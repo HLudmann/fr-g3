@@ -11,7 +11,7 @@ Participants :
  - Paul Dubot
  - Hugo Le Blevec (Rhelik2905)
  - Hugo Ludmann
- - Bruno MATEU
+ - Bruno MATEU (Britaliope)
  - Hugo Selle
  - Kevin Surget (Biro1433)
  - Joris Thaveau

@@ -13,7 +13,7 @@ Participants :
  - Hugo Ludmann
  - Bruno Mateu
  - Hugo Selle
- - Kevin Surget
+ - Kevin Surget (Biro1433)
  - Joris Thaveau
  - Jean-Baptiste Valladeau
 

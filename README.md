@@ -22,5 +22,5 @@ Pour la réalisation, nous avons découpé le développement en 5 lot qui seront
  - Lot 1 : Databases/Containers - Hugo Le Blevec et Hugo Selle
  - Lot 2 : Main+Interface (visitor, manager, player) - Hugo Ludmann et Joris Thaveau
  - Lot 3 : Interface Web - Paul Dubot et JB Valladeau
- - Lot 4 : Users (Person, SystemUser...) - Bruno Mateu et Kevin Surget
+ - Lot 4 : Users (Person, SystemUser...) - Bruno MATEU et Kevin Surget
  - Lot 5 : Système de paris (Bet, Competition...) - PV Besson et Julien Desmazières

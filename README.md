@@ -7,7 +7,7 @@ Encadrant : Fabien Dagnat
 
 Participants : 
  - Pierre-Victor Besson
- - Julien Desmazières
+ - Julien Desmazières (jdesmazi)
  - Paul Dubot
  - Hugo Le Blevec
  - Hugo Ludmann

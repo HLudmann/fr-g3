@@ -7,13 +7,13 @@ Encadrant : Fabien Dagnat
 
 Participants : 
  - Pierre-Victor Besson
- - Julien Desmazière
+ - Julien Desmazières (jdesmazi)
  - Paul Dubot
- - Hugo Le Blevec
+ - Hugo Le Blevec (Rhelik2905)
  - Hugo Ludmann
  - Bruno MATEU
  - Hugo Selle
- - Kevin Surget
+ - Kevin Surget (Biro1433)
  - Joris Thaveau
  - Jean-Baptiste Valladeau
 
@@ -22,5 +22,5 @@ Pour la réalisation, nous avons découpé le développement en 5 lot qui seront
  - Lot 1 : Databases/Containers - Hugo Le Blevec et Hugo Selle
  - Lot 2 : Main+Interface (visitor, manager, player) - Hugo Ludmann et Joris Thaveau
  - Lot 3 : Interface Web - Paul Dubot et JB Valladeau
- - Lot 4 : Users (Person, SystemUser...) - Bruno Mateu et Kévin Surget
- - Lot 5 : Système de paris (Bet, Competition...) - PV Besson et Julien Desmazière
+ - Lot 4 : Users (Person, SystemUser...) - Bruno Mateu et Kevin Surget
+ - Lot 5 : Système de paris (Bet, Competition...) - PV Besson et Julien Desmazières

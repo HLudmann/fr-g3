@@ -7,7 +7,7 @@ Encadrant : Fabien Dagnat
 
 Participants : 
  - Pierre-Victor Besson
- - Julien Desmazière
+ - Julien Desmazière#S
  - Paul Dubot
  - Hugo Le Blevec
  - Hugo Ludmann
@@ -23,4 +23,4 @@ Pour la réalisation, nous avons découpé le développement en 5 lot qui seront
  - Lot 2 : Main+Interface (visitor, manager, player) - Hugo Ludmann et Joris Thaveau
  - Lot 3 : Interface Web - Paul Dubot et JB Valladeau
  - Lot 4 : Users (Person, SystemUser...) - Bruno Mateu et Kévin Surget
- - Lot 5 : Système de paris (Bet, Competition...) - PV Besson et Julien Desmazière
+ - Lot 5 : Système de paris (Bet, Competition...) - PV Besson et Julien Desmazière#S

@@ -9,7 +9,7 @@ Participants :
  - Pierre-Victor Besson
  - Julien Desmazières (jdesmazi)
  - Paul Dubot
- - Hugo Le Blevec
+ - Hugo Le Blevec (Rhelik2905)
  - Hugo Ludmann
  - Bruno Mateu
  - Hugo Selle

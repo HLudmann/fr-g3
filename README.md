@@ -11,7 +11,7 @@ Participants :
  - Paul Dubot
  - Hugo Le Blevec
  - Hugo Ludmann
- - Bruno Mateu
+ - Bruno MATEU
  - Hugo Selle
  - Kevin Surget
  - Joris Thaveau

@@ -1,6 +1,5 @@
-CREATE DATABASE redwire CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+create database redwire with encoding utf8;
 
-use redwire;
 
 create table SYSTEM_USER (
     LASTNAME    varchar(100)         not null,
@@ -8,22 +7,22 @@ create table SYSTEM_USER (
     PASSWORD    char(32)             not null,
     NICKNAME    varchar(20)          not null,
     TYPE        char(3)              not null,
-    WALLET      integer,
-    constraint check (TYPE="PLR" or TYPE="MNG"),
-    primary key (NICKNAME)
+    WALLET      integer		     not null,
+    constraint check_type check (TYPE='PLR' or TYPE='MNG'),
+    constraint primary_key_sysuser primary key (NICKNAME)
 );
 
 create table COMPETITION (
     NAME    varchar(20)             not null,
     DATE    date                    not null,
-    primary key (NAME)
+    constraint primary_key_competition primary key (NAME)
 );
 
 create table COMPETITOR (
     LASTNAME    varchar(100)         not null,
     FIRSTNAME   varchar(100)         not null,
     ID          integer             not null,
-    primary key (ID)
+    constraint primary_key_competitor primary key (ID)
 );
 
 create table BET (
@@ -35,19 +34,19 @@ create table BET (
     THIRD       integer             not null,
     COMPETITION varchar(20)         not null,
     PLAYER      varchar(20)         not null,
-    primary key (ID),
-    foreign key (FIRST) references COMPETITOR(ID),
-    foreign key (SECOND) references COMPETITOR(ID),
-    foreign key (THIRD) references COMPETITOR(ID),
-    foreign key (COMPETITION) references COMPETITION(NAME),
-    foreign key (PLAYER) references SYSTEM_USER(NICKNAME),
-    constraint check (TYPE="SGL" or TYPE="POD")
+    constraint primary_key_bet primary key (ID),
+    constraint foreign_key_first foreign key (FIRST) references COMPETITOR(ID),
+    constraint foreign_key_second foreign key (SECOND) references COMPETITOR(ID),
+    constraint foreign_key_third foreign key (THIRD) references COMPETITOR(ID),
+    constraint foreign_key_competetiton foreign key (COMPETITION) references COMPETITION(NAME),
+    constraint foreign_key_player foreign key (PLAYER) references SYSTEM_USER(NICKNAME),
+    constraint check_type check (TYPE='SGL' or TYPE='POD')
 );
 
 create table PARTICIPATE (
     COMPETITOR  integer        not null,
     COMPETITION varchar(20)    not null,
-    primary key (COMPETITION, COMPETITOR),
-    foreign key (COMPETITION) references COMPETITION(NAME),
-    foreign key (COMPETITOR) references COMPETITOR(ID)
+    constraint primary_key_participate primary key (COMPETITION, COMPETITOR),
+    constraint foreign_key_competition foreign key (COMPETITION) references COMPETITION(NAME),
+    constraint foreign_key_competitor foreign key (COMPETITOR) references COMPETITOR(ID)
 );

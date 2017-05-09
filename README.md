@@ -16,3 +16,11 @@ Participants :
  - Kevin Surget
  - Joris Thaveau
  - Jean-Baptiste Valladeau
+
+Nom des packages :
+
+Gestion compétition et pari : betSystem
+Gestion des personnes : personSystem
+Interfaces : interface
+SGBD : container 
+Interface graphique : gui

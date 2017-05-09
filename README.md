@@ -24,3 +24,11 @@ Pour la réalisation, nous avons découpé le développement en 5 lot qui seront
  - Lot 3 : Interface Graphique - Paul Dubot et JB Valladeau
  - Lot 4 : Users (Person, SystemUser....) - Bruno MATEU et Kevin Surget
  - Lot 5 : Système de paris (Bet, Competition...) - PV Besson et Julien Desmazières
+
+Nom des packages :
+
+- Gestion compétition et pari : betSystem
+- Gestion des personnes : personSystem
+- Interfaces : interface
+- SGBD : container 
+- Interface graphique : gui

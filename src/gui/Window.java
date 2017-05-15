@@ -3,5 +3,10 @@ import javax.swing.JFrame;
 public class Window {
   public static void main(String[] args){
     JFrame fenetre = new JFrame();
+    this.setTitle("ma fenetre");
+    this.setSize(400, 500);
+    this.setLocationRelativeTo(null);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);             
+    this.setVisible(true);
   }
 }

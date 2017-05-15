@@ -14,12 +14,18 @@ abstract class SystemUser extends Person{
 	}
 
 	
-	public void authenticate(String str){
-		//TODO
+	public void authenticate(String str) throws Exception {
+		
+		if password != str{
+			throw new Exception("wrong password")
+		}
+		
 	}
 	
 	public void updatePassword(String str){
-		//TODO
+		
+		password = str;
+		
 	}
 
 }

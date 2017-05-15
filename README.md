@@ -11,7 +11,7 @@ Participants :
  - Bruno MATEU (Britaliope)
  - Hugo Selle
  - Kevin Surget (Biro1433)
- - Joris Thaveau
+ - Joris Thaveau (BusterJava)
  - Jean-Baptiste Valladeau
 
 
@@ -29,6 +29,6 @@ Nom des packages :
 
 - Gestion compétition et pari : betSystem
 - Gestion des personnes : personSystem
-- Interfaces : interface
+- Interfaces : userInterface
 - SGBD : container 
 - Interface graphique : gui

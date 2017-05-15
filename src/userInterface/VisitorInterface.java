@@ -19,24 +19,27 @@ public class VisitorInterface extends Thread {
         return this.id;
     }
 
-    public VisitorInterface signIn (String nickname, String password) {
+    public void signIn (String nickname, String password) throws IndentificationError,
+            ManagerAuthentificated, PlayerAuthentificated {
         try {
 
                 Manager mng = personList.getManager(nickname);
                 mng.authentificate(password);
-                return new ManagerInterface(mng);
+                throw ManagerAuthentificated();
 
             } catch (FalseNickname fn) {
 
                 Player plr = personList.getPlayer(nickname);
                 plr.authentificate(password)
-                return new PlayerInterface(mng);
+                throw PlayerAuthentificated()
 
             } catch (FalsePassword fp) {
                 /*retourner l'erreur: Nickname ou password erroné*/
-                throw new RuntimeError("Nickname ou password erroné");
+                throw new IndentificationError("Nickname ou password erroné");
             }
         }
+
+
 
     public void search (Competition competition) {
 

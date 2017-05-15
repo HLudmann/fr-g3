@@ -9,7 +9,7 @@ Participants :
  - Pierre-Victor Besson
  - Hugo Ludmann
  - Bruno MATEU (Britaliope)
- - Hugo Selle
+ - Hugo Selle (Hsb511)
  - Kevin Surget (Biro1433)
  - Joris Thaveau (BusterJava)
  - Jean-Baptiste Valladeau

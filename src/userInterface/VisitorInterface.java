@@ -20,7 +20,11 @@ public class VisitorInterface extends Thread {
     }
 
     public void signIn (String nickname, String password) throws IndentificationError,
-            ManagerAuthentificated, PlayerAuthentificated {
+            ManagerAuthentificated, PlayerAuthentificated, BadParametersException {
+
+        if (nickname = "") {
+            throw BadParametersException("The nickname can't be empty")
+        }
         try {
 
                 Manager mng = personList.getManager(nickname);

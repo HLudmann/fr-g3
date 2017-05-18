@@ -12,6 +12,9 @@ public class CompContainer {
 	private int findCompByName(String name) {
 		int index = 0;
 		int sizeDB = compDB.size();
+		if (name.length() > 20) {
+			return -1;
+		}
 		while (name != compDB.get(index).getName() || index <= compDB.size()) {
 			index++;			
 		}

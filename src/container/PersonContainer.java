@@ -1,9 +1,9 @@
-package database;
+package src.container;
 
 import java.util.ArrayList;
 
-import personSystem.SystemUser;
-import betSystem.Competitor;
+import src.personSystem.*;
+import src.betSystem.*;
 
 public class PersonContainer {
 	ArrayList<Competitor> CompetitorDB;

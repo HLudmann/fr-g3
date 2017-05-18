@@ -1,5 +1,5 @@
-package userInterface;
-import personSystem.*;
+package src.userInterface;
+import src.personSystem.*;
 
 public class PlayerInterface extends VisitorInterface {
 	

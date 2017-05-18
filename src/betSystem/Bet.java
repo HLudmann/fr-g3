@@ -1,4 +1,4 @@
-package betSystem;
+package src.betSystem;
 
 public class Bet {
 

@@ -1,4 +1,4 @@
-package personSystem;
+package src.personSystem;
 
 public class Competitor extends Person {
 

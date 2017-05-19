@@ -1,0 +1,16 @@
+OFF = (start -> ON),
+ON = (selectionadmin -> COINTERFACEADMIN | selectionplayer -> COINTERFACEPLAYER | selectionvisiteur -> INTERFACEVISITEUR | close -> OFF),
+
+
+INTERFACEVISITEUR = (close -> OFF),
+
+
+
+
+COINTERFACEADMIN = (close -> OFF | erroridentification -> COINTERFACEADMIN | succesidentification -> INTERFACEADMIN | cancel -> ON),
+
+
+
+
+
+COINTERFACEPLAYER = (close -> OFF | erroridentification -> COINTERFACEPLAYER | succesidentification -> INTERFACEPLAYER | cancel -> ON).

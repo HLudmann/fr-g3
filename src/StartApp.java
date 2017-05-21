@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-public class Test {
+public class StartApp {
 	public static void main(String[] args){
 
 	   ConnectionPanel fenetre = new ConnectionPanel();

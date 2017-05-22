@@ -1,10 +1,10 @@
-package database;
+package src.container;
 
 import java.util.ArrayList;
-import betSystem.Competition;
+import src.betSystem.Competition;
 
 public class CompContainer {
-	ArrayList<Competition> compDB;
+	private ArrayList<Competition> compDB;
 	
 	/*
 	 * Method to find the index of the Competition c in the DataBase (private)
@@ -12,6 +12,9 @@ public class CompContainer {
 	private int findCompByName(String name) {
 		int index = 0;
 		int sizeDB = compDB.size();
+		if (name.length() > 20) {
+			return -1;
+		}
 		while (name != compDB.get(index).getName() || index <= compDB.size()) {
 			index++;			
 		}

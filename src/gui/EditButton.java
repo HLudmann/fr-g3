@@ -1,4 +1,7 @@
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -24,7 +27,8 @@ public class EditButton extends JButton implements MouseListener{
   public void mouseClicked(MouseEvent event) {
     switch(type){
       case 1:
-        System.out.println("data: " + this.data + " type: " + this.type);
+        Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+        window.setPanel(new PanelFormBet());
         break;
       case 2:
         System.out.println("data: " + this.data + " type: " + this.type);

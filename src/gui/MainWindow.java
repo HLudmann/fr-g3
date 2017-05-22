@@ -7,11 +7,10 @@ public class MainWindow {
     ArrayList<ArrayList<String>> list = createExemple(); //Simple example
 
     //Will show the correct window according to the arguements provided
-    WindowList window = new WindowList("List Window", list);
+    Window window = new Window("List Window", list);
   }
 
   // TODO: This methods is "useless" and is due to be removed
-  
   private static ArrayList<ArrayList<String>> createExemple(){
     ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
     ArrayList el = new ArrayList();

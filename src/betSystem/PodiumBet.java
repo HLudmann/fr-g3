@@ -1,4 +1,4 @@
-package betSystem;
+package src.betSystem;
 
 import personSystem.Competitor;
 import personSystem.Player;

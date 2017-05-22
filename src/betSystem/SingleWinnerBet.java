@@ -1,6 +1,8 @@
+
 package betSystem;
 import personSystem.Competitor;
 import personSystem.Player;
+
 
 public class SingleWinnerBet extends Bet {
 	

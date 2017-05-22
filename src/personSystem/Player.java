@@ -1,4 +1,4 @@
-package personSystem;
+package src.personSystem;
 
 import java.util.ArrayList;
 

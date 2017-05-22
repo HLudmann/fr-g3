@@ -1,6 +1,8 @@
+
 package betSystem;
 import personSystem.Player;
 import personSystem.Competitor;
+
 
 public class Bet {
 	private static int iterator = 0;

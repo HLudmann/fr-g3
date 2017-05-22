@@ -16,7 +16,10 @@ public class Player extends SystemUser {
 		betList = new ArrayList<Bet>();
 	}	
 
-	public void setWallet(int w){
+	public void setWallet(int w) throws Exception{
+		if (w<0){
+			throw new Exception("wallet cannot be negative");
+		}
 		this.wallet = w;
 	}
 

@@ -23,10 +23,16 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void testSetWallet(){
+	public void testSetWallet() throws Exception{
 		System.out.println("Testing setWallet...");
 		p.setWallet(100);
 		assertEquals("wrong wallet returned ",p.getWallet(),100);
+	}
+	
+	@Test(expected = Exception.class)
+	public void testSettingNegativeWallet() throws Exception{
+		System.out.println("Setting negative wallet");
+		p.setWallet(-100);
 	}
 	
 	@Test

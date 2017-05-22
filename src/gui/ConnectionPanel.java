@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 
 
 public class ConnectionPanel extends JFrame implements ActionListener{
-	private BoutonConnection boutonVisitor = new BoutonConnection("see as just a visitor");
     private BoutonConnection boutonAdmin = new BoutonConnection("connect as admin");
     private BoutonConnection boutonPlayer = new BoutonConnection("connect as player");
     private JPanel initialPan = new JPanel();
@@ -31,6 +30,8 @@ public class ConnectionPanel extends JFrame implements ActionListener{
     private JLabel labelPasswordPlayer = new JLabel("Password: ");
     private BoutonRetour backButtonPlayer = new BoutonRetour("back");
     private BoutonRetour backButtonAdmin = new BoutonRetour("back");
+    private BoutonRetour connectButtonPlayer = new BoutonRetour("connect");
+    private BoutonRetour connectButtonAdmin = new BoutonRetour("connect");
 
 
 	
@@ -44,14 +45,12 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 	    this.setContentPane(initialPan);
 	    boutonPlayer.addActionListener(this);
 	    boutonAdmin.addActionListener(this);
-	    boutonVisitor.addActionListener(this);
-	    GridLayout grid = new GridLayout(3, 1);
+	    GridLayout grid = new GridLayout(2, 1);
 	    grid.setHgap(10);
 	    grid.setVgap(30);
 	    this.setLayout(grid);
 	    initialPan.add(boutonPlayer);
 	    initialPan.add(boutonAdmin);
-	    initialPan.add(boutonVisitor);
 	    setPlayerConnectionPan();
 	    setAdminConnectionPan();
 	}
@@ -67,11 +66,14 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 		if(event.getSource() == boutonAdmin){
 			this.showAdminConnectionPan();
 		}
-		if(event.getSource() == boutonVisitor){
-			System.out.println(" à faire ");
-		}
 		if(event.getSource() == backButtonPlayer || event.getSource() == backButtonAdmin){
 			this.showMainPanel();
+		}
+		if(event.getSource() == connectButtonPlayer){
+			;
+		}
+		if(event.getSource() == connectButtonAdmin){
+			;
 		}
 	}
 	
@@ -115,10 +117,14 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 	    //set du bouton retour
 	    backButtonPlayer.addActionListener(this);
 	    
-	    GridLayout gridPlayer = new GridLayout(3, 1);
+	    //set du bouton connect
+	    connectButtonPlayer.addActionListener(this);
+	    
+	    GridLayout gridPlayer = new GridLayout(4, 1);
 	    playerPan.setLayout(gridPlayer);
 	    playerPan.add(userNamePan);
 	    playerPan.add(passwordPan);
+	    playerPan.add(connectButtonPlayer);
 	    playerPan.add(backButtonPlayer);
 	}
 	
@@ -158,10 +164,14 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 	    //set du bouton retour
 	    backButtonAdmin.addActionListener(this);
 	    
-	    GridLayout gridAdmin = new GridLayout(3, 1);
+	    //set du bouton connect
+	    connectButtonAdmin.addActionListener(this);
+	    
+	    GridLayout gridAdmin = new GridLayout(4, 1);
 	    adminPan.setLayout(gridAdmin);
 	    adminPan.add(userNamePan);
 	    adminPan.add(passwordPan);
+	    adminPan.add(connectButtonAdmin);
 	    adminPan.add(backButtonAdmin);
 	}
 	

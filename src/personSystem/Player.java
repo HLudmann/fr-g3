@@ -5,8 +5,8 @@ import betSystem.Bet;
 
 public class Player extends SystemUser {
 	private long wallet;
-
 	private ArrayList<Bet> betList;
+
 
 	public Player(String firstName, String lastName, String password, String nickname){
 

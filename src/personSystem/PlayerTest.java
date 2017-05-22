@@ -7,40 +7,40 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PlayerTest {
-	
+
 	private Player p;
-	
+
 	@Before
 	public void beforeTest(){
 		System.out.println("doing beforeTest");
 		p = new Player("Jean","Rousseau","password123","Jacques");
 	}
-	
+
 	@Test
 	public void testGetWallet(){
 		System.out.println("Testing getWallet...");
 		assertEquals("wrong wallet returned ",p.getWallet(),0);
 	}
-	
+
 	@Test
 	public void testSetWallet() throws Exception{
 		System.out.println("Testing setWallet...");
 		p.setWallet(100);
 		assertEquals("wrong wallet returned ",p.getWallet(),100);
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testSettingNegativeWallet() throws Exception{
 		System.out.println("Setting negative wallet");
 		p.setWallet(-100);
 	}
-	
+
 	@Test
 	public void testGetBetList(){
 		System.out.println("Testing getBetList...");
 		assertEquals("wrong BetList returned ",p.getBetList().size(),0);
 	}
-	
+
 	@Test
 	public void testAddBet(){
 		System.out.println("Testing addBetList...");
@@ -48,7 +48,7 @@ public class PlayerTest {
 		p.addBet(b1);
 		assertEquals("wrong BetList returned ",p.getBetList().get(0),b1);
 	}
-	
+
 	@Test
 	public void testAddingSameBetTwice(){
 		System.out.println("Testing addBet...");
@@ -58,7 +58,7 @@ public class PlayerTest {
 		p2.addBet(b2);
 		assertEquals("wrong BetList returned ",p2.getBetList().size(),1);
 	}
-	
+
 	@Test
 	public void testRemoveBet(){
 		System.out.println("Testing removeBet...");

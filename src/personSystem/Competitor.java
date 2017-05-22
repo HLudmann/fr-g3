@@ -1,4 +1,6 @@
 package personSystem;
+import java.util.ArrayList;
+
 import betSystem.Competition;
 
 public class Competitor extends Person{
@@ -11,7 +13,7 @@ public class Competitor extends Person{
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.id=id;
-		competitionList = new  ArrayList();
+		competitionList = new  ArrayList<betSystem.Competition>();
 		
 	}
 	
@@ -19,27 +21,33 @@ public class Competitor extends Person{
 		return id;
 	}
 	
-	public Competition[] getCompetitionList() {
+	public ArrayList<Competition> getCompetitionList() {
 		
 		return competitionList;
 				
 	}
 	
-	public void addCompetition(Competition c) {
+	public void addCompetition(Competition c) throws Exception{
 		
 		if (!competitionList.contains(c)){
 			
 			competitionList.add(c);
 			
 		}
+		else{
+			throw new Exception("competition already in list");
+		}
 	}
 	
-	public void removeCompetition(Competition c){
+	public void removeCompetition(Competition c) throws Exception{
 		
 		if (competitionList.contains(c)){
 			
 			competitionList.remove(c);
 			
+		}
+		else{
+			throw new Exception("competition wasnt in list");
 		}
 	}
 

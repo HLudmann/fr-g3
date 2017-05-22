@@ -17,7 +17,7 @@ abstract class SystemUser extends Person{
 	public void authenticate(String str) throws Exception {
 		
 		if (password != str){
-			throw new Exception("wrong password")
+			throw new Exception("wrong password");
 		}
 		
 	}

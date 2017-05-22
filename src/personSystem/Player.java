@@ -1,17 +1,19 @@
 package personSystem;
+import java.util.ArrayList;
+
 import betSystem.Bet;
 
 public class Player extends SystemUser {
 	private int wallet=0;
 
-	private ArrayList<betSystem.Bet> betList;
+	private ArrayList<Bet> betList;
 
-	public Player(String firstName, String lastname, String password, String nickname){
+	public Player(String firstName, String lastName, String password, String nickname){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
 		this.nickname = nickname;
-		betList = new ArrayList();
+		betList = new ArrayList<Bet>();
 	}	
 
 	public void setWallet(int w){
@@ -20,6 +22,10 @@ public class Player extends SystemUser {
 
 	public int getWallet(){
 		return wallet;
+	}
+	
+	ArrayList<betSystem.Bet> getBetList(){
+		return betList;
 	}
 	
 	public void addBet(Bet b) {

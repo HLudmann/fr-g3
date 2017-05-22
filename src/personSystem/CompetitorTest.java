@@ -20,32 +20,6 @@ public class CompetitorTest {
 		c1 = new Competitor("Jean","Rousseau",11);
 		c2 = new Competitor("Michel","Cesar",42);
 	}
-	
-	@Test
-	public void testGetFirstName(){
-		System.out.println("Testing getFirstName...");
-		assertEquals("wrong first name returned ",c1.getFirstName(),"Jean");
-	}
-
-	@Test
-	public void testGetLastName(){
-		System.out.println("Testing getLastName...");
-		assertEquals("wrong last name returned ",c1.getLastName(),"Rousseau");
-	}
-
-	@Test
-	public void testSetFirstName(){
-		System.out.println("Testing setFirstName...");
-		c2.setFirstName("Hugo");
-		assertEquals("wrong first name returned ",c2.getFirstName(),"Hugo");
-	}
-
-	@Test
-	public void testSetLastName(){
-		System.out.println("Testing setLastName...");
-		c2.setLastName("Victor");
-		assertEquals("wrong last name returned ",c2.getLastName(),"Victor");
-	}
 
 
 	@Test
@@ -75,9 +49,9 @@ public class CompetitorTest {
 	@Test(expected = Exception.class)
 	public void testAddTwoIdenticCompetitions() throws Exception{
 		System.out.println("Adding 2 identic competitions");
-			Competition eve = new Competition();
-			c2.addCompetition(eve);
-			c2.addCompetition(eve);
+		Competition eve = new Competition();
+		c2.addCompetition(eve);
+		c2.addCompetition(eve);
 	}
 
 	@Test
@@ -96,7 +70,7 @@ public class CompetitorTest {
 	@Test(expected = Exception.class)
 	public void testRemoveNonExistingCompetition() throws Exception{
 		System.out.println("Removing non existing competition");
-			c2.removeCompetition(new Competition());
+		c2.removeCompetition(new Competition());
 	}
 
 }

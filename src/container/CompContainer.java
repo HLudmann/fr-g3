@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import src.betSystem.Competition;
 
 public class CompContainer {
-	ArrayList<Competition> compDB;
+	private ArrayList<Competition> compDB;
 	
 	/*
 	 * Method to find the index of the Competition c in the DataBase (private)

@@ -20,8 +20,12 @@ public class VisitorInterfaceTest {
         }
 
         try {
-            intrf.signIn("RogerMng", "alberto")
+            intrf.signIn("RogerMng", "alberto");
             fail("Test false signIn failed");
+        } catch (FasleNickname fn) {
+
+        } catch (FalsePassword fp) {
+            
         }
     }
 

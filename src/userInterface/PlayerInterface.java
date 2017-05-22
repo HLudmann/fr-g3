@@ -1,4 +1,6 @@
 package src.userInterface;
+import java.security.PermissionCollection;
+
 import src.personSystem.*;
 
 public class PlayerInterface extends VisitorInterface {
@@ -25,7 +27,11 @@ public class PlayerInterface extends VisitorInterface {
 
 	}
 
-	public void search () {
-		
-	}
+	public String search (String comps) {
+        SearchResults res = new SearchResults(comps);
+        res.setCompetitions(competitionList.searchCompetition(comps));
+        res.setCompetitors(personList.findSysUserByNick(comps));
+		res.setBets(personList.fingBets(this.loggedPlayer, comp));
+        return res.toString();
+    }
 }

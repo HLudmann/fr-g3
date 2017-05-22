@@ -1,8 +1,12 @@
 package src.userInterface;
 import src.personSystem.*;
+
+import javax.naming.directory.SearchResult;
+
 import src.betSystem.*;
 import src.container.*;
 import src.container.*;
+import src.userInterface.SearchResults;
 import src.userInterface.exceptions.*;
 
 /**
@@ -13,8 +17,8 @@ public class VisitorInterface extends Thread {
 
     private long id;
     private static long nextId = 0; 
-    private static CompContainer competitionList = new CompContainer();
-    private static PersonContainer personList = new PersonContainer();
+    protected static CompContainer competitionList = new CompContainer();
+    protected static PersonContainer personList = new PersonContainer();
 
     public VisitorInterface () {
         this.id = nextId;
@@ -68,26 +72,30 @@ public class VisitorInterface extends Thread {
     /**
      * Search a competition by name.
      * 
-     * @param competition
-     *              the name or the date of the searched competition or part of it.
+     * @param comps
+     *             partial or complete research string.
      * 
      * @return the search results.
      */
-    public Competition search (String competition) {
-        return competitionList.searchCompetition(competition);
+    public String search (String comps) {
+        SearchResults res = new SearchResults(comps);
+        res.setCompetitions(competitionList.searchCompetition(comps));
+        res.setCompetitors(personList.findSysUserByNick(comps));
+        return res.toString();
     }
 
 
     /**
      * Search a competition by name.
      * 
-     * @param competitor
-     *              the firstname, lastname or id of the searched competitor or part of it.
+     * @param comps
+     *             partial or complete research int.
      * 
      * @return the search results.
      */
-    public Competitor search (String competitor) {
-        return competitorList.searchCompetitor(competitor);
-
+    public String search (int comp) {
+        SearchResults res = new SearchResults(comp.toString());
+        res.setCompetitors(personList.findSysUserById(comp));
+        return res.toString();
     }
 }

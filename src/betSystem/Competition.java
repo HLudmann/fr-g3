@@ -13,6 +13,10 @@ public class Competition {
 	public Competition(String name, Calendar date){
 		this.name = name;
 		this.date = date;
+		this.date.set(Calendar.MILLISECOND, 0);
+		this.date.set(Calendar.SECOND, 0);
+		this.date.set(Calendar.MINUTE, 0);
+		this.date.set(Calendar.HOUR_OF_DAY, 0);
 	}
 	
 	public String getName(){

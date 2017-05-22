@@ -19,17 +19,24 @@ public class PersonContainer {
     
   }
 
-   /** 
+   /** TODO
 	 * private Method to find the index of a Competitor in the DB with his id
 	 */
 	private int findCompetitorById (int id) {
 		
 	}
 	
-	/**
-	 * private Method to find the index of a SystemUser in the DB with his nickname
+	/** TODO
+	 * private Method to find the index of a Player in the DB with his nickname
 	 */
-	private int findSysUserByNick (String name) {
+	private int findPlayerByNick (String name) {
+		
+	}
+	
+	/** TODO
+	 * private Method to find the index of a Player in the DB with his nickname
+	 */
+	private int findManagerByNick (String name) {
 		
 	}
 	
@@ -47,17 +54,48 @@ public class PersonContainer {
 		} catch (Exception e) {
 			System.err.println("Problem when saving ");
 			e.printStackTrace();
-			return true;
+			return false;
 		}
+		return true;
 		
 	}
 	
-	/** TODO
-	 * Method to add a SystemUser to the DB
+	/** 
+	 * Method to add a Player to the DB
 	 */
-	public boolean addSystemUser(SystemUser s) {
+	public boolean addPlayer(String firstName, String lastname, String password, String nickname) {
 		EntityManager em = JPAUtil.getEntityManager();
-
+		Player p = new Player(String firstName, String lastname, String password, String nickname);
+		p.setWallet(0);
+		if (p == null) {
+			return false;
+		} try {
+			em.persist(p);
+		} catch (Exception e) {
+			System.err.println("Problem when saving ");
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	/** 
+	 * Method to add a Manager to the DB
+	 */
+	public boolean addManager(String firstName, String lastname, String password, String nickname) {
+		EntityManager em = JPAUtil.getEntityManager();
+		Manager m = new Manager(String firstName, String lastname, String password, String nickname);
+		if (m == null) {
+			return false;
+		} try {
+			em.persist(m);
+		} catch (Exception e) {
+			System.err.println("Problem when saving ");
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	
 	/**
 	 * Method to delete a Competitor from the DB with the primary key id
@@ -72,28 +110,43 @@ public class PersonContainer {
 		} catch (Exception e) {
 			System.err.println("Problem when deleting an entity ");
 			e.printStackTrace();
-			return true;
+			return false;
 		}
+		return true;
 	}
 	
 	/** TODO
-	 * Method to delete a SystemUser from the DB with the primary key nickname
+	 * Method to delete a Player from the DB with the primary key nickname
 	 */
-	public boolean delSystemUser(String nickname) {
+	public boolean delPlayer(String nickname) {
+		return true;
+	}
+	
+	/** TODO
+	 * Method to delete a Manager from the DB with the primary key nickname
+	 */
+	public boolean delManager(String nickname) {
 		return true;
 	}
 	
 	/** TODO
 	 * Method to update a Competitor found by his id and replaced by a new Competitor
 	 */
-	public boolean updateCompetitor(int id, Competitor c){
-		
+	public boolean updateCompetitor(int id){
+		return true;
 	}
 	
 	/** TODO
-	 * Method to update a SystemUser found by his id and replaced by a new SystemUser
+	 * Method to update a Player found by his id and replaced by a new SystemUser
 	 */
-	public boolean updateSystemUser(int id, SystemUser su){
-		
+	public boolean updatePlayer(String nickname){
+		return true;
+	}
+	
+	/** TODO
+	 * Method to update a Manager found by his id and replaced by a new SystemUser
+	 */
+	public boolean updateManagerint(String nickname){
+		return true;
 	}
 }

@@ -48,7 +48,9 @@ public class CompContainer {
 			System.err.println("Problem when saving ");
 			e.printStackTrace();
 			return false;
-
+		}
+		return true;
+	}
 	
 	/** 
 	 * Method to update a Competition in the DataBase
@@ -64,7 +66,9 @@ public class CompContainer {
 			System.err.println("Problem when updating ");
 			e.printStackTrace();
 			return false;
-	
+		}
+		return true;
+	}
 	
 	/**
 	 * Method to delete a Competition in the DataBase
@@ -79,8 +83,9 @@ public class CompContainer {
 		} catch (Exception e) {
 			System.err.println("Problem when deleting an entity ");
 			e.printStackTrace();
-			return true;
+			return false;
 		}
+		return true;
 	}
 
 	

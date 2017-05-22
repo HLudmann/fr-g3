@@ -9,11 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CompetitorTest {
-	
+
 	private Competitor c1;
 	private Competitor c2;
-	
-	
+
+
 	@Before
 	public void beforeTest(){
 		System.out.println("doing beforeTest");
@@ -45,7 +45,7 @@ public class CompetitorTest {
 		}
 
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testAddTwoIdenticCompetitions() throws Exception{
 		System.out.println("Adding 2 identic competitions");
@@ -66,7 +66,7 @@ public class CompetitorTest {
 			fail("couldnt remove competition");
 		}
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testRemoveNonExistingCompetition() throws Exception{
 		System.out.println("Removing non existing competition");

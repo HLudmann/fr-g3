@@ -7,12 +7,12 @@ import javax.persistence.EntityManager;
 import jpaUtils.JPAUtil;
 import java.util.Calendar;
 
-import betSystem.Competition;
+import betSystem.Competition;c/container/CompContainer.java
 
 public class CompContainer {
-	ArrayList<Competition> compDB;
+	private ArrayList<Competition> compDB;
 	
-	/* TODO
+	/** TODO
 	 * Method to find the index of the Competition c in the DataBase (private)
 	 */
 	private int findCompByName(String name) {
@@ -34,7 +34,7 @@ public class CompContainer {
 		return -1;
 	}
 	
-	/*
+	/**
 	 * Method to add a Competition to the DataBase
 	 */
 	public boolean addComp(String name, Calendar date) {
@@ -48,11 +48,9 @@ public class CompContainer {
 			System.err.println("Problem when saving ");
 			e.printStackTrace();
 			return false;
-		}
-		return true;
-	}
+
 	
-	/* 
+	/** 
 	 * Method to update a Competition in the DataBase
 	 */
 	public boolean updateComp(String name) {
@@ -66,10 +64,9 @@ public class CompContainer {
 			System.err.println("Problem when updating ");
 			e.printStackTrace();
 			return false;
-		}
-	}
 	
-	/*
+	
+	/**
 	 * Method to delete a Competition in the DataBase
 	 */
 	public boolean delComp(String name) {
@@ -87,7 +84,7 @@ public class CompContainer {
 	}
 
 	
-	/* TODO
+	/** TODO
 	 * Method to find the Competition c in the DataBase (public)
 	 */
 	public Competition[] searchCompetition(String name) {

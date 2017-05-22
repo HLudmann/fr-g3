@@ -1,9 +1,9 @@
-package src.container;
+package container;
 
 import java.util.ArrayList;
 
-import src.personSystem.*;
-import src.betSystem.*;
+import personSystem.*;
+import betSystem.*;
 
 public class PersonContainer {
 	ArrayList<Competitor> CompetitorDB;

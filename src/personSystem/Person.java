@@ -1,4 +1,4 @@
-package src.personSystem;
+package personSystem;
 
 abstract class Person {
 	

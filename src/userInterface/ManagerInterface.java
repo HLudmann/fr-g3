@@ -1,6 +1,6 @@
-package src.userInterface;
-import src.personSystem.*;
-import src.container.*;
+package userInterface;
+import personSystem.*;
+import container.*;
 
 public class ManagerInterface extends VisitorInterface {
 

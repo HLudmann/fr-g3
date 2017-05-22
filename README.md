@@ -9,10 +9,10 @@ Participants :
  - Pierre-Victor Besson
  - Hugo Ludmann
  - Bruno MATEU (Britaliope)
- - Hugo Selle
+ - Hugo Selle (Hsb511)
  - Kevin Surget (Biro1433)
- - Joris Thaveau
- - Jean-Baptiste Valladeau
+ - Joris Thaveau (BusterJava)
+ - Jean-Baptiste Valladeau (Ignamarte)
 
 
 
@@ -29,6 +29,6 @@ Nom des packages :
 
 - Gestion compétition et pari : betSystem
 - Gestion des personnes : personSystem
-- Interfaces : interface
+- Interfaces : userInterface
 - SGBD : container 
 - Interface graphique : gui

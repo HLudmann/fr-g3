@@ -1,7 +1,7 @@
-package src.container;
+package container;
 
 import java.util.ArrayList;
-import src.betSystem.Competition;
+import betSystem.Competition;
 
 public class CompContainer {
 	private ArrayList<Competition> compDB;

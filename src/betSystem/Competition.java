@@ -1,4 +1,4 @@
-package src.betSystem;
+package betSystem;
 
 import java.util.ArrayList;
 import java.util.Calendar;

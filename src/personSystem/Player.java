@@ -1,5 +1,5 @@
 package personSystem;
-import betSystem;
+import betSystem.Bet;
 
 public class Player extends SystemUser {
 	private int wallet=0;
@@ -24,7 +24,7 @@ public class Player extends SystemUser {
 	
 	public void addBet(Bet b) {
 		
-		if !betList.contains(b){
+		if (!betList.contains(b)){
 			
 			betList.add(b);
 			
@@ -33,7 +33,7 @@ public class Player extends SystemUser {
 	
 	public void removeBet(Bet b){
 		
-		if betList.contains(b){
+		if (betList.contains(b)){
 			
 			betList.remove(b);
 			

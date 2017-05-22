@@ -1,5 +1,5 @@
 package personSystem;
-import betSystem;
+import betSystem.Competition;
 
 public class Competitor extends Person{
 	
@@ -21,13 +21,13 @@ public class Competitor extends Person{
 	
 	public Competition[] getCompetitionList() {
 		
-		return competitionList
+		return competitionList;
 				
 	}
 	
 	public void addCompetition(Competition c) {
 		
-		if !competitionList.contains(c){
+		if (!competitionList.contains(c)){
 			
 			competitionList.add(c);
 			
@@ -36,7 +36,7 @@ public class Competitor extends Person{
 	
 	public void removeCompetition(Competition c){
 		
-		if competitionList.contains(c){
+		if (competitionList.contains(c)){
 			
 			competitionList.remove(c);
 			

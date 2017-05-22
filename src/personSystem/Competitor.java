@@ -1,4 +1,4 @@
-package src.personSystem;
+package personSystem;
 
 public class Competitor extends Person {
 
@@ -14,6 +14,7 @@ public class Competitor extends Person {
     public int getId(){
         return id;
     }
+
 
 
 }

@@ -12,28 +12,6 @@ import betSystem.Competition;c/container/CompContainer.java
 public class CompContainer {
 	private ArrayList<Competition> compDB;
 	
-	/** TODO
-	 * Method to find the index of the Competition c in the DataBase (private)
-	 */
-	private int findCompByName(String name) {
-		int index = 0;
-		int sizeDB = compDB.size();
-		if (name.length() > 20) {
-			return -1;
-		}
-		while (name != compDB.get(index).getName() || index <= compDB.size()) {
-			index++;			
-		}
-		//In the case we have't find c in the DataBase
-		if (index == sizeDB) {
-			//if it's not the last
-			if (name != compDB.get(index).getName()) {
-				return index-1;
-			}
-		}
-		return -1;
-	}
-	
 	/**
 	 * Method to add a Competition to the DataBase
 	 */
@@ -53,14 +31,15 @@ public class CompContainer {
 	}
 	
 	/** 
-	 * Method to update a Competition in the DataBase
+	 * Method to update a Competition in the DataBase /!\ you can't update the primary key name
 	 */
-	public boolean updateComp(String name) {
+	public boolean updateComp(String name, Calendar date) {
 		EntityManager em = JPAUtil.getEntityManager();
-		Competition c = searchCompByName(name);		
+		Competition c = searchCompByName(name);	
 		if (c == null) {
 			return false;
 		} try  {
+			c.setDate(date);
 			return em.merge(c);
 		} catch (Exception e) {
 			System.err.println("Problem when updating ");
@@ -75,7 +54,7 @@ public class CompContainer {
 	 */
 	public boolean delComp(String name) {
 		EntityManager em = JPAUtil.getEntityManager();
-		Competition c = searchCompetition(name);
+		Competition c = searchCompByName(name);
 		if (c == null) {
 			return false;
 		} try {
@@ -89,16 +68,16 @@ public class CompContainer {
 	}
 
 	
-	/** TODO
-	 * Method to find the Competition c in the DataBase (public)
+	/**
+	 * Methods to search a Competition in the Database
 	 */
-	public Competition[] searchCompetition(String name) {
-		int index = findCompByName(name);
-		if (index > 0) {
-			return compDB.get(index);
-		}
-		else {
+	public Competition searchCompByName(String name) {
+		EntityManager em = JPAUtil.getEntityManager();
+		if (name == null)
 			return null;
-		}
+
+		
+		return (Competition) em.find(Competition.class, name);
 	}
+	
 }

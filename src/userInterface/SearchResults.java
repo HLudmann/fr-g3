@@ -15,10 +15,10 @@ import personSystem.*;
  */
 public class SearchResults {
 
-    private ArrayList<Competition> competitions = None;
-    private ArrayList<Competitor> competitors = None;
-    private ArrayList<Player> players = None;
-    private ArrayList<Bet> bets = None;
+    private Competition[] competitions = None;
+    private Competitor[] competitors = None;
+    private Player[] players = None;
+    private Bet[] bets = None;
     public SearchResults () {
     }
     /**

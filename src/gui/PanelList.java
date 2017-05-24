@@ -14,7 +14,7 @@ public class PanelList extends JPanel {
 
     //Creates a good layout for our list
     GridLayout gl = new GridLayout();
-    gl.setColumns(2);
+    gl.setColumns(3);
     gl.setRows(list.size());
     gl.setHgap(5);
     gl.setVgap(5);
@@ -23,8 +23,10 @@ public class PanelList extends JPanel {
     //Adds buttons related to the data provided
     for (int i=0; i < list.size(); i++){
       this.add(new JLabel(list.get(i).get(0)));
-      JButton btn = new EditButton("edit", i, type, list.get(i).get(1));
-      this.add(btn);
+      JButton btnEdit = new EditButton("edit", i, type, list.get(i).get(1));
+      JButton btnDel = new DeleteButton("delete", i, type, list.get(i).get(1));
+      this.add(btnEdit);
+      this.add(btnDel);
     }
 
   }

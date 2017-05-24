@@ -34,7 +34,7 @@ public class EditButton extends JButton implements MouseListener{
         listComp.add("Machin");
         listComp.add("Chose");
         Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-        window.setPanel(new PanelFormBet(true, listComp, 50, 1));
+        window.setPanel(new PanelFormBet(false, "jbvallad", listComp, 50, 1));
         break;
       case 2:
         System.out.println("data: " + this.data + " type: " + this.type);

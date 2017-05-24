@@ -6,7 +6,6 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import java.awt.GridLayout;
-import java.awt.Dimension;
 import javax.swing.border.EmptyBorder;
 import java.util.ArrayList;
 import java.text.NumberFormat;
@@ -32,10 +31,8 @@ public class PanelFormBet extends JPanel {
   private JFormattedTextField valueInput;
   private SendDataButton submit;
 
-  private boolean is_done_painting =false;
-
   //TODO: add competitors when editing so the user doesn't have to search again
-  public PanelFormBet(boolean is_edition, ArrayList<String> competitors, int value, int type){
+  public PanelFormBet(boolean is_edition, String id, ArrayList<String> competitors, int value, int type){
 
     this.type = type;
     this.competitors = competitors;
@@ -62,15 +59,14 @@ public class PanelFormBet extends JPanel {
       this.add(new JLabel("Non modifiable"));
     }else{
       this.betSelect = new JComboBox();
+      this.betSelect.addItem("Pari podium");
+      this.betSelect.addItem("Pari simple");
 
       this.betSelect.addActionListener (new ActionListener () {
           public void actionPerformed(ActionEvent e) {
               update_layout(betSelect.getSelectedIndex());
           }
       });
-
-      this.betSelect.addItem("Pari podium");
-      this.betSelect.addItem("Pari simple");
       this.add(this.betSelect);
     }
 
@@ -83,8 +79,6 @@ public class PanelFormBet extends JPanel {
 
     addBottomStuff();
 
-    this.is_done_painting = true;
-
   }
 
   public JComboBox createAndPopulateCompSelectors(){
@@ -96,9 +90,9 @@ public class PanelFormBet extends JPanel {
   }
 
   public void update_layout(int index) {
-    if(index == 1 && this.is_done_painting){
+    if(index == 1){
       for(int i = 0; i < 4; i++){this.remove(4);}
-    }else if (this.is_done_painting) {
+    }else {
       for(int i = 0; i < 3; i++){this.remove(4);}
       addBottomStuff();
     }

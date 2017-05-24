@@ -27,7 +27,8 @@ public class SendDataButton extends JButton implements MouseListener{
   public void mouseClicked(MouseEvent event) {
     switch(type){
       case 1:
-        System.out.println("type: " + this.type);
+        Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+        window.setPanel(new PanelPasswordEdit("jbvallad"));
         break;
       case 2:
         System.out.println("type: " + this.type);

@@ -1,4 +1,4 @@
-package src.userInterface.exceptions;
+package userInterface.exceptions;
 
 public class ManagerAuthentificated extends Exception{
 	private static final long serialVersionUID = -385186352928310148L;

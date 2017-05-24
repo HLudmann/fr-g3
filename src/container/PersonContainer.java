@@ -1,62 +1,99 @@
-package src.container;
+package container;
 
 import java.util.ArrayList;
 
-import src.personSystem.*;
-import src.betSystem.*;
+import javax.persistence.EntityManager;
+import jpaUtils.JPAUtil;
+
+import personSystem.SystemUser;
+import betSystem.Competitor;
 
 public class PersonContainer {
-	ArrayList<Competitor> CompetitorDB;
-	ArrayList<SystemUser> SystemUserDB;
-	Boolean logged;
+	private static ArrayList<Competitor> CompetitorDB;
+	private static ArrayList<Player> PlayerDB;
+	private static ArrayList<Manager> ManagerDB;
+	private ArrayList<SystemUser> logged;
 	
-	/* 
+	
+	private Competitor searchCompetitorById(int id) {
+    
+  }
+
+   /** 
 	 * private Method to find the index of a Competitor in the DB with his id
 	 */
 	private int findCompetitorById (int id) {
 		
 	}
 	
-	/*
+	/**
 	 * private Method to find the index of a SystemUser in the DB with his nickname
 	 */
 	private int findSysUserByNick (String name) {
 		
 	}
 	
-	/*
+	/**
 	 * Method to add a Competitor to the DB
 	 */
-	public Boolean addCompetitor(Competitor c) {
-		CompetitorDB.add(c);
+
+	public boolean addCompetitor(String lastName, String firstName, int id) {
+		EntityManager em = JPAUtil.getEntityManager();
+		Competitor c = new Competitor(lastName, firstName, id);
 		if (c == null) {
 			return false;
+		} try {
+			em.persist(c);
+		} catch (Exception e) {
+			System.err.println("Problem when saving ");
+			e.printStackTrace();
+			return true;
 		}
-		return true;
+		
 	}
 	
-	/*
+	/** TODO
 	 * Method to add a SystemUser to the DB
 	 */
-	public Boolean addSystemUser(SystemUser s) {
-		SystemUserDB.add(s);
-		if (s == null) {
-			return false;
-		}
-		return true;
-	}
+	public boolean addSystemUser(SystemUser s) {
+		EntityManager em = JPAUtil.getEntityManager();
+
 	
-	/*
+	/**
 	 * Method to delete a Competitor from the DB with the primary key id
 	 */
-	public Boolean delCompetitor(int id) {
+	public boolean delCompetitor(int id) {
+		EntityManager em = JPAUtil.getEntityManager();
+		Competitor c = searchCompetitorById(id);
+		if (c == null) {
+			return false;
+		} try {
+			em.remove(c);
+		} catch (Exception e) {
+			System.err.println("Problem when deleting an entity ");
+			e.printStackTrace();
+			return true;
+		}
+	}
+	
+	/** TODO
+	 * Method to delete a SystemUser from the DB with the primary key nickname
+	 */
+	public boolean delSystemUser(String nickname) {
 		return true;
 	}
 	
-	/*
-	 * Method to delete a SystemUser from the DB with the primary key nickname
+	/** TODO
+	 * Method to update a Competitor found by his id and replaced by a new Competitor
 	 */
-	public Boolean delSystemUser(String nickname) {
-		return true;
+	public boolean updateCompetitor(int id, Competitor c){
+		
+	}
+	
+	/** TODO
+	 * Method to update a SystemUser found by his id and replaced by a new SystemUser
+	 */
+	public boolean updateSystemUser(int id, SystemUser su){
+		
 	}
 }

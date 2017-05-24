@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 package userInterface;
 import container.CompContainer;
@@ -12,6 +13,21 @@ import src.betSystem.*;
 import src.container.*;
 import src.personSystem.*;
 import src.userInterface.exceptions.*;
+=======
+package userInterface;
+import personSystem.*;
+
+import java.util.ArrayList;
+
+import javax.naming.directory.SearchResult;
+
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+import betSystem.*;
+import container.*;
+import container.*;
+import userInterface.SearchResults;
+import userInterface.exceptions.*;
+>>>>>>> cab65752ac36d61f7a0e938a6aae39192fe13949
 
 /**
  * @author HLudmann + BusterJava
@@ -68,11 +84,10 @@ public class VisitorInterface extends Thread {
             plr.authentificate(password);
             throw PlayerAuthentificated("Player Authentification successful", plr);
 
-        } catch (FalsePassword fp) {
+        } finally {
             throw new IdentificationError("Nickname ou password erroné");
         }
     }
-
     /**
      * Search a competition by name.
      * 
@@ -81,14 +96,12 @@ public class VisitorInterface extends Thread {
      * 
      * @return the search results.
      */
-    public String search (String comps) {
+    public ArrayList<ArrayList<String>> search (String comps) {
         SearchResults res = new SearchResults(comps);
         res.setCompetitions(competitionList.searchCompetition(comps));
         res.setCompetitors(personList.findSysUserByNick(comps));
-        return res.toString();
+        return res;
     }
-
-
     /**
      * Search a competition by name.
      * 

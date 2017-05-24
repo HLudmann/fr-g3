@@ -1,7 +1,7 @@
 package userInterface;
 import java.security.PermissionCollection;
 
-import src.personSystem.*;
+import personSystem.*;
 
 public class PlayerInterface extends VisitorInterface {
 	

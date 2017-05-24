@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class EditButton extends JButton implements MouseListener{
   private String name;
@@ -24,11 +25,16 @@ public class EditButton extends JButton implements MouseListener{
   }
 
   //Send the correct instruction based on the type provided
+  //TODO: atm we just use it to switch from a panel to another for testing purpose
   public void mouseClicked(MouseEvent event) {
     switch(type){
       case 1:
+        //TODO: get the list of competitors
+        ArrayList<String> listComp = new ArrayList<String>();
+        listComp.add("Machin");
+        listComp.add("Chose");
         Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-        window.setPanel(new PanelFormBet());
+        window.setPanel(new PanelFormBet(true, listComp, 50, 1));
         break;
       case 2:
         System.out.println("data: " + this.data + " type: " + this.type);

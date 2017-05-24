@@ -1,7 +1,13 @@
 package userInterface;
+
 import personSystem.*;
 import container.*;
 
+
+/**
+ * @author HLudmann + BusterJava
+ * 
+ */
 public class ManagerInterface extends VisitorInterface {
 
 	private Manager loggedManager;

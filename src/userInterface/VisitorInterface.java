@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import personSystem.*;
 import betSystem.*;
 import container.*;
-import container.*;
 import userInterface.exceptions.*;
 
 /**
@@ -160,6 +159,24 @@ public class VisitorInterface extends Thread {
     }
 
     /**
+     * Search competitions by a competitor.
+     * 
+     * @param id
+     *          complete id of a competitor.
+     * 
+     * @return the public detail of all the upcomming competitions attended by this competitor.     * 
+     */
+    public String[][] searchCompetitionByCompetitor(int id) {
+        ArrayList<Competitions> list = personList.findCompetitorById(id)[0].getCompetitions();
+        String[][] res = new String[list.size()][2];
+        for (int i; i < list.size(); i++) {
+            res[i][0] = list[i].getName();
+            res[i][1] = list[i].getDate().toString();
+        }
+        return res;
+    }
+
+    /**
      * Search a competitor by name.
      * 
      * @param name
@@ -188,6 +205,25 @@ public class VisitorInterface extends Thread {
      */
     public String[][] searchCompetitorById (int id) {
         ArrayList<Competition> list = personList.findCompetitorById(id);
+        String[][] res = new String[list.size()][3];
+        for (int i; i < list.size(); i++) {
+            res[i][0] = list[i].getId().toString();
+            res[i][1] = list[i].getFirstname();
+            res[i][2] = list[i].getLastname();
+        }
+        return res;
+    }
+
+    /**
+     * Search competitors by a competition.
+     * 
+     * @param name
+     *          complete name of a competition.
+     * 
+     * @return the public detail of all the competitors attending the specified competition. 
+     */
+    public String[][] searchCompetitorByCompetition(String name) {
+        ArrayList<Competitor> list = competitionList.findCompetitionByName(name)[0].getCompetitors();
         String[][] res = new String[list.size()][3];
         for (int i; i < list.size(); i++) {
             res[i][0] = list[i].getId().toString();

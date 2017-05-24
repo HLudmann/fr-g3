@@ -55,10 +55,10 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 	    setAdminConnectionPan();
 	}
 
-	
-	
-	
-	//méthode permettant de faire les actions lorsqu'on appuie sur un bouton
+
+
+
+	//mÃ©thode permettant de faire les actions lorsqu'on appuie sur un bouton
 	public void actionPerformed(ActionEvent event){
 		if(event.getSource() == boutonPlayer){
 			this.showPlayerConnectionPan();
@@ -76,16 +76,16 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 			;
 		}
 	}
-	
-	
-	private void showMainPanel(){      
+
+
+	private void showMainPanel(){
 	    this.setContentPane(initialPan);
 	}
-	
-	//méthode permettant de set la fenêtre d'authentification des joueurs
+
+	//mÃ©thode permettant de set la fenï¿½tre d'authentification des joueurs
 	private void setPlayerConnectionPan(){
 		playerPan.setBackground(Color.BLUE.darker().darker().darker());
-		
+
 		//set de la case formulaire username
 	    JPanel userNamePan = new JPanel();
 	    JPanel userNamePan2 = new JPanel();
@@ -127,12 +127,12 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 	    playerPan.add(connectButtonPlayer);
 	    playerPan.add(backButtonPlayer);
 	}
-	
-	
-	//méthode permettant de set la fenêtre d'authentification des admins
+
+
+	//mÃ©thode permettant de set la fenï¿½tre d'authentification des admins
 	private void setAdminConnectionPan(){
 		adminPan.setBackground(Color.BLUE.darker().darker().darker());
-		
+
 		//set de la case formulaire username
 	    JPanel userNamePan = new JPanel();
 	    JPanel userNamePan2 = new JPanel();

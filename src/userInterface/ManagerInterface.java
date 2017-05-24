@@ -1,4 +1,4 @@
-package src.userInterface;
+package userInterface;
 import src.personSystem.*;
 import src.container.*;
 

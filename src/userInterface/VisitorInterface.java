@@ -1,12 +1,16 @@
-package src.userInterface;
-import src.personSystem.*;
 
-import javax.naming.directory.SearchResult;
-
+package userInterface;
+import container.CompContainer;
+import container.PersonContainer;
+import exceptions.BadParametersException;
+import exceptions.IdentificationError;
+import exceptions.ManagerAuthentificated;
+import exceptions.PlayerAuthentificated;
+import personSystem.Manager;
+import personSystem.Player;
 import src.betSystem.*;
 import src.container.*;
-import src.container.*;
-import src.userInterface.SearchResults;
+import src.personSystem.*;
 import src.userInterface.exceptions.*;
 
 /**

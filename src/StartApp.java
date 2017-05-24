@@ -1,9 +1,7 @@
-import javax.swing.JFrame;
+import gui.MainInterface;
 
 public class StartApp {
 	public static void main(String[] args){
-
-	   ConnectionPanel fenetre = new ConnectionPanel();
-	   fenetre.setSize(500,500);
+		MainInterface fenetre = new MainInterface();
 	  }
 }

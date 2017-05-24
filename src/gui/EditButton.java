@@ -1,3 +1,5 @@
+package gui;
+
 import javax.swing.JButton;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

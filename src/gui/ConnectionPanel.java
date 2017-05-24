@@ -1,3 +1,5 @@
+package gui;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,9 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import userInterface.VisitorInterface;
+import userInterface.exceptions.ManagerAuthentificated;
+import userInterface.exceptions.PlayerAuthentificated;
 
 
-public class ConnectionPanel extends JFrame implements ActionListener{
+
+public class ConnectionPanel extends JFrame implements ActionListener {
     private BoutonConnection boutonAdmin = new BoutonConnection("connect as admin");
     private BoutonConnection boutonPlayer = new BoutonConnection("connect as player");
     private JPanel initialPan = new JPanel();
@@ -32,11 +38,13 @@ public class ConnectionPanel extends JFrame implements ActionListener{
     private BoutonRetour backButtonAdmin = new BoutonRetour("back");
     private BoutonRetour connectButtonPlayer = new BoutonRetour("connect");
     private BoutonRetour connectButtonAdmin = new BoutonRetour("connect");
-
+    private VisitorInterface visitor= new VisitorInterface();
+    private MainInterface mainInterface;
 
 	
 	
-	public ConnectionPanel(){
+	public ConnectionPanel(MainInterface mainInterface){
+		this.mainInterface = mainInterface;
 		this.setTitle("logiciel de paris sportifs");          
 	    this.setVisible(true);
 	    this.setLocationRelativeTo(null);
@@ -70,10 +78,22 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 			this.showMainPanel();
 		}
 		if(event.getSource() == connectButtonPlayer){
-			;
+			try{
+				visitor.signIn(playerName.getText(), playerPassword.getText());
+			} catch(PlayerAuthentificated e){
+				//à faire
+			} catch(Exception e){
+				showMainPanel();
+			}
 		}
 		if(event.getSource() == connectButtonAdmin){
-			;
+			try{
+				visitor.signIn(adminName.getText(), adminPassword.getText());
+			} catch(ManagerAuthentificated e){
+				//à faire
+			} catch(Exception e){
+				showMainPanel();
+			};
 		}
 	}
 	

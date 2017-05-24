@@ -1,8 +1,12 @@
 package userInterface;
-import java.security.PermissionCollection;
 
 import personSystem.*;
+import userInterface.VisitorInterface;
 
+/**
+ * @author HLudmann + BusterJava
+ * 
+ */
 public class PlayerInterface extends VisitorInterface {
 	
 	private Player loggedPlayer;
@@ -11,6 +15,21 @@ public class PlayerInterface extends VisitorInterface {
 		this.loggedPlayer = player;
 	}
 
+	/**
+	 * Log Out
+	 * 
+	 * @return a VisitorInterface to the gui.
+	 */
+	 public VisitorInterface logOut() {
+		 personList.unLog(this.player);
+		 return new VisitorInterface();
+	 }
+
+	 /**
+	  * Change Password
+	  *
+	  *
+	  */
 	public void changePassword () {
 
 	}

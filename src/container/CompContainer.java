@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import jpaUtils.JPAUtil;
 import java.util.Calendar;
 
-import betSystem.Competition;c/container/CompContainer.java
+import betSystem.Competition;
 
 public class CompContainer {
 	private ArrayList<Competition> compDB;
@@ -48,6 +48,8 @@ public class CompContainer {
 			System.err.println("Problem when saving ");
 			e.printStackTrace();
 			return false;
+		}
+	}
 
 	
 	/** 
@@ -64,6 +66,8 @@ public class CompContainer {
 			System.err.println("Problem when updating ");
 			e.printStackTrace();
 			return false;
+		}
+	}
 	
 	
 	/**

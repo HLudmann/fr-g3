@@ -15,17 +15,12 @@ import src.personSystem.*;
 import src.userInterface.exceptions.*;
 =======
 package userInterface;
-import personSystem.*;
 
 import java.util.ArrayList;
-
-import javax.naming.directory.SearchResult;
-
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+import personSystem.*;
 import betSystem.*;
 import container.*;
 import container.*;
-import userInterface.SearchResults;
 import userInterface.exceptions.*;
 >>>>>>> cab65752ac36d61f7a0e938a6aae39192fe13949
 
@@ -50,69 +45,172 @@ public class VisitorInterface extends Thread {
     }
 
     /** 
-     * Singn In.
+     * Singn In for Managers.
      * 
      * @param nickname
-     *              the nickname chosen by the User when he subscribed.
+     *              the nickname chosen by the Manager.
      * @param password
-     *              the password chosen by the User when he subscribed.
+     *              the password chosen by the Manager.
      * 
      * @throws BadParametersException
-     *              thrown if an empty nickname was given.
+     *              thrown if an empty nickname or password was given.
      * @throws IdentificationError
      *              thrown if parameters don't match anything in the container.
-     * @throws ManagerAuthentifiction
-     *              thrown if parameters match a manager's in the container.
-     * @throws PlayerAuthentification
-     *              thrown if parameters match a player's in the container.
      */
-    public void signIn (String nickname, String password) throws IdentificationError,
-            ManagerAuthentificated, PlayerAuthentificated, BadParametersException {
+    public ManagerInterface signInManager (String nickname, String password) throws IdentificationError,
+            BadParametersException {
 
-        if (nickname = "") {
-            throw BadParametersException("The nickname can't be empty");
+        if (nickname == "" || password == "") {
+            throw BadParametersException("The nickname and/or password can't be empty");
         }
         try {
 
-            Manager mng = personList.getManager(nickname);
+            Manager mng = personList.findManager(nickname);
             mng.authentificate(password);
-            throw ManagerAuthentificated("Manager authentification seccessful", mng);
+            return new ManagerInterface(mng);
 
         } catch (FalseNickname fn) {
-
-            Player plr = personList.getPlayer(nickname);
-            plr.authentificate(password);
-            throw PlayerAuthentificated("Player Authentification successful", plr);
-
-        } finally {
+            throw new IdentificationError("Nickname ou password erroné");
+        } catch (FalsePassword fp) {
             throw new IdentificationError("Nickname ou password erroné");
         }
     }
-    /**
-     * Search a competition by name.
+
+    /** 
+     * Singn In for Player.
      * 
-     * @param comps
-     *             partial or complete research string.
+     * @param nickname
+     *              the nickname chosen by the Player when he subscribed.
+     * @param password
+     *              the password chosen by the Player when he subscribed.
      * 
-     * @return the search results.
+     * @throws BadParametersException
+     *              thrown if an empty nickname or password was given.
+     * @throws IdentificationError
+     *              thrown if parameters don't match anything in the container.
      */
-    public ArrayList<ArrayList<String>> search (String comps) {
-        SearchResults res = new SearchResults(comps);
-        res.setCompetitions(competitionList.searchCompetition(comps));
-        res.setCompetitors(personList.findSysUserByNick(comps));
+    public PlayerInterface signInPlayer (String nickname, String password) throws IdentificationError,
+            BadParametersException {
+
+        if (nickname == "" || password == "") {
+            throw BadParametersException("The nickname and/or password can't be empty");
+        }
+        try {
+
+            Player plr = personList.findPlayer(nickname);
+            plr.authentificate(password);
+            return new PlayerInterface(plr);
+
+        } catch (FalseNickname fn) {
+            throw new IdentificationError("Nickname ou password erroné");
+        } catch (FalsePassword fp) {
+            throw new IdentificationError("Nickname ou password erroné");
+        }
+    }
+
+    /**
+     * List competitions
+     * 
+     * @return all the public infos about each competition that has not ended.
+     */
+   public String[][] competitionListing() {
+        ArrayList<Competition> list = competitionList.getListNotEnded();
+        String[][] res = new String[list.size()][2];
+        for (int i; i < list.size(); i++) {
+            res[i][0] = list[i].getName();
+            res[i][1] = list[i].getDate().toString();
+        }
         return res;
     }
+
+    /**
+     * List competitors
+     * 
+     * @return all the public infos about each competitor 
+     *              who is competiting in a upcomming competition
+     */
+    public String[][] competitorListing() {
+        ArrayList<Competitor> list = personList.getCompetitors();
+        String[][] res = new String[list.size()][3];
+        for (int i; i < list.size(); i++) {
+            res[i][0] = list[i].getId().toString();
+            res[i][1] = list[i].getFirstname();
+            res[i][2] = list[i].getLastname();
+        }
+        return res;
+    }
+
     /**
      * Search a competition by name.
      * 
-     * @param comps
-     *             partial or complete research int.
+     * @param name
+     *             partial or complete name of the competition.
      * 
      * @return the search results.
      */
-    public String search (int comp) {
-        SearchResults res = new SearchResults(comp.toString());
-        res.setCompetitors(personList.findSysUserById(comp));
-        return res.toString();
+    public String[][] searchCompetitionByName (String name) {
+        ArrayList<Competition> list = competitionList.findCompetitionByName(name);
+        String[][] res = new String[list.size()][2];
+        for (int i; i < list.size(); i++) {
+            res[i][0] = list[i].getName();
+            res[i][1] = list[i].getDate().toString();
+        }
+        return res;
+    }
+
+    /**
+     * Search a competition by date.
+     * 
+     * @param date
+     *            date when the competition takes place.
+     * 
+     * @return the search results.
+     */
+    public String[][] searchCompetitionByDate (Date date) {
+        ArrayList<Competition> list = competitionList.findCompetitionByDate(date);
+        String[][] res = new String[list.size()][2];
+        for (int i; i < list.size(); i++) {
+            res[i][0] = list[i].getName();
+            res[i][1] = list[i].getDate().toString();
+        }
+        return res;
+    }
+
+    /**
+     * Search a competitor by name.
+     * 
+     * @param name
+     *             partial or complete name of the competitor.
+     * 
+     * @return the search results.
+     */
+    public String[][] searchCompetitorByName (String name) {
+        ArrayList<Competition> list = personList.findCompetitorByName(name);
+        String[][] res = new String[list.size()][3];
+        for (int i; i < list.size(); i++) {
+            res[i][0] = list[i].getId().toString();
+            res[i][1] = list[i].getFirstname();
+            res[i][2] = list[i].getLastname();
+        }
+        return res;
+    }
+
+    /**
+     * Search a competitor by id.
+     * 
+     * @param id
+     *             partial or complete id of the competitor.
+     * 
+     * @return the search results.
+     */
+    public String[][] searchCompetitorById (int id) {
+        ArrayList<Competition> list = personList.findCompetitorById(id);
+        String[][] res = new String[list.size()][3];
+        for (int i; i < list.size(); i++) {
+            res[i][0] = list[i].getId().toString();
+            res[i][1] = list[i].getFirstname();
+            res[i][2] = list[i].getLastname();
+        }
+        return res;
     }
 }

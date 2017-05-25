@@ -1,4 +1,7 @@
-package gui;
+package gui.buttons;
+
+import gui.*;
+import gui.panels.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -6,43 +9,37 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
-public class EditButton extends JButton implements MouseListener{
+public class SendDataButton extends JButton implements MouseListener{
   private String name;
   private String data; // The data related to the entry, and that will be send if needed to the backend
   private int type; // The function from the backend that we need to interact with
   private int id; // The button id, not really needed tbh
 
+  //TODO: get datas from parent panel
 
-  public EditButton(String str, int id, int type, String data) {
+  public SendDataButton(String str, int id, int type) {
     super(str);
 
     this.name = str;
     this.id = id;
-    this.data = data;
     this.type = type;
 
     this.addMouseListener(this);
   }
 
   //Send the correct instruction based on the type provided
-  //TODO: atm we just use it to switch from a panel to another for testing purpose
   public void mouseClicked(MouseEvent event) {
     switch(type){
       case 1:
-        //TODO: get the list of competitors
-        ArrayList<String> listComp = new ArrayList<String>();
-        listComp.add("Machin");
-        listComp.add("Chose");
         Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-        window.setPanel(new PanelFormBet(false, "jbvallad", listComp, 50, 1));
+        window.setPanel(new PanelPasswordEdit("jbvallad"));
         break;
       case 2:
-        System.out.println("data: " + this.data + " type: " + this.type);
+        System.out.println("type: " + this.type);
         break;
       case 3:
-        System.out.println("data: " + this.data + " type: " + this.type);
+        System.out.println("type: " + this.type);
         break;
     }
   }

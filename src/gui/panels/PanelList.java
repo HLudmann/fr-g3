@@ -1,4 +1,7 @@
-package gui;
+package gui.panels;
+
+import gui.buttons.EditButton;
+import gui.buttons.DeleteButton;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;

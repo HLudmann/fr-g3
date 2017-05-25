@@ -1,4 +1,6 @@
-package gui;
+package gui.panels;
+
+import gui.buttons.*;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;

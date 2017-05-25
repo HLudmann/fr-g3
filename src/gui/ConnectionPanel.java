@@ -13,10 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
+/*
 import userInterface.VisitorInterface;
 import userInterface.exceptions.ManagerAuthentificated;
 import userInterface.exceptions.PlayerAuthentificated;
-
+*/
 
 
 public class ConnectionPanel extends JFrame implements ActionListener {

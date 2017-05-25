@@ -41,15 +41,15 @@ public class ConnectionPanel extends JFrame implements ActionListener {
     //private VisitorInterface visitor= new VisitorInterface();
     private MainInterface mainInterface;
 
-	
-	
+
+
 	public ConnectionPanel(MainInterface mainInterface){
 		this.mainInterface = mainInterface;
-		this.setTitle("logiciel de paris sportifs");   
+		this.setTitle("logiciel de paris sportifs");
 		this.setSize(500, 500);
 	    this.setVisible(true);
 	    this.setLocationRelativeTo(null);
-	    initialPan.setBackground(Color.BLUE.darker().darker().darker());        
+	    initialPan.setBackground(Color.BLUE.darker().darker().darker());
 	    this.setContentPane(initialPan);
 	    boutonPlayer.addActionListener(this);
 	    boutonAdmin.addActionListener(this);
@@ -81,7 +81,7 @@ public class ConnectionPanel extends JFrame implements ActionListener {
 			try{
 				visitor.signIn(playerName.getText(), playerPassword.getText());
 			} catch(PlayerAuthentificated e){
-				//à faire
+				//Ã  faire
 			} catch(Exception e){
 				showMainPanel();
 			}
@@ -90,7 +90,7 @@ public class ConnectionPanel extends JFrame implements ActionListener {
 			try{
 				visitor.signIn(adminName.getText(), adminPassword.getText());
 			} catch(ManagerAuthentificated e){
-				//à faire
+				//Ã  faire
 			} catch(Exception e){
 				showMainPanel();
 			};
@@ -119,7 +119,7 @@ public class ConnectionPanel extends JFrame implements ActionListener {
 		userNamePan2.add(playerName);
 		userNamePan.setLayout(new BorderLayout());
 		userNamePan.add(userNamePan2, BorderLayout.SOUTH);
-	    
+
 	    //set de la case formulaire password
 		JPanel passwordPan = new JPanel();
 		JPanel passwordPan2 = new JPanel();
@@ -133,13 +133,13 @@ public class ConnectionPanel extends JFrame implements ActionListener {
 	    passwordPan2.add(playerPassword);
 	    passwordPan.setLayout(new BorderLayout());
 	    passwordPan.add(passwordPan2, BorderLayout.NORTH);
-	    
+
 	    //set du bouton retour
 	    backButtonPlayer.addActionListener(this);
-	    
+
 	    //set du bouton connect
 	    connectButtonPlayer.addActionListener(this);
-	    
+
 	    GridLayout gridPlayer = new GridLayout(4, 1);
 	    playerPan.setLayout(gridPlayer);
 	    playerPan.add(userNamePan);
@@ -166,7 +166,7 @@ public class ConnectionPanel extends JFrame implements ActionListener {
 		userNamePan2.add(adminName);
 		userNamePan.setLayout(new BorderLayout());
 		userNamePan.add(userNamePan2, BorderLayout.SOUTH);
-	    
+
 	    //set de la case formulaire password
 		JPanel passwordPan = new JPanel();
 		JPanel passwordPan2 = new JPanel();
@@ -180,13 +180,13 @@ public class ConnectionPanel extends JFrame implements ActionListener {
 	    passwordPan2.add(adminPassword);
 	    passwordPan.setLayout(new BorderLayout());
 	    passwordPan.add(passwordPan2, BorderLayout.NORTH);
-	    
+
 	    //set du bouton retour
 	    backButtonAdmin.addActionListener(this);
-	    
+
 	    //set du bouton connect
 	    connectButtonAdmin.addActionListener(this);
-	    
+
 	    GridLayout gridAdmin = new GridLayout(4, 1);
 	    adminPan.setLayout(gridAdmin);
 	    adminPan.add(userNamePan);
@@ -194,12 +194,12 @@ public class ConnectionPanel extends JFrame implements ActionListener {
 	    adminPan.add(connectButtonAdmin);
 	    adminPan.add(backButtonAdmin);
 	}
-	
+
 	private void showPlayerConnectionPan(){
 		this.setContentPane(playerPan);
 	    this.setVisible(true);
 	}
-	
+
 	private void showAdminConnectionPan(){
 		this.setContentPane(adminPan);
 	    this.setVisible(true);

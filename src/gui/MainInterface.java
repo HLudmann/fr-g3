@@ -20,11 +20,11 @@ import javax.swing.border.Border;
 public class MainInterface extends JFrame implements ActionListener{
 	private Font font = new Font("TimesRoman",Font.CENTER_BASELINE,25);
 	private JButton boutonConnection = new JButton("connection");
-	private JButton competition = new JButton("lister compétition");
-    private JButton competiteur = new JButton("lister compétiteur");
+	private JButton competition = new JButton("lister compÃ©tition");
+    private JButton competiteur = new JButton("lister compÃ©titeur");
 	private JButton searchButton = new JButton("search");
-	private JPanel mainBox = new JPanel(); 
-	
+	private JPanel mainBox = new JPanel();
+
 	public MainInterface(){
 	    this.setBackground(new Color(0,150,250));
 		this.setTitle("logiciel de paris sportifs");
@@ -32,8 +32,8 @@ public class MainInterface extends JFrame implements ActionListener{
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.getSize();
-	    
-	    
+
+
 	    //set du bouton connection (box ligne de prenant 1/3 de la fenetre)
 	    JPanel connectionBar = new JPanel();
 	    JPanel borderLayoutConnectionBar = new JPanel();
@@ -47,11 +47,11 @@ public class MainInterface extends JFrame implements ActionListener{
 	    connectionBar.add(borderLayoutConnectionBar);
 	    connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
 	    borderLayoutConnectionBar.add(boutonConnection, BorderLayout.NORTH);
-	    
-	    
-	    
-	    
-	    
+
+
+
+
+
 	    //set de la bande central (bouton de listage)
 	    JPanel lister = new JPanel();
 	    JPanel lister2 = new JPanel();
@@ -71,12 +71,12 @@ public class MainInterface extends JFrame implements ActionListener{
 	    lister.add(lister4, BorderLayout.CENTER);
 	    lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
 	    lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
-	    
-	    
-	    
-	    
-	    
-	    
+
+
+
+
+
+
 	    //set du search
 	    JPanel search = new JPanel();
 	    JPanel searchField = new JPanel();
@@ -94,35 +94,35 @@ public class MainInterface extends JFrame implements ActionListener{
 	    search.add(searchButton, BorderLayout.CENTER);
 	    search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
 	    search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
-	    
-	    
-	    
-	    
-	    
-	    
+
+
+
+
+
+
 	    mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
 	    mainBox.add(connectionBar);
 	    mainBox.add(lister);
 	    mainBox.add(search);
 	    mainBox.setBackground(Color.WHITE);
 
-	    
-	    
-	    
-	    
+
+
+
+
 	    //setActions
 	    boutonConnection.addActionListener(this);
 	    competition.addActionListener(this);
 	    competiteur.addActionListener(this);
 	    searchButton.addActionListener(this);
-	    
-	    
-	    
-	    
+
+
+
+
 	    this.getContentPane().add(mainBox);
 	    this.setVisible(true);
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == boutonConnection){
 			ConnectionPanel co = new ConnectionPanel(this);
@@ -137,7 +137,7 @@ public class MainInterface extends JFrame implements ActionListener{
 			;
 		}
 	}
-	
-	
-	
+
+
+
 }

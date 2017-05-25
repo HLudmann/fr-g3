@@ -5,6 +5,8 @@ import betSystem.Bet;
 import exceptions.IncorrectString;
 
 
+import java.util.ArrayList;
+
 public class Player extends SystemUser {
 	private long wallet;
 	private ArrayList<Bet> betList;
@@ -30,6 +32,7 @@ public class Player extends SystemUser {
 		if (w<0){
 			throw new Exception("wallet cannot be negative");
 		}
+
 		this.wallet = w;
 	}
 
@@ -59,4 +62,13 @@ public class Player extends SystemUser {
 		}
 	}
 
+
+	public void addBet(betSystem.Bet b){
+		if(!betList.contains(b)) {
+			betList.add(b);
+			b.getCompetition().addBet(b);
+			this.wallet -= b.getAmount();
+		}
+	}
+	
 }

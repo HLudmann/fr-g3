@@ -2,13 +2,15 @@ package personSystem;
 import java.util.ArrayList;
 
 import betSystem.Bet;
+import exceptions.IncorrectString;
+
 
 public class Player extends SystemUser {
 	private long wallet;
 	private ArrayList<Bet> betList;
 
 
-	public Player(String firstName, String lastName, String password, String nickname){
+	public Player(String firstName, String lastName, String password, String nickname) throws IncorrectString{
 
 		super(firstName, lastName, password, nickname);
 
@@ -16,7 +18,7 @@ public class Player extends SystemUser {
 		wallet=0;
 	}
 
-	public Player(String firstName, String lastName, String password, String nickname, long wallet){
+	public Player(String firstName, String lastName, String password, String nickname, long wallet) throws IncorrectString{
 		//define a custom value of wallet
 		this(firstName, lastName, password, nickname);
 		this.wallet=wallet;

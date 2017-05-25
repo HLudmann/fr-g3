@@ -1,11 +1,15 @@
 package personSystem;
 
+import exceptions.IncorrectString;
+import exceptions.WrongPassword;
+
+
 abstract class SystemUser extends Person{
 
 	private String nickname;
 	private String password;
 
-	public SystemUser(String firstName, String lastName, String nickname, String password){
+	public SystemUser(String firstName, String lastName, String nickname, String password) throws IncorrectString{
 			super(firstName, lastName);
 			this.nickname=nickname;
 			this.password=password;
@@ -20,18 +24,15 @@ abstract class SystemUser extends Person{
 	}
 
 
-	public void authenticate(String str) throws Exception {
-
+	public void authenticate(String str) throws WrongPassword {
 		if (password != str){
-			throw new Exception("wrong password");
+			throw new WrongPassword("Password doesn't match");
 		}
 
 	}
 
 	public void updatePassword(String str){
-
 		password = str;
-
 	}
 
 }

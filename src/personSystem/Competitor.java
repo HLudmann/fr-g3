@@ -3,18 +3,27 @@ import java.util.ArrayList;
 
 import betSystem.Competition;
 
+import exceptions.CompetitionNotInList;
+import exceptions.CompetitionAlreadyInList;
+import exceptions.IncorrectString;
+
 public class Competitor extends Person{
 
 	private int id;
 
 	private ArrayList<betSystem.Competition> competitionList;
 
-	public Competitor(String firstName, String lastName, int id){
+	public Competitor(String firstName, String lastName, int id) throws IncorrectString{
 		super(firstName, lastName);
 		this.id=id;
-		
+
 		competitionList = new  ArrayList<betSystem.Competition>();
 
+	}
+
+	public Competitor(String firstName, String lastName, int id, ArrayList<betSystem.Competition> compList) throws IncorrectString{
+		this(firstName, lastName, id);
+		competitionList = compList;
 	}
 
 	public int getId(){
@@ -27,7 +36,7 @@ public class Competitor extends Person{
 
 	}
 
-	public void addCompetition(Competition c) throws Exception{
+	public void addCompetition(Competition c) throws CompetitionAlreadyInList{
 
 		if (!competitionList.contains(c)){
 
@@ -35,11 +44,11 @@ public class Competitor extends Person{
 
 		}
 		else{
-			throw new Exception("competition already in list");
+			throw new CompetitionAlreadyInList();
 		}
 	}
 
-	public void removeCompetition(Competition c) throws Exception{
+	public void removeCompetition(Competition c) throws CompetitionNotInList{
 
 		if (competitionList.contains(c)){
 
@@ -47,7 +56,7 @@ public class Competitor extends Person{
 
 		}
 		else{
-			throw new Exception("competition wasnt in list");
+			throw new CompetitionNotInList();
 		}
 	}
 

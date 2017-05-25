@@ -1,6 +1,6 @@
 package exceptions;
 
-class IncorrectString extends Exception{
+public class IncorrectString extends Exception{
 
   public IncorrectString(){
 

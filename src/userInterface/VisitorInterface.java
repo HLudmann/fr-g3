@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+
+package userInterface;
+import container.CompContainer;
+import container.PersonContainer;
+import exceptions.BadParametersException;
+import exceptions.IdentificationError;
+import exceptions.ManagerAuthentificated;
+import exceptions.PlayerAuthentificated;
+import personSystem.Manager;
+import personSystem.Player;
+import src.betSystem.*;
+import src.container.*;
+import src.personSystem.*;
+import src.userInterface.exceptions.*;
+=======
 package userInterface;
 
 import java.util.ArrayList;
@@ -6,6 +22,7 @@ import betSystem.*;
 import container.*;
 import container.*;
 import userInterface.exceptions.*;
+>>>>>>> cab65752ac36d61f7a0e938a6aae39192fe13949
 
 /**
  * @author HLudmann + BusterJava

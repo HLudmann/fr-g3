@@ -1,5 +1,4 @@
-import gui.ConnectionPanel;
-import gui.MainInterface;
+import gui.panels.MainInterface;
 
 public class StartApp {
 	public static void main(String[] args){

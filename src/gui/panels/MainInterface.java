@@ -1,4 +1,4 @@
-package gui;
+package gui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+
+import gui.buttons.BoutonInvisible;
 
 public class MainInterface extends JFrame implements ActionListener{
 	private Font font = new Font("TimesRoman",Font.CENTER_BASELINE,25);

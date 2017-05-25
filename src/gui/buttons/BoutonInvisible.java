@@ -1,7 +1,5 @@
-package gui;
+package gui.buttons;
 
-
-import java.awt.Dimension;
 
 import javax.swing.JButton;
 

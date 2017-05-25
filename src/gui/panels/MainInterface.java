@@ -22,8 +22,8 @@ import gui.buttons.BoutonInvisible;
 public class MainInterface extends JFrame implements ActionListener{
 	private Font font = new Font("TimesRoman",Font.CENTER_BASELINE,25);
 	private JButton boutonConnection = new JButton("connection");
-	private JButton competition = new JButton("lister compÃ©tition");
-    private JButton competiteur = new JButton("lister compÃ©titeur");
+	private JButton competition = new JButton("lister compétition");
+    private JButton competiteur = new JButton("lister compétiteur");
 	private JButton searchButton = new JButton("search");
 	private JPanel mainBox = new JPanel();
 

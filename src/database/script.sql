@@ -1,5 +1,3 @@
-create database redwire with encoding utf8;
-
 
 create table SYSTEM_USER (
     LASTNAME    varchar(100)         not null,

@@ -1,8 +1,8 @@
-import gui.panels.PlayerPanel;
+import gui.panels.ManagerPanel;
 
 public class StartApp {
 	public static void main(String[] args){
-		PlayerPanel fenetre = new PlayerPanel();
+		ManagerPanel fenetre = new ManagerPanel();
 		//ConnectionPanel fenetre2 = new ConnectionPanel(fenetre);
 		//fenetre2.setVisible(true);
 	  }

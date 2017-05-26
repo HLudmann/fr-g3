@@ -147,8 +147,8 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
 	    mainBox.add(connectionBar);
 	    mainBox.add(lister);
-	    mainBox.add(search);
 	    mainBox.add(bet);
+	    mainBox.add(search);
 	    mainBox.setBackground(Color.WHITE);
 
 

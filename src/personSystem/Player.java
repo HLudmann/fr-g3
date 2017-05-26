@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import betSystem.Bet;
 import exceptions.IncorrectString;
+import exceptions.InvalidWallet;
 
 
 public class Player extends SystemUser {
@@ -21,14 +22,14 @@ public class Player extends SystemUser {
 	public Player(String firstName, String lastName, String password, String nickname, long wallet) throws IncorrectString{
 		//define a custom value of wallet
 		this(firstName, lastName, password, nickname);
-		this.wallet=wallet;
+		this.setWallet(wallet);
 	}
 
 
 
-	public void setWallet(int w) throws Exception{
+	public void setWallet(int w) throws InvalidWallet{
 		if (w<0){
-			throw new Exception("wallet cannot be negative");
+			throw new InvalidWallet("wallet can't be negative");
 		}
 		this.wallet = w;
 	}

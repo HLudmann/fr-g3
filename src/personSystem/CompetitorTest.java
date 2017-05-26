@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.CompetitionNotInList;
-import exceptions.CompetitionAlreadyInList;
+import exceptions.ItemNotInList;
+import exceptions.ItemAlreadyInList;
 import exceptions.IncorrectString;
 
 public class CompetitorTest {
@@ -22,13 +22,13 @@ public class CompetitorTest {
 	}
 
 	@Test
-	public void testAddValidCompetition() throws IncorrectString, CompetitionAlreadyInList{
+	public void testAddValidCompetition() throws IncorrectString, ItemAlreadyInList{
 		Competitor c = new Competitor("jean", "dupont", 0);
 		c.addCompetition(new Competition());
 	}
 
-	@Test(expected=CompetitionAlreadyInList.class)
-	public void testAddCompetitionTwice() throws CompetitionAlreadyInList, IncorrectString{
+	@Test(expected=ItemAlreadyInList.class)
+	public void testAddCompetitionTwice() throws ItemAlreadyInList, IncorrectString{
 		Competitor c = new Competitor("jean", "dupont", 0);
 		Competition comp = new Competition();
 
@@ -36,16 +36,16 @@ public class CompetitorTest {
 		c.addCompetition(comp);
 	}
 
-	@Test(expected=CompetitionNotInList.class)
-	public void testRemoveNotExistingCompetition() throws CompetitionNotInList,
+	@Test(expected=ItemNotInList.class)
+	public void testRemoveNotExistingCompetition() throws ItemNotInList,
 																										IncorrectString{
 		Competitor c = new Competitor("jean", "dupont", 0);
 		c.removeCompetition(new Competition());
 	}
 
 	@Test
-	public void testRemoveValidCompetition() throws CompetitionAlreadyInList,
-																							CompetitionNotInList,
+	public void testRemoveValidCompetition() throws ItemAlreadyInList,
+																							ItemNotInList,
 																							IncorrectString{
 		Competitor c = new Competitor("jean", "dupont", 0);
 		Competition comp = new Competition();

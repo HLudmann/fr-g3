@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 import betSystem.Competition;
 
-import exceptions.CompetitionNotInList;
-import exceptions.CompetitionAlreadyInList;
+import exceptions.ItemNotInList;
+import exceptions.ItemAlreadyInList;
 import exceptions.IncorrectString;
 
 public class Competitor extends Person{
@@ -36,7 +36,7 @@ public class Competitor extends Person{
 
 	}
 
-	public void addCompetition(Competition c) throws CompetitionAlreadyInList{
+	public void addCompetition(Competition c) throws ItemAlreadyInList{
 
 		if (!competitionList.contains(c)){
 
@@ -44,11 +44,11 @@ public class Competitor extends Person{
 
 		}
 		else{
-			throw new CompetitionAlreadyInList();
+			throw new ItemAlreadyInList();
 		}
 	}
 
-	public void removeCompetition(Competition c) throws CompetitionNotInList{
+	public void removeCompetition(Competition c) throws ItemNotInList{
 
 		if (competitionList.contains(c)){
 
@@ -56,7 +56,7 @@ public class Competitor extends Person{
 
 		}
 		else{
-			throw new CompetitionNotInList();
+			throw new ItemNotInList();
 		}
 	}
 

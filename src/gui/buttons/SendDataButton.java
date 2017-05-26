@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+@SuppressWarnings("serial")
 public class SendDataButton extends JButton implements MouseListener{
   private String name;
   private String data; // The data related to the entry, and that will be send if needed to the backend

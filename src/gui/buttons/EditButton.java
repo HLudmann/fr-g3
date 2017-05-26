@@ -2,14 +2,13 @@ package gui.buttons;
 
 import gui.*;
 import gui.panels.*;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class EditButton extends JButton implements MouseListener{
@@ -33,13 +32,13 @@ public class EditButton extends JButton implements MouseListener{
   //Send the correct instruction based on the type provided
   //TODO: atm we just use it to switch from a panel to another for testing purpose
   public void mouseClicked(MouseEvent event) {
+    Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
     switch(type){
       case 1:
         //TODO: get the list of competitors
         ArrayList<String> listComp = new ArrayList<String>();
         listComp.add("Machin");
         listComp.add("Chose");
-        Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
         window.setPanel(new PanelFormBet(false, "jbvallad", listComp, 50, 1));
         break;
       case 2:

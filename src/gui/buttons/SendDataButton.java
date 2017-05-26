@@ -2,13 +2,12 @@ package gui.buttons;
 
 import gui.*;
 import gui.panels.*;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 @SuppressWarnings("serial")
 public class SendDataButton extends JButton implements MouseListener{
@@ -31,16 +30,16 @@ public class SendDataButton extends JButton implements MouseListener{
 
   //Send the correct instruction based on the type provided
   public void mouseClicked(MouseEvent event) {
+    Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
     switch(type){
       case 1:
-        Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
         window.setPanel(new PanelPasswordEdit("jbvallad"));
         break;
       case 2:
-        System.out.println("type: " + this.type);
+        window.setPanel(new PanelAddCompetition());
         break;
       case 3:
-        System.out.println("type: " + this.type);
+        window.setPanel(new PanelWalletEdit("jbvallad"));
         break;
     }
   }

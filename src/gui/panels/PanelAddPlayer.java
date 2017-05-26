@@ -1,22 +1,17 @@
 package gui.panels;
 
 import gui.buttons.SendDataButton;
-
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
-import javax.swing.JPasswordField;
 import java.awt.GridLayout;
-import javax.swing.border.EmptyBorder;
-import java.util.ArrayList;
 import java.text.NumberFormat;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class PanelAddPlayer extends JPanel{
@@ -56,7 +51,7 @@ public class PanelAddPlayer extends JPanel{
     this.add(new JLabel("Montant du pari: "));
     this.add(this.valueInput);
     this.add(new JLabel(""));
-    this.add(new SendDataButton("Envoyer", 1, 1));
+    this.add(new SendDataButton("Envoyer", 1, 2));
 
   }
 }

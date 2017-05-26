@@ -1,15 +1,13 @@
 package gui;
 
 import gui.panels.*;
-
-import javax.swing.JFrame;
-import javax.swing.border.EmptyBorder;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
-
-import java.util.ArrayList;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame {

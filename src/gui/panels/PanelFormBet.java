@@ -1,22 +1,22 @@
 package gui.panels;
 
 import gui.buttons.SendDataButton;
-
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
-import java.awt.GridLayout;
-import javax.swing.border.EmptyBorder;
-import java.util.ArrayList;
-import java.text.NumberFormat;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class PanelFormBet extends JPanel {
 
   private int type;
@@ -28,10 +28,10 @@ public class PanelFormBet extends JPanel {
   private JLabel firstCompLabel;
   private JLabel secondCompLabel;
   private JLabel thirdCompLabel;
-  private JComboBox betSelect;
-  private JComboBox firstCompetitorSelector;
-  private JComboBox secondCompetitorSelector;
-  private JComboBox thirdCompetitorSelector;
+  private JComboBox<String> betSelect;
+  private JComboBox<String> firstCompetitorSelector;
+  private JComboBox<String> secondCompetitorSelector;
+  private JComboBox<String> thirdCompetitorSelector;
   private JFormattedTextField valueInput;
   private SendDataButton submit;
 
@@ -62,7 +62,7 @@ public class PanelFormBet extends JPanel {
     if(is_edition){
       this.add(new JLabel("Non modifiable"));
     }else{
-      this.betSelect = new JComboBox();
+      this.betSelect = new JComboBox<String>();
       this.betSelect.addItem("Pari podium");
       this.betSelect.addItem("Pari simple");
 
@@ -85,8 +85,8 @@ public class PanelFormBet extends JPanel {
 
   }
 
-  public JComboBox createAndPopulateCompSelectors(){
-    JComboBox comboBox = new JComboBox();
+  public JComboBox<String> createAndPopulateCompSelectors(){
+    JComboBox<String> comboBox = new JComboBox<String>();
     for(String el:this.competitors){
       comboBox.addItem(el);
     }

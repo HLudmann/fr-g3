@@ -1,17 +1,15 @@
 package gui;
 
 import gui.panels.*;
-
-import javax.swing.JFrame;
-import javax.swing.border.EmptyBorder;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.border.EmptyBorder;
 
-import java.util.ArrayList;
-
-
+@SuppressWarnings("serial")
 public class Window extends JFrame {
   public Window(String name){
 
@@ -50,7 +48,7 @@ public class Window extends JFrame {
     el.add("jbvallad");
     list.add(el);
 
-    el = new ArrayList();
+    el = new ArrayList<String>();
     el.add("Jean Machin");
     el.add("jmachin");
     list.add(el);

@@ -1,14 +1,15 @@
 package gui.buttons;
 
 import gui.*;
-
+import gui.panels.PanelAddPlayer;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
+@SuppressWarnings("serial")
 public class DeleteButton extends JButton implements MouseListener{
   private String name;
   private String data; // The data related to the entry, and that will be send if needed to the backend
@@ -29,9 +30,10 @@ public class DeleteButton extends JButton implements MouseListener{
 
   //Send the correct instruction based on the type provided
   public void mouseClicked(MouseEvent event) {
+    Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
     switch(type){
       case 1:
-        System.out.println("data: " + this.data + " type: " + this.type);
+        window.setPanel(new PanelAddPlayer());
         break;
       case 2:
         System.out.println("data: " + this.data + " type: " + this.type);

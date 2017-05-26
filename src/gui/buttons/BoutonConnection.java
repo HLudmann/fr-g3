@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 
-
+@SuppressWarnings("serial")
 public class BoutonConnection extends JButton implements MouseListener{
 	private String name;
 	private Image img;

@@ -24,6 +24,7 @@ import userInterface.exceptions.PlayerAuthentificated;
 */
 
 
+@SuppressWarnings("serial")
 public class ConnectionPanel extends JFrame implements ActionListener {
     private BoutonConnection boutonAdmin = new BoutonConnection("connect as admin");
     private BoutonConnection boutonPlayer = new BoutonConnection("connect as player");

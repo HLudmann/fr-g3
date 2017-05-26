@@ -6,19 +6,20 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class BoutonLister extends JButton implements MouseListener{
 	private String name;
 	private Font font =new Font("TimesRoman",Font.CENTER_BASELINE,25);
-	  
-	  
+
+
 	public BoutonLister(String str){
 		super(str);
 	    this.name = str;
 	    this.setFont(font);
 	this.addMouseListener(this);
 	}
-	  
-	public void mouseClicked(MouseEvent event) {                     
+
+	public void mouseClicked(MouseEvent event) {
 	}
 
 	public void mouseEntered(MouseEvent event) {
@@ -28,9 +29,9 @@ public class BoutonLister extends JButton implements MouseListener{
 	}
 
 	public void mousePressed(MouseEvent event) {
-		
+
 	}
-		 
+
 	public void mouseReleased(MouseEvent event) {
 	}
 }

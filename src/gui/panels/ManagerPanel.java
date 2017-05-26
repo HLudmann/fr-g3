@@ -43,7 +43,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	//pour changeWallet
 	    private JPanel walletPanel = new JPanel();
 	    private JButton walletButton = new JButton("changer le solde d'un compte");
-	//pour end comp�tition
+	//pour end compétition
 	    private JPanel endCompPanel = new JPanel();
 	    private JButton endCompButton = new JButton("rendre les résultats d'une compétition");
 	//pour set des colonnes
@@ -60,14 +60,14 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    private JPanel player2 = new JPanel();
 	    private JPanel player3 = new JPanel();
 	    private JPanel player4 = new JPanel();
-	//pour comp�tition
+	//pour compétition
 	    private JButton addCompetition = new JButton("compétition");
 	    private JButton delCompetition = new JButton("compétition");
 	    private JPanel competition = new JPanel();
 	    private JPanel competition2 = new JPanel();
 	    private JPanel competition3 = new JPanel();
 	    private JPanel competition4 = new JPanel();
-	//pour comp�titeur
+	//pour compétiteur
 	    private JButton addCompetiteur = new JButton("compétiteur");
 	    private JButton delCompetiteur = new JButton("compétiteur");
 	    private JPanel competiteur = new JPanel();
@@ -93,7 +93,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.getSize();
 	
-		//set bouton d�co et chgt password
+		//set bouton déco et chgt password
 	    borderLayoutConnectionBar1.setLayout(new BorderLayout());
 	    borderLayoutConnectionBar2.setLayout(new BorderLayout());
 	    borderLayoutConnectionBar1.setBackground(new Color(0,150,250));
@@ -152,7 +152,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		
 		
 		
-		//set du endComp�tition
+		//set du endCompetition
 	    endCompButton.setFont(font);
 	    endCompPanel.setLayout(new BorderLayout());
 	    endCompPanel.add(endCompButton, BorderLayout.CENTER);
@@ -208,7 +208,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		
 		
 		
-		//set add/del Comp�tition
+		//set add/del Compétition
 	    competition.setBackground(new Color(0,150,250));
 	    competition.setLayout(new BorderLayout());
 	    competition2.setLayout(new BorderLayout());
@@ -229,7 +229,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		
 		
 		
-		//set add/del comp�titor
+		//set add/del compétitor
 	    competiteur.setBackground(new Color(0,150,250));
 	    competiteur.setLayout(new BorderLayout());
 	    competiteur2.setLayout(new BorderLayout());

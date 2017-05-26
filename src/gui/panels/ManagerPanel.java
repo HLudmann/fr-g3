@@ -20,7 +20,6 @@ import javax.swing.border.Border;
 
 import gui.buttons.BoutonInvisible;
 
-@SuppressWarnings("serial")
 public class ManagerPanel extends JFrame implements ActionListener{
 	private Font font = new Font("arial",Font.CENTER_BASELINE,20);
 	private JPanel mainBox = new JPanel();
@@ -32,13 +31,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		private JPanel borderLayoutConnectionBar1 = new JPanel();
 		private JPanel borderLayoutConnectionBar2 = new JPanel();
 	//pour les lister
-<<<<<<< HEAD
-	    private JButton listCompetition = new JButton("lister compétition");
-	    private JButton listCompetiteur = new JButton("lister compétiteur");
-=======
-	    private JButton competition = new JButton("lister compÃ©tition");
-	    private JButton competiteur = new JButton("lister compÃ©titeur");
->>>>>>> 06089de5965d5bd2c4a0dfcd86b9c7e00e20001d
+	    private JButton listCompetition = new JButton("lister compÃ©tition");
+	    private JButton listCompetiteur = new JButton("lister compÃ©titeur");
 	    private JPanel lister = new JPanel();
 	    private JPanel lister2 = new JPanel();
 	    private JPanel lister3 = new JPanel();
@@ -51,7 +45,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    private JButton walletButton = new JButton("changer le solde d'un compte");
 	//pour end compï¿½tition
 	    private JPanel endCompPanel = new JPanel();
-	    private JButton endCompButton = new JButton("rendre les rï¿½sultats d'une compï¿½tition");
+	    private JButton endCompButton = new JButton("rendre les rÃ©sultats d'une compÃ©tition");
 	//pour set des colonnes
 	    private JLabel add = new JLabel("ajouter");
 	    private JLabel delete = new JLabel("supprimer");
@@ -60,42 +54,37 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    private JPanel addDel3 = new JPanel();
 	    private JPanel addDel4 = new JPanel();
 	//pour player
-<<<<<<< HEAD
 	    private JButton addPlayer = new JButton("joueur");
 	    private JButton delPlayer = new JButton("joueur");
 	    private JPanel player = new JPanel();
 	    private JPanel player2 = new JPanel();
 	    private JPanel player3 = new JPanel();
 	    private JPanel player4 = new JPanel();
-	//pour compétition
-	    private JButton addCompetition = new JButton("compétition");
-	    private JButton delCompetition = new JButton("compétition");
+	//pour compï¿½tition
+	    private JButton addCompetition = new JButton("compÃ©tition");
+	    private JButton delCompetition = new JButton("compÃ©tition");
 	    private JPanel competition = new JPanel();
 	    private JPanel competition2 = new JPanel();
 	    private JPanel competition3 = new JPanel();
 	    private JPanel competition4 = new JPanel();
-	//pour compétiteur
-	    private JButton addCompetiteur = new JButton("compétiteur");
-	    private JButton delCompetiteur = new JButton("compétiteur");
+	//pour compï¿½titeur
+	    private JButton addCompetiteur = new JButton("compÃ©titeur");
+	    private JButton delCompetiteur = new JButton("compÃ©titeur");
 	    private JPanel competiteur = new JPanel();
 	    private JPanel competiteur2 = new JPanel();
 	    private JPanel competiteur3 = new JPanel();
 	    private JPanel competiteur4 = new JPanel();
-=======
-	//pour compï¿½tition
-	//pour compï¿½titeur
->>>>>>> 06089de5965d5bd2c4a0dfcd86b9c7e00e20001d
 	//pour search
     	private JPanel search = new JPanel();
         private JPanel searchField = new JPanel();
 	    private JLabel searchLabel = new JLabel("search:");
         private JButton searchButton = new JButton("search");
 	    private JTextField searchText = new JTextField();
-
-
-
-
-
+	    
+	    
+	    
+	    
+	    
 	public ManagerPanel(){
 		this.setBackground(new Color(0,150,250));
 		this.setTitle("logiciel de paris sportifs - interface manager");
@@ -103,7 +92,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.getSize();
-
+	
 		//set bouton dï¿½co et chgt password
 	    borderLayoutConnectionBar1.setLayout(new BorderLayout());
 	    borderLayoutConnectionBar2.setLayout(new BorderLayout());
@@ -119,11 +108,11 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    borderLayoutConnectionBar2.add(boutonDeconnection, BorderLayout.NORTH);
 	    borderLayoutConnectionBar1.add(boutonChgtPassword, BorderLayout.NORTH);
-
-
-
-
-
+	    
+	    
+	    
+	    
+	    
 	    //set de la bande central (bouton de listage)
 	    lister.setBackground(new Color(0,150,250));
 	    lister.setLayout(new BorderLayout());
@@ -139,42 +128,41 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    lister.add(lister4, BorderLayout.CENTER);
 	    lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-
-
-
-
+	
+	    
+	
+	
 		//set bouton delBet
 	    delBet.setFont(font);
 	    delBetPanel.setLayout(new BorderLayout());
 		delBetPanel.add(delBet, BorderLayout.CENTER);
 		delBetPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		delBetPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-
-
-
-
+		
+		
+		
+		
 		//set bouton changeWallet
 		walletButton.setFont(font);
 	    walletPanel.setLayout(new BorderLayout());
 	    walletPanel.add(walletButton, BorderLayout.CENTER);
 	    walletPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    walletPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-
-
-
-
+		
+		
+		
+		
 		//set du endCompï¿½tition
 	    endCompButton.setFont(font);
 	    endCompPanel.setLayout(new BorderLayout());
 	    endCompPanel.add(endCompButton, BorderLayout.CENTER);
 	    endCompPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    endCompPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-
-
-
-
+		
+		
+		
+		
 		//set des colonnes add/del
-<<<<<<< HEAD
 	    addDel.setBackground(new Color(0,150,250));
 	    addDel.setLayout(new BorderLayout());
 	    addDel2.setLayout(new BorderLayout());
@@ -220,7 +208,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		
 		
 		
-		//set add/del Compétition
+		//set add/del Compï¿½tition
 	    competition.setBackground(new Color(0,150,250));
 	    competition.setLayout(new BorderLayout());
 	    competition2.setLayout(new BorderLayout());
@@ -241,7 +229,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		
 		
 		
-		//set add/del compétitor
+		//set add/del compï¿½titor
 	    competiteur.setBackground(new Color(0,150,250));
 	    competiteur.setLayout(new BorderLayout());
 	    competiteur2.setLayout(new BorderLayout());
@@ -262,27 +250,6 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		
 		
 		
-=======
-
-
-
-
-		//set add/del Player
-
-
-
-
-		//set add/del Compï¿½tition
-
-
-
-
-		//set add/del compï¿½titor
-
-
-
-
->>>>>>> 06089de5965d5bd2c4a0dfcd86b9c7e00e20001d
 		//set du search
 	    searchButton.setFont(font);
 	    search.setLayout(new BorderLayout());
@@ -296,10 +263,10 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    search.add(searchButton, BorderLayout.CENTER);
 	    search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-
-
-
-
+	    
+	    
+	    
+	    
 	    //assemblage final
 	    mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
 	    mainBox.add(connectionBar);
@@ -313,15 +280,15 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    mainBox.add(competiteur);
 	    mainBox.add(search);
 	    mainBox.setBackground(Color.WHITE);
-
-
-
+	
+	
+	
 	    this.getContentPane().add(mainBox);
 	    this.setVisible(true);
 	}
-
-
+	
+	
 	public void actionPerformed(ActionEvent e) {
-
+		
 	}
 }

@@ -27,7 +27,7 @@ public class VisitorInterface extends Thread {
     }
 
     /** 
-     * Singn In for Managers.
+     * Sign In for Managers.
      * 
      * @param nickname
      *              the nickname chosen by the Manager.
@@ -59,7 +59,7 @@ public class VisitorInterface extends Thread {
     }
 
     /** 
-     * Singn In for Player.
+     * Sign In for Player.
      * 
      * @param nickname
      *              the nickname chosen by the Player when he subscribed.

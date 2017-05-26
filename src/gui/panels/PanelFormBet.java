@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingUtilities;
 
+@SuppressWarnings("serial")
 public class PanelFormBet extends JPanel {
 
   private int type;

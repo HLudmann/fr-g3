@@ -1,37 +1,21 @@
-<<<<<<< HEAD
-
-package userInterface;
-import container.CompContainer;
-import container.PersonContainer;
-import exceptions.BadParametersException;
-import exceptions.IdentificationError;
-import exceptions.ManagerAuthentificated;
-import exceptions.PlayerAuthentificated;
-import personSystem.Manager;
-import personSystem.Player;
-import src.betSystem.*;
-import src.container.*;
-import src.personSystem.*;
-import src.userInterface.exceptions.*;
-=======
 package userInterface;
 
 import java.util.ArrayList;
+import java.util.Date;
 import personSystem.*;
 import betSystem.*;
 import container.*;
 import container.*;
 import userInterface.exceptions.*;
->>>>>>> cab65752ac36d61f7a0e938a6aae39192fe13949
 
 /**
  * @author HLudmann + BusterJava
- * 
+ *
  */
 public class VisitorInterface extends Thread {
 
     private long id;
-    private static long nextId = 0; 
+    private static long nextId = 0;
     protected static CompContainer competitionList = new CompContainer();
     protected static PersonContainer personList = new PersonContainer();
 
@@ -44,14 +28,14 @@ public class VisitorInterface extends Thread {
         return this.id;
     }
 
-    /** 
+    /**
      * Singn In for Managers.
-     * 
+     *
      * @param nickname
      *              the nickname chosen by the Manager.
      * @param password
      *              the password chosen by the Manager.
-     * 
+     *
      * @throws BadParametersException
      *              thrown if an empty nickname or password was given.
      * @throws IdentificationError
@@ -76,14 +60,14 @@ public class VisitorInterface extends Thread {
         }
     }
 
-    /** 
+    /**
      * Singn In for Player.
-     * 
+     *
      * @param nickname
      *              the nickname chosen by the Player when he subscribed.
      * @param password
      *              the password chosen by the Player when he subscribed.
-     * 
+     *
      * @throws BadParametersException
      *              thrown if an empty nickname or password was given.
      * @throws IdentificationError
@@ -110,7 +94,7 @@ public class VisitorInterface extends Thread {
 
     /**
      * List competitions
-     * 
+     *
      * @return all the public infos about each competition that has not ended.
      */
    public String[][] competitionListing() {
@@ -125,8 +109,8 @@ public class VisitorInterface extends Thread {
 
     /**
      * List competitors
-     * 
-     * @return all the public infos about each competitor 
+     *
+     * @return all the public infos about each competitor
      *              who is competiting in a upcomming competition
      */
     public String[][] competitorListing() {
@@ -142,10 +126,10 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search a competition by name.
-     * 
+     *
      * @param name
      *             partial or complete name of the competition.
-     * 
+     *
      * @return the search results.
      */
     public String[][] searchCompetitionByName (String name) {
@@ -160,10 +144,10 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search a competition by date.
-     * 
+     *
      * @param date
      *            date when the competition takes place.
-     * 
+     *
      * @return the search results.
      */
     public String[][] searchCompetitionByDate (Date date) {
@@ -178,10 +162,10 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search a competitor by name.
-     * 
+     *
      * @param name
      *             partial or complete name of the competitor.
-     * 
+     *
      * @return the search results.
      */
     public String[][] searchCompetitorByName (String name) {
@@ -197,10 +181,10 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search a competitor by id.
-     * 
+     *
      * @param id
      *             partial or complete id of the competitor.
-     * 
+     *
      * @return the search results.
      */
     public String[][] searchCompetitorById (int id) {

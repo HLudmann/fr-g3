@@ -19,18 +19,19 @@ import javax.swing.border.Border;
 
 import gui.buttons.BoutonInvisible;
 
+@SuppressWarnings("serial")
 public class PlayerPanel extends JFrame implements ActionListener{
 	private Font font = new Font("arial",Font.CENTER_BASELINE,20);
 	private JPanel mainBox = new JPanel();
 	//pour bar de connexion
-		private JButton boutonDeconnection = new JButton("déconnection");
+		private JButton boutonDeconnection = new JButton("dÃ©connection");
 		private JButton boutonChgtPassword = new JButton("changer password");
 		private JPanel connectionBar = new JPanel();
 		private JPanel borderLayoutConnectionBar1 = new JPanel();
 		private JPanel borderLayoutConnectionBar2 = new JPanel();
     //pour les lister
-    	private JButton competition = new JButton("lister compétition");
-    	private JButton competiteur = new JButton("lister compétiteur");
+    	private JButton competition = new JButton("lister compÃ©tition");
+    	private JButton competiteur = new JButton("lister compÃ©titeur");
     	private JPanel lister = new JPanel();
     	private JPanel lister2 = new JPanel();
     	private JPanel lister3 = new JPanel();
@@ -61,7 +62,7 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    this.getSize();
 
 
-	    //set du bouton déconnection chgt de password (box ligne de prenant 1/3 de la fenetre)
+	    //set du bouton dï¿½connection chgt de password (box ligne de prenant 1/3 de la fenetre)
 	    borderLayoutConnectionBar1.setLayout(new BorderLayout());
 	    borderLayoutConnectionBar2.setLayout(new BorderLayout());
 	    borderLayoutConnectionBar1.setBackground(new Color(0,150,250));
@@ -137,12 +138,12 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    bet.add(bet3, BorderLayout.CENTER);
 	    bet.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
 	    bet.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
-	    
-	    
-	    
-	    
-	    
-	    
+
+
+
+
+
+
 	    //assemblage final
 	    mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
 	    mainBox.add(connectionBar);
@@ -169,6 +170,6 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 }

@@ -19,18 +19,19 @@ import javax.swing.border.Border;
 
 import gui.buttons.BoutonInvisible;
 
+@SuppressWarnings("serial")
 public class ManagerPanel extends JFrame implements ActionListener{
 	private Font font = new Font("arial",Font.CENTER_BASELINE,20);
 	private JPanel mainBox = new JPanel();
 	//pour bar de connexion
-		private JButton boutonDeconnection = new JButton("déconnection");
+		private JButton boutonDeconnection = new JButton("dÃ©connection");
 		private JButton boutonChgtPassword = new JButton("changer password");
 		private JPanel connectionBar = new JPanel();
 		private JPanel borderLayoutConnectionBar1 = new JPanel();
 		private JPanel borderLayoutConnectionBar2 = new JPanel();
 	//pour les lister
-	    private JButton competition = new JButton("lister compétition");
-	    private JButton competiteur = new JButton("lister compétiteur");
+	    private JButton competition = new JButton("lister compÃ©tition");
+	    private JButton competiteur = new JButton("lister compÃ©titeur");
 	    private JPanel lister = new JPanel();
 	    private JPanel lister2 = new JPanel();
 	    private JPanel lister3 = new JPanel();
@@ -41,24 +42,24 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	//pour changeWallet
 	    private JPanel walletPanel = new JPanel();
 	    private JButton walletButton = new JButton("changer le solde d'un compte");
-	//pour end compétition
+	//pour end compï¿½tition
 	    private JPanel endCompPanel = new JPanel();
-	    private JButton endCompButton = new JButton("rendre les résultats d'une compétition");
+	    private JButton endCompButton = new JButton("rendre les rï¿½sultats d'une compï¿½tition");
 	//pour set des colonnes
 	//pour player
-	//pour compétition
-	//pour compétiteur
+	//pour compï¿½tition
+	//pour compï¿½titeur
 	//pour search
     	private JPanel search = new JPanel();
         private JPanel searchField = new JPanel();
 	    private JLabel searchLabel = new JLabel("search:");
         private JButton searchButton = new JButton("search");
 	    private JTextField searchText = new JTextField();
-	    
-	    
-	    
-	    
-	    
+
+
+
+
+
 	public ManagerPanel(){
 		this.setBackground(new Color(0,150,250));
 		this.setTitle("logiciel de paris sportifs - interface manager");
@@ -66,8 +67,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.getSize();
-	
-		//set bouton déco et chgt password
+
+		//set bouton dï¿½co et chgt password
 	    borderLayoutConnectionBar1.setLayout(new BorderLayout());
 	    borderLayoutConnectionBar2.setLayout(new BorderLayout());
 	    borderLayoutConnectionBar1.setBackground(new Color(0,150,250));
@@ -82,11 +83,11 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    borderLayoutConnectionBar2.add(boutonDeconnection, BorderLayout.NORTH);
 	    borderLayoutConnectionBar1.add(boutonChgtPassword, BorderLayout.NORTH);
-	    
-	    
-	    
-	    
-	    
+
+
+
+
+
 	    //set de la bande central (bouton de listage)
 	    lister.setBackground(new Color(0,150,250));
 	    lister.setLayout(new BorderLayout());
@@ -102,60 +103,60 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    lister.add(lister4, BorderLayout.CENTER);
 	    lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	
-	    
-	
-	
+
+
+
+
 		//set bouton delBet
 	    delBet.setFont(font);
 	    delBetPanel.setLayout(new BorderLayout());
 		delBetPanel.add(delBet, BorderLayout.CENTER);
 		delBetPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		delBetPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-		
-		
-		
-		
+
+
+
+
 		//set bouton changeWallet
 		walletButton.setFont(font);
 	    walletPanel.setLayout(new BorderLayout());
 	    walletPanel.add(walletButton, BorderLayout.CENTER);
 	    walletPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    walletPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-		
-		
-		
-		
-		//set du endCompétition
+
+
+
+
+		//set du endCompï¿½tition
 	    endCompButton.setFont(font);
 	    endCompPanel.setLayout(new BorderLayout());
 	    endCompPanel.add(endCompButton, BorderLayout.CENTER);
 	    endCompPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    endCompPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-		
-		
-		
-		
+
+
+
+
 		//set des colonnes add/del
-		
-		
-		
-		
+
+
+
+
 		//set add/del Player
-		
-		
-		
-		
-		//set add/del Compétition
-		
-		
-		
-		
-		//set add/del compétitor
-		
-		
-		
-		
+
+
+
+
+		//set add/del Compï¿½tition
+
+
+
+
+		//set add/del compï¿½titor
+
+
+
+
 		//set du search
 	    searchButton.setFont(font);
 	    search.setLayout(new BorderLayout());
@@ -169,10 +170,10 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    search.add(searchButton, BorderLayout.CENTER);
 	    search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    
-	    
-	    
-	    
+
+
+
+
 	    //assemblage final
 	    mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
 	    mainBox.add(connectionBar);
@@ -182,15 +183,15 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    mainBox.add(endCompPanel);
 	    mainBox.add(search);
 	    mainBox.setBackground(Color.WHITE);
-	
-	
-	
+
+
+
 	    this.getContentPane().add(mainBox);
 	    this.setVisible(true);
 	}
-	
-	
+
+
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 }

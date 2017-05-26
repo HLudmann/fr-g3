@@ -11,7 +11,7 @@ import java.awt.BorderLayout;
 
 import java.util.ArrayList;
 
-
+@SuppressWarnings("serial")
 public class Window extends JFrame {
   public Window(String name){
 
@@ -50,7 +50,7 @@ public class Window extends JFrame {
     el.add("jbvallad");
     list.add(el);
 
-    el = new ArrayList();
+    el = new ArrayList<String>();
     el.add("Jean Machin");
     el.add("jmachin");
     list.add(el);

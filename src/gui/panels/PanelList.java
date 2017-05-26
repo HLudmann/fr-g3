@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class PanelList extends JPanel {
   public PanelList(ArrayList<ArrayList<String>> list, int type){
 

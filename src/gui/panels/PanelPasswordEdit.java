@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import javax.swing.border.EmptyBorder;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class PanelPasswordEdit extends JPanel{
 
   JPasswordField passwordInput;

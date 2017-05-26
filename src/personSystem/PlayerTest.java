@@ -6,67 +6,67 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import exceptions.IncorrectString;
+import exceptions.InvalidWallet;
+import exceptions.ItemAlreadyInList;
+import exceptions.ItemNotInList;
+
 public class PlayerTest {
 
-	private Player p;
-
-	@Before
-	public void beforeTest(){
-		System.out.println("doing beforeTest");
-		p = new Player("Jean","Rousseau","password123","Jacques");
+	@Test
+	public void testConstructor() throws IncorrectString{
+		Player p = new Player("jean", "dupont", "jdupont", "1234");
 	}
 
 	@Test
-	public void testGetWallet(){
-		System.out.println("Testing getWallet...");
-		assertEquals("wrong wallet returned ",p.getWallet(),0);
+	public void testValidWallet() throws IncorrectString, InvalidWallet{
+		Player p = new Player("jean", "dupont", "jdupont", "1234");
+
+		p.setWallet(0);
+		p.setWallet(1257755);
+		p.setWallet((long)Integer.MAX_VALUE+10);
+	}
+
+	@Test(expected=InvalidWallet.class)
+	public void testInvalidWallet() throws IncorrectString, InvalidWallet{
+		Player p = new Player("jean", "dupont", "jdupont", "1234", -5);
 	}
 
 	@Test
-	public void testSetWallet() throws Exception{
-		System.out.println("Testing setWallet...");
-		p.setWallet(100);
-		assertEquals("wrong wallet returned ",p.getWallet(),100);
+	public void testAddBet() throws IncorrectString, InvalidWallet, ItemAlreadyInList{
+		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		p.addBet(new Bet());
 	}
 
-	@Test(expected = Exception.class)
-	public void testSettingNegativeWallet() throws Exception{
-		System.out.println("Setting negative wallet");
-		p.setWallet(-100);
-	}
-
-	@Test
-	public void testGetBetList(){
-		System.out.println("Testing getBetList...");
-		assertEquals("wrong BetList returned ",p.getBetList().size(),0);
+	@Test(expected=ItemAlreadyInList.class)
+	public void testAddBetTwice() throws IncorrectString, InvalidWallet, ItemAlreadyInList{
+		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		Bet b = new Bet();
+		p.addBet(b);
+		p.addBet(b);
 	}
 
 	@Test
-	public void testAddBet(){
-		System.out.println("Testing addBetList...");
-		Bet b1 = new Bet();
-		p.addBet(b1);
-		assertEquals("wrong BetList returned ",p.getBetList().get(0),b1);
+	public void testRemoveValidBet() throws IncorrectString,
+																			InvalidWallet,
+																		  ItemAlreadyInList,
+																			ItemNotInList
+																														{
+		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		Bet b = new Bet();
+		p.addBet(b);
+		p.removeBet(b);
 	}
 
-	@Test
-	public void testAddingSameBetTwice(){
-		System.out.println("Testing addBet...");
-		Player p2 = new Player("ok","pkpas","fautiltjs","pseudo");
-		Bet b2 = new Bet();
-		p2.addBet(b2);
-		p2.addBet(b2);
-		assertEquals("wrong BetList returned ",p2.getBetList().size(),1);
+	@Test(expected=ItemNotInList.class)
+	public void testRemoveInvalidBet() throws IncorrectString,
+																			InvalidWallet,
+																		  ItemAlreadyInList,
+																			ItemNotInList
+	{
+		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		p.removeBet(new Bet());
 	}
 
-	@Test
-	public void testRemoveBet(){
-		System.out.println("Testing removeBet...");
-		Player p2 = new Player("ok","pkpas","fautiltjs","pseudo");
-		Bet b2 = new Bet();
-		p2.addBet(b2);
-		p2.removeBet(b2);
-		assertEquals("wrong BetList returned ",p.getBetList().size(),0);
-	}
 
 }

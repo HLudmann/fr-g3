@@ -4,7 +4,7 @@ import exceptions.IncorrectString;
 
 public class Manager extends SystemUser{
 
-        public Manager(String firstName, String lastName, String password, String nickname) throws IncorrectString{
+        public Manager(String firstName, String lastName, String nickname, String password) throws IncorrectString{
 
 					super(firstName, lastName, nickname, password);
         }

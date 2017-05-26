@@ -32,7 +32,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		private JPanel borderLayoutConnectionBar2 = new JPanel();
 	//pour les lister
 	    private JButton listCompetition = new JButton("lister compétition");
-	    private JButton listCompetiteur = new JButton("lister compétiteur");
+	    private JButton listCompetitor = new JButton("lister compétiteur");
 	    private JPanel lister = new JPanel();
 	    private JPanel lister2 = new JPanel();
 	    private JPanel lister3 = new JPanel();
@@ -67,13 +67,13 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    private JPanel competition2 = new JPanel();
 	    private JPanel competition3 = new JPanel();
 	    private JPanel competition4 = new JPanel();
-	//pour compétiteur
-	    private JButton addCompetiteur = new JButton("compétiteur");
-	    private JButton delCompetiteur = new JButton("compétiteur");
-	    private JPanel competiteur = new JPanel();
-	    private JPanel competiteur2 = new JPanel();
-	    private JPanel competiteur3 = new JPanel();
-	    private JPanel competiteur4 = new JPanel();
+	//pour compéitor
+	    private JButton addCompetitor = new JButton("compétiteur");
+	    private JButton delCompetitor = new JButton("compétiteur");
+	    private JPanel competitor = new JPanel();
+	    private JPanel competitor2 = new JPanel();
+	    private JPanel competitor3 = new JPanel();
+	    private JPanel competitor4 = new JPanel();
 	//pour search
     	private JPanel search = new JPanel();
         private JPanel searchField = new JPanel();
@@ -92,7 +92,11 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.getSize();
+	    makeAndShowManagerPanel();
+	}
 	
+	    
+	private void makeAndShowManagerPanel(){
 		//set bouton déco et chgt password
 	    borderLayoutConnectionBar1.setLayout(new BorderLayout());
 	    borderLayoutConnectionBar2.setLayout(new BorderLayout());
@@ -119,9 +123,9 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    lister2.setLayout(new BorderLayout());
 	    lister3.setLayout(new BorderLayout());
 	    listCompetition.setFont(font);
-	    listCompetiteur.setFont(font);
+	    listCompetitor.setFont(font);
 	    lister2.add(listCompetition, BorderLayout.CENTER);
-	    lister3.add(listCompetiteur, BorderLayout.CENTER);
+	    lister3.add(listCompetitor, BorderLayout.CENTER);
 	    lister4.setLayout(new GridLayout(1,2));
 	    lister4.add(lister2);
 	    lister4.add(lister3);
@@ -230,23 +234,23 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		
 		
 		//set add/del compétitor
-	    competiteur.setBackground(new Color(0,150,250));
-	    competiteur.setLayout(new BorderLayout());
-	    competiteur2.setLayout(new BorderLayout());
-	    competiteur3.setLayout(new BorderLayout());
-	    addCompetiteur.setFont(font);
-	    delCompetiteur.setFont(font);
-	    competiteur2.add(addCompetiteur, BorderLayout.CENTER);
-	    competiteur3.add(delCompetiteur, BorderLayout.CENTER);
-	    competiteur4.setLayout(new GridLayout(1,2));
-	    competiteur4.add(competiteur2);
-	    competiteur4.add(competiteur3);
-	    //competiteur.setBorder(borderBlack);
-	    competiteur2.setBorder(borderBlack);
-	    competiteur3.setBorder(borderBlack);
-	    competiteur.add(competiteur4, BorderLayout.CENTER);
-	    competiteur.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    competiteur.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    competitor.setBackground(new Color(0,150,250));
+	    competitor.setLayout(new BorderLayout());
+	    competitor2.setLayout(new BorderLayout());
+	    competitor3.setLayout(new BorderLayout());
+	    addCompetitor.setFont(font);
+	    delCompetitor.setFont(font);
+	    competitor2.add(addCompetitor, BorderLayout.CENTER);
+	    competitor3.add(delCompetitor, BorderLayout.CENTER);
+	    competitor4.setLayout(new GridLayout(1,2));
+	    competitor4.add(competitor2);
+	    competitor4.add(competitor3);
+	    //competitor.setBorder(borderBlack);
+	    competitor2.setBorder(borderBlack);
+	    competitor3.setBorder(borderBlack);
+	    competitor.add(competitor4, BorderLayout.CENTER);
+	    competitor.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    competitor.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		
 		
 		
@@ -277,9 +281,29 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    mainBox.add(addDel);
 	    mainBox.add(player);
 	    mainBox.add(competition);
-	    mainBox.add(competiteur);
+	    mainBox.add(competitor);
 	    mainBox.add(search);
 	    mainBox.setBackground(Color.WHITE);
+	    
+	    
+	    
+	    
+	    //set bouton actionnable
+	    boutonDeconnection.addActionListener(this);
+	    boutonChgtPassword.addActionListener(this);
+	    listCompetition.addActionListener(this);
+	    listCompetitor.addActionListener(this);
+	    delBet.addActionListener(this);
+	    walletButton.addActionListener(this);
+	    endCompButton.addActionListener(this);
+	    addPlayer.addActionListener(this);
+	    delPlayer.addActionListener(this);
+	    addCompetition.addActionListener(this);
+	    delCompetition.addActionListener(this);
+	    addCompetitor.addActionListener(this);
+	    delCompetitor.addActionListener(this);
+	    searchButton.addActionListener(this);
+	    
 	
 	
 	
@@ -287,8 +311,55 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    this.setVisible(true);
 	}
 	
-	
+	//méthode liée à l'activation des boutons
 	public void actionPerformed(ActionEvent e) {
-		
+		/*if(e.getSource() == boutonDeconnection){
+			
+		}
+		if(e.getSource() == boutonChgtPassword){
+			
+		}
+		if(e.getSource() == listCompetition){
+			
+		}
+		if(e.getSource() == listCompetitor){
+			
+		}
+		if(e.getSource() == delBet){
+			
+		}
+		if(e.getSource() == walletButton){
+			
+		}
+		if(e.getSource() == endCompButton){
+			
+		}*/
+		if(e.getSource() == addPlayer){
+			PanelAddPlayer addPlayerPan = new PanelAddPlayer();
+			this.setContentPane(addPlayerPan);
+			this.setVisible(true);
+		}/*
+		if(e.getSource() == delPlayer){
+			
+		}*/
+		if(e.getSource() == addCompetition){
+			PanelAddCompetition addCompetitionPan = new PanelAddCompetition();
+			this.setContentPane(addCompetitionPan);
+			this.setVisible(true);
+		}/*
+		if(e.getSource() == delCompetition){
+			
+		}*/
+		if(e.getSource() == addCompetitor){
+			PanelAddCompetitor addCompetitorPan = new PanelAddCompetitor();
+			this.setContentPane(addCompetitorPan);
+			this.setVisible(true);
+		}/*
+		if(e.getSource() == delCompetitor){
+			
+		}
+		if(e.getSource() == searchButton){
+			
+		}*/
 	}
 }

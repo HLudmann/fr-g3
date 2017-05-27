@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import personSystem.Competitor;
 import betSystem.exception.*;
+import exceptions.*;
+import exceptions.BadParametersException;
 
 public class Competition {
 	private String name;
@@ -88,11 +90,17 @@ public class Competition {
 	
 	public void results(Competitor[] winners) throws BadParametersException{
 		if(competitorList.size() <= 2){
-			if(winners.length != 1) throw new BadParametersException("Single winner only");
-			for(int i=0; i<betList.size();i++){
+			if (winners.length != 1) {throw new BadParametersException("Single winner only");}
+			for (int i=0; i<betList.size();i++) {
 				Bet b = betList.get(i);
-				if (b instanceof SingleWinnerBet){
-					if (winners[0] == b.getCompetitor()[0])	b.creditGain();
+				if (b instanceof SingleWinnerBet) {
+					if (winners[0] == b.getCompetitor()[0])	{
+						try {
+							b.creditGain();
+						} catch (InvalidWallet e) {
+							throw new BadParametersException("Issues when crediting wallets");
+						}
+					}
 				}
 			}
 		}
@@ -102,12 +110,22 @@ public class Competition {
 				Bet b = betList.get(i);
 				if (winners[0] == b.getCompetitor()[0] && winners[1] == b.getCompetitor()[1] 
 													   && winners[2] == b.getCompetitor()[2])
-					b.creditGain();				
+					try {
+							b.creditGain();
+						} catch (InvalidWallet e) {
+							throw new BadParametersException("Issues when crediting wallets");
+						}				
 			}
 			for(int i=0; i<betList.size();i++){
 				Bet b = betList.get(i);
 				if (b instanceof SingleWinnerBet){
-					if (winners[0] == b.getCompetitor()[0])	b.creditGain();
+					if (winners[0] == b.getCompetitor()[0])	{
+						try {
+							b.creditGain();
+						} catch (InvalidWallet e) {
+							throw new BadParametersException("Issues when crediting wallets");
+						}
+					}
 				}
 			}
 			

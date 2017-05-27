@@ -2,102 +2,85 @@ package container;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
-import javax.persistence.EntityManager;
-import jpaUtils.JPAUtil;
+//import javax.persistence.EntityManager;
+
+//import jpaUtils.JPAUtil;
 import java.util.Calendar;
 
-import betSystem.Competition;
+import betSystem.*;
+import personSystem.Competitor;
+import exceptions.*;
 
 public class CompContainer {
 	private ArrayList<Competition> compDB;
-	
-	/** TODO
-	 * Method to find the index of the Competition c in the DataBase (private)
-	 */
-	private int findCompByName(String name) {
-		int index = 0;
-		int sizeDB = compDB.size();
-		if (name.length() > 20) {
-			return -1;
-		}
-		while (name != compDB.get(index).getName() || index <= compDB.size()) {
-			index++;			
-		}
-		//In the case we have't find c in the DataBase
-		if (index == sizeDB) {
-			//if it's not the last
-			if (name != compDB.get(index).getName()) {
-				return index-1;
-			}
-		}
-		return -1;
-	}
+
 	
 	/**
 	 * Method to add a Competition to the DataBase
 	 */
-	public boolean addComp(String name, Calendar date) {
-		EntityManager em = JPAUtil.getEntityManager();
-		Competition c = new Competition(name, date);
-		if (c == null) {
-			return false;
-		} try {
-			em.persist(c);
-		} catch (Exception e) {
-			System.err.println("Problem when saving ");
-			e.printStackTrace();
-			return false;
-		}
+	public void addComp(String name, Calendar date, Competitor[] competitors) throws BadParametersException {
+		throw new BadParametersException();
 	}
 
 	
 	/** 
 	 * Method to update a Competition in the DataBase
 	 */
-	public boolean updateComp(String name) {
-		EntityManager em = JPAUtil.getEntityManager();
-		Competition c = searchCompByName(name);		
-		if (c == null) {
-			return false;
-		} try  {
-			return em.merge(c);
-		} catch (Exception e) {
-			System.err.println("Problem when updating ");
-			e.printStackTrace();
-			return false;
-		}
+	public void updateComp(String name) {
+		
 	}
 	
 	
 	/**
 	 * Method to delete a Competition in the DataBase
 	 */
-	public boolean delComp(String name) {
-		EntityManager em = JPAUtil.getEntityManager();
-		Competition c = searchCompetition(name);
-		if (c == null) {
-			return false;
-		} try {
-			em.remove(c);
-		} catch (Exception e) {
-			System.err.println("Problem when deleting an entity ");
-			e.printStackTrace();
-			return true;
-		}
+	public void delComp(String name) throws BadParametersException {
+		throw new BadParametersException();
 	}
 
 	
 	/** TODO
 	 * Method to find the Competition c in the DataBase (public)
 	 */
-	public Competition[] searchCompetition(String name) {
-		int index = findCompByName(name);
-		if (index > 0) {
-			return compDB.get(index);
+	public ArrayList<Competition> findCompetitionByName(String name) {
+		ArrayList<Competition> res = new ArrayList<Competition>();
+		Iterator<Competition> it = this.compDB.iterator();
+		while (it.hasNext()) {
+			Competition c = it.next();
+			if (c.getName().contains(name)) {
+				res.add(c);
+			}
 		}
-		else {
-			return null;
+		return res;
+	}
+
+	public ArrayList<Competition> findCompetitionByDate(Calendar date) {
+		ArrayList<Competition> res = new ArrayList<Competition>();
+		Iterator<Competition> it = this.compDB.iterator();
+		while (it.hasNext()) {
+			Competition c = it.next();
+			if (c.getDate() == date) {
+				res.add(c);
+			}
 		}
+		return res;
+	}
+
+	public ArrayList<Competition> getCompetitionsNotEnded() {
+		ArrayList<Competition> res = new ArrayList<Competition>();
+		Iterator<Competition> it = this.compDB.iterator();
+		while (it.hasNext()) {
+			Competition c = it.next();
+			if (!c.hasBegun()) {
+				res.add(c);
+			}
+		}
+		return res;
+	}
+
+	public ArrayList<Competition> getCompetitions() {
+		return this.compDB;
 	}
 }

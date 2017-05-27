@@ -2,12 +2,10 @@ package userInterface;
 
 import java.util.ArrayList;
 
-import com.sun.org.apache.xerces.internal.util.Status;
-
 import personSystem.*;
 import betSystem.*;
 import container.*;
-import userInterface.exceptions.*;
+import exceptions.*;
 
 /**
  * @author HLudmann + BusterJava
@@ -23,12 +21,12 @@ public class PlayerInterface extends VisitorInterface {
 	}
 
 	/**
-	 * Log Out
+	 * Sign Out
 	 * 
 	 * @return a VisitorInterface to the gui.
 	 */
-	 public VisitorInterface logOut() {
-		 personList.unLog(this.player);
+	 public VisitorInterface signOut() {
+		 personList.logOut(this.loggedPlayer);
 		 return new VisitorInterface();
 	 }
 
@@ -48,13 +46,13 @@ public class PlayerInterface extends VisitorInterface {
 	  *				thrown if the curent password entered is wrong.
 	  */
 	public void changePassword (String curentPasswd, String newPasswd, String reNewPasswd) 
-		throws BadParametersException, FalsePassord {
+		throws BadParametersException, WrongPassword {
 		if (newPasswd == reNewPasswd) {
 			 try {
 				this.loggedPlayer.authentificate(curentPasswd);
 				this.loggedPlayer.updatePassword(newPasswd);
-			} catch (FalsePassword fp) {
-				throw fp;
+			} catch (WrongPassword wp) {
+				throw wp;
 			}
 		} else {
 			throw new BadParametersException("New password and confirmation don't match");
@@ -75,10 +73,10 @@ public class PlayerInterface extends VisitorInterface {
 	 * 			thrown if the competitor is not in the competition
 	 */
 	public void makeBet (String compName, int compId, long amount) throws BadParametersException {
-		Competition competition = competitionList.findCompetitionByName(compName)[0];
-		Competitor competitor = personList.findCompetitorById(compId);
+		Competition competition = competitionList.findCompetitionByName(compName).get(0);
+		Competitor competitor = personList.findCompetitorById(compId).get(0);
 		try {
-			this.betList.addBet(amount, this.player, competition, competitor);
+			this.betList.addBet(amount, this.loggedPlayer, competition, competitor);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -103,19 +101,47 @@ public class PlayerInterface extends VisitorInterface {
 	 */
 	public void makeBet (String compName, int firstCompId, int secondCompId,
 	  int thirdCompId, long amount) throws BadParametersException {
-		Competition competition = competitionList.findCompetitionByName(compName)[0];
-		Competitor first = personList.findCompetitorById(firstCompId);
-		Competitor second = personList.findCompetitorById(firstCompId);
-		Competitor third = personList.findCompetitorById(firstCompId);
+		Competition competition = competitionList.findCompetitionByName(compName).get(0);
+		Competitor first = personList.findCompetitorById(firstCompId).get(0);
+		Competitor second = personList.findCompetitorById(secondCompId).get(0);
+		Competitor third = personList.findCompetitorById(thirdCompId).get(0);
 		try {
-			this.betList.addBet(amount, this.player, competition, first, second, third);
+			this.betList.addBet(amount, this.loggedPlayer, competition, first, second, third);
 		} catch (BadParametersException e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Make changes to a player's bet.
+	 * Make modifications to a player's single winner bet.
+	 * 
+	 * @param id
+	 * 			id of the bet whch is to be modified.
+	 * @param compName
+	 * 			name of the competition the bat is made on.
+	 * @param winnerId
+	 * 			id of the competitor the bet is made on.
+	 * @param amount
+	 * 			the amount bet on the competitor.
+	 * 
+	 * @throws BadParametersException
+	 * 			thrown if the competitor is not in the competition
+	 */
+	public void modBet (int id, String compName, int winnerId, 
+	  int secondCompId,int thirdCompId, long amount) 
+	  throws BadParametersException {
+		Competition competition = competitionList.findCompetitionByName(compName).get(0);
+		Competitor winner = personList.findCompetitorById(winnerId).get(0);
+		try {
+			this.betList.addBet(amount, this.loggedPlayer, competition, winner);
+			delBet(id);
+		} catch (BadParametersException e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Make changes to a player's podium bet.
 	 * 
 	 * @param id
 	 * 			id of the bet whch is to be modified.
@@ -136,12 +162,12 @@ public class PlayerInterface extends VisitorInterface {
 	public void changeBet (int id, String compName, int firstCompId, 
 	  int secondCompId,int thirdCompId, long amount) 
 	  throws BadParametersException {
-		Competition competition = competitionList.findCompetitionByName(compName)[0];
-		Competitor first = personList.findCompetitorById(firstCompId);
-		Competitor second = personList.findCompetitorById(firstCompId);
-		Competitor third = personList.findCompetitorById(firstCompId);
+		Competition competition = competitionList.findCompetitionByName(compName).get(0);
+		Competitor first = personList.findCompetitorById(firstCompId).get(0);
+		Competitor second = personList.findCompetitorById(firstCompId).get(0);
+		Competitor third = personList.findCompetitorById(firstCompId).get(0);
 		try {
-			this.betList.addBet(amount, this.player, competition, first, second, third);
+			this.betList.addBet(amount, this.loggedPlayer, competition, first, second, third);
 			delBet(id);
 		} catch (BadParametersException e) {
 			throw e;
@@ -157,7 +183,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the id does not correspond to any known bet.
 	 */
-	public void delBet (int id) {
+	public void delBet (int id) throws BadParametersException {
 		try {
 			betList.delBet(id);
 		} catch (BadParametersException e) {
@@ -173,13 +199,13 @@ public class PlayerInterface extends VisitorInterface {
 	public String[][] listBets() {
 		ArrayList<Bet> list = betList.getBets();
 		String[][] res = new String[list.size()][6];
-		for (int i; i < list.size(); i++) {
-            res[i][0] = list[i].getId().toString();
-            res[i][1] = list[i].getAmount().toString();
-			res[i][2] = list[i].getCompetition.getName();
-			res[i][3] = list[i].getCompetitor()[0].getId();
-			res[i][4] = list[i].getCompetitor()[1].getId();
-			res[i][5] = list[i].getCompetitor()[2].getId();
+		for (int i = 0; i < list.size(); i++) {
+            res[i][0] = String.valueOf(list.get(i).getId());
+            res[i][1] = String.valueOf(list.get(i).getAmount());
+			res[i][2] = list.get(i).getCompetition().getName();
+			res[i][3] = String.valueOf(list.get(i).getCompetitor()[0].getId());
+			res[i][4] = String.valueOf(list.get(i).getCompetitor()[1].getId());
+			res[i][5] = String.valueOf(list.get(i).getCompetitor()[2].getId());
         }
         return res;
 	}

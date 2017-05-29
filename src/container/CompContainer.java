@@ -1,13 +1,11 @@
 package container;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Iterator;
 
-//import javax.persistence.EntityManager;
-
-//import jpaUtils.JPAUtil;
-import java.util.Calendar;
+import javax.persistence.EntityManager;
+import jpaUtil.JPAUtil;
 
 import betSystem.*;
 import personSystem.Competitor;
@@ -16,28 +14,56 @@ import exceptions.*;
 public class CompContainer {
 	private ArrayList<Competition> compDB;
 
+	public CompContainer() {
+		EntityManager em = JPAUtil.getEntityManager();
+	}
+
 	
 	/**
 	 * Method to add a Competition to the DataBase
 	 */
 	public void addComp(String name, Calendar date, Competitor[] competitors) throws BadParametersException {
-		throw new BadParametersException();
+		EntityManager em = JPAUtil.getEntityManager();
+		try {
+			Competition c = new Competition(name, date, competitors);
+			em.persist(c);
+		} catch (Exception e) {
+			throw new BadParametersException();
+		}
 	}
 
 	
 	/** 
-	 * Method to update a Competition in the DataBase
+	 * Method to update a Competition in the DataBase /!\ you can't update the primary key name
 	 */
-	public void updateComp(String name) {
-		
+	public void updateComp(String name, Calendar date) throws BadParametersException {
+		EntityManager em = JPAUtil.getEntityManager();
+		ArrayList<Competition> searchRes = findCompetitionByName(name);	
+		if (searchRes.size() != 1) {
+			throw new BadParametersException();
+		} 
+		try  {
+			Competition c = searchRes.get(0);
+			c.setDate(date);
+			em.merge(c);
+		} catch (Exception e) {
+			throw new BadParametersException();
+		}
 	}
 	
 	
-	/**
-	 * Method to delete a Competition in the DataBase
-	 */
 	public void delComp(String name) throws BadParametersException {
-		throw new BadParametersException();
+		EntityManager em = JPAUtil.getEntityManager();
+		ArrayList<Competition> searchRes = findCompetitionByName(name);	
+		if (searchRes.size() != 1) {
+			throw new BadParametersException();
+		} 
+		try {
+			Competition c = searchRes.get(0);
+			em.remove(c);
+		} catch (Exception e) {
+			throw new BadParametersException();
+		}
 	}
 
 	

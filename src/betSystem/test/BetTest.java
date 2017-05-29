@@ -1,4 +1,4 @@
-package betSystem;
+package betSystem.test;
 
 import static org.junit.Assert.*;
 
@@ -7,9 +7,10 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
+import betSystem.*;
 import betSystem.exception.*;
-import personSystem.Competitor;
-import personSystem.Player;
+import personSystem.*;
+import exceptions.*;
 
 public class BetTest {
 

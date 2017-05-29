@@ -1,4 +1,5 @@
 package personSystem;
+
 import java.util.ArrayList;
 
 import betSystem.Bet;
@@ -6,9 +7,6 @@ import exceptions.IncorrectString;
 import exceptions.InvalidWallet;
 import exceptions.ItemAlreadyInList;
 import exceptions.ItemNotInList;
-
-
-import java.util.ArrayList;
 
 public class Player extends SystemUser {
 

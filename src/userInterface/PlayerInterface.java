@@ -76,7 +76,7 @@ public class PlayerInterface extends VisitorInterface {
 		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor competitor = personList.findCompetitorById(compId).get(0);
 		try {
-			this.betList.addBet(amount, this.loggedPlayer, competition, competitor);
+			this.betList.addSingleWinnerBet(amount, this.loggedPlayer, competition, competitor);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -105,8 +105,9 @@ public class PlayerInterface extends VisitorInterface {
 		Competitor first = personList.findCompetitorById(firstCompId).get(0);
 		Competitor second = personList.findCompetitorById(secondCompId).get(0);
 		Competitor third = personList.findCompetitorById(thirdCompId).get(0);
+		Competitor[] competitors = new Competitor[] {first, second, third};
 		try {
-			this.betList.addBet(amount, this.loggedPlayer, competition, first, second, third);
+			this.betList.addPodiumBet(amount, this.loggedPlayer, competition, competitors);
 		} catch (BadParametersException e) {
 			throw e;
 		}

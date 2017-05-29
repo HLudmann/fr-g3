@@ -3,6 +3,7 @@ package betSystem;
 import personSystem.Competitor;
 import personSystem.Player;
 import betSystem.exception.*;
+import exceptions.*;
 
 public class PodiumBet extends Bet {
 

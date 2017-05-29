@@ -25,51 +25,51 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	private JPanel mainBox = new JPanel();
 	Border borderBlack = BorderFactory.createLineBorder(Color.BLACK, 3);
 	//pour bar de connexion
-		private JButton boutonDeconnection = new JButton("déconnection");
-		private JButton boutonChgtPassword = new JButton("changer password");
+		private JButton boutonDeconnection = new JButton("Déconnection");
+		private JButton boutonChgtPassword = new JButton("Changer mdp");
 		private JPanel connectionBar = new JPanel();
 		private JPanel borderLayoutConnectionBar1 = new JPanel();
 		private JPanel borderLayoutConnectionBar2 = new JPanel();
 	//pour les lister
-	    private JButton listCompetition = new JButton("lister compétition");
-	    private JButton listCompetitor = new JButton("lister compétiteur");
+	    private JButton listCompetition = new JButton("Lister compétitions");
+	    private JButton listCompetitor = new JButton("Lister compétiteurs");
 	    private JPanel lister = new JPanel();
 	    private JPanel lister2 = new JPanel();
 	    private JPanel lister3 = new JPanel();
 	    private JPanel lister4 = new JPanel();
 	//pour delBet
 	    private JPanel delBetPanel = new JPanel();
-	    private JButton delBet = new JButton("supprimer paris");
+	    private JButton delBet = new JButton("Supprimer paris");
 	//pour changeWallet
 	    private JPanel walletPanel = new JPanel();
-	    private JButton walletButton = new JButton("changer le solde d'un compte");
+	    private JButton walletButton = new JButton("Changer le solde d'un compte");
 	//pour end compétition
 	    private JPanel endCompPanel = new JPanel();
-	    private JButton endCompButton = new JButton("rendre les résultats d'une compétition");
+	    private JButton endCompButton = new JButton("Rendre les résultats d'une compétition");
 	//pour set des colonnes
-	    private JLabel add = new JLabel("ajouter");
-	    private JLabel delete = new JLabel("supprimer");
+	    private JLabel add = new JLabel("Ajouter");
+	    private JLabel delete = new JLabel("Supprimer");
 	    private JPanel addDel = new JPanel();
 	    private JPanel addDel2 = new JPanel();
 	    private JPanel addDel3 = new JPanel();
 	    private JPanel addDel4 = new JPanel();
 	//pour player
-	    private JButton addPlayer = new JButton("joueur");
-	    private JButton delPlayer = new JButton("joueur");
+	    private JButton addPlayer = new JButton("Joueur");
+	    private JButton delPlayer = new JButton("Joueur");
 	    private JPanel player = new JPanel();
 	    private JPanel player2 = new JPanel();
 	    private JPanel player3 = new JPanel();
 	    private JPanel player4 = new JPanel();
 	//pour compétition
-	    private JButton addCompetition = new JButton("compétition");
-	    private JButton delCompetition = new JButton("compétition");
+	    private JButton addCompetition = new JButton("Compétition");
+	    private JButton delCompetition = new JButton("Compétition");
 	    private JPanel competition = new JPanel();
 	    private JPanel competition2 = new JPanel();
 	    private JPanel competition3 = new JPanel();
 	    private JPanel competition4 = new JPanel();
-	//pour compéitor
-	    private JButton addCompetitor = new JButton("compétiteur");
-	    private JButton delCompetitor = new JButton("compétiteur");
+	//pour compétitor
+	    private JButton addCompetitor = new JButton("Compétiteur");
+	    private JButton delCompetitor = new JButton("Compétiteur");
 	    private JPanel competitor = new JPanel();
 	    private JPanel competitor2 = new JPanel();
 	    private JPanel competitor3 = new JPanel();
@@ -77,8 +77,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	//pour search
     	private JPanel search = new JPanel();
         private JPanel searchField = new JPanel();
-	    private JLabel searchLabel = new JLabel("search:");
-        private JButton searchButton = new JButton("search");
+	    private JLabel searchLabel = new JLabel("Rechercher:");
+        private JButton searchButton = new JButton("Rechercher");
 	    private JTextField searchText = new JTextField();
 	    
 	    
@@ -109,7 +109,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    connectionBar.add(borderLayoutConnectionBar1);
 	    connectionBar.add(boutonInvisible);
 	    connectionBar.add(borderLayoutConnectionBar2);
-	    connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    borderLayoutConnectionBar2.add(boutonDeconnection, BorderLayout.NORTH);
 	    borderLayoutConnectionBar1.add(boutonChgtPassword, BorderLayout.NORTH);
 	    
@@ -130,8 +130,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    lister4.add(lister2);
 	    lister4.add(lister3);
 	    lister.add(lister4, BorderLayout.CENTER);
-	    lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	
 	    
 	
@@ -140,8 +140,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    delBet.setFont(font);
 	    delBetPanel.setLayout(new BorderLayout());
 		delBetPanel.add(delBet, BorderLayout.CENTER);
-		delBetPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-		delBetPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+		//delBetPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+		//delBetPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		
 		
 		
@@ -150,8 +150,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 		walletButton.setFont(font);
 	    walletPanel.setLayout(new BorderLayout());
 	    walletPanel.add(walletButton, BorderLayout.CENTER);
-	    walletPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    walletPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //walletPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //walletPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		
 		
 		
@@ -160,8 +160,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    endCompButton.setFont(font);
 	    endCompPanel.setLayout(new BorderLayout());
 	    endCompPanel.add(endCompButton, BorderLayout.CENTER);
-	    endCompPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    endCompPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //endCompPanel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //endCompPanel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		
 		
 		
@@ -173,8 +173,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    addDel3.setLayout(new BorderLayout());
 	    add.setFont(font);
 	    delete.setFont(font);
-	    add.setBackground(Color.WHITE);
-	    delete.setBackground(Color.WHITE);
+	    addDel2.setBackground(Color.WHITE);
+	    addDel3.setBackground(Color.WHITE);
 	    add.setHorizontalAlignment(SwingConstants.CENTER);
 	    delete.setHorizontalAlignment(SwingConstants.CENTER);
 	    addDel2.add(add, BorderLayout.CENTER);
@@ -186,8 +186,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    addDel2.setBorder(borderBlack);
 	    addDel3.setBorder(borderBlack);
 	    addDel.add(addDel4, BorderLayout.CENTER);
-	    addDel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    addDel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //addDel.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //addDel.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		
 		
 		
@@ -207,8 +207,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    player2.setBorder(borderBlack);
 	    player3.setBorder(borderBlack);
 	    player.add(player4, BorderLayout.CENTER);
-	    player.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    player.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //player.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //player.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		
 		
 		
@@ -228,8 +228,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    competition2.setBorder(borderBlack);
 	    competition3.setBorder(borderBlack);
 	    competition.add(competition4, BorderLayout.CENTER);
-	    competition.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    competition.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //competition.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //competition.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		
 		
 		
@@ -249,8 +249,8 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    competitor2.setBorder(borderBlack);
 	    competitor3.setBorder(borderBlack);
 	    competitor.add(competitor4, BorderLayout.CENTER);
-	    competitor.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    competitor.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //competitor.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //competitor.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 		
 		
 		
@@ -258,15 +258,15 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    searchButton.setFont(font);
 	    search.setLayout(new BorderLayout());
 	    searchField.add(searchLabel);
-	    searchText.setPreferredSize(new Dimension(this.getWidth()-100, 30));
+	    searchText.setPreferredSize(new Dimension(this.getWidth()-150, 30));
 	    searchField.add(searchText);
 	    search.setBackground(new Color(0,150,250));
 	    Border borderSearch = BorderFactory.createLineBorder(Color.BLUE, 3);
 	    searchField.setBorder(borderSearch);
 	    search.add(searchField, BorderLayout.NORTH);
 	    search.add(searchButton, BorderLayout.CENTER);
-	    search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
-	    search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/10));
+	    //search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/10));
 	    
 	    
 	    

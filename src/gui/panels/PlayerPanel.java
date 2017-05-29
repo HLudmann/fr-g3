@@ -24,14 +24,14 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	private Font font = new Font("arial",Font.CENTER_BASELINE,20);
 	private JPanel mainBox = new JPanel();
 	//pour bar de connexion
-		private JButton boutonDeconnection = new JButton("déconnection");
-		private JButton boutonChgtPassword = new JButton("changer password");
+		private JButton boutonDeconnection = new JButton("Déconnection");
+		private JButton boutonChgtPassword = new JButton("Changer mdp");
 		private JPanel connectionBar = new JPanel();
 		private JPanel borderLayoutConnectionBar1 = new JPanel();
 		private JPanel borderLayoutConnectionBar2 = new JPanel();
     //pour les lister
-    	private JButton competition = new JButton("lister compétition");
-    	private JButton competiteur = new JButton("lister compétiteur");
+    	private JButton competition = new JButton("Lister compétitions");
+    	private JButton competiteur = new JButton("Lister compétiteurs");
     	private JPanel lister = new JPanel();
     	private JPanel lister2 = new JPanel();
     	private JPanel lister3 = new JPanel();
@@ -39,17 +39,17 @@ public class PlayerPanel extends JFrame implements ActionListener{
     //pour search
     	private JPanel search = new JPanel();
         private JPanel searchField = new JPanel();
-	    private JLabel searchLabel = new JLabel("search:");
-        private JButton searchButton = new JButton("search");
+	    private JLabel searchLabel = new JLabel("Rechercher:");
+        private JButton searchButton = new JButton("Rechercher");
 	    private JTextField searchText = new JTextField();
     //pour les paris
     	private JPanel bet = new JPanel();
     	private JPanel bet2 = new JPanel();
     	private JPanel bet3 = new JPanel();
-    	private JButton makeBet= new JButton("faire");
-    	private JButton changeBet= new JButton("changer");
-    	private JButton delBet = new JButton("supprimer");
-    	private JLabel betLabel = new JLabel("paris");
+    	private JButton makeBet= new JButton("Parier");
+    	private JButton changeBet= new JButton("Changer");
+    	private JButton delBet = new JButton("Supprimer");
+    	private JLabel betLabel = new JLabel("Paris");
 
 
 
@@ -74,7 +74,7 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    connectionBar.add(borderLayoutConnectionBar1);
 	    connectionBar.add(boutonInvisible);
 	    connectionBar.add(borderLayoutConnectionBar2);
-	    connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
+	    //connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
 	    borderLayoutConnectionBar2.add(boutonDeconnection, BorderLayout.NORTH);
 	    borderLayoutConnectionBar1.add(boutonChgtPassword, BorderLayout.NORTH);
 
@@ -95,8 +95,8 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    lister4.add(lister2);
 	    lister4.add(lister3);
 	    lister.add(lister4, BorderLayout.CENTER);
-	    lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
-	    lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
+	    //lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
+	    //1lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
 
 
 
@@ -107,15 +107,15 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    searchButton.setFont(font);
 	    search.setLayout(new BorderLayout());
 	    searchField.add(searchLabel);
-	    searchText.setPreferredSize(new Dimension(this.getWidth()-100, 30));
+	    searchText.setPreferredSize(new Dimension(this.getWidth()-150, 30));
 	    searchField.add(searchText);
 	    search.setBackground(new Color(0,150,250));
 	    Border borderSearch = BorderFactory.createLineBorder(Color.BLUE, 3);
 	    searchField.setBorder(borderSearch);
 	    search.add(searchField, BorderLayout.NORTH);
 	    search.add(searchButton, BorderLayout.CENTER);
-	    search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
-	    search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
+	    //search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
+	    //search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
 
 
 
@@ -130,14 +130,14 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    Border borderBet = BorderFactory.createLineBorder(Color.BLUE, 3);
 	    betLabel.setBorder(borderBet);
 	    bet2.add(betLabel, BorderLayout.CENTER);
-	    betLabel.setPreferredSize(new Dimension(this.getWidth(),40));
+	    //betLabel.setPreferredSize(new Dimension(this.getWidth(),40));
 	    bet3.add(makeBet);
 	    bet3.add(changeBet);
 	    bet3.add(delBet);
 	    bet.add(bet2, BorderLayout.NORTH);
 	    bet.add(bet3, BorderLayout.CENTER);
-	    bet.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
-	    bet.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
+	    //bet.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
+	    //bet.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
 
 
 
@@ -170,6 +170,31 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
+		/*if(e.getSource() == boutonDeconnection){
+			
+		}
+		if(e.getSource() == boutonChgtPassword){
+			
+		}
+		if(e.getSource() == competition){
+			
+		}
+		if(e.getSource() == competiteur){
+			
+		}
+		if(e.getSource() == searchButton){
+			
+		}
+		if(e.getSource() == makeBet){
+			PanelFormBet panelFormBet = new PanelFormBet();
+			this.setContentPane(panelFormBet);
+			this.setVisible(true);
+		}
+		if(e.getSource() == changeBet){
+			
+		}
+		if(e.getSource() == delBet){
+			
+		}*/
 	}
 }

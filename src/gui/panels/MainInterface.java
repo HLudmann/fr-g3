@@ -21,10 +21,11 @@ import gui.buttons.BoutonInvisible;
 
 public class MainInterface extends JFrame implements ActionListener{
 	private Font font = new Font("TimesRoman",Font.CENTER_BASELINE,25);
-	private JButton boutonConnection = new JButton("connection");
-	private JButton competition = new JButton("lister comp�tition");
-    private JButton competiteur = new JButton("lister comp�titeur");
-	private JButton searchButton = new JButton("search");
+	private JButton boutonConnection = new JButton("Connection");
+	private JButton competition = new JButton("Lister compétition");
+    private JButton competiteur = new JButton("Lister compétiteur");
+	private JButton searchButton = new JButton("Rechercher");
+	private JLabel searchLabel = new JLabel("Rechercher:");
 	private JPanel mainBox = new JPanel();
 
 	public MainInterface(){
@@ -47,7 +48,7 @@ public class MainInterface extends JFrame implements ActionListener{
 	    boutonInvisible.setPreferredSize(new Dimension(this.getWidth()*4/5,30));
 	    connectionBar.add(boutonInvisible);
 	    connectionBar.add(borderLayoutConnectionBar);
-	    connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
+	    //connectionBar.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
 	    borderLayoutConnectionBar.add(boutonConnection, BorderLayout.NORTH);
 
 
@@ -71,8 +72,8 @@ public class MainInterface extends JFrame implements ActionListener{
 	    lister4.add(lister2);
 	    lister4.add(lister3);
 	    lister.add(lister4, BorderLayout.CENTER);
-	    lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
-	    lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
+	    //lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
+	    //lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
 
 
 
@@ -84,18 +85,17 @@ public class MainInterface extends JFrame implements ActionListener{
 	    JPanel searchField = new JPanel();
 	    searchButton.setFont(font);
 	    search.setLayout(new BorderLayout());
-	    JLabel searchLabel = new JLabel("search:");
 	    searchField.add(searchLabel);
 	    JTextField searchText = new JTextField();
-	    searchText.setPreferredSize(new Dimension(this.getWidth()-100, 30));
+	    searchText.setPreferredSize(new Dimension(this.getWidth()-150, 30));
 	    searchField.add(searchText);
 	    search.setBackground(new Color(0,150,250));
 	    Border border = BorderFactory.createLineBorder(Color.BLUE, 3);
 	    searchField.setBorder(border);
 	    search.add(searchField, BorderLayout.NORTH);
 	    search.add(searchButton, BorderLayout.CENTER);
-	    search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
-	    search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
+	    //search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
+	    //search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
 
 
 

@@ -25,8 +25,8 @@ import userInterface.exceptions.PlayerAuthentificated;
 
 
 public class ConnectionPanel extends JFrame implements ActionListener {
-    private BoutonConnection boutonAdmin = new BoutonConnection("connect as admin");
-    private BoutonConnection boutonPlayer = new BoutonConnection("connect as player");
+    private BoutonConnection boutonAdmin = new BoutonConnection("Connection admin");
+    private BoutonConnection boutonPlayer = new BoutonConnection("Connection joueur");
     private JPanel initialPan = new JPanel();
     private JPanel adminPan = new JPanel();
     private JPanel playerPan = new JPanel();
@@ -39,10 +39,10 @@ public class ConnectionPanel extends JFrame implements ActionListener {
     private JLabel labelPasswordAdmin = new JLabel("Password: ");
     private JLabel labelUserNameAdmin = new JLabel("Username:",JLabel.CENTER);
     private JLabel labelPasswordPlayer = new JLabel("Password: ");
-    private BoutonRetour backButtonPlayer = new BoutonRetour("back");
-    private BoutonRetour backButtonAdmin = new BoutonRetour("back");
-    private BoutonRetour connectButtonPlayer = new BoutonRetour("connect");
-    private BoutonRetour connectButtonAdmin = new BoutonRetour("connect");
+    private BoutonRetour backButtonPlayer = new BoutonRetour("Retour");
+    private BoutonRetour backButtonAdmin = new BoutonRetour("Retour");
+    private BoutonRetour connectButtonPlayer = new BoutonRetour("Connect");
+    private BoutonRetour connectButtonAdmin = new BoutonRetour("Connect");
     //private VisitorInterface visitor= new VisitorInterface();
     private MainInterface mainInterface;
 

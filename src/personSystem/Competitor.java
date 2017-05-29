@@ -1,4 +1,5 @@
 package personSystem;
+
 import java.util.ArrayList;
 
 import betSystem.Competition;
@@ -6,6 +7,7 @@ import betSystem.Competition;
 import exceptions.ItemNotInList;
 import exceptions.ItemAlreadyInList;
 import exceptions.IncorrectString;
+
 
 public class Competitor extends Person{
 
@@ -23,7 +25,7 @@ public class Competitor extends Person{
 
 	public Competitor(String firstName, String lastName, int id, ArrayList<betSystem.Competition> compList) throws IncorrectString{
 		this(firstName, lastName, id);
-		competitionList = compList;
+		this.competitionList = compList;
 	}
 
 	public int getId(){
@@ -32,7 +34,7 @@ public class Competitor extends Person{
 
 	public ArrayList<Competition> getCompetitionList() {
 
-		return competitionList;
+		return this.competitionList;
 
 	}
 
@@ -40,7 +42,7 @@ public class Competitor extends Person{
 
 		if (!competitionList.contains(c)){
 
-			competitionList.add(c);
+			this.competitionList.add(c);
 
 		}
 		else{
@@ -59,5 +61,4 @@ public class Competitor extends Person{
 			throw new ItemNotInList();
 		}
 	}
-
 }

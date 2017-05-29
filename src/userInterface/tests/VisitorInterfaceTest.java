@@ -3,6 +3,8 @@ package userInterface.tests;
 import static org.junit.Assert.*;
 
 import org.junit.*;
+import exceptions.*;
+import userInterface.*;
 
 public class VisitorInterfaceTest {
 
@@ -12,19 +14,19 @@ public class VisitorInterfaceTest {
     public void testSignInManager() throws BadParametersException {
         this.intrf = new VisitorInterface();
         try {
-            intrf.signIn("RogerMng", "azertyuiop"); //
+            intrf.signInManager("RogerMng", "azertyuiop");
         } catch (FalseNickname fn) {
             fail("Test true signIn failed with nickname");
-        } catch (FalsePassword fp) {
+        } catch (WrongPassword fp) {
             fail("Test true signIn failed with password");
         }
 
         try {
-            intrf.signIn("RogerMng", "alberto");
+            intrf.signInManager("RogerMng", "alberto");
             fail("Test false signIn failed");
         } catch (FasleNickname fn) {
 
-        } catch (FalsePassword fp) {
+        } catch (WrongPassword fp) {
             
         }
     }

@@ -33,8 +33,8 @@ public class PlayerInterface extends VisitorInterface {
 	 /**
 	  * Change Password.
 	  *
-	  * @param curentPasswd
-	  *				curent password of the player.
+	  * @param currentPasswd
+	  *				current password of the player.
 	  * @param newPasswd
 	  *				new password of the player.
 	  * @param reNewPasswd.
@@ -42,14 +42,14 @@ public class PlayerInterface extends VisitorInterface {
 	  *
 	  * @throws BadParametersException
 	  *				thrown if the new password does not respect all resctrictions.
-	  * @throws FalsePassord
-	  *				thrown if the curent password entered is wrong.
+	  * @throws WrongPassword
+	  *				thrown if the current password entered is wrong.
 	  */
-	public void changePassword (String curentPasswd, String newPasswd, String reNewPasswd) 
+	public void changePassword (String currentPasswd, String newPasswd, String reNewPasswd) 
 		throws BadParametersException, WrongPassword {
 		if (newPasswd == reNewPasswd) {
 			 try {
-				this.loggedPlayer.authentificate(curentPasswd);
+				this.loggedPlayer.authentificate(currentPasswd);
 				this.loggedPlayer.updatePassword(newPasswd);
 			} catch (WrongPassword wp) {
 				throw wp;
@@ -63,7 +63,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * Make a bet (simple bet).
 	 * 
 	 * @param compName
-	 * 			name of the competition the bat is made on.
+	 * 			name of the competition the bet is made on.
 	 * @param compId
 	 * 			id of the competitor the bet is made on.
 	 * @param amount
@@ -86,7 +86,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * Make a bet (podium bet).
 	 * 
 	 * @param compName
-	 * 			name of the competition the bat is made on.
+	 * 			name of the competition the bet is made on.
 	 * @param firstCompId
 	 * 			id of the first competitor the bet is made on.
 	 * @param secondCompId
@@ -117,9 +117,9 @@ public class PlayerInterface extends VisitorInterface {
 	 * Make modifications to a player's single winner bet.
 	 * 
 	 * @param id
-	 * 			id of the bet whch is to be modified.
+	 * 			id of the bet which is to be modified.
 	 * @param compName
-	 * 			name of the competition the bat is made on.
+	 * 			name of the competition the bet is made on.
 	 * @param winnerId
 	 * 			id of the competitor the bet is made on.
 	 * @param amount
@@ -131,11 +131,9 @@ public class PlayerInterface extends VisitorInterface {
 	public void modBet (int id, String compName, int winnerId, 
 	  int secondCompId,int thirdCompId, long amount) 
 	  throws BadParametersException {
-		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor winner = personList.findCompetitorById(winnerId).get(0);
 		try {
-			this.betList.addBet(amount, this.loggedPlayer, competition, winner);
-			delBet(id);
+			this.betList.updateSingleWinnerBet(id, amount, this.loggedPlayer, winner);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -145,9 +143,9 @@ public class PlayerInterface extends VisitorInterface {
 	 * Make changes to a player's podium bet.
 	 * 
 	 * @param id
-	 * 			id of the bet whch is to be modified.
+	 * 			id of the bet which is to be modified.
 	 * @param compName
-	 * 			name of the competition the bat is made on.
+	 * 			name of the competition the bet is made on.
 	 * @param firstCompId
 	 * 			id of the first competitor the bet is made on.
 	 * @param secondCompId
@@ -163,12 +161,11 @@ public class PlayerInterface extends VisitorInterface {
 	public void changeBet (int id, String compName, int firstCompId, 
 	  int secondCompId,int thirdCompId, long amount) 
 	  throws BadParametersException {
-		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor first = personList.findCompetitorById(firstCompId).get(0);
 		Competitor second = personList.findCompetitorById(firstCompId).get(0);
 		Competitor third = personList.findCompetitorById(firstCompId).get(0);
 		try {
-			this.betList.addBet(amount, this.loggedPlayer, competition, first, second, third);
+			this.betList.updatePodiumBet(id, amount, this.loggedPlayer, new Competitor[] {first, second, third});
 			delBet(id);
 		} catch (BadParametersException e) {
 			throw e;

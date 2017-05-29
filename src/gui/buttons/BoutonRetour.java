@@ -18,9 +18,9 @@ import javax.swing.JButton;
 public class BoutonRetour extends JButton implements MouseListener{
 	private String name;
 	private Image img;
-	private Font font =new Font("TimesRoman",Font.CENTER_BASELINE,25);
-	  
-	  
+	private Font font = new Font("TimesRoman",Font.CENTER_BASELINE,25);
+
+
 	public BoutonRetour(String str){
 		super(str);
 	    this.name = str;
@@ -31,7 +31,7 @@ public class BoutonRetour extends JButton implements MouseListener{
 	    }
 	this.addMouseListener(this);
 	}
-	  
+
 	  public void paintComponent(Graphics g){
 		    Graphics2D g2d = (Graphics2D)g;
 		    g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
@@ -39,8 +39,8 @@ public class BoutonRetour extends JButton implements MouseListener{
 		    g2d.setFont(font);
 		    g2d.drawString(name, this.getWidth() / 2 - (this.getWidth() / 2 /3), (this.getHeight() / 2) + 5);
 	  }
-	  
-	public void mouseClicked(MouseEvent event) {                     
+
+	public void mouseClicked(MouseEvent event) {
 	}
 
 	public void mouseEntered(MouseEvent event) {
@@ -50,13 +50,13 @@ public class BoutonRetour extends JButton implements MouseListener{
 	}
 
 	public void mousePressed(MouseEvent event) {
-		
+
 	}
-		 
+
 	public void mouseReleased(MouseEvent event) {
 		if((event.getY() > 0 && event.getY() < this.getHeight()) && (event.getX() > 0 && event.getX() < this.getWidth())){
-			
+
 		}
 	}
-	  
+
 }

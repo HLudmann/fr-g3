@@ -2,6 +2,7 @@ package gui.panels;
 
 import gui.buttons.EditButton;
 import gui.buttons.DeleteButton;
+import gui.buttons.GoBackButton;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -21,7 +22,7 @@ public class PanelList extends JPanel {
     //Creates a good layout for our list
     GridLayout gl = new GridLayout();
     gl.setColumns(3);
-    gl.setRows(list.size());
+    gl.setRows(list.size()+1);
     gl.setHgap(5);
     gl.setVgap(5);
     this.setLayout(gl);
@@ -34,6 +35,6 @@ public class PanelList extends JPanel {
       this.add(btnEdit);
       this.add(btnDel);
     }
-
+    this.add(new GoBackButton("Retour", 1, 1));
   }
 }

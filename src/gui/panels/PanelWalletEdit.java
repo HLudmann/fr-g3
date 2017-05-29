@@ -31,7 +31,7 @@ public class PanelWalletEdit extends JPanel{
     this.add(new JLabel("Nouveau solde :"));
     this.valueInput = new JFormattedTextField(NumberFormat.getIntegerInstance());
     this.add(this.valueInput);
-    this.add(new JLabel(""));
+    this.add(new GoBackButton("Retour", 1, 1));
     this.add(new SendDataButton("Envoyer", 1, 1));
 
   }

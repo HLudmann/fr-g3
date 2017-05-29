@@ -31,7 +31,7 @@ public class PanelPasswordEdit extends JPanel{
     this.add(new JLabel("Entrez le nouveau mot de passe:"));
     this.passwordInput = new JPasswordField();
     this.add(this.passwordInput);
-    this.add(new JLabel(""));
+    this.add(new GoBackButton("Retour", 1, 1));
     this.add(new SendDataButton("Envoyer", 1, 4));
 
   }

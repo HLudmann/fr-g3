@@ -1,6 +1,7 @@
 package gui.panels;
 
 import gui.buttons.SendDataButton;
+import gui.buttons.GoBackButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -114,6 +115,7 @@ public class PanelFormBet extends JPanel {
     this.add(this.betValueLabel);
     this.add(this.valueInput);
     this.add(this.submit);
+    this.add(new GoBackButton("Retour", 1, 1));
   }
 
   public int getType(){

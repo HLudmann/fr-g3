@@ -1,6 +1,7 @@
 package gui.panels;
 
 import gui.buttons.SendDataButton;
+import gui.buttons.GoBackButton;
 import java.awt.GridLayout;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class PanelAddPlayer extends JPanel{
     this.add(this.passwordInput);
     this.add(new JLabel("Solde initial: "));
     this.add(this.valueInput);
-    this.add(new JLabel(""));
+    this.add(new GoBackButton("Retour", 1, 1));
     this.add(new SendDataButton("Envoyer", 1, 2));
 
   }

@@ -3,6 +3,7 @@ package gui.panels;
 import gui.Window;
 
 import gui.buttons.SendDataButton;
+import gui.buttons.GoBackButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -88,7 +89,7 @@ public class PanelAddCompetition extends JPanel{
   private void addBottomStuff(){
     this.add(new JLabel(""));
     this.add(this.addCompButton);
-    this.add(new JLabel(""));
+    this.add(new GoBackButton("Retour", 1, 1));
     this.add(new SendDataButton("Envoyer", 1, 3));
   }
 }

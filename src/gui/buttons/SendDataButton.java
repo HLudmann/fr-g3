@@ -43,6 +43,7 @@ public class SendDataButton extends JButton implements MouseListener{
         break;
       case 4:
         window.setPanel(new PanelEndCompetition());
+        break;
     }
   }
 

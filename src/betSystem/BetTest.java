@@ -6,8 +6,8 @@ import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import betSystem.exception.*;
+
 import personSystem.Competitor;
 import personSystem.Player;
 
@@ -22,6 +22,7 @@ public class BetTest {
 	
 	@Before
 	public void before() throws BadParametersException{
+
 		p1 = new Player("p1", "p1lastname", "password", "p1");
 		p1.setWallet(100);
 		
@@ -106,8 +107,7 @@ public class BetTest {
 		
 		comp.results(new Competitor[] {c1, c2});
 	}
-	
-	
+
 	@Test
 	public void testHasBegun(){
 		Calendar futur = Calendar.getInstance();
@@ -126,6 +126,7 @@ public class BetTest {
 	
 	@Test
 	public void testIdBet() throws BadParametersException, ObjectNotFound{
+
 		Bet b0 = new PodiumBet(50, p1, comp, new Competitor[] {c1,c2,c3});
 		Bet b1 = new PodiumBet(40, p2, comp, new Competitor[] {c1,c3,c2});
 		Bet b2 = new SingleWinnerBet(50, p1, comp, c1);
@@ -169,6 +170,6 @@ public class BetTest {
      public void testSameCompetitors() throws BadParametersException, ObjectNotFound {
     	 new PodiumBet(50, p1, comp, new Competitor[] {c1,c2,c2});
      }
-     
+
 }
 

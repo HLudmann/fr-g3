@@ -1,20 +1,41 @@
-package src.personSystem;
 
+package personSystem;
 import java.util.ArrayList;
 
+import betSystem.Bet;
+import exceptions.IncorrectString;
+import exceptions.InvalidWallet;
+import exceptions.ItemAlreadyInList;
+import exceptions.ItemNotInList;
+
+
 public class Player extends SystemUser {
-	private long wallet = 0;
+	private long wallet;
+	private ArrayList<Bet> betList;
 
-	private ArrayList<betSystem.Bet> betList = new ArrayList<betSystem.Bet>();
 
-	public Player(String firstName, String lastname, String password, String nickname){
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.nickname = nickname;
-	}	
+	public Player(String firstName, String lastName, String nickname, String password) throws IncorrectString{
 
-	public void setWallet(long w){
+		super(firstName, lastName, password, nickname);
+
+		betList = new ArrayList<Bet>();
+		wallet=0;
+	}
+
+	public Player(String firstName, String lastName, String password, String nickname, long wallet) throws IncorrectString,
+																																																			InvalidWallet{
+		//define a custom value of wallet
+		this(firstName, lastName, password, nickname);
+		this.setWallet(wallet);
+	}
+
+
+
+	public void setWallet(long w) throws InvalidWallet{
+		if (w<0){
+			throw new InvalidWallet("wallet can't be negative");
+		}
+
 		this.wallet = w;
 	}
 

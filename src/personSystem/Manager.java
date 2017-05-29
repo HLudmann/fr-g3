@@ -1,4 +1,7 @@
-package src.personSystem;
+
+package personSystem;
+import exceptions.IncorrectString;
+
 
 public class Manager extends SystemUser{
 	
@@ -7,6 +10,10 @@ public class Manager extends SystemUser{
                 this.lastName = lastName;
                 this.password = password;
                 this.nickname = nickname;
+        }
+
+        public Manager(String firstName, String lastName, String nickname, String password) throws IncorrectString{
+					super(firstName, lastName, nickname, password);
         }
 
 }

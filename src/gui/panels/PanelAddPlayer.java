@@ -48,7 +48,7 @@ public class PanelAddPlayer extends JPanel{
     this.add(this.usernameInput);
     this.add(new JLabel("Mot de passe: "));
     this.add(this.passwordInput);
-    this.add(new JLabel("Montant du pari: "));
+    this.add(new JLabel("Solde initial: "));
     this.add(this.valueInput);
     this.add(new JLabel(""));
     this.add(new SendDataButton("Envoyer", 1, 2));

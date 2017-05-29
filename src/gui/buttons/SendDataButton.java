@@ -41,6 +41,8 @@ public class SendDataButton extends JButton implements MouseListener{
       case 3:
         window.setPanel(new PanelWalletEdit("jbvallad"));
         break;
+      case 4:
+        window.setPanel(new PanelEndCompetition());
     }
   }
 

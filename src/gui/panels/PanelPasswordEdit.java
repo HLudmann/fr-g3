@@ -32,7 +32,7 @@ public class PanelPasswordEdit extends JPanel{
     this.passwordInput = new JPasswordField();
     this.add(this.passwordInput);
     this.add(new JLabel(""));
-    this.add(new SendDataButton("Envoyer", 1, 1));
+    this.add(new SendDataButton("Envoyer", 1, 4));
 
   }
 }

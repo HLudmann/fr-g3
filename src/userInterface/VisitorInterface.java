@@ -55,7 +55,7 @@ public class VisitorInterface extends Thread {
             return new ManagerInterface(mng);
 
         } catch (Exception fn) {
-            throw new IdentificationError("Nickname ou password erroné");
+            throw new IdentificationError("Wrong nickname or password");
 //        } catch (WrongPassword wp) {
 //            throw new IdentificationError("Nickname ou password erroné");
         }
@@ -87,7 +87,7 @@ public class VisitorInterface extends Thread {
             return new PlayerInterface(plr);
 
         } catch (Exception fn) {
-            throw new IdentificationError("Nickname ou password erroné");
+            throw new IdentificationError("Wrong nickname or password");
 //        } catch (WrongPassword wp) {
 //            throw new IdentificationError("Nickname ou password erroné");
         }
@@ -112,7 +112,7 @@ public class VisitorInterface extends Thread {
      * List competitors
      * 
      * @return all the public infos about each competitor 
-     *              who is competiting in a upcomming competition
+     *              who is competiting in a upcoming competition
      */
     public String[][] competitorListing() {
         ArrayList<Competitor> list = personList.getCompetitors();
@@ -167,7 +167,7 @@ public class VisitorInterface extends Thread {
      * @param id
      *          complete id of a competitor.
      * 
-     * @return the public detail of all the upcomming competitions attended by this competitor.     * 
+     * @return the public detail of all the upcoming competitions attended by this competitor.     * 
      */
     public String[][] searchCompetitionByCompetitor(int id) throws BadParametersException {
         try {    

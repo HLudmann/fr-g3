@@ -33,8 +33,8 @@ public class PlayerInterface extends VisitorInterface {
 	 /**
 	  * Change Password.
 	  *
-	  * @param curentPasswd
-	  *				curent password of the player.
+	  * @param currentPasswd
+	  *				current password of the player.
 	  * @param newPasswd
 	  *				new password of the player.
 	  * @param reNewPasswd.
@@ -42,8 +42,8 @@ public class PlayerInterface extends VisitorInterface {
 	  *
 	  * @throws BadParametersException
 	  *				thrown if the new password does not respect all resctrictions.
-	  * @throws FalsePassord
-	  *				thrown if the curent password entered is wrong.
+	  * @throws WrongPassword
+	  *				thrown if the current password entered is wrong.
 	  */
 	public void changePassword (String curentPasswd, String newPasswd, String reNewPasswd) 
 		throws BadParametersException, WrongPassword {
@@ -63,7 +63,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * Make a bet (simple bet).
 	 * 
 	 * @param compName
-	 * 			name of the competition the bat is made on.
+	 * 			name of the competition the bet is made on.
 	 * @param compId
 	 * 			id of the competitor the bet is made on.
 	 * @param amount
@@ -86,7 +86,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * Make a bet (podium bet).
 	 * 
 	 * @param compName
-	 * 			name of the competition the bat is made on.
+	 * 			name of the competition the bet is made on.
 	 * @param firstCompId
 	 * 			id of the first competitor the bet is made on.
 	 * @param secondCompId
@@ -117,9 +117,9 @@ public class PlayerInterface extends VisitorInterface {
 	 * Make modifications to a player's single winner bet.
 	 * 
 	 * @param id
-	 * 			id of the bet whch is to be modified.
+	 * 			id of the bet which is to be modified.
 	 * @param compName
-	 * 			name of the competition the bat is made on.
+	 * 			name of the competition the bet is made on.
 	 * @param winnerId
 	 * 			id of the competitor the bet is made on.
 	 * @param amount
@@ -145,9 +145,9 @@ public class PlayerInterface extends VisitorInterface {
 	 * Make changes to a player's podium bet.
 	 * 
 	 * @param id
-	 * 			id of the bet whch is to be modified.
+	 * 			id of the bet which is to be modified.
 	 * @param compName
-	 * 			name of the competition the bat is made on.
+	 * 			name of the competition the bet is made on.
 	 * @param firstCompId
 	 * 			id of the first competitor the bet is made on.
 	 * @param secondCompId

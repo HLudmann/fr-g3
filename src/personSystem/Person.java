@@ -1,4 +1,4 @@
-package src.personSystem;
+package personSystem;
 
 import exceptions.IncorrectString;
 
@@ -7,7 +7,7 @@ abstract class Person {
 	private String firstName;
 	private String lastName;
 
-	private String regex="[a-zA-Z-\\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒøğ\\']+";
+	private static String regex="[a-zA-Z-\\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒøğ\\']+";
 
 	public Person(String firstName, String lastName) throws IncorrectString{
 			this.setFirstName(firstName);

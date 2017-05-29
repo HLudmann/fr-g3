@@ -6,8 +6,8 @@ import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
-import betSystem.exception.*;
 
+import exceptions.*;
 import personSystem.Competitor;
 import personSystem.Player;
 
@@ -21,12 +21,11 @@ public class BetTest {
 	private Competition comp;
 	
 	@Before
-	public void before() throws BadParametersException{
-
-		p1 = new Player("p1", "p1lastname", "password", "p1");
+	public void before() throws BadParametersException, InvalidWallet, IncorrectString{
+		p1 = new Player("jean", "dupont", "jdupont", "1234");
 		p1.setWallet(100);
 		
-		p2 = new Player("p2", "p2LastName", "password", "p2");
+		p2 = new Player("pierre", "dupond", "pdupond", "1235");
 		p2.setWallet(100);
 		
 		System.out.println("Initialisation");
@@ -34,27 +33,27 @@ public class BetTest {
 		System.out.println("p2 Wallet : " + p2.getWallet());
 		System.out.println("");
 		
-		c1 = new Competitor("c1", "c1LastName", 1);
-		c2 = new Competitor("c2", "c2LastName", 2);
-		c3 = new Competitor("c3", "c3LastName", 3);
+		c1 = new Competitor("jule", "premier", 1);
+		c2 = new Competitor("francois", "deuxieme", 2);
+		c3 = new Competitor("charles", "troisieme", 3);
 		
 		comp = new Competition("comp", Calendar.getInstance(),new Competitor[] {c1, c2, c3});
 	}
 	
 	@Test(expected = BadParametersException.class)
-	public void testWrongSingleAmount()throws BadParametersException, ObjectNotFound{
+	public void testWrongSingleAmount()throws BadParametersException, ObjectNotFound, ItemAlreadyInList, InvalidWallet{
 		p1.addBet(new SingleWinnerBet(-20,p1,comp,c1));
 	}
 	
 	
 	@Test(expected = BadParametersException.class)
-	public void testWrongPodiumAmount()throws BadParametersException, ObjectNotFound{
-		p1.addBet(new PodiumBet(-20,p1,comp,new Competitor[] {c1,c2,c3}));
+	public void testWrongPodiumAmount()throws BadParametersException, ObjectNotFound, ItemAlreadyInList, InvalidWallet{
+		p1.addBet(new PodiumBet(-20,p1,comp,c1,c2,c3));
 	}
 	
 	
 	@Test
-	public void testResultsSingle() throws ObjectNotFound, BadParametersException {
+	public void testResultsSingle() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
 		comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1, c2});
 		
 		p1.addBet(new SingleWinnerBet(50, p1, comp, c1));
@@ -70,10 +69,10 @@ public class BetTest {
 	}
 	
 	@Test
-	public void testResultsPodium() throws BadParametersException, ObjectNotFound{
+	public void testResultsPodium() throws BadParametersException, ObjectNotFound, ItemAlreadyInList, InvalidWallet{
 		
-		p1.addBet(new PodiumBet(50, p1, comp, new Competitor[] {c1,c2,c3}));
-		p2.addBet(new PodiumBet(40, p2, comp, new Competitor[] {c1,c3,c2}));
+		p1.addBet(new PodiumBet(50, p1, comp, c1,c2,c3));
+		p2.addBet(new PodiumBet(40, p2, comp, c1,c3,c2));
 		
 		assertTrue(p1.getWallet() == 50);
 		assertTrue( p2.getWallet() == 60);
@@ -85,9 +84,9 @@ public class BetTest {
 	}
 	
 	@Test(expected = BadParametersException.class)
-	public void testInvalidPodiumResult() throws ObjectNotFound, BadParametersException {
-		p1.addBet(new PodiumBet(50, p1, comp, new Competitor[] {c1,c2,c3}));
-		p2.addBet(new PodiumBet(40, p2, comp, new Competitor[] {c1,c3,c2}));
+	public void testInvalidPodiumResult() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
+		p1.addBet(new PodiumBet(50, p1, comp, c1,c2,c3));
+		p2.addBet(new PodiumBet(40, p2, comp, c1,c3,c2));
 		
 		assertTrue(p1.getWallet() == 50);
 		assertTrue( p2.getWallet() == 60);
@@ -96,7 +95,7 @@ public class BetTest {
 	}
 	
 	@Test(expected = BadParametersException.class)
-	public void testInvalidSingleResult() throws ObjectNotFound, BadParametersException {
+	public void testInvalidSingleResult() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
 		comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1, c2});
 		
 		p1.addBet(new SingleWinnerBet(50, p1, comp, c1));
@@ -107,7 +106,8 @@ public class BetTest {
 		
 		comp.results(new Competitor[] {c1, c2});
 	}
-
+	
+	
 	@Test
 	public void testHasBegun(){
 		Calendar futur = Calendar.getInstance();
@@ -125,10 +125,9 @@ public class BetTest {
 	}
 	
 	@Test
-	public void testIdBet() throws BadParametersException, ObjectNotFound{
-
-		Bet b0 = new PodiumBet(50, p1, comp, new Competitor[] {c1,c2,c3});
-		Bet b1 = new PodiumBet(40, p2, comp, new Competitor[] {c1,c3,c2});
+	public void testIdBet() throws BadParametersException, ObjectNotFound, ItemAlreadyInList, InvalidWallet{
+		Bet b0 = new PodiumBet(50, p1, comp, c1,c2,c3);
+		Bet b1 = new PodiumBet(40, p2, comp, c1,c3,c2);
 		Bet b2 = new SingleWinnerBet(50, p1, comp, c1);
 		Bet b3 = new SingleWinnerBet(40, p2, comp, c2);
 		
@@ -139,20 +138,16 @@ public class BetTest {
 	}
 	
 	 @Test(expected = ObjectNotFound.class)
-     public void testInvalidSingleWinnerBet() throws ObjectNotFound, BadParametersException {
+     public void testInvalidSingleWinnerBet() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
 		comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1, c2});
          SingleWinnerBet bet = new SingleWinnerBet(50,p1,comp,c3);
      }
      
-	 @Test(expected = BadParametersException.class) 
-     public void testInvalidPodiumBet() throws BadParametersException, ObjectNotFound{
-    	 new PodiumBet(50,p1,comp, new Competitor[] {c1, c2});
-     }
 	 
      @Test(expected = ObjectNotFound.class)
-     public void testInvalidCompetitors() throws BadParametersException, ObjectNotFound {
+     public void testInvalidCompetitors() throws BadParametersException, ObjectNotFound, ItemAlreadyInList, InvalidWallet {
         comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1, c2});
-        new PodiumBet(50, p1, comp, new Competitor[] {c1,c2,c3});
+        new PodiumBet(50, p1, comp, c1,c2,c3);
      }
      
      @Test(expected = BadParametersException.class)
@@ -167,9 +162,9 @@ public class BetTest {
      }
      
      @Test(expected = BadParametersException.class)
-     public void testSameCompetitors() throws BadParametersException, ObjectNotFound {
-    	 new PodiumBet(50, p1, comp, new Competitor[] {c1,c2,c2});
+     public void testSameCompetitors() throws BadParametersException, ObjectNotFound, ItemAlreadyInList, InvalidWallet {
+    	 new PodiumBet(50, p1, comp,c1,c2,c2);
      }
-
+     
 }
 

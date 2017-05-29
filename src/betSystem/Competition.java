@@ -2,8 +2,9 @@ package betSystem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import personSystem.Competitor;
-import betSystem.exception.*;
+import exceptions.*;
 
 public class Competition {
 	private String name;
@@ -58,8 +59,9 @@ public class Competition {
 		this.date = date;
 	}
 	
-	public void addBet(Bet b){
+	public void addBet(Bet b) throws ItemAlreadyInList{
 		if(!betList.contains(b)) betList.add(b);
+		else throw new ItemAlreadyInList();
 	}
 	
 	public void removeBet(Bet b){
@@ -67,8 +69,9 @@ public class Competition {
 	}
 	
 	
-	public void addCompetitor(Competitor c){
+	public void addCompetitor(Competitor c) throws ItemAlreadyInList{
 		if(!competitorList.contains(c)) competitorList.add(c);
+		else throw new ItemAlreadyInList();
 	}
 	
 	public void removeCompetitor(Competitor c) throws MultiplicityException{
@@ -86,28 +89,33 @@ public class Competition {
 		return (currentTime.after(date));
 	}
 	
-	public void results(Competitor[] winners) throws BadParametersException{
+	public void results(Competitor[] winners) throws BadParametersException, InvalidWallet, ObjectNotFound{
 		if(competitorList.size() <= 2){
 			if(winners.length != 1) throw new BadParametersException("Single winner only");
 			for(int i=0; i<betList.size();i++){
-				Bet b = betList.get(i);
-				if (b instanceof SingleWinnerBet){
-					if (winners[0] == b.getCompetitor()[0])	b.creditGain();
+				Bet bet = betList.get(i);
+				if (bet instanceof SingleWinnerBet){
+					SingleWinnerBet b = (SingleWinnerBet) bet;
+					if (winners[0] == b.getFirstCompetitor())	b.creditGain();
 				}
 			}
 		}
 		else{
 			if(winners.length != 3) throw new BadParametersException("3 winners only");
 			for(int i=0; i<betList.size();i++){
-				Bet b = betList.get(i);
-				if (winners[0] == b.getCompetitor()[0] && winners[1] == b.getCompetitor()[1] 
-													   && winners[2] == b.getCompetitor()[2])
-					b.creditGain();				
+				Bet bet = betList.get(i);
+				if(bet instanceof PodiumBet){
+					PodiumBet b = (PodiumBet) bet;
+					if (winners[0] == b.getFirstCompetitor() && winners[1] == b.getSecondCompetitor() 
+													   && winners[2] == b.getThirdCompetitor())
+						b.creditGain();
+				}
 			}
 			for(int i=0; i<betList.size();i++){
-				Bet b = betList.get(i);
-				if (b instanceof SingleWinnerBet){
-					if (winners[0] == b.getCompetitor()[0])	b.creditGain();
+				Bet bet = betList.get(i);
+				if (bet instanceof SingleWinnerBet){
+					SingleWinnerBet b = (SingleWinnerBet) bet;
+					if (winners[0] == b.getFirstCompetitor())	b.creditGain();
 				}
 			}
 			

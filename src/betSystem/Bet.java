@@ -1,8 +1,9 @@
 
 package betSystem;
-import betSystem.exception.BadParametersException;
+import exceptions.BadParametersException;
+import exceptions.InvalidWallet;
 import personSystem.Player;
-import personSystem.Competitor;
+
 
 
 public class Bet {
@@ -11,11 +12,12 @@ public class Bet {
 	private long amount;
 	private Player player;
 	private Competition competition;
-	protected Competitor[] competitors;
 	
-	public Bet(long amount, Player player, Competition competition) throws BadParametersException{
-		setAmount(amount);
+	
+	public Bet(long amount, Player player, Competition competition) throws BadParametersException, InvalidWallet{
 		this.player = player;
+		setAmount(amount);
+		player.setWallet(player.getWallet()-amount);
 		this.competition = competition;
 		this.id = iterator;
 		iterator++;
@@ -33,21 +35,20 @@ public class Bet {
 		return player;
 	}
 	
-	public Competitor[] getCompetitor(){
-		return competitors;
-	}
-	
 	public Competition getCompetition(){
 		return competition;
 	}
 	
-	public void setAmount(long amount) throws BadParametersException{
+	public void setAmount(long amount) throws BadParametersException, InvalidWallet{
 		if (amount <= 0) throw new BadParametersException("Negative Amount");
-		else this.amount = amount;
+		else {
+			player.setWallet(player.getWallet()+this.amount);
+			player.setWallet(player.getWallet()-this.amount);
+			this.amount = amount;
+		}
 	}
 	
-	
-	public void creditGain(){
+	public void creditGain() throws InvalidWallet{
 		player.setWallet(player.getWallet() + 2*amount);
 	}
 

@@ -1,4 +1,4 @@
-package src.personSystem;
+package personSystem;
 
 import exceptions.IncorrectString;
 import exceptions.WrongPassword;
@@ -9,7 +9,7 @@ abstract class SystemUser extends Person{
 	private String nickname;
 	private String password;
 
-	private String regex="[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒøğ]{4,}";
+	private static String regex="[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒøğ]{4,}";
 
 
 	public SystemUser(String firstName, String lastName, String nickname, String password) throws IncorrectString{

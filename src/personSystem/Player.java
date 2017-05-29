@@ -1,5 +1,5 @@
-
 package personSystem;
+
 import java.util.ArrayList;
 
 import betSystem.Bet;
@@ -8,8 +8,8 @@ import exceptions.InvalidWallet;
 import exceptions.ItemAlreadyInList;
 import exceptions.ItemNotInList;
 
-
 public class Player extends SystemUser {
+
 	private long wallet;
 	private ArrayList<Bet> betList;
 
@@ -35,7 +35,6 @@ public class Player extends SystemUser {
 		if (w<0){
 			throw new InvalidWallet("wallet can't be negative");
 		}
-
 		this.wallet = w;
 	}
 
@@ -43,11 +42,30 @@ public class Player extends SystemUser {
 		return wallet;
 	}
 
-	public void addBet(betSystem.Bet b){
-		if(!betList.contains(b)) {
+	public ArrayList<betSystem.Bet> getBetList(){
+		return betList;
+	}
+
+	public void addBet(Bet b) throws ItemAlreadyInList{
+
+		if (!betList.contains(b)){
 			betList.add(b);
-			b.getCompetition().addBet(b);
-			this.wallet -= b.getAmount();
+
+		}
+		else{
+			throw new ItemAlreadyInList("Bet already in list");
+		}
+	}
+
+	public void removeBet(Bet b) throws ItemNotInList{
+
+		if (betList.contains(b)){
+
+			betList.remove(b);
+
+		}
+		else{
+			throw new ItemNotInList("Can't remove a not-existing bet");
 		}
 	}
 	

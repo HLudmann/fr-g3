@@ -1,4 +1,3 @@
-
 package userInterface.exceptions;
 
 public class IdentificationError extends Exception{
@@ -11,4 +10,3 @@ public class IdentificationError extends Exception{
         super(reason);
      }
 }
-

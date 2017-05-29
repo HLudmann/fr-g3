@@ -14,6 +14,13 @@ public class Bet {
 	private Competition competition;
 	
 	
+	/**
+	 * @param amount
+	 * @param player
+	 * @param competition
+	 * @throws BadParametersException
+	 * @throws InvalidWallet
+	 */
 	public Bet(long amount, Player player, Competition competition) throws BadParametersException, InvalidWallet{
 		this.player = player;
 		setAmount(amount);
@@ -23,22 +30,39 @@ public class Bet {
 		iterator++;
 	}
 	
+	/**
+	 * @return id
+	 */
 	public int getId(){
 		return id;
 	}
 	
+	/**
+	 * @return amount
+	 */
 	public long getAmount(){
 		return amount;
 	}
 	
+	/**
+	 * @return player
+	 */
 	public Player getPlayer(){
 		return player;
 	}
 	
+	/**
+	 * @return competition
+	 */
 	public Competition getCompetition(){
 		return competition;
 	}
 	
+	/**
+	 * @param amount
+	 * @throws BadParametersException
+	 * @throws InvalidWallet
+	 */
 	public void setAmount(long amount) throws BadParametersException, InvalidWallet{
 		if (amount <= 0) throw new BadParametersException("Negative Amount");
 		else {
@@ -48,6 +72,9 @@ public class Bet {
 		}
 	}
 	
+	/**
+	 * @throws InvalidWallet
+	 */
 	public void creditGain() throws InvalidWallet{
 		player.setWallet(player.getWallet() + 2*amount);
 	}

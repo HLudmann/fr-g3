@@ -12,6 +12,12 @@ public class Competition {
 	private ArrayList<Bet> betList = new ArrayList<Bet>();
 	private ArrayList<Competitor> competitorList = new ArrayList<Competitor>();
 	
+	/**
+	 * @param name
+	 * @param date
+	 * @param competitors
+	 * @throws BadParametersException
+	 */
 	@SuppressWarnings("deprecation")
 	public Competition(String name, Date date, Competitor[] competitors) throws BadParametersException{
 		this.name = name;
@@ -35,60 +41,106 @@ public class Competition {
 		this.date.setHours(0);
 	}
 	
+	/**
+	 * @return name
+	 */
 	public String getName(){
 		return name;
 	}
 	
+	/**
+	 * @return date
+	 */
 	public Date getDate(){
 		return date;
 	}
 	
+	/**
+	 * @return betList
+	 */
 	public ArrayList<Bet> getBetList(){
 		return betList;
 	}
 	
+	/**
+	 * @return competitorList
+	 */
 	public ArrayList<Competitor> getCompetitorList(){
 		return competitorList;
 	}
 	
+	/**
+	 * @param name
+	 */
 	public void setName(String name){
 		this.name = name;
 	}
 	
+	/**
+	 * @param date
+	 */
 	public void setDate(Date date){
 		this.date = date;
 	}
 	
+	/**
+	 * @param bet
+	 * @throws ItemAlreadyInList
+	 */
 	public void addBet(Bet b) throws ItemAlreadyInList{
 		if(!betList.contains(b)) betList.add(b);
 		else throw new ItemAlreadyInList();
 	}
 	
+	/**
+	 * @param bet
+	 */
 	public void removeBet(Bet b){
 		betList.remove(b);
 	}
 	
 	
+	/**
+	 * @param competitor
+	 * @throws ItemAlreadyInList
+	 */
 	public void addCompetitor(Competitor c) throws ItemAlreadyInList{
 		if(!competitorList.contains(c)) competitorList.add(c);
 		else throw new ItemAlreadyInList();
 	}
 	
+	/**
+	 * @param competitor
+	 * @throws MultiplicityException
+	 */
 	public void removeCompetitor(Competitor c) throws MultiplicityException{
 		if(competitorList.size() == 2) throw new MultiplicityException("Competitor must have at least 2 competitors");
 		competitorList.remove(c);
 	}
 	
+	/**
+	 * @param competitor
+	 * @return if the competitor is in the list of competitors or not
+	 */
 	public boolean contains(Competitor competitor){
 		return competitorList.contains(competitor);
 	}
 	
 	
+	/**
+	 * @return if the competition has begun or not
+	 */
 	public boolean hasBegun() {
 		Date currentTime = new Date();
 		return (currentTime.after(date));
 	}
 	
+	/**
+	 * @param winners
+	 * @throws BadParametersException
+	 * @throws InvalidWallet
+	 * @throws ObjectNotFound
+	 */
 	public void results(Competitor[] winners) throws BadParametersException, InvalidWallet, ObjectNotFound{
 		if(competitorList.size() <= 2){
 			if(winners.length != 1) throw new BadParametersException("Single winner only");

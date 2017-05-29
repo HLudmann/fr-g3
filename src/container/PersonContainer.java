@@ -4,18 +4,55 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.persistence.EntityManager;
+
+import betSystem.Competition;
+import betSystem.Competitor;
 import jpaUtil.JPAUtil;
 import personSystem.*;
 import exceptions.*;
 
+@Entity
+@NamedQuery(
+		name="selectEverythingFromCompetitor",
+		query="SELECT c FROM Competitor c")
+@NamedQuery(
+		name="selectEverythingFromSystemUser",
+		query="SELECT s FROM SystemUser s")
+
+/**
+ * @author Hsb511
+ *
+ */
 public class PersonContainer {
-	private static ArrayList<Competitor> competitorDB;
-	private static ArrayList<Player> playerDB;
-	private static ArrayList<Manager> managerDB;
+	private ArrayList<Competitor> competitorDB;
+	private ArrayList<Player> playerDB;
+	private ArrayList<Manager> managerDB;
 	private static ArrayList<Player> loggedPlayers;
 	private static ArrayList<Manager> loggedManagers;
 
 
+	public PersonContainer() {
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		competitors = em.createNamedQuery("selectEverythingFromCompetitor").getResultList;
+		for (Object competitor : competitors) {
+			Competitor c = (Competitor)competitor;
+			this.competitorDB.add(c);				
+		}
+		
+		systemUsers = em.createNamedQuery("selectEverythingFromSystemUser").getResultList;
+		for (Object sysus : systemUsers) {
+			if (sysus.isInstanceOf[Player]) {
+				Player p = (Player)sysus;
+				this.playerDB.add(p);
+			} else if (sysus.isInstanceOf[Manager]) {
+				Manager m = (Manager)sysus;
+				this.managerDB.add(m);
+			}
+			
+		}
+	}
+	 
 	public ArrayList<Competitor> getCompetitors() {
 		return competitorDB;
 	}
@@ -39,38 +76,55 @@ public class PersonContainer {
 
 	/**
 	 * Method to add a Competitor to the DB
+	 * @param lastName					String 
+	 * @param firstName					String
+	 * @param id						int which corresponds to the primary key
+	 * @throws BadParametersException	
 	 */
 	public void addCompetitor(String lastName, String firstName, int id) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Competitor c = new Competitor(lastName, firstName, id);
 			em.persist(c);
+			this.competitorDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
 	}
 	
-	/** 
+	/**
 	 * Method to add a Player to the DB
+	 * @param firstName					String
+	 * @param lastname					String
+	 * @param password					String
+	 * @param nickname					String which is the primary key
+	 * @throws BadParametersException
 	 */
-  public void addPlayer(String firstName, String lastname, String password, String nickname) throws BadParametersException {
+	public void addPlayer(String firstName, String lastname, String password, String nickname) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Player p = new Player(firstName, lastname, password, nickname);
 			em.persist(p);
+			this.playerDB.add(p);
 		} catch (Exception e) {
 			throw new BadParametersException();	
 		}
 	}
 
-	/** 
+	/**
 	 * Method to add a Manager to the DB
+	 * @param firstName				String
+	 * @param lastname				String
+	 * @param password				String
+	 * @param nickname				String which is the primary key
+	 * @throws BadParametersException
 	 */
 	public void addManager(String firstName, String lastname, String password, String nickname) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Manager m = new Manager(firstName, lastname, password, nickname);
 			em.persist(m);
+			this.managerDB.add(m);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -78,6 +132,8 @@ public class PersonContainer {
 
 	/**
 	 * Method to delete a Competitor from the DB with the primary key id
+	 * @param id					int which is the primary key for the table Competitor
+	 * @throws BadParametersException
 	 */
 	public void delCompetitor(int id) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
@@ -88,61 +144,35 @@ public class PersonContainer {
 		try {
 			Competitor c = searchRes.get(0);
 			em.remove(c);
+			this.competitorDB.remove(c);
 		} catch (Exception e) {
-
 			throw new BadParametersException();
 		}
-		return true;
 	}
 	
-	/** 
-	 * Method to search a Competitor in the Database by his id
+	/**
+	 * Method to delete a Player from the DB with the primary key nickname
+	 * @param nickname				String which is the primary key for the table Player
+	 * @throws BadParametersException
 	 */
-	public Competitor searchCompetitorById(int id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		if (id == null)
-			return null;
-	
-		return (Competitor) em.find(Competitor.class, id);
-	}
-	
-	/** Working ?
-	 * Method to search a Player in the Database by his nickname
-	 */
-	public Player searchPlayerByNickname(String nickname) {
-		EntityManager em = JPAUtil.getEntityManager();
-		if (nickname == null)
-			return null;
-		Player p = em.find(Player.class, nickname); //good instantiation ?
-		if (wallet == null)
-			return null;
-		return (p)
-	}
-	
-	/** Working ?
-	 * Method to search a Manager in the Database by his nickname
-	 */
-	public Manager searchManagerByNickname(String nickname) {
-		EntityManager em = JPAUtil.getEntityManager();
-		if (nickname == null)
-			return null;
-		Manager m = em.find(Manager.class, nickname); //good instantiation ?
-		if (wallet != null)
-			return null;
-		return (m)
-  }
-      
 	public void delPlayer(String nickname) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Player c = findPlayer(nickname);
 			em.remove(c);
+			this.playerDB.remove(p);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
 	}
 		
 
+	/**
+	 * Method to find a Manager in the List
+	 * @param nickname			String : the primary key
+	 * @return					Manager
+	 * @throws Exception
+	 */
 	public Manager findManager(String nickname) throws Exception {
 		Manager res = null;
 		Boolean notFound = true;
@@ -160,6 +190,12 @@ public class PersonContainer {
 		return res;
 	}
 
+	/**
+	 * Method to find a Player in the List
+	 * @param nickname			String : the primary key
+	 * @return					Player
+	 * @throws Exception
+	 */
 	public Player findPlayer(String nickname) throws Exception {
 		Player res = null;
 		Boolean notFound = true;
@@ -177,6 +213,12 @@ public class PersonContainer {
 		return res;
 	}
 
+	/**
+	 * Method to find players with a part of their nickname
+	 * @param nickname			String : the primary key
+	 * @return					ArratyList of Players
+	 * @throws Exception
+	 */
 	public ArrayList<Player> findPlayers(String nickname) throws Exception {
 		ArrayList<Player> res = new ArrayList<Player>();
 		Iterator<Player> it = playerDB.iterator();
@@ -192,6 +234,12 @@ public class PersonContainer {
 		return res;
 	}
 
+	/**
+	 * Method to find Competitors with a part of their name
+	 * @param name				String 
+	 * @return					ArrayList of Competitor
+	 * @throws BadParametersException
+	 */
 	public ArrayList<Competitor> findCompetitorByName(String name) throws BadParametersException {
 		ArrayList<Competitor> res = new ArrayList<Competitor>();
 		Iterator<Competitor> it = competitorDB.iterator();
@@ -207,6 +255,12 @@ public class PersonContainer {
 		return res;
 	}
 
+	/**
+	 * Method to find competitors with their id
+	 * @param id				int : the primary key 
+	 * @return					ArrayList of Competitor
+	 * @throws BadParametersException
+	 */
 	public ArrayList<Competitor> findCompetitorById(int id) throws BadParametersException {
 		ArrayList<Competitor> res = new ArrayList<Competitor>();
 		Iterator<Competitor> it = competitorDB.iterator();
@@ -221,4 +275,4 @@ public class PersonContainer {
 		}
 		return res;
 	}
-} 
+}

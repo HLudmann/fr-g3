@@ -1,7 +1,7 @@
 package container;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import javax.persistence.EntityManager;
@@ -29,7 +29,7 @@ public class CompContainer {
 		competitions = em.createNamedQuery("selectEverything").getResultList;
 		for (Object competition : competitions) {
 			Competition comp = (Competition)competition;
-			compDB.add(comp);				
+			this.compDB.add(comp);				
 		}
 	}
 
@@ -37,16 +37,16 @@ public class CompContainer {
 	/**
 	 * Method to add a Competition to the DataBase
 	 * @param name						String which is the primary key
-	 * @param date						java.util.Calendar
+	 * @param date						java.util.Date
 	 * @param competitors				array of Competitor
 	 * @throws BadParametersException
 	 */
-	public void addComp(String name, Calendar date, Competitor[] competitors) throws BadParametersException {
+	public void addComp(String name, Date date, Competitor[] competitors) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Competition c = new Competition(name, date, competitors);
 			em.persist(c);
-			compDB.add(c);
+			this.compDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -56,10 +56,10 @@ public class CompContainer {
 	/**
 	 * Method to update a Competition in the DataBase /!\ you can't update the primary key name
 	 * @param name						String which is the primary key
-	 * @param date						java.util.Calendar
+	 * @param date						java.util.Date
 	 * @throws BadParametersException
 	 */
-	public void updateComp(String name, Calendar date) throws BadParametersException {
+	public void updateComp(String name, Date date) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		ArrayList<Competition> searchRes = findCompetitionByName(name);	
 		if (searchRes.size() != 1) {
@@ -67,10 +67,10 @@ public class CompContainer {
 		} 
 		try  {
 			Competition c = searchRes.get(0);
-			compDB.remove(c);
+			this.compDB.remove(c);
 			c.setDate(date);
 			em.merge(c);
-			compDB.add(c);
+			this.compDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -90,7 +90,7 @@ public class CompContainer {
 		try {
 			Competition c = searchRes.get(0);
 			em.remove(c);
-			compDB.remove(c);
+			this.compDB.remove(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -117,10 +117,10 @@ public class CompContainer {
 	
 	/**
 	 * Method to find Competitions by their Date
-	 * @param date 		the date of the Competition of type Calendar			
+	 * @param date 		the date of the Competition of type Date			
 	 * @return 			ArrayList of Competitions
 	 */
-	public ArrayList<Competition> findCompetitionByDate(Calendar date) {
+	public ArrayList<Competition> findCompetitionByDate(Date date) {
 		ArrayList<Competition> res = new ArrayList<Competition>();
 		Iterator<Competition> it = this.compDB.iterator();
 		while (it.hasNext()) {

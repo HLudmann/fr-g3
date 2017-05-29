@@ -3,10 +3,6 @@ package container;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.persistence.EntityManager;
-
-import jpaUtil.JPAUtil;
-
 import betSystem.*;
 import personSystem.*;
 import exceptions.*;
@@ -30,10 +26,9 @@ public class BetContainer {
 	 * Method to add a PodiumBet in the DB
 	 */
 	public void addPodiumBet(long amount, Player player, Competition competition, Competitor[] competitors) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			PodiumBet pb = new PodiumBet(amount, player, competition, competitors);
-			em.persist(pb);
+			this.betDB.add(pb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -43,10 +38,9 @@ public class BetContainer {
 	 * Method to add a SingleWinnerBet in the DB
 	 */
 	public void addSingleWinnerBet(long amount, Player player, Competition competition, Competitor competitor) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			SingleWinnerBet pb = new SingleWinnerBet(amount, player, competition, competitor);
-			em.persist(pb);
+			this.betDB.add(pb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -55,13 +49,15 @@ public class BetContainer {
 	/**
 	 * Method to update a PodiumBet found by the pk id 
 	 */
-	public void updatePodiumBet(int id, long amount, Player player, Competition competition, Competitor[] competitors) 
+	public void updatePodiumBet(int id, long amount, Player player, Competitor[] competitors) 
 	 throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
 		try  {
 			PodiumBet pb = findPodiumBetById(id);
+			if (pb.getPlayer() != player) {
+				throw new BadParametersException();
+			}
 			pb.setAmount(amount);
-			em.merge(pb);
+			pb.setCompetitors(competitors);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -70,39 +66,27 @@ public class BetContainer {
 	/**
 	 * Method to update a SingleWinnerBet found by the pk id 
 	 */
-	public void updateSingleWinnerBet(int id, long amount, Player player, Competition competition, Competitor competitor) 
+	public void updateSingleWinnerBet(int id, long amount, Player player, Competitor competitor) 
 	  throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
-		SingleWinnerBet swb = findSingleWinnerBetById(id);
 		try  {
+			SingleWinnerBet swb = findSingleWinnerBetById(id);
+			if (swb.getPlayer() != player) {
+				throw new BadParametersException("");
+			}
 			swb.setAmount(amount);
-			em.merge(swb);
+			swb.setCompetitors(new Competitor[] {competitor});
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
 	}
 	
 	/** 
-	 * Method to delete a PodiumBet from the DB found by the pk id
+	 * Method to delete a Bet from the DB found by the pk id
 	 */
-	public void delPodiumBet(int id ) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
-		PodiumBet pb = findPodiumBetById(id);
+	public void delBet(int id ) throws BadParametersException {
 		try  {
-			em.remove(pb);
-		} catch (Exception e) {
-			throw new BadParametersException();
-		}
-	}
-	
-	/** 
-	 * Method to delete a SingleWinnerBet from the DB found by the pk id
-	 */
-	public void delSingleWinnerBet(int id ) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
-		SingleWinnerBet swb = findSingleWinnerBetById(id);
-		try  {
-			em.remove(swb);
+			Bet pb = findBetById(id);			
+			this.betDB.remove(pb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -115,7 +99,7 @@ public class BetContainer {
 		while (it.hasNext()) {
 			Bet b = it.next();
 			if (b instanceof PodiumBet) {
-				res.add(b);
+				res.add((PodiumBet) b);
 			}
 		}
 		return res;
@@ -128,8 +112,25 @@ public class BetContainer {
 		while (it.hasNext()) {
 			Bet b = it.next();
 			if (b instanceof SingleWinnerBet) {
-				res.add(b);
+				res.add((SingleWinnerBet) b);
 			}
+		}
+		return res;
+	}
+
+	public Bet findBetById(int id) throws BadParametersException {
+		Iterator<Bet> it = getBets().iterator();
+		boolean notFound = true;
+		Bet res = null;
+		while (it.hasNext() && notFound) {
+			Bet b = it.next();
+			if (b.getId() == id) {
+				notFound = !notFound;
+				res = b;
+			}
+		}
+		if (res == null) {
+			throw new BadParametersException();
 		}
 		return res;
 	}

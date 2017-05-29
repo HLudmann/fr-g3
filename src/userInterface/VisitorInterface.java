@@ -52,6 +52,7 @@ public class VisitorInterface extends Thread {
 
             Manager mng = personList.findManager(nickname);
             mng.authentificate(password);
+            personList.logIn(mng);
             return new ManagerInterface(mng);
 
         } catch (Exception fn) {
@@ -84,6 +85,7 @@ public class VisitorInterface extends Thread {
 
             Player plr = personList.findPlayer(nickname);
             plr.authentificate(password);
+            personList.logIn(plr);
             return new PlayerInterface(plr);
 
         } catch (Exception fn) {

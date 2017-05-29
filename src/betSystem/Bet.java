@@ -45,13 +45,11 @@ public class Bet {
 		this.amount = amount;
 	}
 	
-	
+	public void setCompetitors(Competitor[] competitors) {
+		this.competitors = competitors;
+	}
 	public void creditGain() throws InvalidWallet {
-		try {
-			player.setWallet(this.player.getWallet() + 2*this.amount);	
-		} catch (InvalidWallet e) {
-			throw e;
-		}
+		player.setWallet(this.player.getWallet() + 2*this.amount);	
 	}
 
 }

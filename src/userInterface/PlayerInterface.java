@@ -118,8 +118,6 @@ public class PlayerInterface extends VisitorInterface {
 	 * 
 	 * @param id
 	 * 			id of the bet whch is to be modified.
-	 * @param compName
-	 * 			name of the competition the bat is made on.
 	 * @param winnerId
 	 * 			id of the competitor the bet is made on.
 	 * @param amount
@@ -128,14 +126,11 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor is not in the competition
 	 */
-	public void modBet (int id, String compName, int winnerId, 
-	  int secondCompId,int thirdCompId, long amount) 
+	public void modBet (int id, int winnerId, int secondCompId,int thirdCompId, long amount) 
 	  throws BadParametersException {
-		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor winner = personList.findCompetitorById(winnerId).get(0);
 		try {
-			this.betList.addBet(amount, this.loggedPlayer, competition, winner);
-			delBet(id);
+			this.betList.updateSingleWinnerBet(id, amount, this.loggedPlayer, winner);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -146,8 +141,6 @@ public class PlayerInterface extends VisitorInterface {
 	 * 
 	 * @param id
 	 * 			id of the bet whch is to be modified.
-	 * @param compName
-	 * 			name of the competition the bat is made on.
 	 * @param firstCompId
 	 * 			id of the first competitor the bet is made on.
 	 * @param secondCompId
@@ -160,16 +153,14 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor is not in the competition
 	 */
-	public void changeBet (int id, String compName, int firstCompId, 
+	public void changeBet (int id, int firstCompId, 
 	  int secondCompId,int thirdCompId, long amount) 
 	  throws BadParametersException {
-		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor first = personList.findCompetitorById(firstCompId).get(0);
 		Competitor second = personList.findCompetitorById(firstCompId).get(0);
 		Competitor third = personList.findCompetitorById(firstCompId).get(0);
 		try {
-			this.betList.addBet(amount, this.loggedPlayer, competition, first, second, third);
-			delBet(id);
+			this.betList.updatePodiumBet(id,amount, this.loggedPlayer, new Competitor[] {first, second, third});
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -184,7 +175,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the id does not correspond to any known bet.
 	 */
-	public void delBet (int id) throws BadParametersException {
+	public void deleteBet (int id) throws BadParametersException {
 		try {
 			betList.delBet(id);
 		} catch (BadParametersException e) {

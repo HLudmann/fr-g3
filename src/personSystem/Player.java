@@ -15,16 +15,16 @@ public class Player extends SystemUser {
 
 	public Player(String firstName, String lastName, String nickname, String password) throws IncorrectString{
 
-		super(firstName, lastName, password, nickname);
+		super(firstName, lastName, nickname, password);
 
 		betList = new ArrayList<Bet>();
 		wallet=0;
 	}
 
-	public Player(String firstName, String lastName, String password, String nickname, long wallet) throws IncorrectString,
+	public Player(String firstName, String lastName, String nickname, String password, long wallet) throws IncorrectString,
 																																																			InvalidWallet{
 		//define a custom value of wallet
-		this(firstName, lastName, password, nickname);
+		this(firstName, lastName, nickname, password);
 		this.setWallet(wallet);
 	}
 

@@ -45,11 +45,11 @@ public class PlayerInterface extends VisitorInterface {
 	  * @throws WrongPassword
 	  *				thrown if the current password entered is wrong.
 	  */
-	public void changePassword (String curentPasswd, String newPasswd, String reNewPasswd) 
+	public void changePassword (String currentPasswd, String newPasswd, String reNewPasswd) 
 		throws BadParametersException, WrongPassword {
 		if (newPasswd == reNewPasswd) {
 			 try {
-				this.loggedPlayer.authentificate(curentPasswd);
+				this.loggedPlayer.authentificate(currentPasswd);
 				this.loggedPlayer.updatePassword(newPasswd);
 			} catch (WrongPassword wp) {
 				throw wp;

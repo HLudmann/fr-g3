@@ -1,5 +1,4 @@
-
-package userInterface.exceptions;
+package betSystem.exception;
 
 public class BadParametersException extends Exception{
 	private static final long serialVersionUID = -385186352928310148L;
@@ -7,8 +6,8 @@ public class BadParametersException extends Exception{
 	public BadParametersException() {
         super();
      }
+	
       public BadParametersException(String reason) {
         super(reason);
      }
 }
-

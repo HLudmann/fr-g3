@@ -1,3 +1,4 @@
+
 package userInterface.exceptions;
 
 public class PlayerAuthentificated extends Exception{
@@ -16,3 +17,4 @@ public class PlayerAuthentificated extends Exception{
         this.plr = plr;
     }
 }
+

@@ -1,3 +1,4 @@
+
 package container;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class PersonContainer {
 	private int findCompetitorById (int id) {
 		
 	}
-	
+
 	/**
 	 * private Method to find the index of a SystemUser in the DB with his nickname
 	 */

@@ -1,3 +1,4 @@
+
 package userInterface.exceptions;
 
 public class ManagerAuthentificated extends Exception{
@@ -16,3 +17,4 @@ public class ManagerAuthentificated extends Exception{
         this.mng = mng;
     }
 }
+

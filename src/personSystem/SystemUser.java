@@ -1,4 +1,4 @@
-package personSystem;
+package src.personSystem;
 
 import exceptions.IncorrectString;
 import exceptions.WrongPassword;

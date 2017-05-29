@@ -3,6 +3,7 @@ package betSystem;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +38,7 @@ public class BetTest {
 		c2 = new Competitor("francois", "deuxieme", 2);
 		c3 = new Competitor("charles", "troisieme", 3);
 		
-		comp = new Competition("comp", Calendar.getInstance(),new Competitor[] {c1, c2, c3});
+		comp = new Competition("comp", new Date(),new Competitor[] {c1, c2, c3});
 	}
 	
 	@Test(expected = BadParametersException.class)
@@ -54,7 +55,7 @@ public class BetTest {
 	
 	@Test
 	public void testResultsSingle() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
-		comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1, c2});
+		comp = new Competition ("comp", new Date(), new Competitor[] {c1, c2});
 		
 		p1.addBet(new SingleWinnerBet(50, p1, comp, c1));
 		p2.addBet(new SingleWinnerBet(40, p2, comp, c2));
@@ -96,7 +97,7 @@ public class BetTest {
 	
 	@Test(expected = BadParametersException.class)
 	public void testInvalidSingleResult() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
-		comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1, c2});
+		comp = new Competition ("comp", new Date(), new Competitor[] {c1, c2});
 		
 		p1.addBet(new SingleWinnerBet(50, p1, comp, c1));
 		p2.addBet(new SingleWinnerBet(40, p2, comp, c2));
@@ -110,10 +111,12 @@ public class BetTest {
 	
 	@Test
 	public void testHasBegun(){
-		Calendar futur = Calendar.getInstance();
-		Calendar passe = Calendar.getInstance();
-		futur.add(Calendar.DATE, 1);
-		passe.add(Calendar.DATE, -1);
+		Date currentTime = new Date();
+		
+		@SuppressWarnings("deprecation")
+		Date futur = new Date(currentTime.getYear(), currentTime.getMonth()+1, currentTime.getDate());
+		@SuppressWarnings("deprecation")
+		Date passe = new Date(currentTime.getYear(), currentTime.getMonth()-1, currentTime.getDate());
 		
 		assertTrue(comp.hasBegun());
 		
@@ -139,20 +142,20 @@ public class BetTest {
 	
 	 @Test(expected = ObjectNotFound.class)
      public void testInvalidSingleWinnerBet() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
-		comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1, c2});
+		comp = new Competition ("comp", new Date(), new Competitor[] {c1, c2});
          SingleWinnerBet bet = new SingleWinnerBet(50,p1,comp,c3);
      }
      
 	 
      @Test(expected = ObjectNotFound.class)
      public void testInvalidCompetitors() throws BadParametersException, ObjectNotFound, ItemAlreadyInList, InvalidWallet {
-        comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1, c2});
+        comp = new Competition ("comp", new Date(), new Competitor[] {c1, c2});
         new PodiumBet(50, p1, comp, c1,c2,c3);
      }
      
      @Test(expected = BadParametersException.class)
      public void testInvalidCompetition() throws BadParametersException {
-        comp = new Competition ("comp", Calendar.getInstance(), new Competitor[] {c1});
+        comp = new Competition ("comp", new Date(), new Competitor[] {c1});
      }
 	
      @Test(expected = MultiplicityException.class)

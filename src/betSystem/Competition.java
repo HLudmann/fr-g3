@@ -1,18 +1,19 @@
 package betSystem;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 
 import personSystem.Competitor;
 import exceptions.*;
 
 public class Competition {
 	private String name;
-	private Calendar date;
+	private Date date;
 	private ArrayList<Bet> betList = new ArrayList<Bet>();
 	private ArrayList<Competitor> competitorList = new ArrayList<Competitor>();
 	
-	public Competition(String name, Calendar date, Competitor[] competitors) throws BadParametersException{
+	@SuppressWarnings("deprecation")
+	public Competition(String name, Date date, Competitor[] competitors) throws BadParametersException{
 		this.name = name;
 		
 		if(competitors.length < 2) throw new BadParametersException("Wrong number of Competitors");
@@ -29,17 +30,16 @@ public class Competition {
 		}
 		
 		this.date = date;
-		this.date.set(Calendar.MILLISECOND, 0);
-		this.date.set(Calendar.SECOND, 0);
-		this.date.set(Calendar.MINUTE, 0);
-		this.date.set(Calendar.HOUR_OF_DAY, 0);
+		this.date.setSeconds(1);
+		this.date.setMinutes(0);
+		this.date.setHours(0);
 	}
 	
 	public String getName(){
 		return name;
 	}
 	
-	public Calendar getDate(){
+	public Date getDate(){
 		return date;
 	}
 	
@@ -55,7 +55,7 @@ public class Competition {
 		this.name = name;
 	}
 	
-	public void setDate(Calendar date){
+	public void setDate(Date date){
 		this.date = date;
 	}
 	
@@ -85,7 +85,7 @@ public class Competition {
 	
 	
 	public boolean hasBegun() {
-		Calendar currentTime = Calendar.getInstance();
+		Date currentTime = new Date();
 		return (currentTime.after(date));
 	}
 	

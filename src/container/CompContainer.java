@@ -1,68 +1,69 @@
 package container;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.Iterator;
 
 import javax.persistence.EntityManager;
-import jpaUtils.JPAUtil;
-import java.util.Calendar;
+import jpaUtil.JPAUtil;
 
-import betSystem.Competition;c/container/CompContainer.java
+import betSystem.*;
+import personSystem.Competitor;
+import exceptions.*;
 
 public class CompContainer {
 	private ArrayList<Competition> compDB;
+
+
+	public CompContainer() {
+		EntityManager em = JPAUtil.getEntityManager();
+	}
+
 	
 	/**
 	 * Method to add a Competition to the DataBase
 	 */
-	public boolean addComp(String name, Calendar date) {
+	public void addComp(String name, Calendar date, Competitor[] competitors) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		Competition c = new Competition(name, date);
-		if (c == null) {
-			return false;
-		} try {
+		try {
+			Competition c = new Competition(name, date, competitors);
 			em.persist(c);
 		} catch (Exception e) {
-			System.err.println("Problem when saving ");
-			e.printStackTrace();
-			return false;
+			throw new BadParametersException();
 		}
-		return true;
 	}
 	
 	/** 
 	 * Method to update a Competition in the DataBase /!\ you can't update the primary key name
 	 */
-	public boolean updateComp(String name, Calendar date) {
+
+	public void updateComp(String name, Calendar date) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		Competition c = searchCompByName(name);	
-		if (c == null) {
-			return false;
-		} try  {
+		ArrayList<Competition> searchRes = findCompetitionByName(name);	
+		if (searchRes.size() != 1) {
+			throw new BadParametersException();
+		} 
+		try  {
+			Competition c = searchRes.get(0);
 			c.setDate(date);
-			return em.merge(c);
+			em.merge(c);
 		} catch (Exception e) {
-			System.err.println("Problem when updating ");
-			e.printStackTrace();
-			return false;
+			throw new BadParametersException();
 		}
-		return true;
 	}
 	
-	/**
-	 * Method to delete a Competition in the DataBase
-	 */
-	public boolean delComp(String name) {
+	
+	public void delComp(String name) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		Competition c = searchCompByName(name);
-		if (c == null) {
-			return false;
-		} try {
+		ArrayList<Competition> searchRes = findCompetitionByName(name);	
+		if (searchRes.size() != 1) {
+			throw new BadParametersException();
+		} 
+		try {
+			Competition c = searchRes.get(0);
 			em.remove(c);
 		} catch (Exception e) {
-			System.err.println("Problem when deleting an entity ");
-			e.printStackTrace();
-			return false;
+			throw new BadParametersException();
 		}
 		return true;
 	}
@@ -71,13 +72,44 @@ public class CompContainer {
 	/**
 	 * Methods to search a Competition in the Database
 	 */
-	public Competition searchCompByName(String name) {
-		EntityManager em = JPAUtil.getEntityManager();
-		if (name == null)
-			return null;
+	public ArrayList<Competition> findCompetitionByName(String name) {
+		ArrayList<Competition> res = new ArrayList<Competition>();
+		Iterator<Competition> it = this.compDB.iterator();
+		while (it.hasNext()) {
+			Competition c = it.next();
+			if (c.getName().contains(name)) {
+				res.add(c);
+			}
+		}
+		return res;
+	}
 
-		
-		return (Competition) em.find(Competition.class, name);
+	public ArrayList<Competition> findCompetitionByDate(Calendar date) {
+		ArrayList<Competition> res = new ArrayList<Competition>();
+		Iterator<Competition> it = this.compDB.iterator();
+		while (it.hasNext()) {
+			Competition c = it.next();
+			if (c.getDate() == date) {
+				res.add(c);
+			}
+		}
+		return res;
+	}
+
+	public ArrayList<Competition> getCompetitionsNotEnded() {
+		ArrayList<Competition> res = new ArrayList<Competition>();
+		Iterator<Competition> it = this.compDB.iterator();
+		while (it.hasNext()) {
+			Competition c = it.next();
+			if (!c.hasBegun()) {
+				res.add(c);
+			}
+		}
+		return res;
+	}
+
+	public ArrayList<Competition> getCompetitions() {
+		return this.compDB;
 	}
 	
 }

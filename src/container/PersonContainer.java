@@ -1,193 +1,99 @@
 package container;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.persistence.EntityManager;
-import jpaUtils.JPAUtil;
-
-import personSystem.SystemUser;
-import betSystem.Competitor;
+import jpaUtil.JPAUtil;
+import personSystem.*;
+import exceptions.*;
 
 public class PersonContainer {
-	private static ArrayList<Competitor> CompetitorDB;
-	private static ArrayList<Player> PlayerDB;
-	private static ArrayList<Manager> ManagerDB;
-	private ArrayList<SystemUser> logged;
+	private static ArrayList<Competitor> competitorDB;
+	private static ArrayList<Player> playerDB;
+	private static ArrayList<Manager> managerDB;
+	private static ArrayList<Player> loggedPlayers;
+	private static ArrayList<Manager> loggedManagers;
+
+
+	public ArrayList<Competitor> getCompetitors() {
+		return competitorDB;
+	}
+
+	public void logIn(Player plr) {
+		loggedPlayers.add(plr);
+	}
 	
+	public void logIn(Manager mng) {
+		loggedManagers.add(mng);
+	}
+
+	public void logOut(Player plr) {
+		loggedPlayers.remove(plr);
+	}
+
+	public void logOut(Manager mng) {
+		loggedManagers.remove(mng);
+	}
+	
+
 	/**
 	 * Method to add a Competitor to the DB
 	 */
-	public boolean addCompetitor(String lastName, String firstName, int id) {
+	public void addCompetitor(String lastName, String firstName, int id) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		Competitor c = new Competitor(lastName, firstName, id);
-		if (c == null) {
-			return false;
-		} try {
+		try {
+			Competitor c = new Competitor(lastName, firstName, id);
 			em.persist(c);
 		} catch (Exception e) {
-			System.err.println("Problem when saving ");
-			e.printStackTrace();
-			return false;
+			throw new BadParametersException();
 		}
-		return true;
-		
 	}
 	
 	/** 
 	 * Method to add a Player to the DB
 	 */
-	public boolean addPlayer(String firstName, String lastname, String password, String nickname) {
+  public void addPlayer(String firstName, String lastname, String password, String nickname) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		Player p = new Player(String firstName, String lastname, String password, String nickname);
-		p.setWallet(0);
-		if (p == null) {
-			return false;
-		} try {
+		try {
+			Player p = new Player(firstName, lastname, password, nickname);
 			em.persist(p);
 		} catch (Exception e) {
-			System.err.println("Problem when saving ");
-			e.printStackTrace();
-			return false;
+			throw new BadParametersException();	
 		}
-		return true;
 	}
-	
+
 	/** 
 	 * Method to add a Manager to the DB
 	 */
-	public boolean addManager(String firstName, String lastname, String password, String nickname) {
+	public void addManager(String firstName, String lastname, String password, String nickname) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		Manager m = new Manager(String firstName, String lastname, String password, String nickname);
-		if (m == null) {
-			return false;
-		} try {
+		try {
+			Manager m = new Manager(firstName, lastname, password, nickname);
 			em.persist(m);
 		} catch (Exception e) {
-			System.err.println("Problem when saving ");
-			e.printStackTrace();
-			return false;
+			throw new BadParametersException();
 		}
-		return true;
 	}
-	
+
 	/**
 	 * Method to delete a Competitor from the DB with the primary key id
 	 */
-	public boolean delCompetitor(int id) {
+	public void delCompetitor(int id) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		Competitor c = searchCompetitorById(id);
-		if (c == null) {
-			return false;
-		} try {
+		ArrayList<Competitor> searchRes = findCompetitorById(id);
+		if (searchRes.size() != 1) {
+			throw new BadParametersException("Competitor not found");
+		}
+		try {
+			Competitor c = searchRes.get(0);
 			em.remove(c);
 		} catch (Exception e) {
-			System.err.println("Problem when deleting an entity ");
-			e.printStackTrace();
-			return false;
+
+			throw new BadParametersException();
 		}
 		return true;
 	}
-	
-	/**
-	 * Method to delete a Player from the DB with the primary key nickname
-	 */
-	public boolean delPlayer(String nickname) {
-		EntityManager em = JPAUtil.getEntityManager();
-		Player p = searchPlayerByNickname(nickname);
-		if (p == null) {
-			return false;
-		} try {
-			em.remove(p);
-		} catch (Exception e) {
-			System.err.println("Problem when deleting an entity ");
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	
-	/**
-	 * Method to delete a Manager from the DB with the primary key nickname
-	 */
-	public boolean delManager(String nickname) {
-		EntityManager em = JPAUtil.getEntityManager();
-		Manager m = searchManagerByNickname(nickname);
-		if (m == null) {
-			return false;
-		} try {
-			em.remove(p);
-		} catch (Exception e) {
-			System.err.println("Problem when deleting an entity ");
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	
-	/**
-	 * Method to update a Competitor found by his id and replaced by a new Competitor
-	 */
-	public boolean updateCompetitor(String lastName, String firstName, int id){
-		EntityManager em = JPAUtil.getEntityManager();
-		Competitor c = searchCompetitorById(id);	
-		c.setLastName(lastName);
-		c.setFirstName(firstName);
-		if (c == null) {
-			return false;
-		} try  {
-			return em.merge(c);
-		} catch (Exception e) {
-			System.err.println("Problem when updating ");
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	
-	
-	/**
-	 * Method to update a Player in the Database
-	 */
-	public boolean updatePlayer(String firstName, String lastname, String password, String nickname, long wallet){
-		EntityManager em = JPAUtil.getEntityManager();
-		Player p = searchPlayerByNickname(nickname);
-		if (p == null) {
-			return false;
-		} try  {
-			p.set(firstName);
-			p.set(lastName);
-			p.set(password);
-			p.set(wallet);
-			return em.merge(p);
-		} catch (Exception e) {
-			System.err.println("Problem when updating ");
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	
-	/**
-	 * Method to update a Manager in the Database
-	 */
-	public boolean updateManager(String nickname){
-		EntityManager em = JPAUtil.getEntityManager();
-		Manager m = searchManagerByNickname(nickname);
-		if (m == null) {
-			return false;
-		} try  {
-			m.set(firstName);
-			m.set(lastName);
-			m.set(password);
-			return em.merge(,);
-		} catch (Exception e) {
-			System.err.println("Problem when updating ");
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	
 	
 	/** 
 	 * Method to search a Competitor in the Database by his id
@@ -224,5 +130,95 @@ public class PersonContainer {
 		if (wallet != null)
 			return null;
 		return (m)
+  }
+      
+	public void delPlayer(String nickname) throws BadParametersException {
+		EntityManager em = JPAUtil.getEntityManager();
+		try {
+			Player c = findPlayer(nickname);
+			em.remove(c);
+		} catch (Exception e) {
+			throw new BadParametersException();
+		}
+	}
+		
+
+	public Manager findManager(String nickname) throws Exception {
+		Manager res = null;
+		Boolean notFound = true;
+		Iterator<Manager> it = managerDB.iterator();
+		while (it.hasNext() && notFound) {
+			Manager m = it.next();
+			if (m.getNickname() == nickname) {
+				res = m;
+				notFound = false;
+			}
+		}
+		if (res == null) {
+			throw new Exception();
+		}
+		return res;
+	}
+
+	public Player findPlayer(String nickname) throws Exception {
+		Player res = null;
+		Boolean notFound = true;
+		Iterator<Player> it = playerDB.iterator();
+		while (it.hasNext() && notFound) {
+			Player m = it.next();
+			if (m.getNickname() == nickname) {
+				res = m;
+				notFound = false;
+			}
+		}
+		if (res == null) {
+			throw new Exception();
+		}
+		return res;
+	}
+
+	public ArrayList<Player> findPlayers(String nickname) throws Exception {
+		ArrayList<Player> res = new ArrayList<Player>();
+		Iterator<Player> it = playerDB.iterator();
+		while (it.hasNext()) {
+			Player m = it.next();
+			if (m.getNickname().contains(nickname)) {
+				res.add(m);
+			}
+		}
+		if (res.size() == 0) {
+			throw new Exception("No player found");
+		}
+		return res;
+	}
+
+	public ArrayList<Competitor> findCompetitorByName(String name) throws BadParametersException {
+		ArrayList<Competitor> res = new ArrayList<Competitor>();
+		Iterator<Competitor> it = competitorDB.iterator();
+		while (it.hasNext()) {
+			personSystem.Competitor c = it.next();
+			if (c.getFirstName().contains(name) || c.getLastName().contains(name)) {
+				res.add(c);
+			}
+		}
+		if (res.size() == 0) {
+			throw new BadParametersException("Competitor not found");
+		}
+		return res;
+	}
+
+	public ArrayList<Competitor> findCompetitorById(int id) throws BadParametersException {
+		ArrayList<Competitor> res = new ArrayList<Competitor>();
+		Iterator<Competitor> it = competitorDB.iterator();
+		while (it.hasNext()) {
+			personSystem.Competitor c = it.next();
+			if (String.valueOf(c.getId()).contains(String.valueOf(id))) {
+				res.add(c);
+			}
+		}
+		if (res.size() == 0) {
+			throw new BadParametersException("Competitor not found");
+		}
+		return res;
 	}
 } 

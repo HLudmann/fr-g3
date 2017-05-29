@@ -1,6 +1,7 @@
 
 package betSystem;
 import personSystem.Player;
+import exceptions.InvalidWallet;
 import personSystem.Competitor;
 
 
@@ -45,8 +46,12 @@ public class Bet {
 	}
 	
 	
-	public void creditGain(){
-		player.setWallet(player.getWallet() + 2*amount);
+	public void creditGain() throws InvalidWallet {
+		try {
+			player.setWallet(this.player.getWallet() + 2*this.amount);	
+		} catch (InvalidWallet e) {
+			throw e;
+		}
 	}
 
 }

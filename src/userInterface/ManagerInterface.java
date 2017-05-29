@@ -1,7 +1,7 @@
 package userInterface;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import personSystem.*;
@@ -135,7 +135,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * 				if the date has already passed or if the list of competitors 
 	 * 				does not match requirements.
 	 */
-	public void addNewCompetition (String name, Calendar date, Competitor[] competitors) 
+	public void addNewCompetition (String name, Date date, Competitor[] competitors) 
 	  throws BadParametersException {
 		try {
 			competitionList.addComp(name, date, competitors);

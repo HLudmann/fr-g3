@@ -1,7 +1,7 @@
 package userInterface;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 
 import personSystem.*;
 import betSystem.*;
@@ -151,7 +151,7 @@ public class VisitorInterface extends Thread {
      * 
      * @return the search results.
      */
-    public String[][] searchCompetitionByDate (Calendar date) {
+    public String[][] searchCompetitionByDate (Date date) {
         ArrayList<Competition> list = competitionList.findCompetitionByDate(date);
         String[][] res = new String[list.size()][2];
         for (int i = 0; i < list.size(); i++) {

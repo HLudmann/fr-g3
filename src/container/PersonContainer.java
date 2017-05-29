@@ -43,10 +43,10 @@ public class PersonContainer {
 		
 		List<?> systemUsers = em.createNamedQuery("selectEverythingFromSystemUser").getResultList();
 		for (Object sysus : systemUsers) {
-			if (sysus.isInstanceOf[Player]) {
+			if (sysus instanceof Player) {
 				Player p = (Player)sysus;
 				this.playerDB.add(p);
-			} else if (sysus.isInstanceOf[Manager]) {
+			} else if (sysus instanceof Manager) {
 				Manager m = (Manager)sysus;
 				this.managerDB.add(m);
 			}

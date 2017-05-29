@@ -1,10 +1,10 @@
 package container;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 
 import javax.persistence.EntityManager;
-
 
 import jpaUtil.JPAUtil;
 
@@ -19,36 +19,47 @@ public class BetContainer {
 		this.betDB = plr.getBetList();
 	}
 
-	public BetContainer(Manager mng) {
+	public BetContainer (Manager mng) {
 		this.betDB = new ArrayList<Bet>();
 	}
 	
-
 	public ArrayList<Bet> getBets() {
 		return this.betDB;
 	}
 	
-	/** 
+	/**
 	 * Method to add a PodiumBet in the DB
+	 * @param amount
+	 * @param player
+	 * @param competition
+	 * @param competitors
+	 * @throws BadParametersException
 	 */
 	public void addPodiumBet(long amount, Player player, Competition competition, Competitor[] competitors) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			PodiumBet pb = new PodiumBet(amount, player, competition, competitors);
 			em.persist(pb);
+			this.betDB.add(pb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
 	}
 
-	/** 
+	/**
 	 * Method to add a SingleWinnerBet in the DB
+	 * @param amount
+	 * @param player
+	 * @param competition
+	 * @param competitor
+	 * @throws BadParametersException
 	 */
 	public void addSingleWinnerBet(long amount, Player player, Competition competition, Competitor competitor) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			SingleWinnerBet pb = new SingleWinnerBet(amount, player, competition, competitor);
-			em.persist(pb);
+			SingleWinnerBet swb = new SingleWinnerBet(amount, player, competition, competitor);
+			em.persist(swb);
+			this.betDB.add(swb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -56,14 +67,22 @@ public class BetContainer {
 	
 	/**
 	 * Method to update a PodiumBet found by the pk id 
+	 * @param id
+	 * @param amount
+	 * @param player
+	 * @param competition
+	 * @param competitors
+	 * @throws BadParametersException
 	 */
 	public void updatePodiumBet(int id, long amount, Player player, Competition competition, Competitor[] competitors) 
 	 throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
+		PodiumBet pb = findPodiumBetById(id);
 		try  {
-			PodiumBet pb = findPodiumBetById(id);
+			this.betDB.remove(pb);
 			pb.setAmount(amount);
 			em.merge(pb);
+			this.betDB.add(pb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -71,45 +90,62 @@ public class BetContainer {
 	
 	/**
 	 * Method to update a SingleWinnerBet found by the pk id 
+	 * @param id
+	 * @param amount
+	 * @param player
+	 * @param competition
+	 * @param competitor
+	 * @throws BadParametersException
 	 */
 	public void updateSingleWinnerBet(int id, long amount, Player player, Competition competition, Competitor competitor) 
 	  throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		SingleWinnerBet swb = findSingleWinnerBetById(id);
 		try  {
+			this.betDB.remove(swb);
 			swb.setAmount(amount);
 			em.merge(swb);
+			this.betDB.add(swb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
 	}
 	
-	/** 
+	/**
 	 * Method to delete a PodiumBet from the DB found by the pk id
+	 * @param id
+	 * @throws BadParametersException
 	 */
 	public void delPodiumBet(int id ) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		PodiumBet pb = findPodiumBetById(id);
 		try  {
 			em.remove(pb);
+			this.betDB.remove(pb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
 	}
 	
-	/** 
+	/**
 	 * Method to delete a SingleWinnerBet from the DB found by the pk id
+	 * @param id
+	 * @throws BadParametersException
 	 */
 	public void delSingleWinnerBet(int id ) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		SingleWinnerBet swb = findSingleWinnerBetById(id);
 		try  {
 			em.remove(swb);
+			this.betDB.remove(swb);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public ArrayList<PodiumBet> getPodiumBets() {
 		Iterator<Bet> it = this.betDB.iterator();
 		ArrayList<PodiumBet> res = new ArrayList<PodiumBet>();
@@ -123,6 +159,9 @@ public class BetContainer {
 		return res;
 	}
 
+	/**
+	 * @return
+	 */
 	public ArrayList<SingleWinnerBet> getSingleWinnerBets() {
 		Iterator<Bet> it = this.betDB.iterator();
 		ArrayList<SingleWinnerBet> res = new ArrayList<SingleWinnerBet>();
@@ -136,6 +175,11 @@ public class BetContainer {
 		return res;
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 * @throws BadParametersException
+	 */
 	public PodiumBet findPodiumBetById(int id) throws BadParametersException {
 		Iterator<PodiumBet> it = getPodiumBets().iterator();
 		boolean notFound = true;
@@ -153,6 +197,11 @@ public class BetContainer {
 		return res;
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 * @throws BadParametersException
+	 */
 	public SingleWinnerBet findSingleWinnerBetById(int id) throws BadParametersException {
 		Iterator<SingleWinnerBet> it = getSingleWinnerBets().iterator();
 		boolean notFound = true;
@@ -169,28 +218,4 @@ public class BetContainer {
 		}
 		return res;
 	}
-	
-	/** Working ?
-	 * Method to search a PodiumBet in the Database by the id
-	 */
-	public PodiumBet searchPodiumBetById(int id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		if (id == null)
-			return null;
-
-		PodiumBet pb = em.find(PodiumBet.class, id); //good instantiation ?
-		return pb;
-	}	
-	
-	/** Working ?
-	 * Method to search a SingleWinnerBet in the Database by the id
-	 */
-	public SingleWinnerBet searchSingleWinnerBetById(int id) {
-		EntityManager em = JPAUtil.getEntityManager();
-		if (id == null)
-			return null;
-
-		SingleWinnerBet swb = em.find(SingleWinnerBet.class, id); //good instantiation ?
-		return swb;
-	}	
 }

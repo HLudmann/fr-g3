@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -168,33 +169,44 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    this.getContentPane().add(mainBox);
 	    this.setVisible(true);
 	}
+	
+	public void showPlayerPanel(){
+		this.getContentPane().add(mainBox);
+	    this.setVisible(true);
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		/*if(e.getSource() == boutonDeconnection){
-			
-		}
+			;
+		}*/
 		if(e.getSource() == boutonChgtPassword){
-			
+			PanelPasswordEdit PasswordEditPan = new PanelPasswordEdit(new String());
+			this.setContentPane(PasswordEditPan);
+			this.setVisible(true);
 		}
 		if(e.getSource() == competition){
-			
+			PanelList listCompetition = new PanelList(new ArrayList<ArrayList<String>>(), 2);
+			this.setContentPane(listCompetition);
+			this.setVisible(true);
 		}
 		if(e.getSource() == competiteur){
-			
+			PanelList listCompetiteur = new PanelList(new ArrayList<ArrayList<String>>(), 1);
+			this.setContentPane(listCompetiteur);
+			this.setVisible(true);
 		}
-		if(e.getSource() == searchButton){
-			
-		}
+		/*if(e.getSource() == searchButton){
+			;
+		}*/
 		if(e.getSource() == makeBet){
-			PanelFormBet panelFormBet = new PanelFormBet();
+			PanelFormBet panelFormBet = new PanelFormBet(true, new String(), new ArrayList<String>(), 1, 1);
 			this.setContentPane(panelFormBet);
 			this.setVisible(true);
 		}
-		if(e.getSource() == changeBet){
-			
+		/*if(e.getSource() == changeBet){
+			;
 		}
 		if(e.getSource() == delBet){
-			
+			;
 		}*/
 	}
 }

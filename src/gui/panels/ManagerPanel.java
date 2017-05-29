@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -67,7 +68,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    private JPanel competition2 = new JPanel();
 	    private JPanel competition3 = new JPanel();
 	    private JPanel competition4 = new JPanel();
-	//pour compétitor
+	//pour compétiteur
 	    private JButton addCompetitor = new JButton("Compétiteur");
 	    private JButton delCompetitor = new JButton("Compétiteur");
 	    private JPanel competitor = new JPanel();
@@ -311,29 +312,45 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    this.setVisible(true);
 	}
 	
+	
+	public void showManagerPanel(){
+		this.getContentPane().add(mainBox);
+	    this.setVisible(true);
+	}
+	
 	//méthode liée à l'activation des boutons
 	public void actionPerformed(ActionEvent e) {
 		/*if(e.getSource() == boutonDeconnection){
 			
-		}
+		}*/
 		if(e.getSource() == boutonChgtPassword){
-			
+			PanelPasswordEdit PasswordEditPan = new PanelPasswordEdit(new String());
+			this.setContentPane(PasswordEditPan);
+			this.setVisible(true);
 		}
 		if(e.getSource() == listCompetition){
-			
+			PanelList listCompetition = new PanelList(new ArrayList<ArrayList<String>>(), 2);
+			this.setContentPane(listCompetition);
+			this.setVisible(true);
 		}
 		if(e.getSource() == listCompetitor){
-			
+			PanelList listCompetiteur = new PanelList(new ArrayList<ArrayList<String>>(), 1);
+			this.setContentPane(listCompetiteur);
+			this.setVisible(true);
 		}
-		if(e.getSource() == delBet){
-			
-		}
-		if(e.getSource() == walletButton){
-			
-		}
-		if(e.getSource() == endCompButton){
+		/*if(e.getSource() == delBet){
 			
 		}*/
+		if(e.getSource() == walletButton){
+			PanelWalletEdit editWalletPan = new PanelWalletEdit(new String());
+			this.setContentPane(editWalletPan);
+			this.setVisible(true);
+		}
+		if(e.getSource() == endCompButton){
+			PanelEndCompetition endCompPan = new PanelEndCompetition();
+			this.setContentPane(endCompPan);
+			this.setVisible(true);
+		}
 		if(e.getSource() == addPlayer){
 			PanelAddPlayer addPlayerPan = new PanelAddPlayer();
 			this.setContentPane(addPlayerPan);

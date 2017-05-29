@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -124,20 +125,31 @@ public class MainInterface extends JFrame implements ActionListener{
 	    this.getContentPane().add(mainBox);
 	    this.setVisible(true);
 	}
+	
+	public void showMainInterface(){
+		this.getContentPane().add(mainBox);
+	    this.setVisible(true);
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == boutonConnection){
 			ConnectionPanel co = new ConnectionPanel(this);
+			this.setContentPane(co);
+			this.setVisible(true);
 		}
 		if(e.getSource() == competition){
-			;
+			PanelList listCompetition = new PanelList(new ArrayList<ArrayList<String>>(), 2);
+			this.setContentPane(listCompetition);
+			this.setVisible(true);
 		}
 		if(e.getSource() == competiteur){
-			;
+			PanelList listCompetiteur = new PanelList(new ArrayList<ArrayList<String>>(), 1);
+			this.setContentPane(listCompetiteur);
+			this.setVisible(true);
 		}
-		if(e.getSource() == searchButton){
+		/*if(e.getSource() == searchButton){
 			;
-		}
+		}*/
 	}
 
 

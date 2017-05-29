@@ -1,5 +1,6 @@
 
 package betSystem;
+import betSystem.exception.BadParametersException;
 import personSystem.Player;
 import personSystem.Competitor;
 
@@ -12,8 +13,8 @@ public class Bet {
 	private Competition competition;
 	protected Competitor[] competitors;
 	
-	public Bet(long amount, Player player, Competition competition){
-		this.amount = amount;
+	public Bet(long amount, Player player, Competition competition) throws BadParametersException{
+		setAmount(amount);
 		this.player = player;
 		this.competition = competition;
 		this.id = iterator;
@@ -40,8 +41,9 @@ public class Bet {
 		return competition;
 	}
 	
-	public void setAmount(long amount){
-		this.amount = amount;
+	public void setAmount(long amount) throws BadParametersException{
+		if (amount <= 0) throw new BadParametersException("Negative Amount");
+		else this.amount = amount;
 	}
 	
 	

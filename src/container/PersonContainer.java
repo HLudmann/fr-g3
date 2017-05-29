@@ -1,6 +1,7 @@
 package container;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 
 import javax.persistence.EntityManager;
@@ -34,13 +35,13 @@ public class PersonContainer {
 	public PersonContainer() {
 		EntityManager em = JPAUtil.getEntityManager();
 		
-		competitors = em.createNamedQuery("selectEverythingFromCompetitor").getResultList;
+		List<?> competitors = em.createNamedQuery("selectEverythingFromCompetitor").getResultList();
 		for (Object competitor : competitors) {
 			Competitor c = (Competitor)competitor;
 			this.competitorDB.add(c);				
 		}
 		
-		systemUsers = em.createNamedQuery("selectEverythingFromSystemUser").getResultList;
+		List<?> systemUsers = em.createNamedQuery("selectEverythingFromSystemUser").getResultList();
 		for (Object sysus : systemUsers) {
 			if (sysus.isInstanceOf[Player]) {
 				Player p = (Player)sysus;

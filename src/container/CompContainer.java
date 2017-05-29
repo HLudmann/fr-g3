@@ -1,6 +1,7 @@
 package container;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -26,7 +27,7 @@ public class CompContainer {
 	public CompContainer() {
 		EntityManager em = JPAUtil.getEntityManager();
 		
-		competitions = em.createNamedQuery("selectEverything").getResultList;
+		List<?> competitions = em.createNamedQuery("selectEverything").getResultList();
 		for (Object competition : competitions) {
 			Competition comp = (Competition)competition;
 			this.compDB.add(comp);				

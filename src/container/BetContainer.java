@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 
 import jpaUtil.JPAUtil;
 
@@ -14,8 +14,9 @@ import exceptions.*;
 
 @Entity
 @NamedQuery(
-		name="selectEverythingBet",
+		name="selectEverything",
 		query="SELECT b FROM Bet b")
+
 public class BetContainer {
 	private ArrayList<Bet> betDB;
 	
@@ -34,7 +35,6 @@ public class BetContainer {
 				SingleWinnerBet bet = (SingleWinnerBet)b;
 				this.betDB.add(bet);
 			}
-			
 		}
 	}
 	
@@ -70,7 +70,6 @@ public class BetContainer {
 	 * @param player					Player
 	 * @param competition				Competition
 	 * @param competitor				Competitor
-	 * @throws BadParametersException
 	 */
 	public void addSingleWinnerBet(long amount, Player player, Competition competition, Competitor competitor) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
@@ -92,7 +91,6 @@ public class BetContainer {
 	 * @param competitor1				the first Competitor
 	 * @param competitor2				the second Competitor
 	 * @param competitor3				the third Competitor
-	 * @throws BadParametersException
 	 */
 	public void updatePodiumBet(int id, long amount, Player player, Competition competition, Competitor competitors1, Competitor competitor2, Competitor competitor3) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
@@ -135,32 +133,18 @@ public class BetContainer {
 	}
 	
 	/**
-	 * Method to delete a PodiumBet from the DB found by the pk id
-	 * @param id						int : the primary key of the Bet table
+
+	 * Method to delete a Bet from the DB found by the pk id
+	 * @param id
 	 * @throws BadParametersException
 	 */
-	public void delPodiumBet(int id) throws BadParametersException {
+	public void delBet(int id ) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		PodiumBet pb = findPodiumBetById(id);
+		Bet b = findBetById(id);
 		try  {
-			em.remove(pb);
-			this.betDB.remove(pb);
-		} catch (Exception e) {
-			throw new BadParametersException();
-		}
-	}
-	
-	/**
-	 * Method to delete a SingleWinnerBet from the DB found by the pk id
-	 * @param id						int : the primary key of the Bet table
-	 * @throws BadParametersException
-	 */
-	public void delSingleWinnerBet(int id) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
-		SingleWinnerBet swb = findSingleWinnerBetById(id);
-		try  {
-			em.remove(swb);
-			this.betDB.remove(swb);
+
+			em.remove(b);
+			this.betDB.remove(b);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -177,7 +161,7 @@ public class BetContainer {
 		while (it.hasNext()) {
 			Bet b = it.next();
 			if (b instanceof PodiumBet) {
-				res.add(b);
+				res.add((PodiumBet) b);
 			}
 		}
 		return res;
@@ -194,8 +178,31 @@ public class BetContainer {
 		while (it.hasNext()) {
 			Bet b = it.next();
 			if (b instanceof SingleWinnerBet) {
-				res.add(b);
+				res.add((SingleWinnerBet) b);
 			}
+		}
+		return res;
+	}
+
+	/**
+	 * Method to find a Bet by his id
+	 * @param id						int : the primary key of the Bet table		
+	 * @return							the Bet corresponding
+	 * @throws BadParametersException
+	 */
+	public Bet findBetById(int id) throws BadParametersException {
+		Iterator<Bet> it = getBets().iterator();
+		boolean notFound = true;
+		Bet res = null;
+		while (it.hasNext() && notFound) {
+			Bet b = it.next();
+			if (b.getId() == id) {
+				notFound = !notFound;
+				res = b;
+			}
+		}
+		if (res == null) {
+			throw new BadParametersException();
 		}
 		return res;
 	}

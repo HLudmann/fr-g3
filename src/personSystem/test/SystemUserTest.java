@@ -1,12 +1,11 @@
-package personSystem;
+package personSystem.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import exceptions.IncorrectString;
-import exceptions.WrongPassword;
+import personSystem.*;
+import exceptions.*;
 
 public class SystemUserTest {
 

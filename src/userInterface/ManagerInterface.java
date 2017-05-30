@@ -1,7 +1,7 @@
 package userInterface;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import personSystem.*;
@@ -36,8 +36,8 @@ public class ManagerInterface extends VisitorInterface {
 	/**
 	  * Change Password.
 	  *
-	  * @param curentPasswd
-	  *				curent password of the manager.
+	  * @param currentPasswd
+	  *				current password of the manager.
 	  * @param newPasswd
 	  *				new password of the manager.
 	  * @param reNewPasswd.
@@ -45,14 +45,14 @@ public class ManagerInterface extends VisitorInterface {
 	  *
 	  * @throws BadParametersException
 	  *				thrown if the new password does not respect all resctrictions.
-	  * @throws FalsePassord
-	  *				thrown if the curent password entered is wrong.
+	  * @throws WrongPassword
+	  *				thrown if the current password entered is wrong.
 	  */
-	public void changePassword (String curentPasswd, String newPasswd, String reNewPasswd) 
+	public void changePassword (String currentPasswd, String newPasswd, String reNewPasswd) 
 		throws BadParametersException, WrongPassword {
 		if (newPasswd == reNewPasswd) {
 			 try {
-				this.loggedManager.authentificate(curentPasswd);
+				this.loggedManager.authentificate(currentPasswd);
 				this.loggedManager.updatePassword(newPasswd);
 			} catch (WrongPassword wp) {
 				throw wp;
@@ -92,7 +92,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * 			password chosen by the player.
 	 * 
 	 * @throws BadParametersException
-	 * 			thrown if the nickname is already taken or does not match requierments.
+	 * 			thrown if the nickname is already taken or does not match requirements.
 	 */
 	public void addNewPlayer (String firstname, String lastname,String nickname,
 	  String password) throws BadParametersException {
@@ -121,7 +121,7 @@ public class ManagerInterface extends VisitorInterface {
 	}
 
 	/**
-	 * Add e new competition.
+	 * Add a new competition.
 	 * 
 	 * @param name
 	 * 			name of the competition.
@@ -131,11 +131,11 @@ public class ManagerInterface extends VisitorInterface {
 	 * 			list of the competitors attending the competition.
 	 * 
 	 * @throws BadParametersException
-	 * 			thrown if the name is already taken or does not match requierments,
+	 * 			thrown if the name is already taken or does not match requirements,
 	 * 				if the date has already passed or if the list of competitors 
-	 * 				does not match requierments.
+	 * 				does not match requirements.
 	 */
-	public void addNewCompetition (String name, Calendar date, Competitor[] competitors) 
+	public void addNewCompetition (String name, Date date, Competitor[] competitors) 
 	  throws BadParametersException {
 		try {
 			competitionList.addComp(name, date, competitors);
@@ -174,7 +174,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor or his id is already in the database.
 	 */
-	public void addNewCompetitior (String firstname, String lastname, int id)
+	public void addNewCompetitor (String firstname, String lastname, int id)
 	  throws BadParametersException {
 		try {
 			personList.addCompetitor(lastname, firstname, id);
@@ -233,7 +233,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * @param second
 	 * 			id of the second.
 	 * @parma third
-	 * 			id of the third if there is one, else null is excpected.
+	 * 			id of the third if there is one, else null is expected.
 	 * 
 	 * @throws BadParametersException
 	 * 			thrown if all of the parameters do not match each exactly one distinct entity in the database.

@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 
-import betSystem.Competition;
-import betSystem.Competitor;
-import jpaUtil.JPAUtil;
+import betSystem.*;
 import personSystem.*;
 import exceptions.*;
 
 @Entity
-@NamedQuery(
+@NamedQueries({
+	@NamedQuery(
 		name="selectEverythingFromCompetitor",
-		query="SELECT c FROM Competitor c")
-@NamedQuery(
+		query="SELECT c FROM Competitor c"),
+	@NamedQuery(
 		name="selectEverythingFromSystemUser",
 		query="SELECT s FROM SystemUser s")
+})
 
 /**
  * @author Hsb511
@@ -159,8 +159,8 @@ public class PersonContainer {
 	public void delPlayer(String nickname) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			Player c = findPlayer(nickname);
-			em.remove(c);
+			Player p = findPlayer(nickname);
+			em.remove(p);
 			this.playerDB.remove(p);
 		} catch (Exception e) {
 			throw new BadParametersException();
@@ -174,7 +174,7 @@ public class PersonContainer {
 	 * @return					Manager
 	 * @throws Exception
 	 */
-	public Manager findManager(String nickname) throws Exception {
+	public Manager findManager(String nickname) throws BadParametersException {
 		Manager res = null;
 		Boolean notFound = true;
 		Iterator<Manager> it = managerDB.iterator();
@@ -186,7 +186,7 @@ public class PersonContainer {
 			}
 		}
 		if (res == null) {
-			throw new Exception();
+			throw new BadParametersException();
 		}
 		return res;
 	}
@@ -197,7 +197,7 @@ public class PersonContainer {
 	 * @return					Player
 	 * @throws Exception
 	 */
-	public Player findPlayer(String nickname) throws Exception {
+	public Player findPlayer(String nickname) throws BadParametersException {
 		Player res = null;
 		Boolean notFound = true;
 		Iterator<Player> it = playerDB.iterator();
@@ -209,7 +209,7 @@ public class PersonContainer {
 			}
 		}
 		if (res == null) {
-			throw new Exception();
+			throw new BadParametersException();
 		}
 		return res;
 	}
@@ -220,7 +220,7 @@ public class PersonContainer {
 	 * @return					ArratyList of Players
 	 * @throws Exception
 	 */
-	public ArrayList<Player> findPlayers(String nickname) throws Exception {
+	public ArrayList<Player> findPlayers(String nickname) throws BadParametersException {
 		ArrayList<Player> res = new ArrayList<Player>();
 		Iterator<Player> it = playerDB.iterator();
 		while (it.hasNext()) {
@@ -230,7 +230,7 @@ public class PersonContainer {
 			}
 		}
 		if (res.size() == 0) {
-			throw new Exception("No player found");
+			throw new BadParametersException("No player found");
 		}
 		return res;
 	}

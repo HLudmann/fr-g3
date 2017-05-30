@@ -1,7 +1,7 @@
 package userInterface;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 
 import personSystem.*;
 import betSystem.*;
@@ -54,10 +54,10 @@ public class VisitorInterface extends Thread {
             mng.authentificate(password);
             return new ManagerInterface(mng);
 
-        } catch (Exception fn) {
-            throw new IdentificationError("Nickname ou password erroné");
-//        } catch (WrongPassword wp) {
-//            throw new IdentificationError("Nickname ou password erroné");
+        } catch (BadParametersException fn) {
+            throw new IdentificationError("Wrong nickname or password");
+        } catch (WrongPassword wp) {
+            throw new IdentificationError("Wrong nickname or password");
         }
     }
 
@@ -86,10 +86,10 @@ public class VisitorInterface extends Thread {
             plr.authentificate(password);
             return new PlayerInterface(plr);
 
-        } catch (Exception fn) {
-            throw new IdentificationError("Nickname ou password erroné");
-//        } catch (WrongPassword wp) {
-//            throw new IdentificationError("Nickname ou password erroné");
+        } catch (BadParametersException fn) {
+            throw new IdentificationError("Wrong nickname or password");
+        } catch (WrongPassword wp) {
+            throw new IdentificationError("Wrong nickname or password");
         }
     }
 
@@ -112,7 +112,7 @@ public class VisitorInterface extends Thread {
      * List competitors
      * 
      * @return all the public infos about each competitor 
-     *              who is competiting in a upcomming competition
+     *              who is competiting in a upcoming competition
      */
     public String[][] competitorListing() {
         ArrayList<Competitor> list = personList.getCompetitors();
@@ -151,7 +151,7 @@ public class VisitorInterface extends Thread {
      * 
      * @return the search results.
      */
-    public String[][] searchCompetitionByDate (Calendar date) {
+    public String[][] searchCompetitionByDate (Date date) {
         ArrayList<Competition> list = competitionList.findCompetitionByDate(date);
         String[][] res = new String[list.size()][2];
         for (int i = 0; i < list.size(); i++) {
@@ -167,7 +167,7 @@ public class VisitorInterface extends Thread {
      * @param id
      *          complete id of a competitor.
      * 
-     * @return the public detail of all the upcomming competitions attended by this competitor.     * 
+     * @return the public detail of all the upcoming competitions attended by this competitor.     * 
      */
     public String[][] searchCompetitionByCompetitor(int id) throws BadParametersException {
         try {    

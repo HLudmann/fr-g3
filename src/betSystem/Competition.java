@@ -1,7 +1,7 @@
 package betSystem;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import personSystem.Competitor;
 import betSystem.exception.*;
 import exceptions.*;
@@ -9,11 +9,11 @@ import exceptions.BadParametersException;
 
 public class Competition {
 	private String name;
-	private Calendar date;
+	private Date date;
 	private ArrayList<Bet> betList = new ArrayList<Bet>();
 	private ArrayList<Competitor> competitorList = new ArrayList<Competitor>();
 	
-	public Competition(String name, Calendar date, Competitor[] competitors) throws BadParametersException{
+	public Competition(String name, Date date, Competitor[] competitors) throws BadParametersException, ItemAlreadyInList {
 		this.name = name;
 		
 		if(competitors.length < 2) throw new BadParametersException("Wrong number of Competitors");
@@ -30,17 +30,17 @@ public class Competition {
 		}
 		
 		this.date = date;
-		this.date.set(Calendar.MILLISECOND, 0);
-		this.date.set(Calendar.SECOND, 0);
-		this.date.set(Calendar.MINUTE, 0);
-		this.date.set(Calendar.HOUR_OF_DAY, 0);
+
+		for (Competitor c: competitors) {
+			c.addCompetition(this);
+		}
 	}
 	
 	public String getName(){
 		return name;
 	}
 	
-	public Calendar getDate(){
+	public Date getDate(){
 		return date;
 	}
 	
@@ -56,7 +56,7 @@ public class Competition {
 		this.name = name;
 	}
 	
-	public void setDate(Calendar date){
+	public void setDate(Date date){
 		this.date = date;
 	}
 	
@@ -84,13 +84,13 @@ public class Competition {
 	
 	
 	public boolean hasBegun() {
-		Calendar currentTime = Calendar.getInstance();
-		return (currentTime.after(date));
+		Date currentTime = new Date();
+		return (currentTime.after(this.date));
 	}
 	
 	public void results(Competitor[] winners) throws BadParametersException{
 		if(competitorList.size() <= 2){
-			if (winners.length != 1) {throw new BadParametersException("Single winner only");}
+			if (winners.length == 0) {throw new BadParametersException("List empty");}
 			for (int i=0; i<betList.size();i++) {
 				Bet b = betList.get(i);
 				if (b instanceof SingleWinnerBet) {
@@ -108,13 +108,15 @@ public class Competition {
 			if(winners.length != 3) throw new BadParametersException("3 winners only");
 			for(int i=0; i<betList.size();i++){
 				Bet b = betList.get(i);
-				if (winners[0] == b.getCompetitor()[0] && winners[1] == b.getCompetitor()[1] 
-													   && winners[2] == b.getCompetitor()[2])
-					try {
-							b.creditGain();
-						} catch (InvalidWallet e) {
-							throw new BadParametersException("Issues when crediting wallets");
-						}				
+				if (b instanceof PodiumBet) {
+					if (winners[0] == b.getCompetitor()[0] && winners[1] == b.getCompetitor()[1] 
+														&& winners[2] == b.getCompetitor()[2])
+						try {
+								b.creditGain();
+							} catch (InvalidWallet e) {
+								throw new BadParametersException("Issues when crediting wallets");
+							}
+				}				
 			}
 			for(int i=0; i<betList.size();i++){
 				Bet b = betList.get(i);

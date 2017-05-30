@@ -1,4 +1,4 @@
-package personSystem;
+package personSystem.test;
 import betSystem.Bet;
 
 import static org.junit.Assert.*;
@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import personSystem.*;
 import exceptions.IncorrectString;
 import exceptions.InvalidWallet;
 import exceptions.ItemAlreadyInList;
@@ -39,7 +40,7 @@ public class PlayerTest {
 	}
 
 	@Test(expected=ItemAlreadyInList.class)
-	public void testAddBetTwice() throws IncorrectString, InvalidWallet, ItemAlreadyInList{
+	public void testAddBetTwice() throws IncorrectString, InvalidWallet, ItemAlreadyInList {
 		Player p = new Player("jean", "dupont", "jdupont", "1234");
 		Bet b = new Bet();
 		p.addBet(b);
@@ -47,11 +48,8 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testRemoveValidBet() throws IncorrectString,
-																			InvalidWallet,
-																		  ItemAlreadyInList,
-																			ItemNotInList
-																														{
+	public void testRemoveValidBet() throws IncorrectString, InvalidWallet, ItemAlreadyInList, ItemNotInList
+	{
 		Player p = new Player("jean", "dupont", "jdupont", "1234");
 		Bet b = new Bet();
 		p.addBet(b);
@@ -59,10 +57,7 @@ public class PlayerTest {
 	}
 
 	@Test(expected=ItemNotInList.class)
-	public void testRemoveInvalidBet() throws IncorrectString,
-																			InvalidWallet,
-																		  ItemAlreadyInList,
-																			ItemNotInList
+	public void testRemoveInvalidBet() throws IncorrectString, InvalidWallet, ItemAlreadyInList, ItemNotInList											
 	{
 		Player p = new Player("jean", "dupont", "jdupont", "1234");
 		p.removeBet(new Bet());

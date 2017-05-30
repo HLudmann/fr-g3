@@ -1,10 +1,11 @@
-package personSystem;
+package personSystem.test;
 
 import static org.junit.Assert.*;
 
 
 import org.junit.Before;
 import org.junit.Test;
+import personSystem.*;
 import exceptions.IncorrectString;
 
 public class PersonTest {

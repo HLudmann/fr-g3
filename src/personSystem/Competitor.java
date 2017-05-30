@@ -1,19 +1,35 @@
 package personSystem;
 
 import java.util.ArrayList;
-
+import java.io.Serializable;
+import javax.persistence.*;
 import betSystem.Competition;
 
 import exceptions.ItemNotInList;
 import exceptions.ItemAlreadyInList;
 import exceptions.IncorrectString;
 
-
-public class Competitor extends Person{
-
+@Entity
+public class Competitor extends Person implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	@Id
 	private int id;
 
+	//bi-directional many-to-many association to Competition
+  	@ManyToMany
+  	@JoinTable(
+  		name="participate"
+  		, joinColumns={
+  			@JoinColumn(name="competitor")
+  			}
+  		, inverseJoinColumns={
+  			@JoinColumn(name="competition")
+  			}
+  		)
 	private ArrayList<betSystem.Competition> competitionList;
+
+	public Competitor() {}
 
 	public Competitor(String firstName, String lastName, int id) throws IncorrectString{
 		super(firstName, lastName);

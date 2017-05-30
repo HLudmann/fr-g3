@@ -13,6 +13,8 @@ public class Bet {
 	private Competition competition;
 	protected Competitor[] competitors;
 	
+	public Bet() {};
+
 	public Bet(long amount, Player player, Competition competition){
 		this.amount = amount;
 		this.player = player;

@@ -1,6 +1,7 @@
 package container;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Date;
 import java.util.Iterator;
@@ -8,9 +9,7 @@ import java.util.Iterator;
 import javax.persistence.*;
 import jpaUtil.JPAUtil;
 
-import betSystem.*;
-import personSystem.Competitor;
-import exceptions.*;
+import betSystem.Competition;c/container/CompContainer.java
 
 @Entity
 @NamedQuery(
@@ -23,6 +22,7 @@ import exceptions.*;
  */
 public class CompContainer {
 	private ArrayList<Competition> compDB;
+
 
 	public CompContainer() {
 		EntityManager em = JPAUtil.getEntityManager();
@@ -44,15 +44,19 @@ public class CompContainer {
 	 */
 	public void addComp(String name, Date date, Competitor[] competitors) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		try {
-			Competition c = new Competition(name, date, competitors);
+		Competition c = new Competition(name, date);
+		if (c == null) {
+			return false;
+		} try {
 			em.persist(c);
 			this.compDB.add(c);
 		} catch (Exception e) {
-			throw new BadParametersException();
+			System.err.println("Problem when saving ");
+			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
-
 	
 	/**
 	 * Method to update a Competition in the DataBase /!\ you can't update the primary key name
@@ -73,28 +77,32 @@ public class CompContainer {
 			em.merge(c);
 			this.compDB.add(c);
 		} catch (Exception e) {
-			throw new BadParametersException();
+			System.err.println("Problem when updating ");
+			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
-	
-	
+  
 	/**
+	 * Method to delete a Competition in the DataBase
 	 * @param name		String which is the primary key
 	 * @throws BadParametersException
 	 */
 	public void delComp(String name) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
-		ArrayList<Competition> searchRes = findCompetitionByName(name);	
-		if (searchRes.size() != 1) {
-			throw new BadParametersException();
-		} 
-		try {
-			Competition c = searchRes.get(0);
+		Competition c = searchCompByName(name);
+		if (c == null) {
+			return false;
+		} try {
 			em.remove(c);
 			this.compDB.remove(c);
 		} catch (Exception e) {
-			throw new BadParametersException();
+			System.err.println("Problem when deleting an entity ");
+			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 	

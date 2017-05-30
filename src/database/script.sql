@@ -1,5 +1,3 @@
-create database redwire with encoding utf8;
-
 
 create table SYSTEM_USER (
     LASTNAME    varchar(100)         not null,
@@ -8,7 +6,7 @@ create table SYSTEM_USER (
     NICKNAME    varchar(20)          not null,
     TYPE        char(3)              not null,
     WALLET      integer		     not null,
-    constraint check_type check (TYPE='PLR' or TYPE='MNG'),
+    constraint check_type_sysuser check (TYPE='PLR' or TYPE='MNG'),
     constraint primary_key_sysuser primary key (NICKNAME)
 );
 
@@ -30,8 +28,8 @@ create table BET (
     AMOUNT      integer             not null,
     TYPE        char(3)             not null,
     FIRST       integer             not null,
-    SECOND      integer             not null,
-    THIRD       integer             not null,
+    SECOND      integer             ,
+    THIRD       integer             ,
     COMPETITION varchar(20)         not null,
     PLAYER      varchar(20)         not null,
     constraint primary_key_bet primary key (ID),
@@ -40,7 +38,8 @@ create table BET (
     constraint foreign_key_third foreign key (THIRD) references COMPETITOR(ID),
     constraint foreign_key_competetiton foreign key (COMPETITION) references COMPETITION(NAME),
     constraint foreign_key_player foreign key (PLAYER) references SYSTEM_USER(NICKNAME),
-    constraint check_type check (TYPE='SGL' or TYPE='POD')
+    constraint check_type_bet check (TYPE='SGL' or TYPE='POD'),
+    constraint check_nullity check ((TYPE = 'SLG' and SECOND is null and THIRD is null) or (TYPE = 'POD' and SECOND is not null and THIRD is not null))
 );
 
 create table PARTICIPATE (

@@ -6,7 +6,8 @@ import java.util.Iterator;
 
 import javax.persistence.*;
 
-import betSystem.*;
+import betSystem.Competition;
+import jpaUtil.JPAUtil;
 import personSystem.*;
 import exceptions.*;
 

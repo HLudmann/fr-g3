@@ -11,7 +11,6 @@ import jpaUtil.JPAUtil;
 import personSystem.*;
 import exceptions.*;
 
-@Entity
 @NamedQueries({
 	@NamedQuery(
 		name="selectEverythingFromCompetitor",

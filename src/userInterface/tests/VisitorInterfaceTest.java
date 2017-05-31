@@ -28,9 +28,9 @@ public class VisitorInterfaceTest {
         pc.addManager("Jacques", "Fripouille", "azertyuiop", "alberto");
         pc.addPlayer("Jean", "Dutrout", "plottwist", "janot");
 
-        pc.addCompetitor("cun", "cunLastName", 1);
-        pc.addCompetitor("cdeux", "cdeuxLastName", 2);
-        pc.addCompetitor("ctrois", "ctroisLastName", 3);
+        pc.addCompetitor("cun", "cunLastName");
+        pc.addCompetitor("cdeux", "cdeuxLastName");
+        pc.addCompetitor("ctrois", "ctroisLastName");
         
 
         cc = new CompContainer();

@@ -21,7 +21,7 @@ import javax.persistence.*;
 
 public class JPAUtil {
 
-	private final static String PERSISTENCE_UNIT_NAME = "commManagementPU";
+	private final static String PERSISTENCE_UNIT_NAME = "fr-g3";
 	private static EntityManagerFactory entityManagerFactory;
 	private static EntityManager entityManager;
 

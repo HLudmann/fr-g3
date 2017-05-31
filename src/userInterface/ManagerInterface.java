@@ -1,13 +1,15 @@
 package userInterface;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import personSystem.*;
 import betSystem.*;
+import betSystem.exception.MultiplicityException;
 import container.*;
 import exceptions.*;
+import bettingServices.exceptions.*;
 
 
 /**
@@ -36,8 +38,8 @@ public class ManagerInterface extends VisitorInterface {
 	/**
 	  * Change Password.
 	  *
-	  * @param curentPasswd
-	  *				curent password of the manager.
+	  * @param currentPasswd
+	  *				current password of the manager.
 	  * @param newPasswd
 	  *				new password of the manager.
 	  * @param reNewPasswd.
@@ -45,14 +47,14 @@ public class ManagerInterface extends VisitorInterface {
 	  *
 	  * @throws BadParametersException
 	  *				thrown if the new password does not respect all resctrictions.
-	  * @throws FalsePassord
-	  *				thrown if the curent password entered is wrong.
+	  * @throws WrongPassword
+	  *				thrown if the current password entered is wrong.
 	  */
-	public void changePassword (String curentPasswd, String newPasswd, String reNewPasswd) 
+	public void changePassword (String currentPasswd, String newPasswd, String reNewPasswd) 
 		throws BadParametersException, WrongPassword {
 		if (newPasswd == reNewPasswd) {
 			 try {
-				this.loggedManager.authentificate(curentPasswd);
+				this.loggedManager.authentificate(currentPasswd);
 				this.loggedManager.updatePassword(newPasswd);
 			} catch (WrongPassword wp) {
 				throw wp;
@@ -92,7 +94,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * 			password chosen by the player.
 	 * 
 	 * @throws BadParametersException
-	 * 			thrown if the nickname is already taken or does not match requierments.
+	 * 			thrown if the nickname is already taken or does not match requirements.
 	 */
 	public void addNewPlayer (String firstname, String lastname,String nickname,
 	  String password) throws BadParametersException {
@@ -121,7 +123,7 @@ public class ManagerInterface extends VisitorInterface {
 	}
 
 	/**
-	 * Add e new competition.
+	 * Add a new competition.
 	 * 
 	 * @param name
 	 * 			name of the competition.
@@ -131,11 +133,11 @@ public class ManagerInterface extends VisitorInterface {
 	 * 			list of the competitors attending the competition.
 	 * 
 	 * @throws BadParametersException
-	 * 			thrown if the name is already taken or does not match requierments,
+	 * 			thrown if the name is already taken or does not match requirements,
 	 * 				if the date has already passed or if the list of competitors 
-	 * 				does not match requierments.
+	 * 				does not match requirements.
 	 */
-	public void addNewCompetition (String name, Calendar date, Competitor[] competitors) 
+	public void addNewCompetition (String name, Date date, Competitor[] competitors) 
 	  throws BadParametersException {
 		try {
 			competitionList.addComp(name, date, competitors);
@@ -174,10 +176,10 @@ public class ManagerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor or his id is already in the database.
 	 */
-	public void addNewCompetitior (String firstname, String lastname, int id)
+	public void addNewCompetitor (String firstname, String lastname)
 	  throws BadParametersException {
 		try {
-			personList.addCompetitor(lastname, firstname, id);
+			personList.addCompetitor(lastname, firstname);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -216,10 +218,10 @@ public class ManagerInterface extends VisitorInterface {
 		try {
 			Player p = personList.findPlayer(nickname);
 			p.setWallet(p.getWallet()+change);
-		} catch (Exception e) {
+		} catch (BadParametersException e) {
 			throw new BadParametersException("Player not found");
-//		} catch (InvalidWallet e) {
-//			throw new BadParametersException("Wallet cannot be negative");
+		} catch (InvalidWallet e) {
+			throw new BadParametersException("Wallet cannot be negative");
 		}
 	}
 
@@ -233,7 +235,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * @param second
 	 * 			id of the second.
 	 * @parma third
-	 * 			id of the third if there is one, else null is excpected.
+	 * 			id of the third if there is one, else null is expected.
 	 * 
 	 * @throws BadParametersException
 	 * 			thrown if all of the parameters do not match each exactly one distinct entity in the database.
@@ -259,7 +261,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if nickname does not match anyone in the database.
 	 */
-	public String[][] searchPlayer (String nickname) throws BadParametersException {
+	public String[][] searchPlayers (String nickname) throws BadParametersException {
 		try {
 			ArrayList<Player> list = personList.findPlayers(nickname);
 			String[][] res = new String[list.size()][4];
@@ -272,6 +274,64 @@ public class ManagerInterface extends VisitorInterface {
 			return res;
 		} catch (Exception e) {
 			throw new BadParametersException("No player found");
+		}
+	}
+
+	/**
+	 * Add a competitor to a competition. 
+	 * 
+	 * @param competition
+	 * 
+	 * @param competitor
+	 */
+	public void addCompetitorToCompetition(String competition, Competitor competitor) throws ExistingCompetitionException{
+		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		Competition comp = list.get(0);
+		comp.addCompetitor(competitor);
+	}
+
+	/**
+	 * Cancel a competiton.
+	 * 
+	 * @param competition
+	 * 
+	 */
+	public void cancelCompetition(String competition) throws ExistingCompetitionException, CompetitionException {
+		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		Competition comp = list.get(0);
+		Date d = comp.getDate();
+		if (d.before(new Date())) {
+			throw new CompetitionException();
+		} else {
+		 comp.setDate(new Date());
+		}
+	}
+
+	/**
+	 * Remove a competitor from a competition.
+	 * 
+	 * @param competition
+	 * 
+	 * @param competitor
+	 * 
+	 */
+	public void removeCompetitorfromCompetition(String competition, Competitor competitor) 
+		throws ExistingCompetitionException, CompetitionException {
+		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		Competition comp = list.get(0);
+		try {
+			comp.removeCompetitor(competitor);;
+		} catch (MultiplicityException e) {
+			throw new CompetitionException();
 		}
 	}
 }

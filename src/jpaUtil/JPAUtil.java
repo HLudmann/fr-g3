@@ -1,44 +1,71 @@
 package jpaUtil;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+
+/**
+ * Basic JPA helper class, handles EntityManagerFactory, EntityManager and
+ * EntityTransaction
+ * <p>
+ * Uses a static initializer for the initial EntityManagerFactory creation and
+ * holds EntityManager and EntityTransaction as singletons.
+ * </p>
+ * 
+ * <p>
+ * Based on HibernateUtil by Christian Bauer christian@hibernate.org
+ * </p>
+ * 
+ * @author Thomas Werner
+ * @author Maria-Teresa Segarra
+ * @version 2012-03-05
+ */
 
 public class JPAUtil {
 
-    private static final String PERSISTENCE_UNIT = "appUnitPU";
-    private static ThreadLocal<EntityManager> threadLocal;
-    private static EntityManagerFactory factory;
+	private final static String PERSISTENCE_UNIT_NAME = "commManagementPU";
+	private static EntityManagerFactory entityManagerFactory;
+	private static EntityManager entityManager;
 
-    /**
-     * Bloco estatico, inicializa na instancia da classe, carregando a unidade
-     * de persistencia.
-     */
-    static {
-        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-        threadLocal = new ThreadLocal<EntityManager>();
-    }
+	// Create the initial EntityManagerFactory with default configuration
+	static {
+		try {
+			entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		} catch (Throwable ex) {
+			ex.printStackTrace();
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
 
-    /**
-     * Metodo que retorna uma EntityManager.
-     *
-     * @return
-     */
-    public static EntityManager getEntityManager() {
-        if (threadLocal.get() == null) {
-            threadLocal.set(factory.createEntityManager());
-        }
-        return threadLocal.get();
-    }
+	/**
+	 * Returns the EntityManagerFactory used for this static class.
+	 * 
+	 * @return EntityManagerFactory
+	 */
+	public static EntityManagerFactory getEntityManagerFactory() {
+		return entityManagerFactory;
+	}
 
-    /**
-     * Responsavel por fechar a EntityManager.
-     */
-    public static void closeEntityManager() {
-        EntityManager em = threadLocal.get();
-        if (em != null) {
-            threadLocal.remove();
-            em.close();
-        }
-    }
+	/**
+	 * Retrieves the current EntityManager. If no Session is open, opens a new
+	 * EntityManager.
+	 * 
+	 * @return EntityManager
+	 */
+	public static EntityManager getEntityManager() {
+		if (entityManager == null) {
+			// TODO tom: log.debug("Opening new Session for this thread.");
+			entityManager = getEntityManagerFactory().createEntityManager();
+		}
+		return entityManager;
+	}
+
+	/**
+	 * Closes the EntityManager.
+	 */
+	public static void closeEntityManager() {
+		if ((null != entityManager) && entityManager.isOpen()) {
+			// TODO tom: log.debug("Closing Session of this thread.");
+			entityManager.close();
+		}
+		entityManager = null;
+	}
 }

@@ -11,6 +11,8 @@ abstract class SystemUser extends Person{
 
 	private static String regex="[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒøğ]{4,}";
 
+	public SystemUser() {
+	}
 
 	public SystemUser(String firstName, String lastName, String nickname, String password) throws IncorrectString{
 			super(firstName, lastName);
@@ -39,6 +41,10 @@ abstract class SystemUser extends Person{
 
 	public void updatePassword(String str){
 		password = str;
+	}
+
+	public String getPassword() {
+		return this.password;
 	}
 
 }

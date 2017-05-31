@@ -1,11 +1,18 @@
 package personSystem;
 import exceptions.IncorrectString;
+import javax.persistence.*;
 
-
+@Entity
 public class Manager extends SystemUser{
 	
-        public Manager(String firstName, String lastName, String nickname, String password) throws IncorrectString{
+	private static final long serialVersionUID = 1L;
+
+		public Manager(String firstName, String lastName, String nickname, String password) throws IncorrectString{
 					super(firstName, lastName, nickname, password);
         }
+		
+		public Manager(){
+			
+		}
 
 }

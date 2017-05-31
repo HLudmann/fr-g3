@@ -9,6 +9,9 @@ abstract class Person {
 
 	private static String regex="[a-zA-Z-\\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒøğ\\']+";
 
+	public Person() {
+	}
+
 	public Person(String firstName, String lastName) throws IncorrectString{
 			this.setFirstName(firstName);
 			this.setLastName(lastName);

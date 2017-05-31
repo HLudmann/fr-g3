@@ -1,18 +1,32 @@
 package personSystem;
 
 import java.util.ArrayList;
-
+import java.util.List;
+import javax.persistence.*;
 import betSystem.Bet;
 import exceptions.IncorrectString;
 import exceptions.InvalidWallet;
 import exceptions.ItemAlreadyInList;
 import exceptions.ItemNotInList;
 
+@NamedQuery(
+        name="findAllBetsWithNickname",
+        query="SELECT b FROM Bet b WHERE b.player LIKE :custName"
+)
+@Entity 
 public class Player extends SystemUser {
 
+	@PersistenceContext
+	public EntityManager em;
+	
+	private static final long serialVersionUID = 1L;
 	private long wallet;
+	
+	@Transient
 	private ArrayList<Bet> betList;
 
+	public Player() {	
+	}
 
 	public Player(String firstName, String lastName, String nickname, String password) throws IncorrectString{
 
@@ -29,6 +43,17 @@ public class Player extends SystemUser {
 		this.setWallet(wallet);
 	}
 
+	
+	@PostLoad
+	public void initBetList(){
+		final List<?> bets = em.createNamedQuery("findAllBetsWithNickname")
+								.setParameter("custName",this.getNickname())
+								.getResultList();
+		for(Object bet : bets){
+			Bet b = (Bet) bet;
+			this.betList.add(b);
+		}
+	}
 
 
 	public void setWallet(long w) throws InvalidWallet{
@@ -46,10 +71,11 @@ public class Player extends SystemUser {
 		return betList;
 	}
 
-	public void addBet(Bet b) throws ItemAlreadyInList{
+	public void addBet(Bet b) throws ItemAlreadyInList, InvalidWallet {
 
 		if (!betList.contains(b)){
 
+			setWallet(getWallet()-b.getAmount());
 			betList.add(b);
 
 		}

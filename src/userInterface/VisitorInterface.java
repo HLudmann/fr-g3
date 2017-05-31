@@ -54,10 +54,10 @@ public class VisitorInterface extends Thread {
             mng.authentificate(password);
             return new ManagerInterface(mng);
 
-        } catch (Exception fn) {
+        } catch (BadParametersException fn) {
             throw new IdentificationError("Wrong nickname or password");
-//        } catch (WrongPassword wp) {
-//            throw new IdentificationError("Nickname ou password erroné");
+        } catch (WrongPassword wp) {
+            throw new IdentificationError("Wrong nickname or password");
         }
     }
 
@@ -86,10 +86,10 @@ public class VisitorInterface extends Thread {
             plr.authentificate(password);
             return new PlayerInterface(plr);
 
-        } catch (Exception fn) {
+        } catch (BadParametersException fn) {
             throw new IdentificationError("Wrong nickname or password");
-//        } catch (WrongPassword wp) {
-//            throw new IdentificationError("Nickname ou password erroné");
+        } catch (WrongPassword wp) {
+            throw new IdentificationError("Wrong nickname or password");
         }
     }
 

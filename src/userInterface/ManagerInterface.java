@@ -6,8 +6,10 @@ import java.util.Iterator;
 
 import personSystem.*;
 import betSystem.*;
+import betSystem.exception.MultiplicityException;
 import container.*;
 import exceptions.*;
+import bettingServices.exceptions.*;
 
 
 /**
@@ -174,10 +176,10 @@ public class ManagerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor or his id is already in the database.
 	 */
-	public void addNewCompetitor (String firstname, String lastname, int id)
+	public void addNewCompetitor (String firstname, String lastname)
 	  throws BadParametersException {
 		try {
-			personList.addCompetitor(lastname, firstname, id);
+			personList.addCompetitor(lastname, firstname);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -216,10 +218,10 @@ public class ManagerInterface extends VisitorInterface {
 		try {
 			Player p = personList.findPlayer(nickname);
 			p.setWallet(p.getWallet()+change);
-		} catch (Exception e) {
+		} catch (BadParametersException e) {
 			throw new BadParametersException("Player not found");
-//		} catch (InvalidWallet e) {
-//			throw new BadParametersException("Wallet cannot be negative");
+		} catch (InvalidWallet e) {
+			throw new BadParametersException("Wallet cannot be negative");
 		}
 	}
 
@@ -259,7 +261,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if nickname does not match anyone in the database.
 	 */
-	public String[][] searchPlayer (String nickname) throws BadParametersException {
+	public String[][] searchPlayers (String nickname) throws BadParametersException {
 		try {
 			ArrayList<Player> list = personList.findPlayers(nickname);
 			String[][] res = new String[list.size()][4];
@@ -272,6 +274,64 @@ public class ManagerInterface extends VisitorInterface {
 			return res;
 		} catch (Exception e) {
 			throw new BadParametersException("No player found");
+		}
+	}
+
+	/**
+	 * Add a competitor to a competition. 
+	 * 
+	 * @param competition
+	 * 
+	 * @param competitor
+	 */
+	public void addCompetitorToCompetition(String competition, Competitor competitor) throws ExistingCompetitionException{
+		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		Competition comp = list.get(0);
+		comp.addCompetitor(competitor);
+	}
+
+	/**
+	 * Cancel a competiton.
+	 * 
+	 * @param competition
+	 * 
+	 */
+	public void cancelCompetition(String competition) throws ExistingCompetitionException, CompetitionException {
+		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		Competition comp = list.get(0);
+		Date d = comp.getDate();
+		if (d.before(new Date())) {
+			throw new CompetitionException();
+		} else {
+		 comp.setDate(new Date());
+		}
+	}
+
+	/**
+	 * Remove a competitor from a competition.
+	 * 
+	 * @param competition
+	 * 
+	 * @param competitor
+	 * 
+	 */
+	public void removeCompetitorfromCompetition(String competition, Competitor competitor) 
+		throws ExistingCompetitionException, CompetitionException {
+		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		Competition comp = list.get(0);
+		try {
+			comp.removeCompetitor(competitor);;
+		} catch (MultiplicityException e) {
+			throw new CompetitionException();
 		}
 	}
 }

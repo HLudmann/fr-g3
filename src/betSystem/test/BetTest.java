@@ -21,7 +21,7 @@ public class BetTest {
 	private Competition comp;
 	
 	@Before
-	public void before() throws BadParametersException, IncorrectString, InvalidWallet {
+	public void before() throws BadParametersException, IncorrectString, InvalidWallet, ItemAlreadyInList {
 		this.p1 = new Player("pun", "punlastname", "password", "plun", 100);
 		
 		this.p2 = new Player("pun", "pdeuxLastName", "password", "pldeux", 100);

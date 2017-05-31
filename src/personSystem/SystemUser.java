@@ -43,4 +43,8 @@ abstract class SystemUser extends Person{
 		password = str;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
 }

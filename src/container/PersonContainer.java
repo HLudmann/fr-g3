@@ -83,10 +83,10 @@ public class PersonContainer {
 	 * @param id						int which corresponds to the primary key
 	 * @throws BadParametersException	
 	 */
-	public void addCompetitor(String lastName, String firstName, int id) throws BadParametersException {
+	public void addCompetitor(String lastName, String firstName) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			Competitor c = new Competitor(lastName, firstName, id);
+			Competitor c = new Competitor(lastName, firstName);
 			em.persist(c);
 			this.competitorDB.add(c);
 		} catch (Exception e) {

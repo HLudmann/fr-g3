@@ -28,8 +28,7 @@ public class JPAUtil {
 	// Create the initial EntityManagerFactory with default configuration
 	static {
 		try {
-			entityManagerFactory = Persistence
-					.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 			throw new ExceptionInInitializerError(ex);

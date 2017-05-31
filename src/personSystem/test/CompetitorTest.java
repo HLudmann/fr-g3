@@ -20,7 +20,7 @@ public class CompetitorTest {
 	private Competition comp;
 
 	@Before
-	public void before() throws BadParametersException, IncorrectString {
+	public void before() throws BadParametersException, IncorrectString, ItemAlreadyInList {
 		
 		this.c1 = new Competitor("cun", "cunLastName", 1);
 		this.c2 = new Competitor("cdeux", "cdeuxLastName", 2);

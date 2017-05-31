@@ -12,7 +12,8 @@ import exceptions.IncorrectString;
 @Entity
 public class Competitor extends Person implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+	private static int ids = 0;
+
 	@Id
 	private int id;
 
@@ -31,17 +32,17 @@ public class Competitor extends Person implements Serializable{
 
 	public Competitor() {}
 
-	public Competitor(String firstName, String lastName, int id) throws IncorrectString{
-		super(firstName, lastName);
-		this.id=id;
-
-		competitionList = new  ArrayList<betSystem.Competition>();
-
+	public Competitor(String name) throws IncorrectString {
+		super(name, name);
+		this.id = ids++;
 	}
 
-	public Competitor(String firstName, String lastName, int id, ArrayList<betSystem.Competition> compList) throws IncorrectString{
-		this(firstName, lastName, id);
-		this.competitionList = compList;
+	public Competitor(String firstName, String lastName) throws IncorrectString {
+		super(firstName, lastName);
+		this.id = ids++;
+
+		this.competitionList = new  ArrayList<betSystem.Competition>();
+
 	}
 
 	public int getId(){

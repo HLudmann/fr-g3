@@ -12,7 +12,10 @@ public class Competition {
 	private Date date;
 	private ArrayList<Bet> betList = new ArrayList<Bet>();
 	private ArrayList<Competitor> competitorList = new ArrayList<Competitor>();
-	
+	private Competitor winner = null;
+	private Competitor second = null;
+	private Competitor third = null;
+
 	public Competition(String name, Date date, Competitor[] competitors) throws BadParametersException, ItemAlreadyInList {
 		this.name = name;
 		
@@ -91,6 +94,7 @@ public class Competition {
 	public void results(Competitor[] winners) throws BadParametersException{
 		if(competitorList.size() <= 2){
 			if (winners.length == 0) {throw new BadParametersException("List empty");}
+			this.winner = winners[0];
 			for (int i=0; i<betList.size();i++) {
 				Bet b = betList.get(i);
 				if (b instanceof SingleWinnerBet) {
@@ -106,6 +110,9 @@ public class Competition {
 		}
 		else{
 			if(winners.length != 3) throw new BadParametersException("3 winners only");
+			this.winner = winners[0];
+			this.second = winners[1];
+			this.third = winners[2];
 			for(int i=0; i<betList.size();i++){
 				Bet b = betList.get(i);
 				if (b instanceof PodiumBet) {
@@ -121,6 +128,19 @@ public class Competition {
 		}
 	}
 
+	public ArrayList<Competitor> getResults() {
+		ArrayList<Competitor> res = new ArrayList<Competitor>();
+		if (this.winner != null) {
+			res.add(this.winner);
+		}
+		if (second != null) {
+			res.add(second);
+		}
+		if (third != null) {
+			res.add(third);
+		}
+		return res;
+	}
 	
 
 }

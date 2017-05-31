@@ -1,5 +1,6 @@
 package personSystem;
 
+import java.util.Date;
 import exceptions.IncorrectString;
 import exceptions.WrongPassword;
 
@@ -14,8 +15,8 @@ abstract class SystemUser extends Person{
 	public SystemUser() {
 	}
 
-	public SystemUser(String firstName, String lastName, String nickname, String password) throws IncorrectString{
-			super(firstName, lastName);
+	public SystemUser(String firstName, String lastName, Date bornDate, String nickname, String password) throws IncorrectString{
+			super(firstName, lastName, bornDate);
 			checkNickname(nickname);
 			this.nickname=nickname;
 			this.password=password;

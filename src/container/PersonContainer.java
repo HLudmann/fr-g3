@@ -3,6 +3,7 @@ package container;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -75,18 +76,36 @@ public class PersonContainer {
 		loggedManagers.remove(mng);
 	}
 	
-
 	/**
-	 * Method to add a Competitor to the DB
+	 * Method to add a Competitor (Team) to the DB
 	 * @param lastName					String 
 	 * @param firstName					String
 	 * @param id						int which corresponds to the primary key
 	 * @throws BadParametersException	
 	 */
-	public void addCompetitor(String lastName, String firstName) throws BadParametersException {
+	public void addCompetitor(String name) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			Competitor c = new Competitor(lastName, firstName);
+			Competitor c = new Competitor(name);
+			em.persist(c);
+			this.competitorDB.add(c);
+		} catch (Exception e) {
+			throw new BadParametersException();
+		}
+	}
+
+	/**
+	 * Method to add a Competitor (Person) to the DB
+	 * @param lastName					String 
+	 * @param firstName					String
+	 * @param id						int which corresponds to the primary key
+	 * @throws BadParametersException	
+	 */
+	public void addCompetitor(String lastName, String firstName, String bornDate) throws BadParametersException {
+		EntityManager em = JPAUtil.getEntityManager();
+		try {
+			Date d = new Date(bornDate);
+			Competitor c = new Competitor(lastName, firstName, d);
 			em.persist(c);
 			this.competitorDB.add(c);
 		} catch (Exception e) {
@@ -102,10 +121,11 @@ public class PersonContainer {
 	 * @param nickname					String which is the primary key
 	 * @throws BadParametersException
 	 */
-	public void addPlayer(String firstName, String lastname, String password, String nickname) throws BadParametersException {
+	public void addPlayer(String firstName, String lastname, String bornDate, String password, String nickname) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			Player p = new Player(firstName, lastname, password, nickname);
+			Date d = new Date(bornDate);
+			Player p = new Player(firstName, lastname, d, password, nickname);
 			em.persist(p);
 			this.playerDB.add(p);
 		} catch (Exception e) {

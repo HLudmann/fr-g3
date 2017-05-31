@@ -1,6 +1,7 @@
 package personSystem;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.io.Serializable;
 import javax.persistence.*;
 import betSystem.Competition;
@@ -33,12 +34,12 @@ public class Competitor extends Person implements Serializable{
 	public Competitor() {}
 
 	public Competitor(String name) throws IncorrectString {
-		super(name, name);
+		super(name, name, new Date());
 		this.id = ids++;
 	}
 
-	public Competitor(String firstName, String lastName) throws IncorrectString {
-		super(firstName, lastName);
+	public Competitor(String firstName, String lastName, Date bornDate) throws IncorrectString {
+		super(firstName, lastName, bornDate);
 		this.id = ids++;
 
 		this.competitionList = new  ArrayList<betSystem.Competition>();

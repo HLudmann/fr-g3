@@ -6,9 +6,10 @@ import java.util.Iterator;
 
 import personSystem.*;
 import betSystem.*;
-import betSystem.exception.MultiplicityException;
+import betSystem.exception.*;
 import container.*;
 import exceptions.*;
+import exceptions.BadParametersException;
 import bettingServices.exceptions.*;
 
 
@@ -23,6 +24,18 @@ public class ManagerInterface extends VisitorInterface {
 
 	public ManagerInterface (Manager manager) {
 		this.loggedManager = manager;
+	}
+
+	public ArrayList<Competition> getAllCompetitions() {
+		return this.competitionList.getCompetitions();
+    }
+
+	public Competition searchACompetitionByName(String name) throws ExistingCompetitionException {
+		ArrayList<Competition> list = this.competitionList.findCompetitionByName(name);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		return list.get(0);
 	}
 
 	/**
@@ -96,10 +109,10 @@ public class ManagerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the nickname is already taken or does not match requirements.
 	 */
-	public void addNewPlayer (String firstname, String lastname,String nickname,
-	  String password) throws BadParametersException {
+	public void addNewPlayer (String firstname, String lastname, String bornDate,
+	  String nickname, String password) throws BadParametersException {
 		try {
-			personList.addPlayer(firstname, lastname, nickname, password);
+			personList.addPlayer(firstname, lastname, bornDate, nickname, password);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -164,22 +177,40 @@ public class ManagerInterface extends VisitorInterface {
 	}
 
 	/**
-	 * Add a new competitor
+	 * Add a new competitor (Person).
 	 * 
 	 * @param firstname
 	 * 			of the competitor.
 	 * @param lastname
 	 * 			of the competitor.
-	 * @param id
+	 * @param bornDate
 	 * 			of the competitor.
 	 * 
 	 * @throws BadParametersException
 	 * 			thrown if the competitor or his id is already in the database.
 	 */
-	public void addNewCompetitor (String firstname, String lastname)
+	public void addNewCompetitor (String firstname, String lastname, String bornDate)
 	  throws BadParametersException {
 		try {
-			personList.addCompetitor(lastname, firstname);
+			personList.addCompetitor(lastname, firstname, bornDate);
+		} catch (BadParametersException e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Add a new competitor (Team).
+	 * 
+	 * @param name
+	 * 			of the team.
+	 * 
+	 * @throws BadParametersException
+	 * 			thrown if the competitor or his id is already in the database.
+	 */
+	public void addNewCompetitor (String name)
+	  throws BadParametersException {
+		try {
+			personList.addCompetitor(name);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -342,8 +373,8 @@ public class ManagerInterface extends VisitorInterface {
 	 * 
 	 * @param winner
 	 */
-	public void creditSingleWinnerBet(String competiton, Competitor winner)
-	  throws ExistingCompetitionException, CompetitionException {
+	public void creditSingleWinnerBet(String competition, Competitor winner)
+	  throws ExistingCompetitionException, CompetitionException, BadParametersException {
 		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
 		if (list.size() != 1) {
 			throw new ExistingCompetitionException();
@@ -364,7 +395,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * @param third
 	 */
 	public void creditPodiumBet(String competition, Competitor winner, Competitor second, Competitor third) 
-	 throws ExistingCompetitionException, CompetitionException {
+	 throws ExistingCompetitionException, CompetitionException, BadParametersException {
 		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
 		if (list.size() != 1) {
 			throw new ExistingCompetitionException();

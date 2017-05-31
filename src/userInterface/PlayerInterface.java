@@ -72,7 +72,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor is not in the competition
 	 */
-	public void makeBet (String compName, int compId, long amount) throws BadParametersException {
+	public void makeBet (String compName, long amount, int compId) throws BadParametersException {
 		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor competitor = personList.findCompetitorById(compId).get(0);
 		try {
@@ -99,8 +99,8 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor is not in the competition
 	 */
-	public void makeBet (String compName, int firstCompId, int secondCompId,
-	  int thirdCompId, long amount) throws BadParametersException {
+	public void makeBet (String compName, long amount, int firstCompId, int secondCompId,
+	  int thirdCompId) throws BadParametersException {
 		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor first = personList.findCompetitorById(firstCompId).get(0);
 		Competitor second = personList.findCompetitorById(secondCompId).get(0);
@@ -128,8 +128,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor is not in the competition
 	 */
-	public void changeSingleWinnerBet (int id, long amount, String compName, int winnerId, 
-	  int secondCompId,int thirdCompId) 
+	public void changeSingleWinnerBet (int id, long amount, String compName, int winnerId) 
 	  throws BadParametersException {
 		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor winner = personList.findCompetitorById(winnerId).get(0);

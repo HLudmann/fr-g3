@@ -118,19 +118,6 @@ public class Competition {
 							}
 				}				
 			}
-			for(int i=0; i<betList.size();i++){
-				Bet b = betList.get(i);
-				if (b instanceof SingleWinnerBet){
-					if (winners[0] == b.getCompetitor()[0])	{
-						try {
-							b.creditGain();
-						} catch (InvalidWallet e) {
-							throw new BadParametersException("Issues when crediting wallets");
-						}
-					}
-				}
-			}
-			
 		}
 	}
 

@@ -214,7 +214,7 @@ public class ManagerInterface extends VisitorInterface {
 	 * 			thrown if the nickname does not natch a player in the database
 	 * 				or if the withdraw is higher than the wallet.
 	 */
-	public void changeWallet (String nickname, int change) throws BadParametersException {
+	public void changeWallet (String nickname, long change) throws BadParametersException {
 		try {
 			Player p = personList.findPlayer(nickname);
 			p.setWallet(p.getWallet()+change);
@@ -333,5 +333,43 @@ public class ManagerInterface extends VisitorInterface {
 		} catch (MultiplicityException e) {
 			throw new CompetitionException();
 		}
+	}
+
+	/**
+	 * Credit sigle winner bets.
+	 * 
+	 * @param competition
+	 * 
+	 * @param winner
+	 */
+	public void creditSingleWinnerBet(String competiton, Competitor winner)
+	  throws ExistingCompetitionException, CompetitionException {
+		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		Competition comp = list.get(0);
+		comp.results(new Competitor[] {winner});
+	}
+
+	/**
+	 * Credit podium bets.
+	 * 
+	 * @param competition
+	 * 
+	 * @param winner
+	 * 
+	 * @param second
+	 * 
+	 * @param third
+	 */
+	public void creditPodiumBet(String competition, Competitor winner, Competitor second, Competitor third) 
+	 throws ExistingCompetitionException, CompetitionException {
+		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
+		if (list.size() != 1) {
+			throw new ExistingCompetitionException();
+		}
+		Competition comp = list.get(0);
+		comp.results(new Competitor[] {winner, second, third});
 	}
 }

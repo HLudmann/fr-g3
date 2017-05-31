@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.omg.PortableInterceptor.TRANSPORT_RETRY;
 
+import com.sun.org.glassfish.gmbal.AMXMetadata;
+
 import bettingServices.exceptions.*;
 import exceptions.BadParametersException;
 import exceptions.IncorrectString;
@@ -65,7 +67,15 @@ public class BettingSoft implements Betting {
 		// The password should be valid
 		setManagerPassword(managerPwd);
 		this.subscribers = new ArrayList<Player>();
+
+		// Set interfaces
+		this.mngInt = new ManagerInterface(new Manager("Jean", "Dupont", "Jannot", this.managerPassword));
 	}
+
+	
+	/***********************************************************************
+	 * MANAGER FONCTIONNALITIES
+	 ***********************************************************************/
 
 	private void setManagerPassword(String managerPassword)
 			throws BadParametersException {
@@ -278,5 +288,68 @@ public class BettingSoft implements Betting {
 	 * From Betting interface.
 	 */
 	@Override
-	public 
+	public void creditPlayer(String username, long numberTokens, String managerPwd)
+			throws AuthenticationException, ExistingPlayerException,
+			BadParametersException {
+				authenticateMngr(managerPwd);
+				this.mngInt.changeWallet(username, numberTokens);
+			}
+	
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void debitPlayer(String username, long numberTokens, String managerPwd)
+			throws AuthenticationException, ExistingPlayerException,
+			PlayerException, BadParametersException {
+				authenticateMngr(managerPwd);
+				this.mngInt.changeWallet(username, -1*numberTokens);
+			}
+
+	/** 
+	 * From Betting interface
+	 */
+	@Override
+	public void settleWinner(String competition, Competitor winner, String managerPwd)
+			throws AuthenticationException, ExistingCompetitionException,
+			CompetitionException {
+				authenticateMngr(managerPwd);
+				this.mngInt.creditSingleWinnerBet(competiton, winner);
+			}
+		
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void settlePodium(String competition, Competitor winner, Competitor second,
+			Competitor third, String managerPwd)
+			throws AuthenticationException, ExistingCompetitionException,
+			CompetitionException {
+				authenticateMngr(managerPwd);
+				this.mngInt.creditPodiumBet(competition, winner, second, third);
+			}
+
+	/***********************************************************************
+	 * SUBSCRIBERS FONCTIONNALITIES
+	 ***********************************************************************/
+
+	 /**
+	  * Find a player in the list by his username.
+	  *
+	  * @param username
+	  */
+	  public Player(String username) {
+		  
+	  }
+
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void betOnWinner(long numberTokens, String competition, Competitor winner,
+			String username, String pwdSubs) throws AuthenticationException,
+			CompetitionException, ExistingCompetitionException,
+			PlayerException, BadParametersException {
+				
+			}
 }

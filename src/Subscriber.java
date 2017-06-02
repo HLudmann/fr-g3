@@ -2,7 +2,7 @@ package bettingServices;
 
 import java.io.Serializable;
 
-import bettingServices.exceptions.BadParametersException;
+import exceptions.BadParametersException;
 import utils.*;
 
 /**

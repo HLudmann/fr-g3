@@ -113,7 +113,7 @@ public class BettingSoft implements Betting {
 		}
 		// Add it to the collection of subscribers
 		subscribers.add(s);
-		return s.getPassword();
+		return password;
 	}
 
 	/**
@@ -354,7 +354,9 @@ public class BettingSoft implements Betting {
 			CompetitionException, ExistingCompetitionException,
 			PlayerException, BadParametersException {
 				Player p = searchPlayerByUsername(username);
-				if (p.getPassword() != pwdSubs) {
+				try {
+					p.authentificate(pwdSubs);
+				} catch (WrongPassword e) {
 					throw new AuthenticationException();
 				}
 				PlayerInterface plrInt = new PlayerInterface(p);
@@ -370,7 +372,9 @@ public class BettingSoft implements Betting {
 			ExistingCompetitionException, PlayerException,
 			BadParametersException {
 				Player p = searchPlayerByUsername(username);
-				if (p.getPassword() != pwdSubs) {
+				try {
+					p.authentificate(pwdSubs);
+				} catch (WrongPassword e) {
 					throw new AuthenticationException();
 				}
 				PlayerInterface plrInt = new PlayerInterface(p);
@@ -384,7 +388,9 @@ public class BettingSoft implements Betting {
 	public void changeSubsPwd(String username, String newPwd, String currentPwd)
 			throws AuthenticationException, BadParametersException {
 				Player p = searchPlayerByUsername(username);
-				if (p.getPassword() != currentPwd) {
+				try {
+					p.authentificate(newPwd);
+				} catch (WrongPassword e) {
 					throw new AuthenticationException();
 				}
 				PlayerInterface plrInt = new PlayerInterface(p);
@@ -402,7 +408,9 @@ public class BettingSoft implements Betting {
 	public ArrayList<String> infosPlayer(String username, String pwdSubs)
 			throws AuthenticationException {
 				Player p = searchPlayerByUsername(username);
-				if (p.getPassword() != pwdSubs) {
+				try {
+					p.authentificate(pwdSubs);
+				} catch (WrongPassword e) {
 					throw new AuthenticationException();
 				}
 				ArrayList<String> res = new ArrayList<String>();
@@ -428,7 +436,9 @@ public class BettingSoft implements Betting {
 				Competition comp = this.mngInt.searchACompetitionByName(competition);
 				Player p = searchPlayerByUsername(username);
 				PlayerInterface plrInt = new PlayerInterface(p);
-				if (p.getPassword() != pwdSubs) {
+				try {
+					p.authentificate(pwdSubs);
+				} catch (WrongPassword e) {
 					throw new AuthenticationException();
 				}
 				for (Bet b : p.getBetList()) {

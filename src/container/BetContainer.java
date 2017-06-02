@@ -12,7 +12,7 @@ import betSystem.*;
 import personSystem.*;
 import exceptions.*;
 
-@Entity
+
 @NamedQuery(
 		name="selectEverything",
 		query="SELECT b FROM Bet b")
@@ -46,10 +46,10 @@ public class BetContainer {
 	 * @param competitors
 	 * @throws BadParametersException
 	 */
-	public void addPodiumBet(long amount, Player player, Competition competition, Competitor[] competitors) throws BadParametersException {
+	public void addPodiumBet(long amount, Player player, Competition competition, Competitor competitor1, Competitor competitor2, Competitor competitor3) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			PodiumBet pb = new PodiumBet(amount, player, competition, competitors);
+			PodiumBet pb = new PodiumBet(amount, player, competition, competitor1, competitor2, competitor3);
 			em.persist(pb);
 			this.betDB.add(pb);
 		} catch (Exception e) {

@@ -21,7 +21,7 @@ import javax.swing.border.Border;
 
 import gui.buttons.BoutonInvisible;
 
-public class ManagerPanel extends JFrame implements ActionListener{
+public class ManagerPanel extends JPanel implements ActionListener{
 	private Font font = new Font("arial",Font.CENTER_BASELINE,20);
 	private JPanel mainBox = new JPanel();
 	Border borderBlack = BorderFactory.createLineBorder(Color.BLACK, 3);
@@ -88,10 +88,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	    
 	public ManagerPanel(){
 		this.setBackground(new Color(0,150,250));
-		this.setTitle("logiciel de paris sportifs - interface manager");
 		this.setSize(700, 1040);
-	    this.setLocationRelativeTo(null);
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.getSize();
 	    makeAndShowManagerPanel();
 	}
@@ -314,7 +311,7 @@ public class ManagerPanel extends JFrame implements ActionListener{
 	
 	
 	public void showManagerPanel(){
-		this.getContentPane().add(mainBox);
+		this.setContentPane(mainBox);
 	    this.setVisible(true);
 	}
 	

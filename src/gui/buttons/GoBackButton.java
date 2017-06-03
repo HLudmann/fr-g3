@@ -1,13 +1,15 @@
 package gui.buttons;
 
-import gui.*;
-import gui.panels.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import gui.panels.MainInterface;
+import gui.panels.ManagerPanel;
+import gui.panels.PlayerPanel;
 
 @SuppressWarnings("serial")
 public class GoBackButton extends JButton implements MouseListener{
@@ -30,13 +32,18 @@ public class GoBackButton extends JButton implements MouseListener{
 
   //Send the correct instruction based on the type provided
   public void mouseClicked(MouseEvent event) {
-    Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
     switch(type){
       case 1:
+    	ManagerPanel window1 = (ManagerPanel) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+    	window1.showManagerPanel();
         break;
       case 2:
+    	PlayerPanel window2 = (PlayerPanel) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+      	window2.showPlayerPanel();
         break;
       case 3:
+    	MainInterface window3 = (MainInterface) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+      	window3.showMainInterface();
         break;
       case 4:
       break;

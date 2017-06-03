@@ -162,6 +162,10 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	    competition.addActionListener(this);
 	    competiteur.addActionListener(this);
 	    searchButton.addActionListener(this);
+	    makeBet.addActionListener(this);
+	    delBet.addActionListener(this);
+	    changeBet.addActionListener(this);
+	    boutonChgtPassword.addActionListener(this);
 
 
 
@@ -171,7 +175,7 @@ public class PlayerPanel extends JFrame implements ActionListener{
 	}
 	
 	public void showPlayerPanel(){
-		this.getContentPane().add(mainBox);
+		this.setContentPane(mainBox);
 	    this.setVisible(true);
 	}
 
@@ -198,7 +202,7 @@ public class PlayerPanel extends JFrame implements ActionListener{
 			;
 		}*/
 		if(e.getSource() == makeBet){
-			PanelFormBet panelFormBet = new PanelFormBet(true, new String(), new ArrayList<String>(), 1, 1);
+			PanelFormBet panelFormBet = new PanelFormBet(false, new String(), new ArrayList<String>(), 1, 1);
 			this.setContentPane(panelFormBet);
 			this.setVisible(true);
 		}

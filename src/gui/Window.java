@@ -21,10 +21,7 @@ public class Window extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     //Adds our panel to the window, in the center of it
-    JLabel label = new JLabel("Une liste:");
-    label.setBorder(new EmptyBorder(10, 10, 0, 0));
-    this.add(label, BorderLayout.NORTH);
-    this.add(new PanelList(list, 1));
+    this.add(new ManagerPanel());
 
     //Set the correct size for our window and show it (might be usefull)
     this.pack();

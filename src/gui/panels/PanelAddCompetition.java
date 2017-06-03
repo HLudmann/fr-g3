@@ -29,7 +29,7 @@ public class PanelAddCompetition extends JPanel{
   private ArrayList<JFormattedTextField> listComp;
 
 
-  public PanelAddCompetition() {
+public PanelAddCompetition(JPanel panel) {
 
     this.listComp = new ArrayList<JFormattedTextField>();
     this.listComp.add(new JFormattedTextField(NumberFormat.getIntegerInstance()));

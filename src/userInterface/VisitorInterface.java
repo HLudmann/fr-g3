@@ -11,12 +11,12 @@ import userInterface.exceptions.*;
 
 /**
  * @author HLudmann + BusterJava
- * 
+ *
  */
 public class VisitorInterface extends Thread {
 
     private long id;
-    private static long nextId = 0; 
+    private static long nextId = 0;
     protected static CompContainer competitionList = new CompContainer();
     protected static PersonContainer personList = new PersonContainer();
 
@@ -29,14 +29,15 @@ public class VisitorInterface extends Thread {
         return this.id;
     }
 
-    /** 
-     * Sign In for Managers.
-     * 
+
+    /**
+     * Singn In for Managers.
+     *
      * @param nickname
      *              the nickname chosen by the Manager.
      * @param password
      *              the password chosen by the Manager.
-     * 
+     *
      * @throws BadParametersException
      *              thrown if an empty nickname or password was given.
      * @throws IdentificationError
@@ -60,15 +61,15 @@ public class VisitorInterface extends Thread {
             throw new IdentificationError("Wrong nickname or password");
         }
     }
-
-    /** 
-     * Sign In for Player.
-     * 
+  
+/**
+     * Singn In for Player.
+     *
      * @param nickname
      *              the nickname chosen by the Player when he subscribed.
      * @param password
      *              the password chosen by the Player when he subscribed.
-     * 
+     *
      * @throws BadParametersException
      *              thrown if an empty nickname or password was given.
      * @throws IdentificationError
@@ -95,7 +96,7 @@ public class VisitorInterface extends Thread {
 
     /**
      * List competitions
-     * 
+     *
      * @return all the public infos about each competition that has not ended.
      */
    public String[][] competitionListing() {
@@ -110,9 +111,9 @@ public class VisitorInterface extends Thread {
 
     /**
      * List competitors
-     * 
-     * @return all the public infos about each competitor 
-     *              who is competiting in a upcoming competition
+     *
+     * @return all the public infos about each competitor
+     *              who is competiting in a upcomming competition
      */
     public String[][] competitorListing() {
         ArrayList<Competitor> list = personList.getCompetitors();
@@ -127,10 +128,10 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search a competition by name.
-     * 
+     *
      * @param name
      *             partial or complete name of the competition.
-     * 
+     *
      * @return the search results.
      */
     public String[][] searchCompetitionByName (String name) {
@@ -145,10 +146,10 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search a competition by date.
-     * 
+     *
      * @param date
      *            date when the competition takes place.
-     * 
+     *
      * @return the search results.
      */
     public String[][] searchCompetitionByDate (Date date) {
@@ -185,10 +186,10 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search a competitor by name.
-     * 
+     *
      * @param name
      *             partial or complete name of the competitor.
-     * 
+     *
      * @return the search results.
      */
     public String[][] searchCompetitorByName (String name) throws BadParametersException {
@@ -208,10 +209,10 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search a competitor by id.
-     * 
+     *
      * @param id
      *             partial or complete id of the competitor.
-     * 
+     *
      * @return the search results.
      */
     public String[][] searchCompetitorById (int id) throws BadParametersException {

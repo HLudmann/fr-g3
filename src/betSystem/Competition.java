@@ -2,17 +2,47 @@ package betSystem;
 
 import java.util.ArrayList;
 import java.util.Date;
-import personSystem.Competitor;
-import betSystem.exception.*;
-import exceptions.*;
-import exceptions.BadParametersException;
+import java.util.List;
+import javax.persistence.*;
 
+import betSystem.exception.*;
+import personSystem.Competitor;
+import exceptions.*;
+
+@Entity
+@NamedQuery(
+        name="findAllBetsWithCompName",
+        query="SELECT b FROM Bet b WHERE b.competition LIKE :compName "
+)
 public class Competition {
+	@Id
 	private String name;
-	private Date date;
+	@Temporal(TemporalType.DATE)
+	private Date date ;
+	@Transient
 	private ArrayList<Bet> betList = new ArrayList<Bet>();
+	private Competitor winner = null;
+	private Competitor second = null;
+	private Competitor third = null;
+
+	
+	//bi-directional many-to-many association to Competitor
+	@ManyToMany(mappedBy="competitionList")
 	private ArrayList<Competitor> competitorList = new ArrayList<Competitor>();
 	
+	@PersistenceContext
+	public EntityManager em;
+		
+	
+	
+	
+	/**
+	 * @param name
+	 * @param date
+	 * @param competitors
+	 * @throws BadParametersException
+	 */
+	@SuppressWarnings("deprecation")
 	public Competition(String name, Date date, Competitor[] competitors) throws BadParametersException, ItemAlreadyInList {
 		this.name = name;
 		
@@ -30,71 +60,135 @@ public class Competition {
 		}
 		
 		this.date = date;
-
-		for (Competitor c: competitors) {
-			c.addCompetition(this);
+		this.date.setSeconds(1);
+		this.date.setMinutes(0);
+		this.date.setHours(0);
+	}
+	
+	public Competition(){	
+	}
+	
+	@PostLoad
+	public void initBetList(){
+		final List<?> bets =em.createNamedQuery("findAllBetsWithCompName")
+							.setParameter("compName",this.name)
+							.getResultList();
+		for(Object bet : bets){
+			Bet b = (Bet) bet;
+			this.betList.add(b);
+			
 		}
 	}
 	
+	/**
+	 * @return name
+	 */
 	public String getName(){
 		return name;
 	}
 	
+	/**
+	 * @return date
+	 */
 	public Date getDate(){
 		return date;
 	}
 	
+	/**
+	 * @return betList
+	 */
 	public ArrayList<Bet> getBetList(){
 		return betList;
 	}
 	
+	/**
+	 * @return competitorList
+	 */
 	public ArrayList<Competitor> getCompetitorList(){
 		return competitorList;
 	}
 	
+	/**
+	 * @param name
+	 */
 	public void setName(String name){
 		this.name = name;
 	}
 	
+	/**
+	 * @param date
+	 */
 	public void setDate(Date date){
 		this.date = date;
 	}
 	
-	public void addBet(Bet b){
+	/**
+	 * @param bet
+	 * @throws ItemAlreadyInList
+	 */
+	public void addBet(Bet b) throws ItemAlreadyInList{
 		if(!betList.contains(b)) betList.add(b);
+		else throw new ItemAlreadyInList();
 	}
 	
+	/**
+	 * @param bet
+	 */
 	public void removeBet(Bet b){
 		betList.remove(b);
 	}
 	
 	
-	public void addCompetitor(Competitor c){
+	/**
+	 * @param competitor
+	 * @throws ItemAlreadyInList
+	 */
+	public void addCompetitor(Competitor c) throws ItemAlreadyInList{
 		if(!competitorList.contains(c)) competitorList.add(c);
+		else throw new ItemAlreadyInList();
 	}
 	
+	/**
+	 * @param competitor
+	 * @throws MultiplicityException
+	 */
 	public void removeCompetitor(Competitor c) throws MultiplicityException{
 		if(competitorList.size() == 2) throw new MultiplicityException("Competitor must have at least 2 competitors");
 		competitorList.remove(c);
 	}
 	
+	/**
+	 * @param competitor
+	 * @return if the competitor is in the list of competitors or not
+	 */
 	public boolean contains(Competitor competitor){
 		return competitorList.contains(competitor);
 	}
 	
 	
+	/**
+	 * @return if the competition has begun or not
+	 */
 	public boolean hasBegun() {
 		Date currentTime = new Date();
-		return (currentTime.after(this.date));
+		return (currentTime.after(date));
 	}
 	
-	public void results(Competitor[] winners) throws BadParametersException{
+	/**
+	 * @param winners
+	 * @throws BadParametersException
+	 * @throws InvalidWallet
+	 * @throws ObjectNotFound
+	 */
+	public void results(Competitor[] winners) throws BadParametersException, InvalidWallet, ObjectNotFound{
 		if(competitorList.size() <= 2){
 			if (winners.length == 0) {throw new BadParametersException("List empty");}
+			this.winner = winners[0];
 			for (int i=0; i<betList.size();i++) {
-				Bet b = betList.get(i);
-				if (b instanceof SingleWinnerBet) {
-					if (winners[0] == b.getCompetitor()[0])	{
+				Bet bet = betList.get(i);
+				if (bet instanceof SingleWinnerBet) {
+					SingleWinnerBet b = (SingleWinnerBet) bet;
+					if (winners[0] == b.getFirstCompetitor())	{
 						try {
 							b.creditGain();
 						} catch (InvalidWallet e) {
@@ -106,34 +200,42 @@ public class Competition {
 		}
 		else{
 			if(winners.length != 3) throw new BadParametersException("3 winners only");
+			this.winner = winners[0];
+			this.second = winners[1];
+			this.third = winners[2];
 			for(int i=0; i<betList.size();i++){
-				Bet b = betList.get(i);
-				if (b instanceof PodiumBet) {
-					if (winners[0] == b.getCompetitor()[0] && winners[1] == b.getCompetitor()[1] 
-														&& winners[2] == b.getCompetitor()[2])
-						try {
-								b.creditGain();
-							} catch (InvalidWallet e) {
-								throw new BadParametersException("Issues when crediting wallets");
-							}
-				}				
+				Bet bet = betList.get(i);
+				if(bet instanceof PodiumBet){
+					PodiumBet b = (PodiumBet) bet;
+					if (winners[0] == b.getFirstCompetitor() && winners[1] == b.getSecondCompetitor() 
+													   && winners[2] == b.getThirdCompetitor())
+						b.creditGain();
+				}
 			}
 			for(int i=0; i<betList.size();i++){
-				Bet b = betList.get(i);
-				if (b instanceof SingleWinnerBet){
-					if (winners[0] == b.getCompetitor()[0])	{
-						try {
-							b.creditGain();
-						} catch (InvalidWallet e) {
-							throw new BadParametersException("Issues when crediting wallets");
-						}
-					}
+				Bet bet = betList.get(i);
+				if (bet instanceof SingleWinnerBet){
+					SingleWinnerBet b = (SingleWinnerBet) bet;
+					if (winners[0] == b.getFirstCompetitor())	b.creditGain();
 				}
 			}
 			
 		}
 	}
 
+	public ArrayList<Competitor> getResults() {
+		ArrayList<Competitor> res = new ArrayList<Competitor>();
+		if (this.winner != null) {
+			res.add(this.winner);
+		}
+		if (second != null) {
+			res.add(second);
+		}
+		if (third != null) {
+			res.add(third);
+		}
+		return res;
+	}
 	
 
 }

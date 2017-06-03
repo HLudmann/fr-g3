@@ -1,6 +1,6 @@
 
 import bettingServices.*;
-import bettingServices.exceptions.BadParametersException;
+import exceptions.*;
 import tests.validation.*;
 
 public class ValidationTests {

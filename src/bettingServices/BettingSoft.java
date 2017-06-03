@@ -3,12 +3,11 @@ package bettingServices;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
-import org.omg.PortableInterceptor.TRANSPORT_RETRY;
-
+import betSystem.*;
 import bettingServices.exceptions.*;
-import exceptions.BadParametersException;
-import exceptions.IncorrectString;
+import exceptions.*;
 import personSystem.*;
 import userInterface.*;
 import utils.*;
@@ -65,7 +64,19 @@ public class BettingSoft implements Betting {
 		// The password should be valid
 		setManagerPassword(managerPwd);
 		this.subscribers = new ArrayList<Player>();
+
+		// Set interfaces
+		try {
+			this.mngInt = new ManagerInterface(new Manager("Jean", "Dupont", "Jannot", this.managerPassword));
+		} catch (IncorrectString e) {
+			throw new BadParametersException();
+		}
 	}
+
+	
+	/***********************************************************************
+	 * MANAGER FONCTIONNALITIES
+	 ***********************************************************************/
 
 	private void setManagerPassword(String managerPassword)
 			throws BadParametersException {
@@ -95,13 +106,14 @@ public class BettingSoft implements Betting {
 		// Creates the new subscriber
 		String password = RandPass.getPass(Constraints.LONG_PWD);
 		try {
-			s = new Player(firstName, lastName, username, password);
+			s = new Player(firstName, lastName, new Date(borndate), username, password);
+			this.mngInt.addNewPlayer(firstName, lastName, borndate, username, password);
 		} catch (IncorrectString e) {
 			throw new BadParametersException();
 		}
 		// Add it to the collection of subscribers
 		subscribers.add(s);
-		return s.getPassword();
+		return password;
 	}
 
 	/**
@@ -238,7 +250,8 @@ public class BettingSoft implements Betting {
 				authenticateMngr(managerPwd);
 				Competitor c = new Competitor();
 				try {
-					c = new Competitor(firstName, lastName);					
+					c = new Competitor(firstName, lastName, new Date(borndate));
+					this.mngInt.addNewCompetitor(firstName, lastName, borndate);				
 				} catch (IncorrectString e) {
 					throw new BadParametersException();
 				}
@@ -256,6 +269,7 @@ public class BettingSoft implements Betting {
 				Competitor c = new Competitor();
 				try {
 					c = new Competitor(name);
+					this.mngInt.addNewCompetitor(name);
 				} catch (IncorrectString e) {
 					throw new BadParametersException();
 				}
@@ -278,5 +292,221 @@ public class BettingSoft implements Betting {
 	 * From Betting interface.
 	 */
 	@Override
-	public 
+	public void creditPlayer(String username, long numberTokens, String managerPwd)
+			throws AuthenticationException, ExistingPlayerException,
+			BadParametersException {
+				authenticateMngr(managerPwd);
+				this.mngInt.changeWallet(username, numberTokens);
+			}
+	
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void debitPlayer(String username, long numberTokens, String managerPwd)
+			throws AuthenticationException, ExistingPlayerException,
+			PlayerException, BadParametersException {
+				authenticateMngr(managerPwd);
+				this.mngInt.changeWallet(username, -1*numberTokens);
+			}
+
+	/** 
+	 * From Betting interface
+	 */
+	@Override
+	public void settleWinner(String competition, Competitor winner, String managerPwd)
+			throws AuthenticationException, ExistingCompetitionException,
+			CompetitionException {
+				authenticateMngr(managerPwd);
+				try {
+					this.mngInt.creditSingleWinnerBet(competition, winner);
+				} catch (BadParametersException e) {
+					throw new CompetitionException();
+				}
+			}
+		
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void settlePodium(String competition, Competitor winner, Competitor second,
+			Competitor third, String managerPwd)
+			throws AuthenticationException, ExistingCompetitionException,
+			CompetitionException {
+				authenticateMngr(managerPwd);
+				try {
+					this.mngInt.creditPodiumBet(competition, winner, second, third);
+				} catch (BadParametersException e) {
+					throw new CompetitionException();
+				}
+			}
+
+	/***********************************************************************
+	 * SUBSCRIBERS FONCTIONNALITIES
+	 ***********************************************************************/
+
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void betOnWinner(long numberTokens, String competition, Competitor winner,
+			String username, String pwdSubs) throws AuthenticationException,
+			CompetitionException, ExistingCompetitionException,
+			PlayerException, BadParametersException {
+				Player p = searchPlayerByUsername(username);
+				try {
+					p.authentificate(pwdSubs);
+				} catch (WrongPassword e) {
+					throw new AuthenticationException();
+				}
+				PlayerInterface plrInt = new PlayerInterface(p);
+				plrInt.makeBet(competition, numberTokens, winner.getId());
+			}
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void betOnPodium(long numberTokens, String competition, Competitor winner,
+			Competitor second, Competitor third, String username, String pwdSubs)
+			throws AuthenticationException, CompetitionException,
+			ExistingCompetitionException, PlayerException,
+			BadParametersException {
+				Player p = searchPlayerByUsername(username);
+				try {
+					p.authentificate(pwdSubs);
+				} catch (WrongPassword e) {
+					throw new AuthenticationException();
+				}
+				PlayerInterface plrInt = new PlayerInterface(p);
+				plrInt.makeBet(competition, numberTokens, winner.getId(), second.getId(), third.getId());
+			}
+
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void changeSubsPwd(String username, String newPwd, String currentPwd)
+			throws AuthenticationException, BadParametersException {
+				Player p = searchPlayerByUsername(username);
+				try {
+					p.authentificate(newPwd);
+				} catch (WrongPassword e) {
+					throw new AuthenticationException();
+				}
+				PlayerInterface plrInt = new PlayerInterface(p);
+				try {
+					plrInt.changePassword(currentPwd, newPwd, newPwd);
+				} catch (WrongPassword e) {
+					throw new AuthenticationException();
+				}
+			}
+
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public ArrayList<String> infosPlayer(String username, String pwdSubs)
+			throws AuthenticationException {
+				Player p = searchPlayerByUsername(username);
+				try {
+					p.authentificate(pwdSubs);
+				} catch (WrongPassword e) {
+					throw new AuthenticationException();
+				}
+				ArrayList<String> res = new ArrayList<String>();
+				res.add(p.getLastName());
+				res.add(p.getFirstName());
+				res.add(p.getBornDate().toString());
+				res.add(p.getNickname());
+				res.add(String.valueOf(p.getWallet()));
+				res.add(String.valueOf(p.getBettedWallet()));
+				for (Bet b : p.getBetList()) {
+					res.add(b.toString());
+				}
+				return res;
+			}
+
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public void deleteBetsCompetition(String competition, String username,
+			String pwdSubs) throws AuthenticationException,
+			CompetitionException, ExistingCompetitionException {
+				Competition comp = this.mngInt.searchACompetitionByName(competition);
+				Player p = searchPlayerByUsername(username);
+				PlayerInterface plrInt = new PlayerInterface(p);
+				try {
+					p.authentificate(pwdSubs);
+				} catch (WrongPassword e) {
+					throw new AuthenticationException();
+				}
+				for (Bet b : p.getBetList()) {
+					if (comp.getBetList().contains(b)) {
+						try {
+							plrInt.deleteBet(b.getId());
+						} catch (BadParametersException e) {
+							throw new CompetitionException();
+						}
+					}
+				}
+			}
+
+	/***********************************************************************
+	 * VISITORS FONCTIONNALITIES
+	 ***********************************************************************/
+	 /**
+	 * From Betting interface.
+	 */
+	@Override
+	public List<List<String>> listCompetitions() {
+		ArrayList<Competition> auxRes = this.mngInt.getAllCompetitions();
+		List<List<String>> res = new ArrayList<List<String>>();
+		for (Competition c : auxRes) {
+			ArrayList<String> auxList = new ArrayList<String>();
+			auxList.add(c.getName());
+			auxList.add(c.getDate().toString());
+			auxList.add(c.getBetList().toString());
+			auxList.add(c.getCompetitorList().toString());
+		}
+		return res;
+	}
+
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public Collection<Competitor> listCompetitors(String competition)
+			throws ExistingCompetitionException, CompetitionException {
+				Competition comp = this.mngInt.searchACompetitionByName(competition);
+				return comp.getCompetitorList();
+			}
+	
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public ArrayList<String> consultBetsCompetition(String competition)
+			throws ExistingCompetitionException {
+				Competition comp = this.mngInt.searchACompetitionByName(competition);
+				ArrayList<String> res = new ArrayList<String>();
+				for (Bet b : comp.getBetList()) {
+					res.add(b.toString());
+				}
+				return res;
+			}
+
+	/**
+	 * From Betting interface.
+	 */
+	@Override
+	public ArrayList<Competitor> consultResultsCompetition(String competition)
+			throws ExistingCompetitionException {
+				Competition comp = this.mngInt.searchACompetitionByName(competition);
+				if (comp.getDate().after(new Date())) {
+					throw new ExistingCompetitionException();
+				}
+				return comp.getResults();
+			}
+
 }

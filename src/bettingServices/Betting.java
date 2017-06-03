@@ -3,7 +3,7 @@ package bettingServices;
 import java.util.*;
 
 import bettingServices.exceptions.ExistingPlayerException;
-import betSystem.exception.PlayerException;
+import bettingServices.exceptions.PlayerException;
 import bettingServices.exceptions.*;
 import exceptions.*;
 import personSystem.*;

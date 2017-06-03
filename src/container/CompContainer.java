@@ -12,7 +12,7 @@ import betSystem.*;
 import personSystem.Competitor;
 import exceptions.*;
 
-@Entity
+
 @NamedQuery(
 		name="selectEverything",
 		query="SELECT c FROM Competition c")

@@ -6,6 +6,7 @@ import personSystem.*;
 import betSystem.*;
 import container.*;
 import exceptions.*;
+import betSystem.exception.*;
 
 /**
  * @author HLudmann + BusterJava
@@ -72,7 +73,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor is not in the competition
 	 */
-	public void makeBet (String compName, int compId, long amount) throws BadParametersException {
+	public void makeBet (String compName, long amount, int compId) throws BadParametersException {
 		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor competitor = personList.findCompetitorById(compId).get(0);
 		try {
@@ -99,15 +100,14 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor is not in the competition
 	 */
-	public void makeBet (String compName, int firstCompId, int secondCompId,
-	  int thirdCompId, long amount) throws BadParametersException {
+	public void makeBet (String compName, long amount, int firstCompId, int secondCompId,
+	  int thirdCompId) throws BadParametersException {
 		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor first = personList.findCompetitorById(firstCompId).get(0);
 		Competitor second = personList.findCompetitorById(secondCompId).get(0);
 		Competitor third = personList.findCompetitorById(thirdCompId).get(0);
-		Competitor[] competitors = new Competitor[] {first, second, third};
 		try {
-			this.betList.addPodiumBet(amount, this.loggedPlayer, competition, competitors);
+			this.betList.addPodiumBet(amount, this.loggedPlayer, competition, first, second, third);
 		} catch (BadParametersException e) {
 			throw e;
 		}
@@ -128,8 +128,7 @@ public class PlayerInterface extends VisitorInterface {
 	 * @throws BadParametersException
 	 * 			thrown if the competitor is not in the competition
 	 */
-	public void changeSingleWinnerBet (int id, long amount, String compName, int winnerId, 
-	  int secondCompId,int thirdCompId) 
+	public void changeSingleWinnerBet (int id, long amount, String compName, int winnerId) 
 	  throws BadParametersException {
 		Competition competition = competitionList.findCompetitionByName(compName).get(0);
 		Competitor winner = personList.findCompetitorById(winnerId).get(0);
@@ -195,16 +194,27 @@ public class PlayerInterface extends VisitorInterface {
 	 * 
 	 * @return all the info about the player's bets.
 	 */
-	public String[][] listBets() {
+	public String[][] listBets() throws ObjectNotFound {
 		ArrayList<Bet> list = betList.getBets();
 		String[][] res = new String[list.size()][6];
 		for (int i = 0; i < list.size(); i++) {
-            res[i][0] = String.valueOf(list.get(i).getId());
-            res[i][1] = String.valueOf(list.get(i).getAmount());
-			res[i][2] = list.get(i).getCompetition().getName();
-			res[i][3] = String.valueOf(list.get(i).getCompetitor()[0].getId());
-			res[i][4] = String.valueOf(list.get(i).getCompetitor()[1].getId());
-			res[i][5] = String.valueOf(list.get(i).getCompetitor()[2].getId());
+			if (list.get(i) instanceof SingleWinnerBet) {
+				SingleWinnerBet b = (SingleWinnerBet) list.get(i);
+				res[i][0] = String.valueOf(b.getId());
+            	res[i][1] = String.valueOf(b.getAmount());
+				res[i][2] = b.getCompetition().getName();
+				res[i][3] = String.valueOf(b.getFirstCompetitor().getId());
+				res[i][4] = new String("");
+				res[i][5] = new String("");
+			} else if (list.get(i) instanceof PodiumBet) {
+				PodiumBet b = (PodiumBet) list.get(i);
+				res[i][0] = String.valueOf(b.getId());
+            	res[i][1] = String.valueOf(b.getAmount());
+				res[i][2] = b.getCompetition().getName();
+				res[i][3] = String.valueOf(b.getFirstCompetitor().getId());
+				res[i][4] = String.valueOf(b.getSecondCompetitor().getId());
+				res[i][5] = String.valueOf(b.getThirdCompetitor().getId());
+			}
         }
         return res;
 	}

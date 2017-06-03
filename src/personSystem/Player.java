@@ -2,12 +2,15 @@ package personSystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import javax.persistence.*;
 import betSystem.Bet;
 import exceptions.IncorrectString;
 import exceptions.InvalidWallet;
 import exceptions.ItemAlreadyInList;
 import exceptions.ItemNotInList;
+import jpaUtil.JPAUtil;
+import utils.*;
 
 @NamedQuery(
         name="findAllBetsWithNickname",
@@ -16,9 +19,7 @@ import exceptions.ItemNotInList;
 @Entity 
 public class Player extends SystemUser {
 
-	@PersistenceContext
-	public EntityManager em;
-	
+	@PersistenceContext	
 	private static final long serialVersionUID = 1L;
 	private long wallet;
 	
@@ -28,24 +29,32 @@ public class Player extends SystemUser {
 	public Player() {	
 	}
 
-	public Player(String firstName, String lastName, String nickname, String password) throws IncorrectString{
+	public Player(String firstName, String lastName, String nickname) throws IncorrectString {
+		super(firstName, lastName, new Date(), RandPass.getPass(10), nickname);
 
-		super(firstName, lastName, password, nickname);
-
-		betList = new ArrayList<Bet>();
-		wallet=0;
+		this.betList = new ArrayList<Bet>();
+		this.wallet=0;
 	}
 
-	public Player(String firstName, String lastName, String password, String nickname, long wallet) throws IncorrectString,
+	public Player(String firstName, String lastName, Date bornDate, String nickname, String password) throws IncorrectString {
+
+		super(firstName, lastName, bornDate, password, nickname);
+
+		this.betList = new ArrayList<Bet>();
+		this.wallet=0;
+	}
+
+	public Player(String firstName, String lastName, Date bornDate, String password, String nickname, long wallet) throws IncorrectString,
 																																																			InvalidWallet{
 		//define a custom value of wallet
-		this(firstName, lastName, password, nickname);
+		this(firstName, lastName, bornDate, password, nickname);
 		this.setWallet(wallet);
 	}
 
 	
 	@PostLoad
 	public void initBetList(){
+		EntityManager em = JPAUtil.getEntityManager();
 		final List<?> bets = em.createNamedQuery("findAllBetsWithNickname")
 								.setParameter("custName",this.getNickname())
 								.getResultList();
@@ -67,7 +76,15 @@ public class Player extends SystemUser {
 		return wallet;
 	}
 
-	public ArrayList<betSystem.Bet> getBetList(){
+	public long getBettedWallet() {
+		long res = 0;
+		for (Bet b : this.betList) {
+			res += b.getAmount();
+		}
+		return res;
+	}
+
+	public ArrayList<Bet> getBetList() {
 		return betList;
 	}
 

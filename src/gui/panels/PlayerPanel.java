@@ -76,8 +76,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
 
 
-
-
 		//set de la bande central (bouton de listage)
 		lister.setBackground(new Color(0,150,250));
 		lister.setLayout(new BorderLayout());
@@ -98,7 +96,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
 
 
-
 		//set du search
 		searchButton.setFont(font);
 		search.setLayout(new BorderLayout());
@@ -112,11 +109,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
 		search.add(searchButton, BorderLayout.CENTER);
 		//search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/4));
 		//search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
-
-
-
-
-
 		//set de la partie paris
 		betLabel.setFont(font);
 		betLabel.setHorizontalAlignment(betLabel.CENTER);
@@ -137,9 +129,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
 
 
-
-
-
 		//assemblage final
 		mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
 		mainBox.add(connectionBar);
@@ -147,9 +136,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
 		mainBox.add(bet);
 		mainBox.add(search);
 		mainBox.setBackground(Color.WHITE);
-
-
-
 
 
 		//setActions
@@ -161,7 +147,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
 		delBet.addActionListener(this);
 		changeBet.addActionListener(this);
 		boutonChgtPassword.addActionListener(this);
-
 	}
 
 	public void actionPerformed(ActionEvent e) {

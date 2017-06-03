@@ -47,10 +47,7 @@ public class MainInterface extends JPanel implements ActionListener{
 		borderLayoutConnectionBar.add(boutonConnection, BorderLayout.NORTH);
 
 
-
-
-
-		//set de la bande central (bouton de listage)
+    //set de la bande central (bouton de listage)
 		JPanel lister = new JPanel();
 		JPanel lister2 = new JPanel();
 		JPanel lister3 = new JPanel();
@@ -70,11 +67,6 @@ public class MainInterface extends JPanel implements ActionListener{
 		//lister.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
 		//lister.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
 
-
-
-
-
-
 		//set du search
 		JPanel search = new JPanel();
 		JPanel searchField = new JPanel();
@@ -91,33 +83,23 @@ public class MainInterface extends JPanel implements ActionListener{
 		search.add(searchButton, BorderLayout.CENTER);
 		//search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
 		//search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
-
-
-
-
-
-
-		mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
+  
+    mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
 		mainBox.add(connectionBar);
 		mainBox.add(lister);
 		mainBox.add(search);
 		mainBox.setBackground(Color.WHITE);
 
-
-
-
-
-		//setActions
+//setActions
 		boutonConnection.addActionListener(this);
 		competition.addActionListener(this);
 		competiteur.addActionListener(this);
 		searchButton.addActionListener(this);
-
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == boutonConnection){
-		}
+}
 		if(e.getSource() == competition){
 		}
 		if(e.getSource() == competiteur){

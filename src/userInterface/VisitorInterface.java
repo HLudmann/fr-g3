@@ -2,10 +2,11 @@ package userInterface;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 import personSystem.*;
 import betSystem.*;
 import container.*;
-import container.*;
+import exceptions.*;
 import userInterface.exceptions.*;
 
 /**
@@ -28,6 +29,7 @@ public class VisitorInterface extends Thread {
         return this.id;
     }
 
+
     /**
      * Singn In for Managers.
      *
@@ -45,7 +47,7 @@ public class VisitorInterface extends Thread {
             BadParametersException {
 
         if (nickname == "" || password == "") {
-            throw BadParametersException("The nickname and/or password can't be empty");
+            throw new BadParametersException("The nickname and/or password can't be empty");
         }
         try {
 
@@ -53,14 +55,14 @@ public class VisitorInterface extends Thread {
             mng.authentificate(password);
             return new ManagerInterface(mng);
 
-        } catch (FalseNickname fn) {
-            throw new IdentificationError("Nickname ou password erroné");
-        } catch (FalsePassword fp) {
-            throw new IdentificationError("Nickname ou password erroné");
+        } catch (BadParametersException fn) {
+            throw new IdentificationError("Wrong nickname or password");
+        } catch (WrongPassword wp) {
+            throw new IdentificationError("Wrong nickname or password");
         }
     }
-
-    /**
+  
+/**
      * Singn In for Player.
      *
      * @param nickname
@@ -77,7 +79,7 @@ public class VisitorInterface extends Thread {
             BadParametersException {
 
         if (nickname == "" || password == "") {
-            throw BadParametersException("The nickname and/or password can't be empty");
+            throw new BadParametersException("The nickname and/or password can't be empty");
         }
         try {
 
@@ -85,10 +87,10 @@ public class VisitorInterface extends Thread {
             plr.authentificate(password);
             return new PlayerInterface(plr);
 
-        } catch (FalseNickname fn) {
-            throw new IdentificationError("Nickname ou password erroné");
-        } catch (FalsePassword fp) {
-            throw new IdentificationError("Nickname ou password erroné");
+        } catch (BadParametersException fn) {
+            throw new IdentificationError("Wrong nickname or password");
+        } catch (WrongPassword wp) {
+            throw new IdentificationError("Wrong nickname or password");
         }
     }
 
@@ -98,11 +100,11 @@ public class VisitorInterface extends Thread {
      * @return all the public infos about each competition that has not ended.
      */
    public String[][] competitionListing() {
-        ArrayList<Competition> list = competitionList.getListNotEnded();
+        ArrayList<Competition> list = competitionList.getCompetitionsNotEnded();
         String[][] res = new String[list.size()][2];
-        for (int i; i < list.size(); i++) {
-            res[i][0] = list[i].getName();
-            res[i][1] = list[i].getDate().toString();
+        for (int i = 0; i < list.size(); i++) {
+            res[i][0] = list.get(i).getName();
+            res[i][1] = String.valueOf(list.get(i).getDate());
         }
         return res;
     }
@@ -116,10 +118,10 @@ public class VisitorInterface extends Thread {
     public String[][] competitorListing() {
         ArrayList<Competitor> list = personList.getCompetitors();
         String[][] res = new String[list.size()][3];
-        for (int i; i < list.size(); i++) {
-            res[i][0] = list[i].getId().toString();
-            res[i][1] = list[i].getFirstname();
-            res[i][2] = list[i].getLastname();
+        for (int i = 0; i < list.size(); i++) {
+            res[i][0] = String.valueOf(list.get(i).getId());
+            res[i][1] = list.get(i).getFirstName();
+            res[i][2] = list.get(i).getLastName();
         }
         return res;
     }
@@ -135,9 +137,9 @@ public class VisitorInterface extends Thread {
     public String[][] searchCompetitionByName (String name) {
         ArrayList<Competition> list = competitionList.findCompetitionByName(name);
         String[][] res = new String[list.size()][2];
-        for (int i; i < list.size(); i++) {
-            res[i][0] = list[i].getName();
-            res[i][1] = list[i].getDate().toString();
+        for (int i = 0; i < list.size(); i++) {
+            res[i][0] = list.get(i).getName();
+            res[i][1] = String.valueOf(list.get(i).getDate());
         }
         return res;
     }
@@ -153,11 +155,33 @@ public class VisitorInterface extends Thread {
     public String[][] searchCompetitionByDate (Date date) {
         ArrayList<Competition> list = competitionList.findCompetitionByDate(date);
         String[][] res = new String[list.size()][2];
-        for (int i; i < list.size(); i++) {
-            res[i][0] = list[i].getName();
-            res[i][1] = list[i].getDate().toString();
+        for (int i = 0; i < list.size(); i++) {
+            res[i][0] = list.get(i).getName();
+            res[i][1] = String.valueOf(list.get(i).getDate());
         }
         return res;
+    }
+
+    /**
+     * Search competitions by a competitor.
+     * 
+     * @param id
+     *          complete id of a competitor.
+     * 
+     * @return the public detail of all the upcoming competitions attended by this competitor.     * 
+     */
+    public String[][] searchCompetitionByCompetitor(int id) throws BadParametersException {
+        try {    
+            ArrayList<Competition> list = personList.findCompetitorById(id).get(0).getCompetitionList();
+            String[][] res = new String[list.size()][2];
+            for (int i = 0; i < list.size(); i++) {
+                res[i][0] = list.get(i).getName();
+                res[i][1] = String.valueOf(list.get(i).getDate());
+            }
+            return res;
+        } catch (BadParametersException e) {
+            throw e;
+        }
     }
 
     /**
@@ -168,15 +192,19 @@ public class VisitorInterface extends Thread {
      *
      * @return the search results.
      */
-    public String[][] searchCompetitorByName (String name) {
-        ArrayList<Competition> list = personList.findCompetitorByName(name);
-        String[][] res = new String[list.size()][3];
-        for (int i; i < list.size(); i++) {
-            res[i][0] = list[i].getId().toString();
-            res[i][1] = list[i].getFirstname();
-            res[i][2] = list[i].getLastname();
+    public String[][] searchCompetitorByName (String name) throws BadParametersException {
+        try {
+            ArrayList<Competitor> list = personList.findCompetitorByName(name);
+            String[][] res = new String[list.size()][3];
+            for (int i = 0; i < list.size(); i++) {
+                res[i][0] = String.valueOf(list.get(i).getId());
+                res[i][1] = list.get(i).getFirstName();
+                res[i][2] = list.get(i).getLastName();
+            }
+            return res;
+        } catch (BadParametersException e) {
+            throw e;
         }
-        return res;
     }
 
     /**
@@ -187,13 +215,36 @@ public class VisitorInterface extends Thread {
      *
      * @return the search results.
      */
-    public String[][] searchCompetitorById (int id) {
-        ArrayList<Competition> list = personList.findCompetitorById(id);
+    public String[][] searchCompetitorById (int id) throws BadParametersException {
+        try {
+            ArrayList<Competitor> list = personList.findCompetitorById(id);
+            String[][] res = new String[list.size()][3];
+            for (int i = 0; i < list.size(); i++) {
+                res[i][0] = String.valueOf(list.get(i).getId());
+                res[i][1] = list.get(i).getFirstName();
+                res[i][2] = list.get(i).getLastName();
+            }
+            return res;
+        } catch (BadParametersException e) {
+            throw e;
+        }
+    }
+
+    /**
+     * Search competitors by a competition.
+     * 
+     * @param name
+     *          complete name of a competition.
+     * 
+     * @return the public detail of all the competitors attending the specified competition. 
+     */
+    public String[][] searchCompetitorByCompetition(String name) throws BadParametersException {
+        ArrayList<Competitor> list = competitionList.findCompetitionByName(name).get(0).getCompetitorList();
         String[][] res = new String[list.size()][3];
-        for (int i; i < list.size(); i++) {
-            res[i][0] = list[i].getId().toString();
-            res[i][1] = list[i].getFirstname();
-            res[i][2] = list[i].getLastname();
+        for (int i = 0; i < list.size(); i++) {
+            res[i][0] = String.valueOf(list.get(i).getId());
+            res[i][1] = list.get(i).getFirstName();
+            res[i][2] = list.get(i).getLastName();
         }
         return res;
     }

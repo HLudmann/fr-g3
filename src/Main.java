@@ -1,17 +1,12 @@
-import betSystem.*;
-import container.*;
-/*import gui.*;
-*/import userInterface.*;
-import personSystem.*;
+
+import database.DBConnection;
+
 
 public class Main {
     
-    public static void main(String[] args) {
-    	VisitorInterface v0 = new VisitorInterface();
-    	VisitorInterface v1 = new VisitorInterface();
+    public static void main(String[] args) throws Exception {
 
-    	System.out.println(v1.getId());
-    	System.out.println(v0.getId());
-    	
+		String[] argv = {};
+		DBConnection.main(argv);
     }
 }

@@ -10,6 +10,7 @@ import exceptions.InvalidWallet;
 import exceptions.ItemAlreadyInList;
 import exceptions.ItemNotInList;
 import jpaUtil.JPAUtil;
+import utils.*;
 
 @NamedQuery(
         name="findAllBetsWithNickname",
@@ -28,7 +29,14 @@ public class Player extends SystemUser {
 	public Player() {	
 	}
 
-	public Player(String firstName, String lastName, Date bornDate, String nickname, String password) throws IncorrectString{
+	public Player(String firstName, String lastName, String nickname) throws IncorrectString {
+		super(firstName, lastName, new Date(), RandPass.getPass(10), nickname);
+
+		this.betList = new ArrayList<Bet>();
+		this.wallet=0;
+	}
+
+	public Player(String firstName, String lastName, Date bornDate, String nickname, String password) throws IncorrectString {
 
 		super(firstName, lastName, bornDate, password, nickname);
 

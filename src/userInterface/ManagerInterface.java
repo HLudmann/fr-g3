@@ -278,8 +278,8 @@ public class ManagerInterface extends VisitorInterface {
 			Competitor s = personList.findCompetitorById(second).get(0);
 			Competitor t = personList.findCompetitorById(third).get(0);
 			c.results(new Competitor[] {f,s,t});
-		} catch (BadParametersException e) {
-			throw e;
+		} catch (Exception e) {
+			throw new BadParametersException();
 		}
 	}
 
@@ -315,13 +315,18 @@ public class ManagerInterface extends VisitorInterface {
 	 * 
 	 * @param competitor
 	 */
-	public void addCompetitorToCompetition(String competition, Competitor competitor) throws ExistingCompetitionException{
+	public void addCompetitorToCompetition(String competition, Competitor competitor) 
+	  throws ExistingCompetitionException {
 		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
 		if (list.size() != 1) {
 			throw new ExistingCompetitionException();
 		}
 		Competition comp = list.get(0);
-		comp.addCompetitor(competitor);
+		try {
+			comp.addCompetitor(competitor);
+		} catch (ItemAlreadyInList e) {
+			throw new ExistingCompetitionException();
+		}
 	}
 
 	/**
@@ -380,7 +385,11 @@ public class ManagerInterface extends VisitorInterface {
 			throw new ExistingCompetitionException();
 		}
 		Competition comp = list.get(0);
-		comp.results(new Competitor[] {winner});
+		try {
+			comp.results(new Competitor[] {winner});
+		} catch (Exception e) {
+			throw new BadParametersException();
+		}
 	}
 
 	/**
@@ -401,6 +410,10 @@ public class ManagerInterface extends VisitorInterface {
 			throw new ExistingCompetitionException();
 		}
 		Competition comp = list.get(0);
-		comp.results(new Competitor[] {winner, second, third});
+		try {
+			comp.results(new Competitor[] {winner, second, third});
+		} catch (Exception e) {
+			throw new BadParametersException();
+		}
 	}
 }

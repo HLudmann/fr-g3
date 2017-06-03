@@ -34,16 +34,10 @@ public class GoBackButton extends JButton implements MouseListener{
   public void mouseClicked(MouseEvent event) {
     switch(type){
       case 1:
-    	ManagerPanel window1 = (ManagerPanel) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-    	window1.showManagerPanel();
         break;
       case 2:
-    	PlayerPanel window2 = (PlayerPanel) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-      	window2.showPlayerPanel();
         break;
       case 3:
-    	MainInterface window3 = (MainInterface) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-      	window3.showMainInterface();
         break;
       case 4:
       break;

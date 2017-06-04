@@ -293,7 +293,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == listCompetitor) {
 		}
-		if(e.getSource() == delBet){ 
+		if(e.getSource() == delBet){
 		}
 		/*if (e.getSource() == walletButton) {
 			window.setPanel(new PanelWalletEdit());

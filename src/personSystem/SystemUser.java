@@ -38,9 +38,19 @@ abstract class SystemUser extends Person implements Serializable{
 	}
 
 	public String getNickname(){
-		return nickname;
+		return this.nickname;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
+	private void setNickname(String nickname) throws IncorrectString {
+		if (nickname == null)
+			throw new IncorrectString("username is not valid");
+		checkNickname(nickname);
+		this.nickname = nickname;
+	}
 
 	public void authentificate(String str) throws WrongPassword {
 		if (password != str){
@@ -51,6 +61,20 @@ abstract class SystemUser extends Person implements Serializable{
 
 	public void updatePassword(String str){
 		password = str;
+	}
+
+	/**
+	 * check if this subscriber has the username of the parameter
+	 * 
+	 * @param nicjname the username to check
+	 * 
+	 * @return true if this username is the same as the parameter false
+	 * otherwise
+	 */
+	public boolean hasNickname(String nickname) {
+		if (nickname == null)
+			return false;
+		return this.nickname.equals(nickname);
 	}
 
 }

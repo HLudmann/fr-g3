@@ -1,5 +1,8 @@
 package gui.panels;
 
+import userInterface.ManagerInterface;
+import gui.*;
+
 import gui.buttons.SendDataButton;
 import gui.buttons.GoBackButton;
 import java.awt.GridLayout;
@@ -24,7 +27,7 @@ public class PanelAddPlayer extends JPanel{
   private JPasswordField passwordInput;
   private JFormattedTextField valueInput;
 
-  public PanelAddPlayer() {
+  public PanelAddPlayer(JPanel panel) {
 
     this.setBorder(new EmptyBorder(10, 10, 10, 10));
 
@@ -52,7 +55,11 @@ public class PanelAddPlayer extends JPanel{
     this.add(new JLabel("Solde initial: "));
     this.add(this.valueInput);
     this.add(new GoBackButton("Retour", 1, 1));
-    this.add(new SendDataButton("Envoyer", 1, 2));
+    this.add(new SendDataButton("Envoyer", 1, 1));
 
+  }
+
+  public String getFirstName(){
+    return this.firstNameInput.getText();
   }
 }

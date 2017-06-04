@@ -16,8 +16,6 @@ public class SendDataButton extends JButton implements MouseListener{
   private int type; // The function from the backend that we need to interact with
   private int id; // The button id, not really needed tbh
 
-  //TODO: get datas from parent panel
-
   public SendDataButton(String str, int id, int type) {
     super(str);
 
@@ -33,16 +31,18 @@ public class SendDataButton extends JButton implements MouseListener{
     Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
     switch(type){
       case 1:
-        window.setPanel(new PanelPasswordEdit("jbvallad"));
+        PanelAddPlayer parent = (PanelAddPlayer) SwingUtilities.getAncestorOfClass(JPanel.class, this);
+
+        String firstName = parent.getFirstName();
+        System.out.println(firstName);
+
+        //window.setPanel(new ManagerPanel());
         break;
       case 2:
-        window.setPanel(new PanelAddCompetition());
         break;
       case 3:
-        window.setPanel(new PanelWalletEdit("jbvallad"));
         break;
       case 4:
-        window.setPanel(new PanelEndCompetition());
         break;
     }
   }

@@ -315,7 +315,7 @@ public class ManagerInterface extends VisitorInterface {
 	 *
 	 * @param competitor
 	 */
-	public void addCompetitorToCompetition(String competition, Competitor competitor) 
+	public void addCompetitorToCompetition(String competition, Competitor competitor)
 	  throws ExistingCompetitionException {
 		ArrayList<Competition> list = competitionList.findCompetitionByName(competition);
 		if (list.size() != 1) {

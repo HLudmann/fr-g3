@@ -28,7 +28,7 @@ public class PanelEndCompetition extends JPanel{
   private JComboBox<String> thirdWinner;
 
 
-  public PanelEndCompetition() {
+  public PanelEndCompetition(JPanel panel) {
 
     this.setBorder(new EmptyBorder(10, 10, 10, 10));
 

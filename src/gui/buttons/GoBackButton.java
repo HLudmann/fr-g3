@@ -32,16 +32,8 @@ public class GoBackButton extends JButton implements MouseListener{
 
   //Send the correct instruction based on the type provided
   public void mouseClicked(MouseEvent event) {
-    switch(type){
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-      break;
-    }
+    Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+    window.goBack();
   }
 
   //Javax needs this soooo ...

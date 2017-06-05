@@ -20,8 +20,6 @@ public class GoBackButton extends JButton implements MouseListener{
   private int type; // The function from the backend that we need to interact with
   private int id; // The button id, not really needed tbh
 
-  //TODO: get datas from parent panel
-
   public GoBackButton(String str, int id, int type) {
     super(str);
 

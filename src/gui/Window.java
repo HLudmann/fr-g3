@@ -31,7 +31,7 @@ public class Window extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     //Adds our panel to the window, in the center of it
-    ManagerPanel managerPanel = new ManagerPanel();
+    MainInterface managerPanel = new MainInterface();
     this.currentPanel = managerPanel;
     this.add(managerPanel);
 
@@ -66,22 +66,5 @@ public class Window extends JFrame {
       this.history.remove(panel);
       this.currentPanel = panel;
     }
-  }
-
-  // TODO: This methods is "useless" and is due to be removed
-  private static ArrayList<ArrayList<String>> createExemple(){
-    ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
-
-    ArrayList<String> el = new ArrayList<String>();
-    el.add("Jean-Baptiste Valladeau");
-    el.add("jbvallad");
-    list.add(el);
-
-    el = new ArrayList<String>();
-    el.add("Jean Machin");
-    el.add("jmachin");
-    list.add(el);
-
-    return(list);
   }
 }

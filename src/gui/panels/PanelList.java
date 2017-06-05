@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class PanelList extends JPanel {
-  public PanelList(ArrayList<ArrayList<String>> list, int type){
+  public PanelList(int type){
 
     //Aesthetic borders
     this.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -26,6 +26,19 @@ public class PanelList extends JPanel {
     gl.setHgap(5);
     gl.setVgap(5);
     this.setLayout(gl);
+
+    //the following is just for testing purpose
+    ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+
+    ArrayList<String> el = new ArrayList<String>();
+    el.add("Jean-Baptiste Valladeau");
+    el.add("jbvallad");
+    list.add(el);
+
+    el = new ArrayList<String>();
+    el.add("Jean Machin");
+    el.add("jmachin");
+    list.add(el);
 
     //Adds buttons related to the data provided
     for (int i=0; i < list.size(); i++){

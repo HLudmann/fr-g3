@@ -1,5 +1,7 @@
 package gui.panels;
 
+import gui.*;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.SwingUtilities;
 
 import gui.buttons.BoutonInvisible;
 
@@ -27,7 +30,6 @@ public class MainInterface extends JPanel implements ActionListener{
 	private JButton competiteur = new JButton("Lister compétiteur");
 	private JButton searchButton = new JButton("Rechercher");
 	private JLabel searchLabel = new JLabel("Rechercher:");
-	private JPanel mainBox = new JPanel();
 
 	public MainInterface(){
 		this.setBackground(new Color(0,150,250));
@@ -83,14 +85,13 @@ public class MainInterface extends JPanel implements ActionListener{
 		search.add(searchButton, BorderLayout.CENTER);
 		//search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
 		//search.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/3));
-  
-    mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
-		mainBox.add(connectionBar);
-		mainBox.add(lister);
-		mainBox.add(search);
-		mainBox.setBackground(Color.WHITE);
 
-//setActions
+    this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.add(connectionBar);
+		this.add(lister);
+		this.setBackground(Color.WHITE);
+
+		//setActions
 		boutonConnection.addActionListener(this);
 		competition.addActionListener(this);
 		competiteur.addActionListener(this);
@@ -99,7 +100,9 @@ public class MainInterface extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == boutonConnection){
-}
+			Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+			new ConnectionPanel(this, window);
+		}
 		if(e.getSource() == competition){
 		}
 		if(e.getSource() == competiteur){

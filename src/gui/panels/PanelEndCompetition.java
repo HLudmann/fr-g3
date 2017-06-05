@@ -34,7 +34,7 @@ public class PanelEndCompetition extends JPanel{
 
     this.gl = new GridLayout();
     this.gl.setColumns(2);
-    this.gl.setRows(5);
+    this.gl.setRows(4);
     this.gl.setHgap(5);
     this.gl.setVgap(5);
     this.setLayout(this.gl);

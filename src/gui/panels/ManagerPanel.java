@@ -286,6 +286,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
 		if(e.getSource() == boutonDeconnection){
+			window.setPanel(new MainInterface());
 		}
 		if (e.getSource() == boutonChgtPassword) {
 		}

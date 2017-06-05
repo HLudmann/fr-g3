@@ -1,5 +1,7 @@
 package gui.panels;
 
+import gui.*;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,13 +19,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.SwingUtilities;
 
 import gui.buttons.BoutonInvisible;
 
 @SuppressWarnings("serial")
 public class PlayerPanel extends JPanel implements ActionListener{
 	private Font font = new Font("arial",Font.CENTER_BASELINE,20);
-	private JPanel mainBox = new JPanel();
 	//pour bar de connexion
 	private JButton boutonDeconnection = new JButton("Déconnection");
 	private JButton boutonChgtPassword = new JButton("Changer mdp");
@@ -130,12 +132,12 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
 
 		//assemblage final
-		mainBox.setLayout(new BoxLayout(mainBox, BoxLayout.PAGE_AXIS));
-		mainBox.add(connectionBar);
-		mainBox.add(lister);
-		mainBox.add(bet);
-		mainBox.add(search);
-		mainBox.setBackground(Color.WHITE);
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.add(connectionBar);
+		this.add(lister);
+		this.add(bet);
+		this.add(search);
+		this.setBackground(Color.WHITE);
 
 
 		//setActions
@@ -150,9 +152,10 @@ public class PlayerPanel extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		/*if(e.getSource() == boutonDeconnection){
-		;
-	}*/
+	Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+	if(e.getSource() == boutonDeconnection) {
+		window.setPanel(new MainInterface());
+	}
 	if(e.getSource() == boutonChgtPassword){
 	}
 	if(e.getSource() == competition){

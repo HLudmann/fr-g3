@@ -121,29 +121,25 @@ public abstract class TestBettingServices extends ValidationTest {
 
 		// Tests entries : null
 		try {
-			this.getBetting().subscribe(null, new String("Albert"),
-					new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe("", new String("Albert"), new String("worldChamp"), new String("1989-06-06"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un nom non instanci� n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 		try {
-			this.getBetting().subscribe(new String("Duran"), null,
-					new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran"), "", new String("worldChamp"), new String("Sat Apr 11 12:16:44 IST 2015"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un pr�nom non instanci� n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 		try {
-			this.getBetting().subscribe(new String("Duran"),
-					new String("Albert"), null, new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran"), new String("Albert"), "", new String("Sat Apr 11 12:16:44 IST 2015"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un pseudo non instanci� n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 		try {
-			this.getBetting().subscribe(new String("Duran"),
-					new String("Albert"), new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), null);
+			this.getBetting().subscribe(new String("Duran"), new String("Albert"), new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), "");
 			System.out
 					.println("l'ajout d'un joueur avec un mdp gestionnaire non instanci� n'a pas lev� d'exception");
 		} catch (AuthenticationException e) {
@@ -151,67 +147,53 @@ public abstract class TestBettingServices extends ValidationTest {
 
 		// Tests entries : invalid format
 		try {
-			this.getBetting().subscribe(new String(" "), new String("Albert"),
-					new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String(" "), new String("Albert"), new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un nom invalide ( ) n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 		try {
-			this.getBetting().subscribe(new String("Duran"), new String(" "),
-					new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran"), new String(" "), new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un pr�nom invalide ( ) n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 		try {
-			this.getBetting().subscribe(new String("Duran87"),
-					new String("Albert"), new String("worldChamp"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran87"), new String("Albert"), new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un nom invalide (Duran87) n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 		try {
-			this.getBetting().subscribe(new String("87Duran87"),
-					new String("Albert"), new String("worldChamp"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("87Duran87"), new String("Albert"), new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un nom invalide (87Duran87) n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 
 		try {
-			this.getBetting().subscribe(new String("-Duran87"),
-					new String("Albert"), new String("worldChamp"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("-Duran87"), new String("Albert"), new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un nom invalide (-Duran87) n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 
 		try {
-			this.getBetting().subscribe(new String("Nobel"),
-					new String("Alfred"), new String("tnt"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Nobel"), new String("Alfred"), new String("tnt"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un pseudo invalide (tnt) n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 
 		try {
-			this.getBetting().subscribe(new String("Nobel"),
-					new String("Alfred"), new String("tnt988987-"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Nobel"), new String("Alfred"), new String("tnt988987-"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur avec un pseudo invalide (tnt988987-) n'a pas lev� d'exception");
 		} catch (BadParametersException e) {
 		}
 
 		try {
-			this.getBetting().subscribe(new String("Duran"),
-					new String("Roberto"), new String("worldChamp"),
-					new String("1989-06-06T09:00:00.000Z"), new String("abef"));
+			this.getBetting().subscribe(new String("Duran"), new String("Roberto"), new String("worldChamp"), new String("1989-06-06T09:00:00.000Z"), new String("abef"));
 			System.out
 					.println("l'ajout d'un joueur avec un password gestionnaire incorrect n'a pas lev� d'exception");
 		} catch (AuthenticationException e) {
@@ -219,18 +201,14 @@ public abstract class TestBettingServices extends ValidationTest {
 
 		// Tests with valid parameters
 		try {
-			this.getBetting().subscribe(new String("Duran"),
-					new String("Albert"), new String("fanfan"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran"), new String("Albert"), new String("fanfan"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 		} catch (ExistingPlayerException | BadParametersException e) {
 			System.out
 					.println("l'ajout d'un nouveau joueur (Duran, fanfan) a lev� une exception "
 							+ e.getClass());
 		}
 		try {
-			this.getBetting().subscribe(new String("Duran Dorton"),
-					new String("Albert"), new String("fanfen"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran Dorton"), new String("Albert"), new String("fanfen"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 		} catch (ExistingPlayerException | BadParametersException e) {
 			System.out
 					.println("l'ajout d'un nouveau joueur (Duran Dorton, fanfen) a lev� une exception "
@@ -238,9 +216,7 @@ public abstract class TestBettingServices extends ValidationTest {
 		}
 
 		try {
-			this.getBetting().subscribe(new String("Nobel"),
-					new String("Alfred"), new String("9tnt988987"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Nobel"), new String("Alfred"), new String("9tnt988987"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 		} catch (BadParametersException e) {
 			System.out
 					.println("l'ajout d'un nouveau joueur (Nobel Alfred tnt988987) a lev� une exception");
@@ -248,36 +224,28 @@ public abstract class TestBettingServices extends ValidationTest {
 
 		// The same player
 		try {
-			this.getBetting().subscribe(new String("Duran"),
-					new String("Albert"), new String("fanfan"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran"), new String("Albert"), new String("fanfan"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur existant (Duran, fanfan) n'a pas lev� d'exception");
 		} catch (ExistingPlayerException e) {
 		}
 		// same firstname, username ; different lastname
 		try {
-			this.getBetting().subscribe(new String("Durano"),
-					new String("Albert"), new String("fanfan"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Durano"), new String("Albert"), new String("fanfan"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur existant (Durano, fanfan) n'a pas lev� d'exception");
 		} catch (ExistingPlayerException e) {
 		}
 		// same lastname, username; different firstname
 		try {
-			this.getBetting().subscribe(new String("Duran"),
-					new String("Alfred"), new String("fanfan"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran"), new String("Alfred"), new String("fanfan"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 			System.out
 					.println("l'ajout d'un joueur existant (Duran, fanfan) n'a pas lev� d'exception ");
 		} catch (ExistingPlayerException e) {
 		}
 		// same lastname, firstname; different username
 		try {
-			this.getBetting().subscribe(new String("Duran"),
-					new String("Albert"), new String("fanfin"),
-					new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
+			this.getBetting().subscribe(new String("Duran"), new String("Albert"), new String("fanfin"), new String("1989-06-06T09:00:00.000Z"), this.getManagerPassword());
 		} catch (ExistingPlayerException e) {
 			System.out
 					.println("l'ajout d'un joueur pas inscrit (Duran, fanfin) a lev� l'exception "

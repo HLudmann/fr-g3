@@ -12,13 +12,15 @@ import jpaUtil.JPAUtil;
 import personSystem.*;
 import exceptions.*;
 
-@NamedQueries({
-	@NamedQuery(
+@MappedSuperclass
+@NamedNativeQueries({
+	@NamedNativeQuery(
 		name="selectEverythingFromCompetitor",
-		query="SELECT c FROM Competitor c"),
-	@NamedQuery(
+		query="SELECT * FROM competitor c",
+		resultClass = Competitor.class),
+	@NamedNativeQuery(
 		name="selectEverythingFromSystemUser",
-		query="SELECT s FROM SystemUser s")
+		query="SELECT * FROM system_user s")
 })
 
 /**
@@ -26,23 +28,18 @@ import exceptions.*;
  *
  */
 public class PersonContainer {
-	private ArrayList<Competitor> competitorDB;
-	private ArrayList<Player> playerDB;
-	private ArrayList<Manager> managerDB;
-	private static ArrayList<Player> loggedPlayers;
-	private static ArrayList<Manager> loggedManagers;
+	private ArrayList<Competitor> competitorDB = new ArrayList<Competitor>();
+	private ArrayList<Player> playerDB = new ArrayList<Player>();
+	private ArrayList<Manager> managerDB = new ArrayList<Manager>();
+	private static ArrayList<Player> loggedPlayers = new ArrayList<Player>();
+	private static ArrayList<Manager> loggedManagers = new ArrayList<Manager>();
 
 
 	public PersonContainer() {
 		EntityManager em = JPAUtil.getEntityManager();
-		
-		List<?> competitors = em.createNamedQuery("selectEverythingFromCompetitor").getResultList();
-		for (Object competitor : competitors) {
-			Competitor c = (Competitor)competitor;
-			this.competitorDB.add(c);				
-		}
-		
-		List<?> systemUsers = em.createNamedQuery("selectEverythingFromSystemUser").getResultList();
+
+		Query q1 = em.createNamedQuery("selectEverythingFromSystemUser");
+		List<?> systemUsers = q1.getResultList();
 		for (Object sysus : systemUsers) {
 			if (sysus instanceof Player) {
 				Player p = (Player)sysus;
@@ -51,12 +48,23 @@ public class PersonContainer {
 				Manager m = (Manager)sysus;
 				this.managerDB.add(m);
 			}
-			
+		
+		Query q2 = em.createNamedQuery("selectEverythingFromCompetitor");
+		List<?> competitors = q2.getResultList();
+		for (Object competitor : competitors) {
+			Competitor c = (Competitor)competitor;
+			this.competitorDB.add(c);				
+		}
+		
 		}
 	}
 	 
 	public ArrayList<Competitor> getCompetitors() {
 		return competitorDB;
+	}
+	
+	public ArrayList<Manager> getManagerDB() {
+		return this.managerDB;
 	}
 
 	public void logIn(Player plr) {
@@ -86,7 +94,7 @@ public class PersonContainer {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Competitor c = new Competitor(name);
-			em.persist(c);
+			em.merge(c);
 			this.competitorDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
@@ -103,9 +111,9 @@ public class PersonContainer {
 	public void addCompetitor(String lastName, String firstName, String bornDate) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			Date d = new Date(bornDate);
+			Date d = new Date();
 			Competitor c = new Competitor(lastName, firstName, d);
-			em.persist(c);
+			em.merge(c);
 			this.competitorDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
@@ -123,12 +131,12 @@ public class PersonContainer {
 	public void addPlayer(String firstName, String lastname, String bornDate, String password, String nickname) throws BadParametersException {
 		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			Date d = new Date(bornDate);
+			Date d = new Date();
 			Player p = new Player(firstName, lastname, d, password, nickname);
+			this.playerDB.add(p);			
 			em.persist(p);
-			this.playerDB.add(p);
-		} catch (Exception e) {
-			throw new BadParametersException();	
+		} catch (IncorrectString e) {
+			throw new BadParametersException("Incorrect string");	
 		}
 	}
 
@@ -146,8 +154,8 @@ public class PersonContainer {
 			Manager m = new Manager(firstName, lastname, password, nickname);
 			em.persist(m);
 			this.managerDB.add(m);
-		} catch (Exception e) {
-			throw new BadParametersException();
+		} catch (IncorrectString e) {
+			throw new BadParametersException("Incorrect string");
 		}
 	}
 

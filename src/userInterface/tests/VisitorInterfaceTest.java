@@ -9,7 +9,6 @@ import java.util.Date;
 import container.CompContainer;
 import container.PersonContainer;
 import personSystem.*;
-import betSystem.*;
 import exceptions.*;
 import userInterface.*;
 import userInterface.exceptions.*;
@@ -26,11 +25,11 @@ public class VisitorInterfaceTest {
         pc = new PersonContainer();
 
         pc.addManager("Jacques", "Fripouille", "azertyuiop", "alberto");
-        pc.addPlayer("Jean", "Dutrout", "plottwist", "janot");
+        pc.addPlayer("Jean", "Dutrout","03/11/96", "plottwist", "janot");
 
-        pc.addCompetitor("cun", "cunLastName");
-        pc.addCompetitor("cdeux", "cdeuxLastName");
-        pc.addCompetitor("ctrois", "ctroisLastName");
+        pc.addCompetitor("cun", "cunLastName","12/11/88");
+        pc.addCompetitor("cdeux", "cdeuxLastName","04/07/87");
+        pc.addCompetitor("ctrois", "ctroisLastName","06/12/92");
         
 
         cc = new CompContainer();
@@ -67,21 +66,25 @@ public class VisitorInterfaceTest {
     @Test
     public void testSignInManager() throws IdentificationError, BadParametersException {
         ManagerInterface mngInt = intrf.signInManager("alberto", "azertyuiop");
+        assertTrue(mngInt instanceof ManagerInterface);
     }
 
     @Test(expected=BadParametersException.class)
     public void testSignInManagerFail1() throws IdentificationError, BadParametersException {
         ManagerInterface mngInt = intrf.signInManager("", "");
+        assertFalse(mngInt instanceof ManagerInterface);
     }
 
     @Test(expected=IdentificationError.class)
     public void testSignInManagerFail2() throws IdentificationError, BadParametersException {
         ManagerInterface mngInt = intrf.signInManager("albertina", "azertyuiop");
+        assertFalse(mngInt instanceof ManagerInterface);
     }
 
     @Test(expected=IdentificationError.class)
     public void testSignInManagerFail() throws IdentificationError, BadParametersException {
         ManagerInterface mngInt = intrf.signInManager("alberto", "quelquechose");
+        assertFalse(mngInt instanceof ManagerInterface);
     }
 
     /**
@@ -89,22 +92,26 @@ public class VisitorInterfaceTest {
      */
     @Test
     public void testSignInPlayer() throws IdentificationError, BadParametersException {
-        PlayerInterface mngInt = intrf.signInPlayer("janot", "plottwist");
+        PlayerInterface plrInt = intrf.signInPlayer("janot", "plottwist");
+        assertTrue(plrInt instanceof PlayerInterface);
     }
 
     @Test(expected=BadParametersException.class)
     public void testSignInPlayerFail1() throws IdentificationError, BadParametersException {
-        PlayerInterface mngInt = intrf.signInPlayer("", "");
+        PlayerInterface plrInt = intrf.signInPlayer("", "");
+        assertFalse(plrInt instanceof PlayerInterface);
     }
 
     @Test(expected=IdentificationError.class)
     public void testSignInPlayerFail2() throws IdentificationError, BadParametersException {
-        PlayerInterface mngInt = intrf.signInPlayer("janotte", "plottwist");
+        PlayerInterface plrInt = intrf.signInPlayer("janotte", "plottwist");
+        assertFalse(plrInt instanceof PlayerInterface);
     }
 
     @Test(expected=IdentificationError.class)
     public void testSignInPlayerFail() throws IdentificationError, BadParametersException {
-        PlayerInterface mngInt = intrf.signInPlayer("janot", "quelquechose");
+        PlayerInterface plrInt = intrf.signInPlayer("janot", "quelquechose");
+        assertFalse(plrInt instanceof PlayerInterface);
     }
 
     /**

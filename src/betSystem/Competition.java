@@ -2,17 +2,21 @@ package betSystem;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.*;
 
 import betSystem.exception.*;
 import personSystem.Competitor;
 import exceptions.*;
+import jpaUtil.JPAUtil;
 
 @Entity
-@NamedQuery(
+@NamedNativeQuery(
         name="findAllBetsWithCompName",
-        query="SELECT b FROM Bet b WHERE b.competition LIKE :compName "
+        query="SELECT * FROM Bet b WHERE b.competition LIKE :compName "
 )
 public class Competition {
 	@Id
@@ -21,17 +25,18 @@ public class Competition {
 	private Date date ;
 	@Transient
 	private ArrayList<Bet> betList = new ArrayList<Bet>();
+	@JoinColumn(name="winner")
 	private Competitor winner = null;
+	@JoinColumn(name="second")
 	private Competitor second = null;
+	@JoinColumn(name="third")
 	private Competitor third = null;
 
 	
 	//bi-directional many-to-many association to Competitor
 	@ManyToMany(mappedBy="competitionList")
-	private ArrayList<Competitor> competitorList = new ArrayList<Competitor>();
+	private Set<Competitor> competitorList = new HashSet<Competitor>();
 	
-	@PersistenceContext
-	public EntityManager em;
 		
 	
 	
@@ -70,6 +75,7 @@ public class Competition {
 	
 	@PostLoad
 	public void initBetList(){
+		EntityManager em = JPAUtil.getEntityManager();
 		final List<?> bets =em.createNamedQuery("findAllBetsWithCompName")
 							.setParameter("compName",this.name)
 							.getResultList();
@@ -104,7 +110,7 @@ public class Competition {
 	/**
 	 * @return competitorList
 	 */
-	public ArrayList<Competitor> getCompetitorList(){
+	public Set<Competitor> getCompetitorList(){
 		return competitorList;
 	}
 	

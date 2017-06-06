@@ -2,6 +2,8 @@ package personSystem;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.io.Serializable;
 import javax.persistence.*;
 import betSystem.Competition;
@@ -29,20 +31,25 @@ public class Competitor extends Person implements Serializable{
   			@JoinColumn(name="competition")
   			}
   		)
-	private ArrayList<betSystem.Competition> competitionList;
+	private Set<betSystem.Competition> competitionList;
+  	
+  	@Temporal(TemporalType.DATE)
+  	private Date bornDate;
 
 	public Competitor() {}
 
 	public Competitor(String name) throws IncorrectString {
-		super(name, name, new Date());
+		super(name, name);
 		this.id = ids++;
+		this.bornDate = new Date();
 	}
 
 	public Competitor(String firstName, String lastName, Date bornDate) throws IncorrectString {
-		super(firstName, lastName, bornDate);
+		super(firstName, lastName);
 		this.id = ids++;
+		this.bornDate = new Date();
 
-		this.competitionList = new  ArrayList<betSystem.Competition>();
+		this.competitionList = new  HashSet<betSystem.Competition>();
 
 	}
 
@@ -50,7 +57,7 @@ public class Competitor extends Person implements Serializable{
 		return id;
 	}
 
-	public ArrayList<Competition> getCompetitionList() {
+	public Set<Competition> getCompetitionList() {
 
 		return this.competitionList;
 

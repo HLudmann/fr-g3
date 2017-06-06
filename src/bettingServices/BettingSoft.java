@@ -106,7 +106,7 @@ public class BettingSoft implements Betting {
 		// Creates the new subscriber
 		String password = RandPass.getPass(Constraints.LONG_PWD);
 		try {
-			s = new Player(firstName, lastName, new Date(borndate), username, password);
+			s = new Player(firstName, lastName, new Date(), username, password);
 			this.mngInt.addNewPlayer(firstName, lastName, borndate, username, password);
 		} catch (IncorrectString e) {
 			throw new BadParametersException();

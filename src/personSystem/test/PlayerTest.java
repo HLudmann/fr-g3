@@ -1,11 +1,13 @@
 package personSystem.test;
-import betSystem.Bet;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+
+import betSystem.Bet;
 import personSystem.*;
 import exceptions.IncorrectString;
 import exceptions.InvalidWallet;
@@ -16,12 +18,12 @@ public class PlayerTest {
 
 	@Test
 	public void testConstructor() throws IncorrectString{
-		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		Player p = new Player("jean", "dupont", new Date("1985-05-26"), "jdupont", "1234");
 	}
 
 	@Test
 	public void testValidWallet() throws IncorrectString, InvalidWallet{
-		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		Player p = new Player("jean", "dupont", new Date("1985-05-26"), "jdupont", "1234");
 
 		p.setWallet(0);
 		p.setWallet(1257755);
@@ -30,18 +32,18 @@ public class PlayerTest {
 
 	@Test(expected=InvalidWallet.class)
 	public void testInvalidWallet() throws IncorrectString, InvalidWallet{
-		Player p = new Player("jean", "dupont", "jdupont", "1234", -5);
+		Player p = new Player("jean", "dupont", new Date("1985-05-26"), "jdupont", "1234", -5);
 	}
 
 	@Test
 	public void testAddBet() throws IncorrectString, InvalidWallet, ItemAlreadyInList{
-		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		Player p = new Player("jean", "dupont", new Date("1985-05-26"), "jdupont", "1234");
 		p.addBet(new Bet());
 	}
 
 	@Test(expected=ItemAlreadyInList.class)
 	public void testAddBetTwice() throws IncorrectString, InvalidWallet, ItemAlreadyInList {
-		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		Player p = new Player("jean", "dupont", new Date("1985-05-26"), "jdupont", "1234");
 		Bet b = new Bet();
 		p.addBet(b);
 		p.addBet(b);
@@ -50,7 +52,7 @@ public class PlayerTest {
 	@Test
 	public void testRemoveValidBet() throws IncorrectString, InvalidWallet, ItemAlreadyInList, ItemNotInList
 	{
-		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		Player p = new Player("jean", "dupont", new Date("1985-05-26"), "jdupont", "1234");
 		Bet b = new Bet();
 		p.addBet(b);
 		p.removeBet(b);
@@ -59,7 +61,7 @@ public class PlayerTest {
 	@Test(expected=ItemNotInList.class)
 	public void testRemoveInvalidBet() throws IncorrectString, InvalidWallet, ItemAlreadyInList, ItemNotInList											
 	{
-		Player p = new Player("jean", "dupont", "jdupont", "1234");
+		Player p = new Player("jean", "dupont", new Date("1985-05-26"), "jdupont", "1234");
 		p.removeBet(new Bet());
 	}
 

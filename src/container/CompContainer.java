@@ -12,22 +12,22 @@ import betSystem.*;
 import personSystem.Competitor;
 import exceptions.*;
 
-
-@NamedQuery(
-		name="selectEverything",
-		query="SELECT c FROM Competition c")
+@MappedSuperclass
+@NamedNativeQuery(
+		name="selectEverythingFromCompetition",
+		query="SELECT * FROM competition c")
 
 /**
  * @author Hsb511 
  *
  */
 public class CompContainer {
-	private ArrayList<Competition> compDB;
+	private ArrayList<Competition> compDB = new ArrayList<Competition>();
 
 	public CompContainer() {
 		EntityManager em = JPAUtil.getEntityManager();
 		
-		List<?> competitions = em.createNamedQuery("selectEverything").getResultList();
+		List<?> competitions = em.createNamedQuery("selectEverythingFromCompetition").getResultList();
 		for (Object competition : competitions) {
 			Competition comp = (Competition)competition;
 			this.compDB.add(comp);				

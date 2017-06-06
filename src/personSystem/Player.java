@@ -12,14 +12,14 @@ import exceptions.ItemNotInList;
 import jpaUtil.JPAUtil;
 import utils.*;
 
-@NamedQuery(
+@NamedNativeQuery(
         name="findAllBetsWithNickname",
-        query="SELECT b FROM Bet b WHERE b.player LIKE :custName"
+        query="SELECT * FROM bet b WHERE b.player LIKE :custName"
 )
 @Entity 
 public class Player extends SystemUser {
 
-	@PersistenceContext	
+	
 	private static final long serialVersionUID = 1L;
 	private long wallet;
 	

@@ -34,11 +34,12 @@ public class BetTest {
 		comp = new Competition("comp", new Date(), new Competitor[] {this.c1, this.c2, this.c3});
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testResultsSingle() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
 		
-		p1.addBet(new SingleWinnerBet(50, p1, comp, c1));
-		p2.addBet(new SingleWinnerBet(40, p2, comp, c2));
+		SingleWinnerBet b0 = new SingleWinnerBet(50, p1, comp, c1);
+		SingleWinnerBet b1 = new SingleWinnerBet(40, p2, comp, c2);
 		
 		assertTrue(p1.getWallet() == 50);
 		assertTrue(p2.getWallet() == 60);
@@ -49,11 +50,19 @@ public class BetTest {
 		assertTrue(p2.getWallet() == 60);
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testResultsPodium() throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet {
 		
-		p1.addBet(new PodiumBet(50, p1, comp, c1, c2, c3));
-		p2.addBet(new PodiumBet(40, p2, comp, c1, c3, c2));
+//		System.out.println(p1.getWallet());
+		
+		PodiumBet b0 = new PodiumBet(50, p1, comp, c1, c2, c3);
+		
+//		System.out.println(p1.getWallet());
+		
+		PodiumBet b1 = new PodiumBet(40, p2, comp, c1, c3, c2);
+		
+//		System.out.println(p1.getWallet());
 		
 		assertTrue(p1.getWallet() == 50);
 		assertTrue(p2.getWallet() == 60);
@@ -83,10 +92,22 @@ public class BetTest {
 	
 	@Test
 	public void testIdBet() throws ObjectNotFound, BadParametersException, InvalidWallet, ItemAlreadyInList {
+//		System.out.println(p1.getWallet());
+//		System.out.println(p2.getWallet());
+		
 		Bet b0 = new PodiumBet(50, p1, comp, c1, c2, c3);
 		Bet b1 = new PodiumBet(40, p2, comp, c1, c3, c2);
-		Bet b2 = new SingleWinnerBet(50, p1, comp, c1);
+		
+//		System.out.println(p1.getWallet());
+//		System.out.println(p2.getWallet());
+		
+		Bet b2 = new SingleWinnerBet(40, p1, comp, c1);
 		Bet b3 = new SingleWinnerBet(40, p2, comp, c2);
+		
+//		System.out.println(b0.getId());
+//		System.out.println(b1.getId());
+//		System.out.println(b2.getId());
+//		System.out.println(b3.getId());
 		
 		assertTrue(b0.getId() == 0);
 		assertTrue(b1.getId() == 1);

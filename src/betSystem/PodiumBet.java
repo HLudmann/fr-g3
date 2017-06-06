@@ -61,6 +61,7 @@ public class PodiumBet extends Bet {
 		second = competitor2;
 		third = competitor3;
 		competition.addBet(this);
+		player.addBet(this);
 		
 	}
 	

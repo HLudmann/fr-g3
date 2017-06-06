@@ -107,10 +107,9 @@ public class PersonTest {
 	public void testSetCorrectFirstName() throws IncorrectString{
 		Competitor c=new Competitor("jean", "dupont", new Date());
 
-		c.setFirstName("Éva");
-		c.setFirstName("Marie-hélènne");
+		c.setFirstName("Eva");
+		c.setFirstName("Marie-Helenne");
 		c.setFirstName("Jean Pierre");
-		c.setFirstName("Öykü");
 	}
 
 	@Test
@@ -119,8 +118,8 @@ public class PersonTest {
 
 		c.setLastName("Matthieu");
 		c.setLastName("Dupont-Aignan");
-		c.setLastName("Mørk");
-		c.setLastName("Erdoğan");
+		c.setLastName("Mark");
+		c.setLastName("Erdogan");
 
 	}
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import bettingServices.Competitor;
+import personSystem.*;
 import utils.MyCalendar;
 
 public class UnSubscribeValidationTests {
@@ -97,7 +97,7 @@ public class UnSubscribeValidationTests {
 					new String(increment.getManagerPassword()));
 
 			// Credit account subscriber 'fanfan'
-			increment.getBetting().creditSubscriber(new String("fanfan"), 1500,
+			increment.getBetting().creditPlayer(new String("fanfan"), 1500,
 					new String(increment.getManagerPassword()));
 
 			// salto and fanfan bet on competition 'a_compet'
@@ -199,7 +199,7 @@ public class UnSubscribeValidationTests {
 				//Suppose list of subscribers tested
 				try {
 					List<List<String>> liste = increment.getBetting()
-							.listSubscribers(increment.getManagerPassword());
+							.listPlayers(increment.getManagerPassword());
 					if (liste.size() != 2) {
 						System.out
 								.println("le nombre de joueurs est incorrect (2 != "

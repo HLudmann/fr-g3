@@ -3,8 +3,8 @@ package tests.validation.withoutPersistence;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import bettingServices.*;
 import bettingServices.exceptions.*;
+import personSystem.*;
 import utils.MyCalendar;
 
 public class BetOnPodiumValidationTests {
@@ -81,7 +81,6 @@ public class BetOnPodiumValidationTests {
 				.print("  ----- Parier podium avec des �quipes avec membres sur une comp�tition ?(y/n)\n");
 		c = getResponse();
 		if (c.equals("y")) {
-			this.setUpTeamMembers();
 
 			this.testTeamMembersWithNullParameters();
 			System.out.println("  >>>>> Fin tests param�tre non instanci�\n");
@@ -365,7 +364,7 @@ public class BetOnPodiumValidationTests {
 					new String(increment.getManagerPassword()));
 
 			// Credit tokens
-			increment.getBetting().creditSubscriber("titi", 100,
+			increment.getBetting().creditPlayer("titi", 100,
 					new String(increment.getManagerPassword()));
 		} catch (Exception e) {
 			assert (false);
@@ -383,7 +382,7 @@ public class BetOnPodiumValidationTests {
 		try {
 			increment.getBetting().unsubscribe(new String("titi"),
 					increment.getManagerPassword());
-		} catch (AuthenticationException | ExistingSubscriberException e) {
+		} catch (AuthenticationException | ExistingPlayerException e) {
 			assert (false);
 		}
 
@@ -395,7 +394,7 @@ public class BetOnPodiumValidationTests {
 		// tested
 		// Add a subscriber
 		try {
-			increment.getBetting().creditSubscriber(new String("salto"), 1500,
+			increment.getBetting().creditPlayer(new String("salto"), 1500,
 					new String(increment.getManagerPassword()));
 		} catch (Exception e) {
 			assert (false);
@@ -677,7 +676,7 @@ public class BetOnPodiumValidationTests {
 		// tested
 		// Add a subscriber
 		try {
-			increment.getBetting().creditSubscriber(new String("lolito"), 1500,
+			increment.getBetting().creditPlayer(new String("lolito"), 1500,
 					new String(increment.getManagerPassword()));
 
 		} catch (Exception e) {
@@ -716,77 +715,6 @@ public class BetOnPodiumValidationTests {
 
 	}
 
-	private void setUpTeamMembers() {
-
-		try {
-			// On fixe la date au 01/08/2011
-			MyCalendar.setDate(2011, 8, 1);
-			System.out.println("Nous sommes au " + MyCalendar.getDate());
-
-			// Suppose subscribe and addCompetition ok
-			// Suppose createCompetitor ok
-
-			cName = new String("otra_compet");
-			winnerTeam = increment.getBetting().createCompetitor(
-					new String("Madrid"), increment.getManagerPassword());
-			winnerTeam.addMember(increment.getBetting().createCompetitor(
-					new String("Torres"),
-					new String("Sergio"),
-					new SimpleDateFormat("dd-MM-yyyy").format(new MyCalendar(
-							1984, 12, 13).getTime()),
-					increment.getManagerPassword()));
-
-			winnerTeam.addMember(increment.getBetting().createCompetitor(
-					new String("Lopez"),
-					new String("Eduardo"),
-					new SimpleDateFormat("dd-MM-yyyy").format(new MyCalendar(
-							1983, 12, 13).getTime()),
-					increment.getManagerPassword()));
-
-			winnerTeam.addMember(increment.getBetting().createCompetitor(
-					new String("Bosque"),
-					new String("Verde"),
-					new SimpleDateFormat("dd-MM-yyyy").format(new MyCalendar(
-							1982, 4, 13).getTime()),
-					increment.getManagerPassword()));
-
-			secondTeam = increment.getBetting().createCompetitor(
-					new String("Barca"), increment.getManagerPassword());
-			secondTeam.addMember(increment.getBetting().createCompetitor(
-					new String("Calle"),
-					new String("Vicente"),
-					new SimpleDateFormat("dd-MM-yyyy").format(new MyCalendar(
-							1982, 5, 13).getTime()),
-					increment.getManagerPassword()));
-			secondTeam.addMember(increment.getBetting().createCompetitor(
-					new String("Martinez"),
-					new String("Rojo"),
-					new SimpleDateFormat("dd-MM-yyyy").format(new MyCalendar(
-							1987, 5, 13).getTime()),
-					increment.getManagerPassword()));
-
-			thirdTeam = increment.getBetting().createCompetitor(
-					new String("Villareal"), increment.getManagerPassword());
-
-			// Add a subscriber
-			pwd = increment.getBetting().subscribe(new String("Dida"),
-					new String("John"), new String("lolito"), new String("11-03-1987"),
-					new String(increment.getManagerPassword()));
-
-			// Add a competition
-			competitorTeams = new ArrayList<Competitor>();
-			competitorTeams.add(winnerTeam);
-			competitorTeams.add(secondTeam);
-			competitorTeams.add(thirdTeam);
-
-			increment.getBetting().addCompetition(new String("otra_compet"),
-					new MyCalendar(2018, 3, 1), competitorTeams,
-					new String(increment.getManagerPassword()));
-		} catch (Exception e) {
-			assert (false);
-		}
-	}
-
 	private void testTeamMembersWithNullParameters() {
 		this.testTeamWithNullParameters();
 	}
@@ -811,7 +739,7 @@ public class BetOnPodiumValidationTests {
 					new String(increment.getManagerPassword()));
 
 			// Credit tokens
-			increment.getBetting().creditSubscriber("titi", 100,
+			increment.getBetting().creditPlayer("titi", 100,
 					new String(increment.getManagerPassword()));
 		} catch (Exception e) {
 			assert (false);
@@ -829,7 +757,7 @@ public class BetOnPodiumValidationTests {
 		try {
 			increment.getBetting().unsubscribe(new String("titi"),
 					increment.getManagerPassword());
-		} catch (AuthenticationException | ExistingSubscriberException e) {
+		} catch (AuthenticationException | ExistingPlayerException e) {
 			assert (false);
 		}
 

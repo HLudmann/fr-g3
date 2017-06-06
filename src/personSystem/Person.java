@@ -7,7 +7,7 @@ abstract class Person {
 	private String firstName;
 	private String lastName;
 
-	private static String regex="[a-zA-Z0-9Ã¡Ã Ã¢Ã¤Ã£Ã¥Ã§Ã©Ã¨ÃªÃ«Ã­Ã¬Ã®Ã¯Ã±Ã³Ã²Ã´Ã¶ÃµÃºÃ¹Ã»Ã¼Ã½Ã¿Ã¦Å“Ã�Ã€Ã‚Ã„ÃƒÃ…Ã‡Ã‰ÃˆÃŠÃ‹Ã�ÃŒÃŽÃ�Ã‘Ã“Ã’Ã”Ã–Ã•ÃšÃ™Ã›ÃœÃ�Å¸Ã†Å’Ã¸ÄŸ]+";
+	private static String regex="[a-zA-Z][a-zA-Z\\-\\ ]*";
 
 	public Person() {
 	}

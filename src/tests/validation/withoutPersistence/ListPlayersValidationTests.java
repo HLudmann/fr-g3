@@ -42,11 +42,11 @@ public class ListPlayersValidationTests {
 		}
 
 		try {
-			increment.getBetting().creditSubscriber(new String("fanfan"), 100,
+			increment.getBetting().creditPlayer(new String("fanfan"), 100,
 					increment.getManagerPassword());
-			increment.getBetting().creditSubscriber(new String("fanfan"), 300,
+			increment.getBetting().creditPlayer(new String("fanfan"), 300,
 					increment.getManagerPassword());
-			increment.getBetting().creditSubscriber(new String("fanfin"), 300,
+			increment.getBetting().creditPlayer(new String("fanfin"), 300,
 					increment.getManagerPassword());
 		} catch (Exception e) {
 			assert (false);
@@ -57,7 +57,7 @@ public class ListPlayersValidationTests {
 	private void testListNullParameters() {
 		// Tests "entries" : null
 		try {
-			increment.getBetting().listSubscribers(null);
+			increment.getBetting().listPlayers(null);
 			System.out
 					.println("la consultation des joueurs avec mdp gestionnaire non instanci� n'a pas lev� d'exception ");
 		} catch (Exception e) {
@@ -67,19 +67,19 @@ public class ListPlayersValidationTests {
 	private void testListInvalidParameters() {
 		// Tests "entries" : invalid
 		try {
-			increment.getBetting().listSubscribers(" ");
+			increment.getBetting().listPlayers(" ");
 			System.out
 					.println(" la consultation des joueurs avec mdp gestionnaire incorrect (\" \") n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().listSubscribers("oi");
+			increment.getBetting().listPlayers("oi");
 			System.out
 					.println(" la consultation des joueurs avec mdp gestionnaire incorrect (\"oi\") n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().listSubscribers("dsfqdfqf�");
+			increment.getBetting().listPlayers("dsfqdfqf�");
 			System.out
 					.println(" la consultation des joueurs avec mdp gestionnaire incorrect (\"dsfqdfqf�\") n'a pas lev� d'exception ");
 		} catch (Exception e) {
@@ -89,10 +89,10 @@ public class ListPlayersValidationTests {
 	private void testListOK() {
 		List<List<String>> liste;
 		// Tests number
-		// Subscribers : [[Duran, Albert, fanfan], [Duran, Albert, fanfin],
+		// Players : [[Duran, Albert, fanfan], [Duran, Albert, fanfin],
 		// [Duran, Morgan, fanfon], [Mato, Anna, salto]]
 		try {
-			liste = increment.getBetting().listSubscribers(
+			liste = increment.getBetting().listPlayers(
 					increment.getManagerPassword());
 			if (liste.size() != 4) {
 
@@ -112,7 +112,7 @@ public class ListPlayersValidationTests {
 		}
 
 		try {
-			liste = increment.getBetting().listSubscribers(
+			liste = increment.getBetting().listPlayers(
 					increment.getManagerPassword());
 			if (liste.size() != 5) {
 				System.out.println("le nombre de joueurs est incorrect (5 != "
@@ -130,7 +130,7 @@ public class ListPlayersValidationTests {
 		}
 
 		try {
-			liste = increment.getBetting().listSubscribers(
+			liste = increment.getBetting().listPlayers(
 					increment.getManagerPassword());
 			if (liste.size() != 4) {
 				System.out.println("le nombre de joueurs est incorrect (4 != "
@@ -154,7 +154,7 @@ public class ListPlayersValidationTests {
 		}
 
 		try {
-			liste = increment.getBetting().listSubscribers(
+			liste = increment.getBetting().listPlayers(
 					increment.getManagerPassword());
 			if (liste.size() != 0) {
 				System.out.println("le nombre de joueurs est incorrect (0 != "

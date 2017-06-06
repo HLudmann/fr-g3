@@ -48,11 +48,11 @@ public class DebitValidationTests {
 		}
 
 		try {
-			increment.getBetting().creditSubscriber(new String("fanfan"), 100,
+			increment.getBetting().creditPlayer(new String("fanfan"), 100,
 					increment.getManagerPassword());
-			increment.getBetting().creditSubscriber(new String("fanfan"), 300,
+			increment.getBetting().creditPlayer(new String("fanfan"), 300,
 					increment.getManagerPassword());
-			increment.getBetting().creditSubscriber(new String("fanfin"), 300,
+			increment.getBetting().creditPlayer(new String("fanfin"), 300,
 					increment.getManagerPassword());
 		} catch (Exception e) {
 			assert (false);
@@ -62,20 +62,20 @@ public class DebitValidationTests {
 	private void testDebitNullParameters() {
 		// Tests parameters : null
 		try {
-			increment.getBetting().debitSubscriber(null, 100, null);
+			increment.getBetting().debitPlayer(null, 100, null);
 			System.out
 					.println("debit avec pseudo et mdp gestionnaire non instanci�s et nombre de jetons valide n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().debitSubscriber(new String("fanfan"), 100,
+			increment.getBetting().debitPlayer(new String("fanfan"), 100,
 					null);
 			System.out
 					.println("debit avec pseudo et nombre de jetons valides et mdp gestionnaire non instanci� n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().debitSubscriber(null, 100,
+			increment.getBetting().debitPlayer(null, 100,
 					increment.getManagerPassword());
 			System.out
 					.println("debit avec pseudo non instanci�, nombre de jetons valide et mdp gestionnaire correct n'a pas lev� d'exception ");
@@ -85,35 +85,35 @@ public class DebitValidationTests {
 
 	private void testDebitInvalidParameters() {
 		try {
-			increment.getBetting().debitSubscriber(new String(" "), 100,
+			increment.getBetting().debitPlayer(new String(" "), 100,
 					increment.getManagerPassword());
 			System.out
 					.println("debit avec pseudo invalide (\" \"), nombre de jetons valide et mdp gestionnaire correct n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().debitSubscriber(new String("%�%�%�%�"), 100,
+			increment.getBetting().debitPlayer(new String("%�%�%�%�"), 100,
 					increment.getManagerPassword());
 			System.out
 					.println("debit avec pseudo invalide, nombre de jetons valide et mdp gestionnaire correct n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().debitSubscriber(new String("fanfan"), 100,
+			increment.getBetting().debitPlayer(new String("fanfan"), 100,
 					new String(" "));
 			System.out
 					.println(" debit avec pseudo connu, nombre de jetons valide et mdp gestionnaire invalide (\" \") n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().debitSubscriber(new String("fanfan"), 100,
+			increment.getBetting().debitPlayer(new String("fanfan"), 100,
 					new String("kjkj"));
 			System.out
 					.println("debit avec pseudo connu, nombre de jetons valide et mdp gestionnaire incorrect n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().debitSubscriber(new String("fanfan"), -100,
+			increment.getBetting().debitPlayer(new String("fanfan"), -100,
 					increment.getManagerPassword());
 			System.out
 					.println("debit avec pseudo connu, nombre jetons invalide (-100) et mdp gestionnaire correct n'a pas lev� d'exception ");
@@ -124,7 +124,7 @@ public class DebitValidationTests {
 	private void testDebitUsernameNotExist() {
 		// Tests parameters: username does not exist
 		try {
-			increment.getBetting().debitSubscriber(new String("locainaColina"),
+			increment.getBetting().debitPlayer(new String("locainaColina"),
 					100, increment.getManagerPassword());
 			System.out
 					.println("debit avec pseudo inconnu, nombre de jetons valide et mdp gestionnaire correct n'a pas lev� d'exception ");
@@ -134,7 +134,7 @@ public class DebitValidationTests {
 
 	private void testDebitNotEnoughTokens() {
 		try {
-			increment.getBetting().debitSubscriber(new String("fanfan"), 450,
+			increment.getBetting().debitPlayer(new String("fanfan"), 450,
 					increment.getManagerPassword());
 			System.out
 					.println("debit avec pseudo connu (fanfan), nombre de jetons insufisant (450) et mdp gestionnaire correct n'a pas lev� d'exception ");
@@ -147,10 +147,10 @@ public class DebitValidationTests {
 		
 		// Tests ok
 		try {
-			increment.getBetting().debitSubscriber(new String("fanfan"), 100,
+			increment.getBetting().debitPlayer(new String("fanfan"), 100,
 					increment.getManagerPassword());
 			// Verify specification
-			infos = increment.getBetting().infosSubscriber(
+			infos = increment.getBetting().infosPlayer(
 					new String("fanfan"), fanfanPwd);
 			if (Integer.parseInt(infos.get(4)) != 300)
 				System.out
@@ -162,10 +162,10 @@ public class DebitValidationTests {
 							+ e.getClass());
 		}
 		try {
-			increment.getBetting().debitSubscriber(new String("fanfin"), 50,
+			increment.getBetting().debitPlayer(new String("fanfin"), 50,
 					increment.getManagerPassword());
 			// Verify specification
-			infos = increment.getBetting().infosSubscriber(
+			infos = increment.getBetting().infosPlayer(
 					new String("fanfin"), fanfinPwd);
 			if (Integer.parseInt(infos.get(4)) != 250)
 				System.out

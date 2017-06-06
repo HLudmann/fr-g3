@@ -153,7 +153,7 @@ public class PersonContainer {
 	public void addManager(String firstName, String lastname, String password, String nickname) throws BadParametersException {
 //		EntityManager em = JPAUtil.getEntityManager();
 		try {
-			Manager m = new Manager(firstName, lastname, password, nickname);
+			Manager m = new Manager(firstName, lastname, nickname, password);
 //			em.persist(m);
 			managerDB.add(m);
 		} catch (IncorrectString e) {

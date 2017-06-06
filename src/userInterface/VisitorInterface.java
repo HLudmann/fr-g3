@@ -28,8 +28,7 @@ public class VisitorInterface extends Thread {
     public long getId () {
         return this.id;
     }
-
-
+   
     /**
      * Singn In for Managers.
      *
@@ -112,8 +111,8 @@ public class VisitorInterface extends Thread {
     /**
      * List competitors
      *
-     * @return all the public infos about each competitor
-     *              who is competiting in a upcomming competition
+     * @return all the public info about each competitor
+     *              who is competiting in a upcoming competition
      */
     public String[][] competitorListing() {
         ArrayList<Competitor> list = personList.getCompetitors();

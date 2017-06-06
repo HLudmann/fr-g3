@@ -24,7 +24,7 @@ public class Player extends SystemUser {
 	private long wallet;
 	
 	@Transient
-	private ArrayList<Bet> betList;
+	private ArrayList<Bet> betList = new ArrayList<Bet>();
 
 	public Player() {	
 	}
@@ -32,7 +32,6 @@ public class Player extends SystemUser {
 	public Player(String firstName, String lastName, String nickname) throws IncorrectString {
 		super(firstName, lastName, new Date(), new String("PLR"), RandPass.getPass(10), nickname);
 
-		this.betList = new ArrayList<Bet>();
 		this.wallet=0;
 	}
 
@@ -40,7 +39,6 @@ public class Player extends SystemUser {
 
 		super(firstName, lastName, bornDate, new String("PLR"), password, nickname);
 
-		this.betList = new ArrayList<Bet>();
 		this.wallet=0;
 	}
 
@@ -85,17 +83,15 @@ public class Player extends SystemUser {
 	}
 
 	public ArrayList<Bet> getBetList() {
-		return betList;
+		return this.betList;
 	}
 
 	public void addBet(Bet b) throws ItemAlreadyInList, InvalidWallet {
 
 		if (!betList.contains(b)){
-
-			setWallet(getWallet()-b.getAmount());
 			betList.add(b);
-
 		}
+		
 		else{
 			throw new ItemAlreadyInList("Bet already in list");
 		}

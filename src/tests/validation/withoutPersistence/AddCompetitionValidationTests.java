@@ -94,8 +94,6 @@ public class AddCompetitionValidationTests {
 			if (c.equals("y")) {
 				this.addTeamCompetition = true;
 
-				this.setUpTeamWithCompetitors();
-
 				this.testTeamWithCompetitorsNullParameters();
 				System.out
 						.println("  >>>>> Fin tests param�tre non instanci�\n");
@@ -575,36 +573,6 @@ public class AddCompetitionValidationTests {
 		}
 	}
 
-	private void setUpTeamWithCompetitors() {
-
-		try {
-			pc1 = increment.getBetting().createCompetitor(new String("Durant"),
-					new String("Miguel"), new String("20-07-1984"),
-					increment.getManagerPassword());
-			pc2 = increment.getBetting().createCompetitor(
-					new String("Duranto"), new String("Miguel"),
-					new String("13-12-1983"), increment.getManagerPassword());
-
-			madrid = increment.getBetting().createCompetitor(
-					new String("Madrid"), increment.getManagerPassword());
-			madrid.addMember(pc1);
-			madrid.addMember(pc2);
-
-			pc3 = increment.getBetting().createCompetitor(
-					new String("Durante"), new String("Miguel"),
-					new String("20-07-1980"), increment.getManagerPassword());
-
-			barca = increment.getBetting().createCompetitor(
-					new String("Barca"), increment.getManagerPassword());
-			barca.addMember(pc3);
-
-			competitorTeams = new ArrayList<Competitor>();
-			competitorTeams.add(madrid);
-			competitorTeams.add(barca);
-		} catch (Exception e) {
-			assert (false);
-		}
-	}
 
 	private void testTeamWithCompetitorsNullParameters() {
 		this.testTeamNullParameters();

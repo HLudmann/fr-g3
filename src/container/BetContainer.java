@@ -17,7 +17,7 @@ import exceptions.*;
 //		query="SELECT * FROM bet b")
 
 public class BetContainer {
-	private ArrayList<Bet> betDB = new ArrayList<Bet>();
+	private ArrayList<Bet> betDB;
 	
 	public BetContainer() {}
 	
@@ -34,6 +34,7 @@ public class BetContainer {
 //			this.betDB.add(b);				
 //		}
 		PersonContainer pc = new PersonContainer();
+		this.betDB = new ArrayList<Bet>();
 		for (Player p : pc.getPlayerDB()) {
 			this.betDB.addAll(p.getBetList());
 		}

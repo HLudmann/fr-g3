@@ -2,9 +2,10 @@ package personSystem.test;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+
 import personSystem.*;
 import exceptions.IncorrectString;
 
@@ -12,14 +13,15 @@ public class PersonTest {
 
 	@Test
 	public void testConstructor() throws IncorrectString{
-		Competitor c=new Competitor("jean", "dupont", 0);
-		//insance de compétition car person est abstract
+		Competitor c=new Competitor("jean", "dupont", new Date());
+		//instance of competition because person is abstract
+		assertTrue(c instanceof Competitor);
 	}
 
 	@Test
 	public void testSetFirstName() throws IncorrectString{
-		Competitor c=new Competitor("jean", "dupont", 0);
-		//insance de compétition car person est abstract
+		Competitor c=new Competitor("jean", "dupont", new Date());
+		//instance of competition because person is abstract
 
 		try{
 			c.setFirstName("paul");
@@ -35,8 +37,8 @@ public class PersonTest {
 
 	@Test
 	public void testSetLastName() throws IncorrectString{
-		Competitor c=new Competitor("jean", "dupont", 0);
-		//insance de compétition car person est abstract
+		Competitor c=new Competitor("jean", "dupont", new Date());
+		//instance of competition because person is abstract
 
 		try{
 			c.setLastName("paul");
@@ -52,18 +54,20 @@ public class PersonTest {
 
 	@Test(expected = IncorrectString.class)
 	public void testSetEmptyFirstName() throws IncorrectString{
-		Competitor c=new Competitor("", "dupont", 0);
+		Competitor c=new Competitor("", "dupont", new Date());
+		assertFalse(c instanceof Competitor);
 	}
 
 	@Test(expected = IncorrectString.class)
 	public void testSetEmptyLastName() throws IncorrectString{
-		Competitor c=new Competitor("jean", "", 0);
+		Competitor c=new Competitor("jean", "", new Date());
+		assertFalse(c instanceof Competitor);
 	}
 
 	@Test
 	public void testSetIncorrectFirstName() throws IncorrectString{
-		Competitor c=new Competitor("jean", "dupont", 0);
-		//insance de compétition car person est abstract
+		Competitor c=new Competitor("jean", "dupont", new Date());
+		////instance of competition because person is abstract
 
 		String[] incorrectChars = {"0", "1", "2", ".", ",", ";", "_", ":", "*", "%", "&", "@"};
 
@@ -82,7 +86,7 @@ public class PersonTest {
 
 	@Test
 	public void testSetIncorrectLastName() throws IncorrectString{
-		Competitor c=new Competitor("jean", "dupont", 0);
+		Competitor c=new Competitor("jean", "dupont", new Date());
 		//insance de compétition car person est abstract
 
 		String[] incorrectChars = {"0", "1", "2", ".", ",", ";", "_", ":", "*", "%", "&", "@"};
@@ -101,7 +105,7 @@ public class PersonTest {
 
 	@Test
 	public void testSetCorrectFirstName() throws IncorrectString{
-		Competitor c=new Competitor("jean", "dupont", 0);
+		Competitor c=new Competitor("jean", "dupont", new Date());
 
 		c.setFirstName("Éva");
 		c.setFirstName("Marie-hélènne");
@@ -111,7 +115,7 @@ public class PersonTest {
 
 	@Test
 	public void testSetCorrectLastName() throws IncorrectString{
-		Competitor c=new Competitor("jean", "dupont", 0);
+		Competitor c=new Competitor("jean", "dupont", new Date());
 
 		c.setLastName("Matthieu");
 		c.setLastName("Dupont-Aignan");

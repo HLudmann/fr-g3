@@ -29,8 +29,8 @@ public class DBConnection {
 		try {
 
 			connection = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/Redwire", "hugo",
-					"Stupcrou4577");
+					"jdbc:postgresql://localhost:5432/postgres", "postgres",
+					"genki1504db");
 
 		} catch (SQLException e) {
 

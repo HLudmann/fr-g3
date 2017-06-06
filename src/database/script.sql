@@ -4,6 +4,7 @@ create database redwire with encoding utf8;
 create table SYSTEM_USER (
     LASTNAME    varchar(100)         not null,
     FIRSTNAME   varchar(100)         not null,
+    BORNDATE    date                 not null,
     PASSWORD    char(32)             not null,
     NICKNAME    varchar(20)          not null,
     TYPE        char(3)              not null,
@@ -21,6 +22,7 @@ create table COMPETITION (
 create table COMPETITOR (
     LASTNAME    varchar(100)         not null,
     FIRSTNAME   varchar(100)         not null,
+    BORNDATE    date                 not null,
     ID          integer             not null,
     constraint primary_key_competitor primary key (ID)
 );

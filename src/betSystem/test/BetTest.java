@@ -64,6 +64,7 @@ public class BetTest {
 		assertTrue(p2.getWallet() == 60);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testHasBegun() {
 		Date futur = new Date();

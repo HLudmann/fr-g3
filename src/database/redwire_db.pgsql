@@ -34,7 +34,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: bet; Type: TABLE; Schema: public; Owner: hugo
+-- Name: bet; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE bet (
@@ -50,10 +50,10 @@ CREATE TABLE bet (
 );
 
 
-ALTER TABLE bet OWNER TO hugo;
+ALTER TABLE bet OWNER TO postgres;
 
 --
--- Name: competition; Type: TABLE; Schema: public; Owner: hugo
+-- Name: competition; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE competition (
@@ -62,10 +62,10 @@ CREATE TABLE competition (
 );
 
 
-ALTER TABLE competition OWNER TO hugo;
+ALTER TABLE competition OWNER TO postgres;
 
 --
--- Name: competitor; Type: TABLE; Schema: public; Owner: hugo
+-- Name: competitor; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE competitor (
@@ -75,10 +75,10 @@ CREATE TABLE competitor (
 );
 
 
-ALTER TABLE competitor OWNER TO hugo;
+ALTER TABLE competitor OWNER TO postgres;
 
 --
--- Name: participate; Type: TABLE; Schema: public; Owner: hugo
+-- Name: participate; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE participate (
@@ -87,10 +87,10 @@ CREATE TABLE participate (
 );
 
 
-ALTER TABLE participate OWNER TO hugo;
+ALTER TABLE participate OWNER TO postgres;
 
 --
--- Name: system_user; Type: TABLE; Schema: public; Owner: hugo
+-- Name: system_user; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE system_user (
@@ -104,10 +104,10 @@ CREATE TABLE system_user (
 );
 
 
-ALTER TABLE system_user OWNER TO hugo;
+ALTER TABLE system_user OWNER TO postgres;
 
 --
--- Data for Name: bet; Type: TABLE DATA; Schema: public; Owner: hugo
+-- Data for Name: bet; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY bet (id, amount, type, first, second, third, competition, player) FROM stdin;
@@ -115,7 +115,7 @@ COPY bet (id, amount, type, first, second, third, competition, player) FROM stdi
 
 
 --
--- Data for Name: competition; Type: TABLE DATA; Schema: public; Owner: hugo
+-- Data for Name: competition; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY competition (name, date) FROM stdin;
@@ -123,7 +123,7 @@ COPY competition (name, date) FROM stdin;
 
 
 --
--- Data for Name: competitor; Type: TABLE DATA; Schema: public; Owner: hugo
+-- Data for Name: competitor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY competitor (lastname, firstname, id) FROM stdin;
@@ -131,7 +131,7 @@ COPY competitor (lastname, firstname, id) FROM stdin;
 
 
 --
--- Data for Name: participate; Type: TABLE DATA; Schema: public; Owner: hugo
+-- Data for Name: participate; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY participate (competitor, competition) FROM stdin;
@@ -139,7 +139,7 @@ COPY participate (competitor, competition) FROM stdin;
 
 
 --
--- Data for Name: system_user; Type: TABLE DATA; Schema: public; Owner: hugo
+-- Data for Name: system_user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY system_user (lastname, firstname, password, nickname, type, wallet) FROM stdin;
@@ -147,7 +147,7 @@ COPY system_user (lastname, firstname, password, nickname, type, wallet) FROM st
 
 
 --
--- Name: primary_key_bet; Type: CONSTRAINT; Schema: public; Owner: hugo
+-- Name: primary_key_bet; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY bet
@@ -155,7 +155,7 @@ ALTER TABLE ONLY bet
 
 
 --
--- Name: primary_key_competition; Type: CONSTRAINT; Schema: public; Owner: hugo
+-- Name: primary_key_competition; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY competition
@@ -163,7 +163,7 @@ ALTER TABLE ONLY competition
 
 
 --
--- Name: primary_key_competitor; Type: CONSTRAINT; Schema: public; Owner: hugo
+-- Name: primary_key_competitor; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY competitor
@@ -171,7 +171,7 @@ ALTER TABLE ONLY competitor
 
 
 --
--- Name: primary_key_participate; Type: CONSTRAINT; Schema: public; Owner: hugo
+-- Name: primary_key_participate; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY participate
@@ -179,7 +179,7 @@ ALTER TABLE ONLY participate
 
 
 --
--- Name: primary_key_sysuser; Type: CONSTRAINT; Schema: public; Owner: hugo
+-- Name: primary_key_sysuser; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY system_user
@@ -187,7 +187,7 @@ ALTER TABLE ONLY system_user
 
 
 --
--- Name: foreign_key_competetiton; Type: FK CONSTRAINT; Schema: public; Owner: hugo
+-- Name: foreign_key_competetiton; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY bet
@@ -195,7 +195,7 @@ ALTER TABLE ONLY bet
 
 
 --
--- Name: foreign_key_competition; Type: FK CONSTRAINT; Schema: public; Owner: hugo
+-- Name: foreign_key_competition; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY participate
@@ -203,7 +203,7 @@ ALTER TABLE ONLY participate
 
 
 --
--- Name: foreign_key_competitor; Type: FK CONSTRAINT; Schema: public; Owner: hugo
+-- Name: foreign_key_competitor; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY participate
@@ -211,7 +211,7 @@ ALTER TABLE ONLY participate
 
 
 --
--- Name: foreign_key_first; Type: FK CONSTRAINT; Schema: public; Owner: hugo
+-- Name: foreign_key_first; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY bet
@@ -219,7 +219,7 @@ ALTER TABLE ONLY bet
 
 
 --
--- Name: foreign_key_player; Type: FK CONSTRAINT; Schema: public; Owner: hugo
+-- Name: foreign_key_player; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY bet
@@ -227,7 +227,7 @@ ALTER TABLE ONLY bet
 
 
 --
--- Name: foreign_key_second; Type: FK CONSTRAINT; Schema: public; Owner: hugo
+-- Name: foreign_key_second; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY bet
@@ -235,7 +235,7 @@ ALTER TABLE ONLY bet
 
 
 --
--- Name: foreign_key_third; Type: FK CONSTRAINT; Schema: public; Owner: hugo
+-- Name: foreign_key_third; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY bet

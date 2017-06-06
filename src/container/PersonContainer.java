@@ -1,62 +1,60 @@
 package container;
 
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 import java.util.Iterator;
 import java.util.Date;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 
-import betSystem.Competition;
-import jpaUtil.JPAUtil;
+//import jpaUtil.JPAUtil;
 import personSystem.*;
 import exceptions.*;
 
-@MappedSuperclass
-@NamedNativeQueries({
-	@NamedNativeQuery(
-		name="selectEverythingFromCompetitor",
-		query="SELECT * FROM competitor c",
-		resultClass = Competitor.class),
-	@NamedNativeQuery(
-		name="selectEverythingFromSystemUser",
-		query="SELECT * FROM system_user s")
-})
+//@MappedSuperclass
+//@NamedNativeQueries({
+//	@NamedNativeQuery(
+//		name="selectEverythingFromCompetitor",
+//		query="SELECT * FROM competitor c",
+//		resultClass = Competitor.class),
+//	@NamedNativeQuery(
+//		name="selectEverythingFromSystemUser",
+//		query="SELECT * FROM system_user s")
+//})
 
 /**
  * @author Hsb511
  *
  */
 public class PersonContainer {
-	private ArrayList<Competitor> competitorDB = new ArrayList<Competitor>();
-	private ArrayList<Player> playerDB = new ArrayList<Player>();
-	private ArrayList<Manager> managerDB = new ArrayList<Manager>();
+	private static ArrayList<Competitor> competitorDB = new ArrayList<Competitor>();
+	private static ArrayList<Player> playerDB = new ArrayList<Player>();
+	private static ArrayList<Manager> managerDB = new ArrayList<Manager>();
 	private static ArrayList<Player> loggedPlayers = new ArrayList<Player>();
 	private static ArrayList<Manager> loggedManagers = new ArrayList<Manager>();
 
 
 	public PersonContainer() {
-		EntityManager em = JPAUtil.getEntityManager();
-
-		Query q1 = em.createNamedQuery("selectEverythingFromSystemUser");
-		List<?> systemUsers = q1.getResultList();
-		for (Object sysus : systemUsers) {
-			if (sysus instanceof Player) {
-				Player p = (Player)sysus;
-				this.playerDB.add(p);
-			} else if (sysus instanceof Manager) {
-				Manager m = (Manager)sysus;
-				this.managerDB.add(m);
-			}
+//		EntityManager em = JPAUtil.getEntityManager();
+//
+//		Query q1 = em.createNamedQuery("selectEverythingFromSystemUser");
+//		List<?> systemUsers = q1.getResultList();
+//		for (Object sysus : systemUsers) {
+//			if (sysus instanceof Player) {
+//				Player p = (Player)sysus;
+//				playerDB.add(p);
+//			} else if (sysus instanceof Manager) {
+//				Manager m = (Manager)sysus;
+//				managerDB.add(m);
+//			}
+//		}
+//		Query q2 = em.createNamedQuery("selectEverythingFromCompetitor");
+//		List<?> competitors = q2.getResultList();
+//		for (Object competitor : competitors) {
+//			Competitor c = (Competitor)competitor;
+//			competitorDB.add(c);				
+//		}
 		
-		Query q2 = em.createNamedQuery("selectEverythingFromCompetitor");
-		List<?> competitors = q2.getResultList();
-		for (Object competitor : competitors) {
-			Competitor c = (Competitor)competitor;
-			this.competitorDB.add(c);				
-		}
-		
-		}
 	}
 	 
 	public ArrayList<Competitor> getCompetitors() {
@@ -64,7 +62,11 @@ public class PersonContainer {
 	}
 	
 	public ArrayList<Manager> getManagerDB() {
-		return this.managerDB;
+		return managerDB;
+	}
+	
+	public ArrayList<Player> getPlayerDB() {
+		return playerDB;
 	}
 
 	public void logIn(Player plr) {
@@ -91,11 +93,11 @@ public class PersonContainer {
 	 * @throws BadParametersException	
 	 */
 	public void addCompetitor(String name) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Competitor c = new Competitor(name);
-			em.merge(c);
-			this.competitorDB.add(c);
+//			em.merge(c);
+			competitorDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -109,12 +111,12 @@ public class PersonContainer {
 	 * @throws BadParametersException	
 	 */
 	public void addCompetitor(String lastName, String firstName, String bornDate) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Date d = new Date();
 			Competitor c = new Competitor(lastName, firstName, d);
-			em.merge(c);
-			this.competitorDB.add(c);
+//			em.merge(c);
+			competitorDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -129,12 +131,12 @@ public class PersonContainer {
 	 * @throws BadParametersException
 	 */
 	public void addPlayer(String firstName, String lastname, String bornDate, String password, String nickname) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Date d = new Date();
 			Player p = new Player(firstName, lastname, d, password, nickname);
-			this.playerDB.add(p);			
-			em.persist(p);
+			playerDB.add(p);			
+//			em.persist(p);
 		} catch (IncorrectString e) {
 			throw new BadParametersException("Incorrect string");	
 		}
@@ -149,11 +151,11 @@ public class PersonContainer {
 	 * @throws BadParametersException
 	 */
 	public void addManager(String firstName, String lastname, String password, String nickname) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Manager m = new Manager(firstName, lastname, password, nickname);
-			em.persist(m);
-			this.managerDB.add(m);
+//			em.persist(m);
+			managerDB.add(m);
 		} catch (IncorrectString e) {
 			throw new BadParametersException("Incorrect string");
 		}
@@ -165,15 +167,15 @@ public class PersonContainer {
 	 * @throws BadParametersException
 	 */
 	public void delCompetitor(int id) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		ArrayList<Competitor> searchRes = findCompetitorById(id);
 		if (searchRes.size() != 1) {
 			throw new BadParametersException("Competitor not found");
 		}
 		try {
 			Competitor c = searchRes.get(0);
-			em.remove(c);
-			this.competitorDB.remove(c);
+//			em.r=emove(c);
+			competitorDB.remove(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -185,11 +187,11 @@ public class PersonContainer {
 	 * @throws BadParametersException
 	 */
 	public void delPlayer(String nickname) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Player p = findPlayer(nickname);
-			em.remove(p);
-			this.playerDB.remove(p);
+//			em.remove(p);
+			playerDB.remove(p);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}

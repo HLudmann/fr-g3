@@ -10,7 +10,7 @@ public class Manager extends SystemUser{
 	private static final long serialVersionUID = 1573L;
 
 		public Manager(String firstName, String lastName, String nickname, String password) throws IncorrectString{
-					super(firstName, lastName, new Date(0), nickname, password);
+					super(firstName, lastName, new Date(0), new String("MNG"), nickname, password);
         }
 		
 		public Manager(){

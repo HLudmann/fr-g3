@@ -2,7 +2,6 @@ package userInterface;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 import personSystem.*;
 import betSystem.*;
@@ -27,11 +26,11 @@ public class ManagerInterface extends VisitorInterface {
 	}
 
 	public ArrayList<Competition> getAllCompetitions() {
-		return this.competitionList.getCompetitions();
+		return competitionList.getCompetitions();
     }
 
 	public Competition searchACompetitionByName(String name) throws ExistingCompetitionException {
-		ArrayList<Competition> list = this.competitionList.findCompetitionByName(name);
+		ArrayList<Competition> list = competitionList.findCompetitionByName(name);
 		if (list.size() != 1) {
 			throw new ExistingCompetitionException();
 		}
@@ -41,7 +40,7 @@ public class ManagerInterface extends VisitorInterface {
 	/**
 	 * Sign Out
 	 * 
-	 * @return a VisitorInterface to the gui.
+	 * @return a VisitorInterface to the GUI.
 	 */
 	public VisitorInterface signOut() {
 		personList.logOut(this.loggedManager);

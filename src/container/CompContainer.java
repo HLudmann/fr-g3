@@ -1,37 +1,37 @@
 package container;
 
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 import java.util.Date;
 import java.util.Iterator;
 
-import javax.persistence.*;
-import jpaUtil.JPAUtil;
+//import javax.persistence.*;
+//import jpaUtil.JPAUtil;
 
 import betSystem.*;
 import personSystem.Competitor;
 import exceptions.*;
 
-@MappedSuperclass
-@NamedNativeQuery(
-		name="selectEverythingFromCompetition",
-		query="SELECT * FROM competition c")
+//@MappedSuperclass
+//@NamedNativeQuery(
+//		name="selectEverythingFromCompetition",
+//		query="SELECT * FROM competition c")
 
 /**
  * @author Hsb511 
  *
  */
 public class CompContainer {
-	private ArrayList<Competition> compDB = new ArrayList<Competition>();
+	private static ArrayList<Competition> compDB = new ArrayList<Competition>();
 
 	public CompContainer() {
-		EntityManager em = JPAUtil.getEntityManager();
-		
-		List<?> competitions = em.createNamedQuery("selectEverythingFromCompetition").getResultList();
-		for (Object competition : competitions) {
-			Competition comp = (Competition)competition;
-			this.compDB.add(comp);				
-		}
+//		EntityManager em = JPAUtil.getEntityManager();
+//		
+//		List<?> competitions = em.createNamedQuery("selectEverythingFromCompetition").getResultList();
+//		for (Object competition : competitions) {
+//			Competition comp = (Competition)competition;
+//			this.compDB.add(comp);				
+//		}
 	}
 
 	
@@ -43,11 +43,11 @@ public class CompContainer {
 	 * @throws BadParametersException
 	 */
 	public void addComp(String name, Date date, Competitor[] competitors) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		try {
 			Competition c = new Competition(name, date, competitors);
-			em.persist(c);
-			this.compDB.add(c);
+//			em.persist(c);
+			compDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -61,17 +61,17 @@ public class CompContainer {
 	 * @throws BadParametersException
 	 */
 	public void updateComp(String name, Date date) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		ArrayList<Competition> searchRes = findCompetitionByName(name);	
 		if (searchRes.size() != 1) {
 			throw new BadParametersException();
 		} 
 		try  {
 			Competition c = searchRes.get(0);
-			this.compDB.remove(c);
+			compDB.remove(c);
 			c.setDate(date);
-			em.merge(c);
-			this.compDB.add(c);
+//			em.merge(c);
+			compDB.add(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -83,15 +83,15 @@ public class CompContainer {
 	 * @throws BadParametersException
 	 */
 	public void delComp(String name) throws BadParametersException {
-		EntityManager em = JPAUtil.getEntityManager();
+//		EntityManager em = JPAUtil.getEntityManager();
 		ArrayList<Competition> searchRes = findCompetitionByName(name);	
 		if (searchRes.size() != 1) {
 			throw new BadParametersException();
 		} 
 		try {
 			Competition c = searchRes.get(0);
-			em.remove(c);
-			this.compDB.remove(c);
+//			em.remove(c);
+			compDB.remove(c);
 		} catch (Exception e) {
 			throw new BadParametersException();
 		}
@@ -105,7 +105,7 @@ public class CompContainer {
 	 */
 	public ArrayList<Competition> findCompetitionByName(String name) {
 		ArrayList<Competition> res = new ArrayList<Competition>();
-		Iterator<Competition> it = this.compDB.iterator();
+		Iterator<Competition> it = compDB.iterator();
 		while (it.hasNext()) {
 			Competition c = it.next();
 			if (c.getName().contains(name)) {
@@ -123,7 +123,7 @@ public class CompContainer {
 	 */
 	public ArrayList<Competition> findCompetitionByDate(Date date) {
 		ArrayList<Competition> res = new ArrayList<Competition>();
-		Iterator<Competition> it = this.compDB.iterator();
+		Iterator<Competition> it = compDB.iterator();
 		while (it.hasNext()) {
 			Competition c = it.next();
 			if (c.getDate() == date) {
@@ -139,7 +139,7 @@ public class CompContainer {
 	 */
 	public ArrayList<Competition> getCompetitionsNotEnded() {
 		ArrayList<Competition> res = new ArrayList<Competition>();
-		Iterator<Competition> it = this.compDB.iterator();
+		Iterator<Competition> it = compDB.iterator();
 		while (it.hasNext()) {
 			Competition c = it.next();
 			if (!c.hasBegun()) {
@@ -154,6 +154,6 @@ public class CompContainer {
 	 * @return ArrayList of Competitions
 	 */
 	public ArrayList<Competition> getCompetitions() {
-		return this.compDB;
+		return compDB;
 	}
 }

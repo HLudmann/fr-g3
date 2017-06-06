@@ -12,8 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import exceptions.IncorrectString;
-
 @SuppressWarnings("serial")
 public class Window extends JFrame {
 
@@ -23,7 +21,6 @@ public class Window extends JFrame {
 
   public Window(String name){
 
-    ArrayList<ArrayList<String>> list = createExemple(); //Simple example
 
     //Sets simple values for ou window
     this.setTitle(name);

@@ -99,13 +99,15 @@ public class MainInterface extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
 		if(e.getSource() == boutonConnection){
-			Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
 			new ConnectionPanel(this, window);
 		}
-		if(e.getSource() == competition){
+		if (e.getSource() == competition) {
+			window.setPanel(new PanelList(1));
 		}
-		if(e.getSource() == competiteur){
+		if (e.getSource() == competiteur) {
+			window.setPanel(new PanelList(1));
 		}
 		/*if(e.getSource() == searchButton){
 		;

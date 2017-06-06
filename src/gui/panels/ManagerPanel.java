@@ -41,8 +41,8 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private JPanel lister3 = new JPanel();
 	private JPanel lister4 = new JPanel();
 	// pour delBet
-	private JPanel delBetPanel = new JPanel();
-	private JButton delBet = new JButton("Supprimer paris");
+	/*private JPanel delBetPanel = new JPanel();
+	private JButton delBet = new JButton("Supprimer paris");*/
 	// pour changeWallet
 	private JPanel walletPanel = new JPanel();
 	private JButton walletButton = new JButton("Changer le solde d'un compte");
@@ -78,11 +78,11 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private JPanel competitor3 = new JPanel();
 	private JPanel competitor4 = new JPanel();
 	// pour search
-	private JPanel search = new JPanel();
+	/*private JPanel search = new JPanel();
 	private JPanel searchField = new JPanel();
 	private JLabel searchLabel = new JLabel("Rechercher:");
 	private JButton searchButton = new JButton("Rechercher");
-	private JTextField searchText = new JTextField();
+	private JTextField searchText = new JTextField();*/
 
 	public ManagerPanel() {
 		// set bouton déco et chgt password
@@ -121,9 +121,9 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		// Dimension(this.getWidth(),this.getHeight()/10));
 
 		// set bouton delBet
-		delBet.setFont(font);
+		/*delBet.setFont(font);
 		delBetPanel.setLayout(new BorderLayout());
-		delBetPanel.add(delBet, BorderLayout.CENTER);
+		delBetPanel.add(delBet, BorderLayout.CENTER);*/
 		// delBetPanel.setMaximumSize(new
 		// Dimension(this.getWidth(),this.getHeight()/10));
 		// delBetPanel.setPreferredSize(new
@@ -155,17 +155,17 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		add.setFont(font);
 		delete.setFont(font);
 		addDel2.setBackground(Color.WHITE);
-		addDel3.setBackground(Color.WHITE);
+		addDel3.setBackground(new Color(0, 150, 250));
 		add.setHorizontalAlignment(SwingConstants.CENTER);
 		delete.setHorizontalAlignment(SwingConstants.CENTER);
 		addDel2.add(add, BorderLayout.CENTER);
-		addDel3.add(delete, BorderLayout.CENTER);
+		//addDel3.add(delete, BorderLayout.CENTER);
 		addDel4.setLayout(new GridLayout(1, 2));
 		addDel4.add(addDel2);
 		addDel4.add(addDel3);
-		addDel.setBorder(borderBlack);
+		//addDel.setBorder(borderBlack);
 		addDel2.setBorder(borderBlack);
-		addDel3.setBorder(borderBlack);
+		//addDel3.setBorder(borderBlack);
 		addDel.add(addDel4, BorderLayout.CENTER);
 		// addDel.setMaximumSize(new
 		// Dimension(this.getWidth(),this.getHeight()/10));
@@ -180,13 +180,14 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		addPlayer.setFont(font);
 		delPlayer.setFont(font);
 		player2.add(addPlayer, BorderLayout.CENTER);
-		player3.add(delPlayer, BorderLayout.CENTER);
+		//player3.add(delPlayer, BorderLayout.CENTER);
 		player4.setLayout(new GridLayout(1, 2));
 		player4.add(player2);
 		player4.add(player3);
 		// player.setBorder(borderBlack);
 		player2.setBorder(borderBlack);
-		player3.setBorder(borderBlack);
+		//player3.setBorder(borderBlack);
+		player3.setBackground(new Color(0, 150, 250));
 		player.add(player4, BorderLayout.CENTER);
 		// player.setMaximumSize(new
 		// Dimension(this.getWidth(),this.getHeight()/10));
@@ -201,13 +202,14 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		addCompetition.setFont(font);
 		delCompetition.setFont(font);
 		competition2.add(addCompetition, BorderLayout.CENTER);
-		competition3.add(delCompetition, BorderLayout.CENTER);
+		//competition3.add(delCompetition, BorderLayout.CENTER);
 		competition4.setLayout(new GridLayout(1, 2));
 		competition4.add(competition2);
 		competition4.add(competition3);
-		competition.setBorder(borderBlack);
+		//competition.setBorder(borderBlack);
 		competition2.setBorder(borderBlack);
-		competition3.setBorder(borderBlack);
+		//competition3.setBorder(borderBlack);
+		competition3.setBackground(new Color(0, 150, 250));
 		competition.add(competition4, BorderLayout.CENTER);
 		// competition.setMaximumSize(new
 		// Dimension(this.getWidth(),this.getHeight()/10));
@@ -222,13 +224,14 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		addCompetitor.setFont(font);
 		delCompetitor.setFont(font);
 		competitor2.add(addCompetitor, BorderLayout.CENTER);
-		competitor3.add(delCompetitor, BorderLayout.CENTER);
+		//competitor3.add(delCompetitor, BorderLayout.CENTER);
 		competitor4.setLayout(new GridLayout(1, 2));
 		competitor4.add(competitor2);
 		competitor4.add(competitor3);
 		// competitor.setBorder(borderBlack);
 		competitor2.setBorder(borderBlack);
-		competitor3.setBorder(borderBlack);
+		//competitor3.setBorder(borderBlack);
+		competitor3.setBackground(new Color(0, 150, 250));
 		competitor.add(competitor4, BorderLayout.CENTER);
 		// competitor.setMaximumSize(new
 		// Dimension(this.getWidth(),this.getHeight()/10));
@@ -255,7 +258,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.add(connectionBar);
 		this.add(lister);
-		this.add(delBetPanel);
+		//this.add(delBetPanel);
 		//this.add(walletPanel);
 		this.add(endCompPanel);
 		this.add(addDel);
@@ -270,7 +273,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		boutonChgtPassword.addActionListener(this);
 		listCompetition.addActionListener(this);
 		listCompetitor.addActionListener(this);
-		delBet.addActionListener(this);
+		//delBet.addActionListener(this);
 		walletButton.addActionListener(this);
 		endCompButton.addActionListener(this);
 		addPlayer.addActionListener(this);
@@ -279,7 +282,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		delCompetition.addActionListener(this);
 		addCompetitor.addActionListener(this);
 		delCompetitor.addActionListener(this);
-		searchButton.addActionListener(this);
+		//searchButton.addActionListener(this);
 	}
 
 	// méthode liée à l'activation des boutons
@@ -289,13 +292,16 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			window.setPanel(new MainInterface());
 		}
 		if (e.getSource() == boutonChgtPassword) {
+			window.setPanel(new PanelPasswordEdit(""));
 		}
 		if (e.getSource() == listCompetition) {
+			window.setPanel(new PanelList(1));
 		}
 		if (e.getSource() == listCompetitor) {
+			window.setPanel(new PanelList(1));
 		}
-		if(e.getSource() == delBet){
-		}
+		/*if(e.getSource() == delBet){
+		}*/
 		/*if (e.getSource() == walletButton) {
 			window.setPanel(new PanelWalletEdit());
 		}*/
@@ -305,19 +311,19 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		if (e.getSource() == addPlayer) {
 			window.setPanel(new PanelAddPlayer(this));
 		}
-		if(e.getSource() == delPlayer){
-		}
+		/*if(e.getSource() == delPlayer){
+		}*/
 		if (e.getSource() == addCompetition) {
 			window.setPanel(new PanelAddCompetition(this));
 		}
-		if(e.getSource() == delCompetition){
-		}
+		/*if(e.getSource() == delCompetition){
+		}*/
 		if (e.getSource() == addCompetitor) {
 			window.setPanel(new PanelAddCompetitor(this));
 		}
-		if(e.getSource() == delCompetitor){
-		}
-		if(e.getSource() == searchButton){
-		}
+		/*if(e.getSource() == delCompetitor){
+		}*/
+		/*if(e.getSource() == searchButton){
+		}*/
 	}
 }

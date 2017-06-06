@@ -18,16 +18,8 @@ public class PanelList extends JPanel {
 
     //Aesthetic borders
     this.setBorder(new EmptyBorder(10, 10, 10, 10));
-
-    //Creates a good layout for our list
-    GridLayout gl = new GridLayout();
-    gl.setColumns(3);
-    gl.setRows(list.size()+1);
-    gl.setHgap(5);
-    gl.setVgap(5);
-    this.setLayout(gl);
-
-    //the following is just for testing purpose
+    
+  //the following is just for testing purpose
     ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 
     ArrayList<String> el = new ArrayList<String>();
@@ -39,6 +31,14 @@ public class PanelList extends JPanel {
     el.add("Jean Machin");
     el.add("jmachin");
     list.add(el);
+    
+    //Creates a good layout for our list
+    GridLayout gl = new GridLayout();
+    gl.setColumns(3);
+    gl.setRows(list.size()+1);
+    gl.setHgap(5);
+    gl.setVgap(5);
+    this.setLayout(gl);
 
     //Adds buttons related to the data provided
     for (int i=0; i < list.size(); i++){

@@ -38,15 +38,13 @@ public class Window extends JFrame {
   }
 
   public void setPanel(JPanel panel){
-    this.history.add(this.currentPanel);
 
     this.getContentPane().removeAll();
     this.add(panel);
     this.revalidate();
     this.repaint();
     this.pack();
-
-    this.history.add(currentPanel);
+    this.history.add(this.currentPanel);
     this.currentPanel = panel;
   }
 

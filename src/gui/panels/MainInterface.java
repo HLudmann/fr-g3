@@ -24,7 +24,6 @@ import javax.swing.SwingUtilities;
 import gui.buttons.BoutonInvisible;
 
 public class MainInterface extends JPanel implements ActionListener{
-	private Font font = new Font("TimesRoman",Font.CENTER_BASELINE,25);
 	private JButton boutonConnection = new JButton("Connection");
 	private JButton competition = new JButton("Lister compétition");
 	private JButton competiteur = new JButton("Lister compétiteur");
@@ -38,7 +37,6 @@ public class MainInterface extends JPanel implements ActionListener{
 		JPanel connectionBar = new JPanel();
 		JPanel borderLayoutConnectionBar = new JPanel();
 		borderLayoutConnectionBar.setLayout(new BorderLayout());
-		borderLayoutConnectionBar.setBackground(new Color(0,150,250));
 		connectionBar.setBackground(new Color(0,150,250));
 		connectionBar.setLayout(new BoxLayout(connectionBar, BoxLayout.LINE_AXIS));
 		BoutonInvisible boutonInvisible = new BoutonInvisible();
@@ -54,12 +52,9 @@ public class MainInterface extends JPanel implements ActionListener{
 		JPanel lister2 = new JPanel();
 		JPanel lister3 = new JPanel();
 		JPanel lister4 = new JPanel();
-		lister.setBackground(new Color(0,150,250));
 		lister.setLayout(new BorderLayout());
 		lister2.setLayout(new BorderLayout());
 		lister3.setLayout(new BorderLayout());
-		competition.setFont(font);
-		competiteur.setFont(font);
 		lister2.add(competition, BorderLayout.CENTER);
 		lister3.add(competiteur, BorderLayout.CENTER);
 		lister4.setLayout(new GridLayout(1,2));
@@ -72,15 +67,11 @@ public class MainInterface extends JPanel implements ActionListener{
 		//set du search
 		JPanel search = new JPanel();
 		JPanel searchField = new JPanel();
-		searchButton.setFont(font);
 		search.setLayout(new BorderLayout());
 		searchField.add(searchLabel);
 		JTextField searchText = new JTextField();
 		searchText.setPreferredSize(new Dimension(this.getWidth()-150, 30));
 		searchField.add(searchText);
-		search.setBackground(new Color(0,150,250));
-		Border border = BorderFactory.createLineBorder(Color.BLUE, 3);
-		searchField.setBorder(border);
 		search.add(searchField, BorderLayout.NORTH);
 		search.add(searchButton, BorderLayout.CENTER);
 		//search.setMaximumSize(new Dimension(this.getWidth(),this.getHeight()/3));
@@ -104,10 +95,10 @@ public class MainInterface extends JPanel implements ActionListener{
 			new ConnectionPanel(this, window);
 		}
 		if (e.getSource() == competition) {
-			window.setPanel(new PanelList(1));
+			window.setPanel(new PanelListWithoutButtons(1));
 		}
 		if (e.getSource() == competiteur) {
-			window.setPanel(new PanelList(1));
+			window.setPanel(new PanelListWithoutButtons(1));
 		}
 		/*if(e.getSource() == searchButton){
 		;

@@ -25,7 +25,6 @@ import javax.swing.border.Border;
 import gui.buttons.BoutonInvisible;
 
 public class ManagerPanel extends JPanel implements ActionListener {
-	private Font font = new Font("arial", Font.CENTER_BASELINE, 20);
 	Border borderBlack = BorderFactory.createLineBorder(Color.BLACK, 3);
 	// pour bar de connexion
 	private JButton boutonDeconnection = new JButton("Déconnection");
@@ -50,7 +49,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private JPanel endCompPanel = new JPanel();
 	private JButton endCompButton = new JButton("Rendre les résultats d'une compétition");
 	// pour set des colonnes
-	private JLabel add = new JLabel("Ajouter");
+	private JLabel add = new JLabel("Ajouter: ");
 	private JLabel delete = new JLabel("Supprimer");
 	private JPanel addDel = new JPanel();
 	private JPanel addDel2 = new JPanel();
@@ -88,9 +87,6 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		// set bouton déco et chgt password
 		borderLayoutConnectionBar1.setLayout(new BorderLayout());
 		borderLayoutConnectionBar2.setLayout(new BorderLayout());
-		borderLayoutConnectionBar1.setBackground(new Color(0, 150, 250));
-		borderLayoutConnectionBar2.setBackground(new Color(0, 150, 250));
-		connectionBar.setBackground(new Color(0, 150, 250));
 		connectionBar.setLayout(new BoxLayout(connectionBar, BoxLayout.LINE_AXIS));
 		BoutonInvisible boutonInvisible = new BoutonInvisible();
 		boutonInvisible.setPreferredSize(new Dimension(this.getWidth() * 3 / 5, 30));
@@ -103,12 +99,9 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		borderLayoutConnectionBar1.add(boutonChgtPassword, BorderLayout.NORTH);
 
 		// set de la bande central (bouton de listage)
-		lister.setBackground(new Color(0, 150, 250));
 		lister.setLayout(new BorderLayout());
 		lister2.setLayout(new BorderLayout());
 		lister3.setLayout(new BorderLayout());
-		listCompetition.setFont(font);
-		listCompetitor.setFont(font);
 		lister2.add(listCompetition, BorderLayout.CENTER);
 		lister3.add(listCompetitor, BorderLayout.CENTER);
 		lister4.setLayout(new GridLayout(1, 2));
@@ -130,7 +123,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		// Dimension(this.getWidth(),this.getHeight()/10));
 
 		/* set bouton changeWallet
-		walletButton.setFont(font);
+		walletButton.setFont();
 		walletPanel.setLayout(new BorderLayout());
 		walletPanel.add(walletButton, BorderLayout.CENTER);
 		// walletPanel.setMaximumSize(new
@@ -139,7 +132,6 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		// Dimension(this.getWidth(),this.getHeight()/10));*/
 
 		// set du endCompetition
-		endCompButton.setFont(font);
 		endCompPanel.setLayout(new BorderLayout());
 		endCompPanel.add(endCompButton, BorderLayout.CENTER);
 		// endCompPanel.setMaximumSize(new
@@ -148,14 +140,9 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		// Dimension(this.getWidth(),this.getHeight()/10));
 
 		// set des colonnes add/del
-		addDel.setBackground(new Color(0, 150, 250));
 		addDel.setLayout(new BorderLayout());
 		addDel2.setLayout(new BorderLayout());
 		addDel3.setLayout(new BorderLayout());
-		add.setFont(font);
-		delete.setFont(font);
-		addDel2.setBackground(Color.WHITE);
-		addDel3.setBackground(new Color(0, 150, 250));
 		add.setHorizontalAlignment(SwingConstants.CENTER);
 		delete.setHorizontalAlignment(SwingConstants.CENTER);
 		addDel2.add(add, BorderLayout.CENTER);
@@ -164,7 +151,6 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		addDel4.add(addDel2);
 		addDel4.add(addDel3);
 		//addDel.setBorder(borderBlack);
-		addDel2.setBorder(borderBlack);
 		//addDel3.setBorder(borderBlack);
 		addDel.add(addDel4, BorderLayout.CENTER);
 		// addDel.setMaximumSize(new
@@ -177,17 +163,13 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		player.setLayout(new BorderLayout());
 		player2.setLayout(new BorderLayout());
 		player3.setLayout(new BorderLayout());
-		addPlayer.setFont(font);
-		delPlayer.setFont(font);
 		player2.add(addPlayer, BorderLayout.CENTER);
 		//player3.add(delPlayer, BorderLayout.CENTER);
 		player4.setLayout(new GridLayout(1, 2));
 		player4.add(player2);
 		player4.add(player3);
 		// player.setBorder(borderBlack);
-		player2.setBorder(borderBlack);
 		//player3.setBorder(borderBlack);
-		player3.setBackground(new Color(0, 150, 250));
 		player.add(player4, BorderLayout.CENTER);
 		// player.setMaximumSize(new
 		// Dimension(this.getWidth(),this.getHeight()/10));
@@ -195,21 +177,16 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		// Dimension(this.getWidth(),this.getHeight()/10));
 
 		// set add/del Compétition
-		competition.setBackground(new Color(0, 150, 250));
 		competition.setLayout(new BorderLayout());
 		competition2.setLayout(new BorderLayout());
 		competition3.setLayout(new BorderLayout());
-		addCompetition.setFont(font);
-		delCompetition.setFont(font);
 		competition2.add(addCompetition, BorderLayout.CENTER);
 		//competition3.add(delCompetition, BorderLayout.CENTER);
 		competition4.setLayout(new GridLayout(1, 2));
 		competition4.add(competition2);
 		competition4.add(competition3);
 		//competition.setBorder(borderBlack);
-		competition2.setBorder(borderBlack);
 		//competition3.setBorder(borderBlack);
-		competition3.setBackground(new Color(0, 150, 250));
 		competition.add(competition4, BorderLayout.CENTER);
 		// competition.setMaximumSize(new
 		// Dimension(this.getWidth(),this.getHeight()/10));
@@ -217,21 +194,16 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		// Dimension(this.getWidth(),this.getHeight()/10));
 
 		// set add/del compétitor
-		competitor.setBackground(new Color(0, 150, 250));
 		competitor.setLayout(new BorderLayout());
 		competitor2.setLayout(new BorderLayout());
 		competitor3.setLayout(new BorderLayout());
-		addCompetitor.setFont(font);
-		delCompetitor.setFont(font);
 		competitor2.add(addCompetitor, BorderLayout.CENTER);
 		//competitor3.add(delCompetitor, BorderLayout.CENTER);
 		competitor4.setLayout(new GridLayout(1, 2));
 		competitor4.add(competitor2);
 		competitor4.add(competitor3);
 		// competitor.setBorder(borderBlack);
-		competitor2.setBorder(borderBlack);
 		//competitor3.setBorder(borderBlack);
-		competitor3.setBackground(new Color(0, 150, 250));
 		competitor.add(competitor4, BorderLayout.CENTER);
 		// competitor.setMaximumSize(new
 		// Dimension(this.getWidth(),this.getHeight()/10));

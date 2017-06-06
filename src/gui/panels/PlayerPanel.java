@@ -25,7 +25,6 @@ import gui.buttons.BoutonInvisible;
 
 @SuppressWarnings("serial")
 public class PlayerPanel extends JPanel implements ActionListener {
-	private Font font = new Font("arial", Font.CENTER_BASELINE, 20);
 	// pour bar de connexion
 	private JButton boutonDeconnection = new JButton("Déconnection");
 	private JButton boutonChgtPassword = new JButton("Changer mdp");
@@ -62,9 +61,6 @@ public class PlayerPanel extends JPanel implements ActionListener {
 		// de la fenetre)
 		borderLayoutConnectionBar1.setLayout(new BorderLayout());
 		borderLayoutConnectionBar2.setLayout(new BorderLayout());
-		borderLayoutConnectionBar1.setBackground(new Color(0, 150, 250));
-		borderLayoutConnectionBar2.setBackground(new Color(0, 150, 250));
-		connectionBar.setBackground(new Color(0, 150, 250));
 		connectionBar.setLayout(new BoxLayout(connectionBar, BoxLayout.LINE_AXIS));
 		BoutonInvisible boutonInvisible = new BoutonInvisible();
 		boutonInvisible.setPreferredSize(new Dimension(this.getWidth() * 3 / 5, 30));
@@ -77,12 +73,9 @@ public class PlayerPanel extends JPanel implements ActionListener {
 		borderLayoutConnectionBar1.add(boutonChgtPassword, BorderLayout.NORTH);
 
 		// set de la bande central (bouton de listage)
-		lister.setBackground(new Color(0, 150, 250));
 		lister.setLayout(new BorderLayout());
 		lister2.setLayout(new BorderLayout());
 		lister3.setLayout(new BorderLayout());
-		competition.setFont(font);
-		competiteur.setFont(font);
 		lister2.add(competition, BorderLayout.CENTER);
 		lister3.add(competiteur, BorderLayout.CENTER);
 		lister4.setLayout(new GridLayout(1, 2));
@@ -110,13 +103,10 @@ public class PlayerPanel extends JPanel implements ActionListener {
 		 */
 
 		// set de la partie paris
-		betLabel.setFont(font);
 		betLabel.setHorizontalAlignment(betLabel.CENTER);
 		bet3.setLayout(new GridLayout(1, 3));
 		bet2.setLayout(new BorderLayout());
 		bet.setLayout(new BorderLayout());
-		Border borderBet = BorderFactory.createLineBorder(Color.BLUE, 3);
-		betLabel.setBorder(borderBet);
 		bet2.add(betLabel, BorderLayout.CENTER);
 		// betLabel.setPreferredSize(new Dimension(this.getWidth(),40));
 		bet3.add(makeBet);
@@ -157,10 +147,10 @@ public class PlayerPanel extends JPanel implements ActionListener {
 			window.setPanel(new PanelPasswordEdit(""));
 		}
 		if (e.getSource() == competition) {
-			window.setPanel(new PanelList(1));
+			window.setPanel(new PanelListWithoutButtons(1));
 		}
 		if (e.getSource() == competiteur) {
-			window.setPanel(new PanelList(1));
+			window.setPanel(new PanelListWithoutButtons(1));
 		}
 		/*
 		 * if(e.getSource() == searchButton){ ; }

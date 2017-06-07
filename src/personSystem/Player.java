@@ -16,17 +16,17 @@ import utils.*;
         name="findAllBetsWithNickname",
         query="SELECT * FROM bet b WHERE b.player LIKE :custName"
 )
-@Entity 
+@Entity
 public class Player extends SystemUser {
 
 	
 	private static final long serialVersionUID = 1L;
 	private long wallet;
-	
+
 	@Transient
 	private ArrayList<Bet> betList = new ArrayList<Bet>();
 
-	public Player() {	
+	public Player() {
 	}
 
 	public Player(String firstName, String lastName, String nickname) throws IncorrectString {
@@ -49,7 +49,7 @@ public class Player extends SystemUser {
 		this.setWallet(wallet);
 	}
 
-	
+
 	@PostLoad
 	public void initBetList(){
 		EntityManager em = JPAUtil.getEntityManager();
@@ -91,7 +91,7 @@ public class Player extends SystemUser {
 		if (!betList.contains(b)){
 			betList.add(b);
 		}
-		
+
 		else{
 			throw new ItemAlreadyInList("Bet already in list");
 		}
@@ -108,5 +108,5 @@ public class Player extends SystemUser {
 			throw new ItemNotInList("Can't remove a not-existing bet");
 		}
 	}
-	
+
 }

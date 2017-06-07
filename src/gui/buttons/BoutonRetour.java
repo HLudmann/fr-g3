@@ -18,27 +18,13 @@ import javax.swing.JButton;
 public class BoutonRetour extends JButton implements MouseListener{
 	private String name;
 	private Image img;
-	private Font font = new Font("TimesRoman",Font.CENTER_BASELINE,25);
 
 
 	public BoutonRetour(String str){
 		super(str);
-	    this.name = str;
-	    try {
-	        img = ImageIO.read(new File("Bleu-degrade-vertical.jpg"));
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	this.addMouseListener(this);
+	  this.name = str;
+		this.addMouseListener(this);
 	}
-
-	  public void paintComponent(Graphics g){
-		    Graphics2D g2d = (Graphics2D)g;
-		    g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-		    g2d.setColor(Color.red.darker());
-		    g2d.setFont(font);
-		    g2d.drawString(name, this.getWidth() / 2 - (this.getWidth() / 2 /3), (this.getHeight() / 2) + 5);
-	  }
 
 	public void mouseClicked(MouseEvent event) {
 	}

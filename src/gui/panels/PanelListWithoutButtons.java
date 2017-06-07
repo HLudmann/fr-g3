@@ -13,12 +13,12 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class PanelList extends JPanel {
-  public PanelList(int type){
+public class PanelListWithoutButtons extends JPanel {
+  public PanelListWithoutButtons(int type){
 
     //Aesthetic borders
     this.setBorder(new EmptyBorder(10, 10, 10, 10));
-    
+
   //the following is just for testing purpose
     ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 
@@ -31,10 +31,10 @@ public class PanelList extends JPanel {
     el.add("Jean Machin");
     el.add("jmachin");
     list.add(el);
-    
+
     //Creates a good layout for our list
     GridLayout gl = new GridLayout();
-    gl.setColumns(3);
+    gl.setColumns(2);
     gl.setRows(list.size()+1);
     gl.setHgap(5);
     gl.setVgap(5);
@@ -43,10 +43,6 @@ public class PanelList extends JPanel {
     //Adds buttons related to the data provided
     for (int i=0; i < list.size(); i++){
       this.add(new JLabel(list.get(i).get(0)));
-      JButton btnEdit = new EditButton("edit", i, type, list.get(i).get(1));
-      JButton btnDel = new DeleteButton("delete", i, type, list.get(i).get(1));
-      this.add(btnEdit);
-      this.add(btnDel);
     }
     this.add(new GoBackButton("Retour", 1, 1));
   }

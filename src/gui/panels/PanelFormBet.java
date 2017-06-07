@@ -114,8 +114,8 @@ public class PanelFormBet extends JPanel {
     this.add(this.thirdCompetitorSelector);
     this.add(this.betValueLabel);
     this.add(this.valueInput);
-    this.add(this.submit);
     this.add(new GoBackButton("Retour", 1, 1));
+    this.add(this.submit);
   }
 
   public int getType(){

@@ -9,15 +9,15 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 
-@Entity @Inheritance(strategy=InheritanceType.SINGLE_TABLE) 
+@Entity @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type", discriminatorType=DiscriminatorType.STRING , length=3)
 @Table(name="system_user")
 abstract class SystemUser extends Person implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String nickname;
-	
+
 	private String password;
 
 	@SuppressWarnings("unused")
@@ -40,7 +40,7 @@ abstract class SystemUser extends Person implements Serializable{
 			this.nickname=nickname;
 			this.password=password;
 	}
-	
+
 	private void checkNickname(String str) throws IncorrectString{
 		if (!str.matches(regex)){
 			throw new IncorrectString("Nickname not valid");
@@ -79,9 +79,9 @@ abstract class SystemUser extends Person implements Serializable{
 
 	/**
 	 * check if this subscriber has the username of the parameter
-	 * 
+	 *
 	 * @param nicjname the username to check
-	 * 
+	 *
 	 * @return true if this username is the same as the parameter false
 	 * otherwise
 	 */

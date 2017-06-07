@@ -20,7 +20,7 @@ public class PanelAddCompetitor extends JPanel{
   private JTextField lastNameInput;
   private JFormattedTextField idInput;
 
-  public PanelAddCompetitor() {
+  public PanelAddCompetitor(JPanel panel) {
 
     this.setBorder(new EmptyBorder(10, 10, 10, 10));
 

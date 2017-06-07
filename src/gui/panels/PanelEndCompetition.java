@@ -28,13 +28,13 @@ public class PanelEndCompetition extends JPanel{
   private JComboBox<String> thirdWinner;
 
 
-  public PanelEndCompetition() {
+  public PanelEndCompetition(JPanel panel) {
 
     this.setBorder(new EmptyBorder(10, 10, 10, 10));
 
     this.gl = new GridLayout();
     this.gl.setColumns(2);
-    this.gl.setRows(5);
+    this.gl.setRows(4);
     this.gl.setHgap(5);
     this.gl.setVgap(5);
     this.setLayout(this.gl);

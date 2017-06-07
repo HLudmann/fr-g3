@@ -1,5 +1,7 @@
 package gui.buttons;
 
+import gui.*;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -18,8 +20,6 @@ public class GoBackButton extends JButton implements MouseListener{
   private int type; // The function from the backend that we need to interact with
   private int id; // The button id, not really needed tbh
 
-  //TODO: get datas from parent panel
-
   public GoBackButton(String str, int id, int type) {
     super(str);
 
@@ -32,16 +32,8 @@ public class GoBackButton extends JButton implements MouseListener{
 
   //Send the correct instruction based on the type provided
   public void mouseClicked(MouseEvent event) {
-    switch(type){
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-      break;
-    }
+    Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+    window.goBack();
   }
 
   //Javax needs this soooo ...

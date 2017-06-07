@@ -33,7 +33,6 @@ public class DeleteButton extends JButton implements MouseListener{
     Window window = (Window) SwingUtilities.getAncestorOfClass(JFrame.class, this);
     switch(type){
       case 1:
-        window.setPanel(new PanelAddPlayer());
         break;
       case 2:
         System.out.println("data: " + this.data + " type: " + this.type);

@@ -13,7 +13,7 @@ import userInterface.exceptions.*;
  * @author HLudmann + BusterJava
  *
  */
-public class VisitorInterface extends Thread {
+public class VisitorInterface  {
 
     private long id;
     private static long nextId = 0;
@@ -28,7 +28,7 @@ public class VisitorInterface extends Thread {
     public long getId () {
         return this.id;
     }
-   
+
     /**
      * Singn In for Managers.
      *
@@ -60,7 +60,7 @@ public class VisitorInterface extends Thread {
             throw new IdentificationError("Wrong nickname or password");
         }
     }
-  
+
 /**
      * Singn In for Player.
      *
@@ -163,11 +163,11 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search competitions by a competitor.
-     * 
+     *
      * @param id
      *          complete id of a competitor.
-     * 
-     * @return the public detail of all the upcoming competitions attended by this competitor.     * 
+     *
+     * @return the public detail of all the upcoming competitions attended by this competitor.     *
      */
     public String[][] searchCompetitionByCompetitor(int id) throws BadParametersException {
         try {    
@@ -232,14 +232,14 @@ public class VisitorInterface extends Thread {
 
     /**
      * Search competitors by a competition.
-     * 
+     *
      * @param name
      *          complete name of a competition.
-     * 
-     * @return the public detail of all the competitors attending the specified competition. 
+     *
+     * @return the public detail of all the competitors attending the specified competition.
      */
     public String[][] searchCompetitorByCompetition(String name) throws BadParametersException {
-        ArrayList<Competitor> list = new ArrayList<Competitor>(); 
+        ArrayList<Competitor> list = new ArrayList<Competitor>();
         list.addAll(competitionList.findCompetitionByName(name).get(0).getCompetitorList());
         String[][] res = new String[list.size()][3];
         for (int i = 0; i < list.size(); i++) {

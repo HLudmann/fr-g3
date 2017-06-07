@@ -27,7 +27,7 @@ public class SingleWinnerBet extends Bet {
 	 * @throws InvalidWallet
 	 */
 	public SingleWinnerBet(long amount, Player player, Competition competition, Competitor competitor) throws ObjectNotFound, BadParametersException, ItemAlreadyInList, InvalidWallet{
-		super(amount, player, competition);
+		super(amount, player, new String("SGL"), competition);
 		
 		if(!competition.contains(competitor)) throw new ObjectNotFound("Competitor "+competitor.getFirstName()+" not in Competition "+competition.getName());
 		

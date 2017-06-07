@@ -1,30 +1,24 @@
 package personSystem;
 
-import java.util.Date;
 import exceptions.IncorrectString;
 
 abstract class Person {
 
 	private String firstName;
 	private String lastName;
-	private Date bornDate;
 
-	private static String regex="[a-zA-Z-\\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒøğ\\']+";
+	private static String regex="[a-zA-Z][a-zA-Z\\-\\ ]*";
 
 	public Person() {
 	}
 
-	public Person(String firstName, String lastName, Date bornDate) throws IncorrectString{
+	public Person(String firstName, String lastName) throws IncorrectString{
 			this.setFirstName(firstName);
 			this.setLastName(lastName);
-			this.bornDate = bornDate;
 	}
 
 
-	public Date getBornDate() {
-		return this.bornDate;
-	}
-
+	
 	public void setFirstName(String name) throws IncorrectString{
 		if (name.matches(regex)){
 			firstName = name;

@@ -1,7 +1,6 @@
 package tests.validation;
 
 import bettingServices.Betting;
-import exceptions.*;
 
 public abstract class ValidationTest {
 

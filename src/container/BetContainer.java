@@ -1,7 +1,6 @@
 package container;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Iterator;
 
 import javax.persistence.*;
@@ -12,25 +11,32 @@ import betSystem.*;
 import personSystem.*;
 import exceptions.*;
 
-
-@NamedQuery(
-		name="selectEverything",
-		query="SELECT b FROM Bet b")
+//@MappedSuperclass
+//@NamedNativeQuery(
+//		name="selectEverythingFromBet",
+//		query="SELECT * FROM bet b")
 
 public class BetContainer {
 	private ArrayList<Bet> betDB;
+	
+	public BetContainer() {}
 	
 	public BetContainer (Player plr) {
 		this.betDB = plr.getBetList();
 	}
 
 	public BetContainer (Manager mng) {
-		EntityManager em = JPAUtil.getEntityManager();
-		
-		List<?> bets = em.createNamedQuery("selectEverything").getResultList();
-		for (Object bet : bets) {
-			Bet b = (Bet) bet;
-			this.betDB.add(b);				
+//		EntityManager em = JPAUtil.getEntityManager();
+//		
+//		List<?> bets = em.createNamedQuery("selectEverythingFromBet").getResultList();
+//		for (Object bet : bets) {
+//			Bet b = (Bet) bet;
+//			this.betDB.add(b);				
+//		}
+		PersonContainer pc = new PersonContainer();
+		this.betDB = new ArrayList<Bet>();
+		for (Player p : pc.getPlayerDB()) {
+			this.betDB.addAll(p.getBetList());
 		}
 	}
 	

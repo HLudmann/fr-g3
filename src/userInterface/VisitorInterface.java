@@ -29,7 +29,6 @@ public class VisitorInterface  {
         return this.id;
     }
 
-
     /**
      * Singn In for Managers.
      *
@@ -112,8 +111,8 @@ public class VisitorInterface  {
     /**
      * List competitors
      *
-     * @return all the public infos about each competitor
-     *              who is competiting in a upcomming competition
+     * @return all the public info about each competitor
+     *              who is competiting in a upcoming competition
      */
     public String[][] competitorListing() {
         ArrayList<Competitor> list = personList.getCompetitors();
@@ -171,8 +170,9 @@ public class VisitorInterface  {
      * @return the public detail of all the upcoming competitions attended by this competitor.     *
      */
     public String[][] searchCompetitionByCompetitor(int id) throws BadParametersException {
-        try {
-            ArrayList<Competition> list = personList.findCompetitorById(id).get(0).getCompetitionList();
+        try {    
+            ArrayList<Competition> list = new ArrayList<Competition>();
+            list.addAll(personList.findCompetitorById(id).get(0).getCompetitionList());
             String[][] res = new String[list.size()][2];
             for (int i = 0; i < list.size(); i++) {
                 res[i][0] = list.get(i).getName();
@@ -239,7 +239,8 @@ public class VisitorInterface  {
      * @return the public detail of all the competitors attending the specified competition.
      */
     public String[][] searchCompetitorByCompetition(String name) throws BadParametersException {
-        ArrayList<Competitor> list = competitionList.findCompetitionByName(name).get(0).getCompetitorList();
+        ArrayList<Competitor> list = new ArrayList<Competitor>();
+        list.addAll(competitionList.findCompetitionByName(name).get(0).getCompetitorList());
         String[][] res = new String[list.size()][3];
         for (int i = 0; i < list.size(); i++) {
             res[i][0] = String.valueOf(list.get(i).getId());

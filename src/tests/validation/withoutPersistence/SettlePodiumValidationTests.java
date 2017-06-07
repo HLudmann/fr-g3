@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import bettingServices.*;
+import personSystem.*;
 import utils.MyCalendar;
 
 public class SettlePodiumValidationTests {
@@ -93,7 +94,7 @@ public class SettlePodiumValidationTests {
 							1982, 4, 13).getTime()),
 					increment.getManagerPassword());
 
-			// Add subscribers
+			// Add Players
 			increment.getBetting().subscribe(new String("Mato"),
 					new String("Anna"), new String("salto"),
 					new String("11-03-1987"),
@@ -121,14 +122,14 @@ public class SettlePodiumValidationTests {
 					new MyCalendar(2017, 2, 16), competitors,
 					new String(increment.getManagerPassword()));
 
-			// Credit subscribers
-			increment.getBetting().creditSubscriber(new String("salto"), 890,
+			// Credit Players
+			increment.getBetting().creditPlayer(new String("salto"), 890,
 					new String(increment.getManagerPassword()));
-			increment.getBetting().creditSubscriber(new String("brinco"), 1500,
+			increment.getBetting().creditPlayer(new String("brinco"), 1500,
 					new String(increment.getManagerPassword()));
-			increment.getBetting().creditSubscriber(new String("aupar"), 550,
+			increment.getBetting().creditPlayer(new String("aupar"), 550,
 					new String(increment.getManagerPassword()));
-			increment.getBetting().creditSubscriber(new String("jefaza"), 2210,
+			increment.getBetting().creditPlayer(new String("jefaza"), 2210,
 					new String(increment.getManagerPassword()));
 
 			// Bet
@@ -275,7 +276,7 @@ public class SettlePodiumValidationTests {
 
 		// brinco will loose all tokens
 		try {
-			increment.getBetting().debitSubscriber("brinco", 1,
+			increment.getBetting().debitPlayer("brinco", 1,
 					new String(increment.getManagerPassword()));
 			System.out
 					.println("Solder n'est pas valide (\"brinco\" ne doit pas avoir des jetons)");
@@ -283,7 +284,7 @@ public class SettlePodiumValidationTests {
 		}
 		// aupar will win (300*1800)/300 = 1800
 		try {
-			increment.getBetting().debitSubscriber("aupar", 2051,
+			increment.getBetting().debitPlayer("aupar", 2051,
 					new String(increment.getManagerPassword()));
 			System.out
 					.println("Solder n'est pas valide (\"aupar\" doit avoir 2050 jetons)");
@@ -309,7 +310,7 @@ public class SettlePodiumValidationTests {
 			thirdTeam = increment.getBetting().createCompetitor(
 					new String("Villareal"), increment.getManagerPassword());
 
-			// Add subscribers
+			// Add Players
 			increment.getBetting().subscribe(new String("Mato"),
 					new String("Anna"), new String("aloha"),
 					new String("11-03-1987"),
@@ -337,14 +338,14 @@ public class SettlePodiumValidationTests {
 					new MyCalendar(2018, 2, 19), competitorTeams,
 					new String(increment.getManagerPassword()));
 
-			// Credit subscribers
-			increment.getBetting().creditSubscriber(new String("aloha"), 890,
+			// Credit Players
+			increment.getBetting().creditPlayer(new String("aloha"), 890,
 					new String(increment.getManagerPassword()));
-			increment.getBetting().creditSubscriber(new String("alohi"), 1500,
+			increment.getBetting().creditPlayer(new String("alohi"), 1500,
 					new String(increment.getManagerPassword()));
-			increment.getBetting().creditSubscriber(new String("aloho"), 550,
+			increment.getBetting().creditPlayer(new String("aloho"), 550,
 					new String(increment.getManagerPassword()));
-			increment.getBetting().creditSubscriber(new String("alohu"), 2210,
+			increment.getBetting().creditPlayer(new String("alohu"), 2210,
 					new String(increment.getManagerPassword()));
 
 			// Bet
@@ -498,7 +499,7 @@ public class SettlePodiumValidationTests {
 
 		// alohi will loose all tokens
 		try {
-			increment.getBetting().debitSubscriber("alohi", 1,
+			increment.getBetting().debitPlayer("alohi", 1,
 					new String(increment.getManagerPassword()));
 			System.out
 					.println("Solder n'est pas valide (\"alohi\" ne doit pas avoir des jetons)");
@@ -507,7 +508,7 @@ public class SettlePodiumValidationTests {
 		
 		// aloho will win (300*1800)/300 = 1800
 		try {
-			increment.getBetting().debitSubscriber("aloho", 2051,
+			increment.getBetting().debitPlayer("aloho", 2051,
 					new String(increment.getManagerPassword()));
 			System.out
 					.println("Solder n'est pas valide (\"aloho\" doit avoir 2050 jetons)");

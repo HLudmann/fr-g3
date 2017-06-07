@@ -15,10 +15,11 @@ import betSystem.exception.*;
 public class PlayerInterface extends VisitorInterface {
 
 	private Player loggedPlayer;
-	private BetContainer betList = new BetContainer(this.loggedPlayer);
+	private BetContainer betList;
 
 	public PlayerInterface (Player player) {
 		this.loggedPlayer = player;
+		this.betList = new BetContainer(this.loggedPlayer);
 	}
 
 	/**

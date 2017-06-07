@@ -3,7 +3,9 @@ package betSystem;
 import exceptions.BadParametersException;
 import exceptions.InvalidWallet;
 import personSystem.Player;
+
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -15,13 +17,17 @@ public abstract class Bet implements Serializable{
 	@Id
 	private int id;
 	private long amount;
+	@SuppressWarnings("unused")
+	private String type;
 	@JoinColumn(name="player") 
 	private Player player;
-	//uni-directional many-to-one association to Competition
+	// Unidirectional many-to-one association to Competition
 	@ManyToOne
 	@JoinColumn(name="competition")
 	private Competition competition;
 	
+	public Bet() {
+	}
 	
 	/**
 	 * @param amount
@@ -30,16 +36,14 @@ public abstract class Bet implements Serializable{
 	 * @throws BadParametersException
 	 * @throws InvalidWallet
 	 */
-	public Bet(long amount, Player player, Competition competition) throws BadParametersException, InvalidWallet{
+	public Bet(long amount, Player player, String type, Competition competition) throws BadParametersException, InvalidWallet{
 		this.player = player;
+		this.type = type;
 		setAmount(amount);
 		player.setWallet(player.getWallet()-amount);
 		this.competition = competition;
 		this.id = iterator;
 		iterator++;
-	}
-	
-	public Bet() {
 	}
 	
 	/**

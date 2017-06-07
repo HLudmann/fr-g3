@@ -1,9 +1,6 @@
 package bettingServices;
 
 import java.util.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
 
 import betSystem.*;
 import bettingServices.exceptions.*;
@@ -91,7 +88,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface
 	 */
-	@Override
 	public String subscribe(String lastName, String firstName, String username,
 			String borndate, String managerPwd) throws AuthenticationException,
 			ExistingPlayerException, PlayerException,
@@ -106,7 +102,7 @@ public class BettingSoft implements Betting {
 		// Creates the new subscriber
 		String password = RandPass.getPass(Constraints.LONG_PWD);
 		try {
-			s = new Player(firstName, lastName, new Date(borndate), username, password);
+			s = new Player(firstName, lastName, new Date(), username, password);
 			this.mngInt.addNewPlayer(firstName, lastName, borndate, username, password);
 		} catch (IncorrectString e) {
 			throw new BadParametersException();
@@ -119,7 +115,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface
 	 */
-	@Override
 	public long unsubscribe(String username, String managerPwd)
 			throws AuthenticationException, ExistingPlayerException {
 		Long wallet;
@@ -139,7 +134,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface
 	 */
-	@Override
 	public List<List<String>> listPlayers(String managerPwd)
 			throws AuthenticationException {
 		// Authenticate manager
@@ -160,7 +154,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface
 	 */
-	@Override
 	public void authenticateMngr(String managerPwd)
 			throws AuthenticationException {
 		if (managerPwd == null)
@@ -192,7 +185,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface
 	 */
-	@Override
 	public void addCompetition(String competition, Calendar closingDate,
 			Collection<Competitor> competitors, String managerPwd)
 			throws AuthenticationException, ExistingCompetitionException,
@@ -206,7 +198,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface
 	 */
-	@Override
 	public void cancelCompetition(String competition, String managerPwd)
 			throws AuthenticationException, ExistingCompetitionException,
 			CompetitionException {
@@ -217,7 +208,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface
 	 */
-	@Override
 	public void deleteCompetition(String competition, String managerPwd)
 			throws AuthenticationException, ExistingCompetitionException,
 			CompetitionException {
@@ -232,7 +222,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting Interface
 	 */
-	@Override
 	public void addCompetitor(String competition, Competitor competitor,
 			String managerPwd) throws AuthenticationException,
 			ExistingCompetitionException, CompetitionException,
@@ -244,7 +233,7 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface
 	 */
-	@Override
+	@SuppressWarnings("deprecation")
 	public Competitor createCompetitor(String lastName, String firstName,
 			String borndate, String managerPwd) throws AuthenticationException, BadParametersException {
 				authenticateMngr(managerPwd);
@@ -259,9 +248,8 @@ public class BettingSoft implements Betting {
 			}
 
 	/**
-	 * From Bettting interface
+	 * From Betting interface
 	 */
-	@Override
 	public Competitor createCompetitor(String name, String managerPwd)
 			throws AuthenticationException,
 			BadParametersException {
@@ -279,7 +267,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public void deleteCompetitor(String competition, Competitor competitor,
 			String managerPwd) throws AuthenticationException,
 			ExistingCompetitionException, CompetitionException,
@@ -291,7 +278,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public void creditPlayer(String username, long numberTokens, String managerPwd)
 			throws AuthenticationException, ExistingPlayerException,
 			BadParametersException {
@@ -302,7 +288,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public void debitPlayer(String username, long numberTokens, String managerPwd)
 			throws AuthenticationException, ExistingPlayerException,
 			PlayerException, BadParametersException {
@@ -313,7 +298,6 @@ public class BettingSoft implements Betting {
 	/** 
 	 * From Betting interface
 	 */
-	@Override
 	public void settleWinner(String competition, Competitor winner, String managerPwd)
 			throws AuthenticationException, ExistingCompetitionException,
 			CompetitionException {
@@ -328,7 +312,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public void settlePodium(String competition, Competitor winner, Competitor second,
 			Competitor third, String managerPwd)
 			throws AuthenticationException, ExistingCompetitionException,
@@ -348,7 +331,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public void betOnWinner(long numberTokens, String competition, Competitor winner,
 			String username, String pwdSubs) throws AuthenticationException,
 			CompetitionException, ExistingCompetitionException,
@@ -365,7 +347,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public void betOnPodium(long numberTokens, String competition, Competitor winner,
 			Competitor second, Competitor third, String username, String pwdSubs)
 			throws AuthenticationException, CompetitionException,
@@ -384,7 +365,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public void changeSubsPwd(String username, String newPwd, String currentPwd)
 			throws AuthenticationException, BadParametersException {
 				Player p = searchPlayerByUsername(username);
@@ -404,7 +384,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public ArrayList<String> infosPlayer(String username, String pwdSubs)
 			throws AuthenticationException {
 				Player p = searchPlayerByUsername(username);
@@ -429,7 +408,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public void deleteBetsCompetition(String competition, String username,
 			String pwdSubs) throws AuthenticationException,
 			CompetitionException, ExistingCompetitionException {
@@ -458,7 +436,6 @@ public class BettingSoft implements Betting {
 	 /**
 	 * From Betting interface.
 	 */
-	@Override
 	public List<List<String>> listCompetitions() {
 		ArrayList<Competition> auxRes = this.mngInt.getAllCompetitions();
 		List<List<String>> res = new ArrayList<List<String>>();
@@ -475,7 +452,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public Collection<Competitor> listCompetitors(String competition)
 			throws ExistingCompetitionException, CompetitionException {
 				Competition comp = this.mngInt.searchACompetitionByName(competition);
@@ -485,7 +461,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public ArrayList<String> consultBetsCompetition(String competition)
 			throws ExistingCompetitionException {
 				Competition comp = this.mngInt.searchACompetitionByName(competition);
@@ -499,7 +474,6 @@ public class BettingSoft implements Betting {
 	/**
 	 * From Betting interface.
 	 */
-	@Override
 	public ArrayList<Competitor> consultResultsCompetition(String competition)
 			throws ExistingCompetitionException {
 				Competition comp = this.mngInt.searchACompetitionByName(competition);

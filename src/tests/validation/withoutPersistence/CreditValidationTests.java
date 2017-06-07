@@ -52,20 +52,20 @@ public class CreditValidationTests {
 
 		// Tests parameters : null
 		try {
-			increment.getBetting().creditSubscriber(null, 100, null);
+			increment.getBetting().creditPlayer(null, 100, null);
 			System.out
 					.println("cr�diter avec pseudo et mdp gestionnaire non instanci�s et nombre de jetons valide n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().creditSubscriber(new String("fanfan"), 100,
+			increment.getBetting().creditPlayer(new String("fanfan"), 100,
 					null);
 			System.out
 					.println("cr�diter avec pseudo et nombre de jetons valides et mdp gestionnaire non instanci� n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().creditSubscriber(null, 100,
+			increment.getBetting().creditPlayer(null, 100,
 					increment.getManagerPassword());
 			System.out
 					.println("cr�diter avec pseudo non instanci�, nombre de jetons valide et mdp gestionnaire correct n'a pas lev� d'exception ");
@@ -75,35 +75,35 @@ public class CreditValidationTests {
 
 	private void testCreditInvalidParameters() {
 		try {
-			increment.getBetting().creditSubscriber(new String(" "), 100,
+			increment.getBetting().creditPlayer(new String(" "), 100,
 					increment.getManagerPassword());
 			System.out
 					.println("cr�diter avec pseudo invalide (\" \"), nombre de jetons valide et mdp gestionnaire correct n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().creditSubscriber(new String("%�%�%�%�"),
+			increment.getBetting().creditPlayer(new String("%�%�%�%�"),
 					100, increment.getManagerPassword());
 			System.out
 					.println("cr�diter avec pseudo invalide, nombre de jetons valide et mdp gestionnaire correct n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().creditSubscriber(new String("fanfan"), 100,
+			increment.getBetting().creditPlayer(new String("fanfan"), 100,
 					new String(" "));
 			System.out
 					.println("cr�diter avec pseudo connu, nombre de jetons valide et mdp gestionnaire invalide (\" \")  n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().creditSubscriber(new String("fanfan"), 100,
+			increment.getBetting().creditPlayer(new String("fanfan"), 100,
 					new String("kjkj"));
 			System.out
 					.println("cr�diter avec pseudo connu, nombre de jetons valide et mdp gestionnaire incorrect n'a pas lev� d'exception ");
 		} catch (Exception e) {
 		}
 		try {
-			increment.getBetting().creditSubscriber(new String("fanfan"), -100,
+			increment.getBetting().creditPlayer(new String("fanfan"), -100,
 					increment.getManagerPassword());
 			System.out
 					.println("cr�diter avec pseudo connu, nombre jetons invalide (-100) et mdp gestionnaire correct n'a pas lev� d'exception ");
@@ -114,7 +114,7 @@ public class CreditValidationTests {
 	private void testCreditUsernameNotExist() {
 		// Tests parameters: username does not exist
 		try {
-			increment.getBetting().creditSubscriber(
+			increment.getBetting().creditPlayer(
 					new String("locainaColina"), 100,
 					increment.getManagerPassword());
 			System.out
@@ -127,10 +127,10 @@ public class CreditValidationTests {
 		ArrayList<String> infos;
 		// Tests ok
 		try {
-			increment.getBetting().creditSubscriber(new String("fanfan"), 100,
+			increment.getBetting().creditPlayer(new String("fanfan"), 100,
 					increment.getManagerPassword());
 			// Verify specification
-			infos = increment.getBetting().infosSubscriber(
+			infos = increment.getBetting().infosPlayer(
 					new String("fanfan"), fanfanPwd);
 			if (Integer.parseInt(infos.get(4)) != 100)
 				System.out
@@ -143,10 +143,10 @@ public class CreditValidationTests {
 							+ e.getClass());
 		}
 		try {
-			increment.getBetting().creditSubscriber(new String("fanfin"), 50,
+			increment.getBetting().creditPlayer(new String("fanfin"), 50,
 					increment.getManagerPassword());
 			// Verify specification
-			infos = increment.getBetting().infosSubscriber(
+			infos = increment.getBetting().infosPlayer(
 					new String("fanfin"), fanfinPwd);
 			if (Integer.parseInt(infos.get(4)) != 50)
 				System.out

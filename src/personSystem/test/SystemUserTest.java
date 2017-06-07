@@ -12,6 +12,7 @@ public class SystemUserTest {
     @Test
     public void testConstructorValidNickname() throws IncorrectString{
       Manager m=new Manager("jean", "dupont", "jdupont", "21041975");
+      assertTrue(m instanceof Manager);
 
       m = new Manager("jean", "dupont", "jEandUpond5572", "21041975");
       m = new Manager("jean", "dupont", "éjÀn", "21041975");
@@ -22,6 +23,7 @@ public class SystemUserTest {
     @Test
     public void testConstructorInvalidNickname() throws IncorrectString{
       Manager m=new Manager("jean", "dupont", "jdupont", "21041975");
+      assertTrue(m instanceof Manager);
 
       String[] incorrectNicknames = {"test-lol", "abc", "jojo du 33", "1_23soleil"};
 

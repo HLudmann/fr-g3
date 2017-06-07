@@ -6,6 +6,9 @@
 		<class>betSystem.Competition</class>
 		<class>betSystem.PodiumBet</class>
 		<class>betSystem.SingleWinnerBet</class>
+		<class>container.BetContainer</class>
+		<class>container.CompContainer</class>
+		<class>container.PersonContainer</class>
 		<class>personSystem.Competitor</class>
 		<class>personSystem.Manager</class>
 		<class>personSystem.Player</class>

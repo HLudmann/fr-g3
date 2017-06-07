@@ -37,7 +37,7 @@ public class PodiumBet extends Bet {
 	 */
 	public PodiumBet(long amount, Player player, Competition competition, 
 					Competitor competitor1, Competitor competitor2, Competitor competitor3 )throws BadParametersException, ObjectNotFound, ItemAlreadyInList, InvalidWallet{
-		super(amount, player, competition);
+		super(amount, player, new String("POD"), competition);
 
 		if (competitor1 == null) throw new BadParametersException("Wrong number of competitors");
 		if (competitor2 == null) throw new BadParametersException("Wrong number of competitors");
@@ -61,6 +61,7 @@ public class PodiumBet extends Bet {
 		second = competitor2;
 		third = competitor3;
 		competition.addBet(this);
+		player.addBet(this);
 		
 	}
 	
